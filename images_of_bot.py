@@ -725,11 +725,11 @@ def praw_oauth_login(r):
     
     print('authorizing...')
     
-    #Load keys 
-    client_id = 'client_id'
-    client_secret = 'client_secret'
+    #Load keys from OS variables
+    client_id = os.environ.get("imagesof_client_id")
+    client_secret = os.environ.get("imagesof_client_secret")
     redirect_uri = "http://127.0.0.1:65010/authorize_callback"
-    refresh_token= 'refresh_token'
+    refresh_token=os.environ.get("imagesof_refresh_token")
     
     #Set the oauth app info and get authorization
     r.set_oauth_app_info(client_id, client_secret, redirect_uri)
