@@ -696,40 +696,30 @@ def search_for_places(r):
 
 def swim(r, goodregex, postinto, getfromthese, submission, badregex=r"(\bbadregex\b)", badcaseregex=r"(\bBadCaseRegex\b)", smallsubredditblacklist={'blacklistedsubreddit'}):
         title = submission.title
-        if re.search(goodregex, title, flags=re.IGNORECASE) != None:
-            if re.search(badregex, title, flags=re.IGNORECASE) == None:
-                if re.search(badcaseregex, title,) == None:
-                    if str(submission.author).lower() not in globaluserblacklist:
-                        if str(submission.subreddit).lower() not in globalsubredditblacklist:
-                            if str(submission.subreddit).lower() not in smallsubredditblacklist:
-                                if submission.over_18 == False:
-                                    if re.search(urlregex, submission.url, flags=re.IGNORECASE) != None:
-                                        make_post(r, submission, postinto)
-        else:
-            if str(submission.subreddit).lower() in getfromthese:
-                if str(submission.author).lower() not in globaluserblacklist:
-                
-                    if submission.over_18 == False:
-                        if re.search(urlregex, submission.url, flags=re.IGNORECASE) != None:
-                            make_post(r, submission, postinto)
+        if (submission.over_18  or
+                submission.author.name.lower() in globaluserblacklist or
+                not re.search(urlregex, submission.url, flags=re.IGNORECASE)):
+            return
+        if ((submission.subreddit.display_name.lower() not in globalsubredditblacklist + smallsubredditblacklist and
+                re.search(goodregex, title, flags=re.IGNORECASE) and
+                not re.search(badregex, title, flags=re.IGNORECASE) and
+                not re.search(badcaseregex, title)) or
+                submission.subreddit.display_name.lower() in getfromthese:
+            make_post(r, submission, postinto)
 
 def make_post(r, originalsubmission, subreddit):
-    title = '{}'.format(originalsubmission.title)
+    title = originalsubmission.title
     comment = '[Original post]({}) by /u/{} in /r/{}'.format(originalsubmission.permalink, originalsubmission.author, originalsubmission.subreddit)
     print("Making post in {}: ".format(subreddit))
     print(("    " + title +"\n").encode('utf-8', 'ignore'))
-    while True:
-        try:
-            xpost = r.submit(subreddit, title, url=originalsubmission.url, captcha=None, send_replies=True)
-            xpost.add_comment(comment)
-            break
-        except praw.errors.AlreadySubmitted as e:
-            print("Already submitted. Skipping.\n")
-            break
-        except praw.errors.APIException as e:
-            print(e)
-            print("API error. Skipping.")
-            break
+    try:
+        xpost = r.submit(subreddit, title, url=originalsubmission.url, captcha=None, send_replies=True)
+        xpost.add_comment(comment)
+    except praw.errors.AlreadySubmitted as e:
+        print("Already submitted. Skipping.\n")
+    except praw.errors.APIException as e:
+        print(e)
+        print("API error. Skipping.")
 
 def praw_oauth_login(r):
     
