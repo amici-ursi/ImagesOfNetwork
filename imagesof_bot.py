@@ -705,7 +705,7 @@ def swim(r, goodregex, postinto, getfromthese, submission, badregex=r"(\bbadrege
                 re.search(goodregex, title, flags=re.IGNORECASE) and
                 not re.search(badregex, title, flags=re.IGNORECASE) and
                 not re.search(badcaseregex, title)) or
-                submission.subreddit.display_name.lower() in getfromthese:
+                submission.subreddit.display_name.lower() in getfromthese):
             make_post(r, submission, postinto)
 
 def make_post(r, originalsubmission, subreddit):
