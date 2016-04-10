@@ -701,7 +701,7 @@ def swim(r, goodregex, postinto, getfromthese, submission, badregex=r"(\bbadrege
                 submission.author.name.lower() in globaluserblacklist or
                 not re.search(urlregex, submission.url, flags=re.IGNORECASE)):
             return
-        if ((submission.subreddit.display_name.lower() not in globalsubredditblacklist + smallsubredditblacklist and
+        if ((submission.subreddit.display_name.lower() not in globalsubredditblacklist | smallsubredditblacklist and
                 re.search(goodregex, title, flags=re.IGNORECASE) and
                 not re.search(badregex, title, flags=re.IGNORECASE) and
                 not re.search(badcaseregex, title)) or
@@ -728,9 +728,12 @@ def praw_oauth_login(r):
     
     #Load keys from OS variables
     client_id = os.environ.get("imagesof_client_id")
+    print(client_id)
     client_secret = os.environ.get("imagesof_client_secret")
+    print(client_secret)
     redirect_uri = "http://127.0.0.1:65010/authorize_callback"
     refresh_token=os.environ.get("imagesof_refresh_token")
+    print(refresh_token)
     
     #Set the oauth app info and get authorization
     r.set_oauth_app_info(client_id, client_secret, redirect_uri)
