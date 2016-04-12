@@ -4,8 +4,9 @@ import praw
 import re
 import requests
 
-urlregex = r"(https?://.*(\.500px\.com|\.abload\.de|\.cdn\.theatlantic\.com|\.deviantart\.com|\.deviantart\.net|\.fav\.me|\.fbcdn\.net|\.files\.wordpress\.com|\.flic\.kr|\.flickr\.com|\.forgifs\.com|\.gfycat\.com|\.gifsoup\.com|\.gyazo\.com|\.imageshack\.us|\.imgclean\.com|\.imgur\.com|\.instagr\.am|\.instagram\.com|\.mediacru\.sh|\.media\.tumblr\.com|\.min\.us|\.minus\.com|\.myimghost\.com|\.panoramio\.com|\.photoburst\.net|\.photoshelter\.com|\.pbs\.twing\.com|\.photobucket\.com|\.picsarus\.com|\.puu\.sh|\.scontent\.cdninstagram\.com|\.staticflickr\.com|\.tinypic\.com|\.twitpic\.com|\.wikimedia\.org|\.(amazonaws.com|dropboxusercontent.com).*(\.jpg|\.jpeg|\.png|\.gif|\.gifv|\.apng|\.tiff|\.bmp|\.pdf|\.xcf)$))"
-r = praw.Reddit('ImagesOf v5.0 /u/amici_ursi')
+urlregex = r"\.(amazonaws.com|dropboxusercontent.com).*(\.jpg|\.jpeg|\.png|\.gif|\.gifv|\.apng|\.tiff|\.bmp|\.pdf|\.xcf)$"
+domainregex = r"^(500px\.com|abload\.de|cdn\.theatlantic\.com|.*\.deviantart\.com|.*\.deviantart\.net|fav\.me|.*\.fbcdn\.net|.*\.files\.wordpress\.com|flic\.kr|flickr\.com|forgifs\.com|gfycat\.com|(.*\.)?gifsoup\.com|(.*\.)?gyazo\.com|(.*\.)?imageshack\.us|imgclean\.com|(i\.)?imgur\.com|instagr\.am|instagram\.com|(cdn\.)?mediacru\.sh|(.*\.)?media\.tumblr\.com|(.*\.)?min\.us|(.*\.)?minus\.com|(.*\.)?panoramio\.com|photoburst\.net|(.*\.)?photoshelter\.com|pbs\.twimg\.com|(.*\.)?photobucket\.com|picsarus\.com|puu\.sh|scontent\.cdninstagram\.com|(.*\.)?staticflickr\.com|(.*\.)?tinypic\.com|twitpic\.com|upload.wikimedia\.org)"
+r = praw.Reddit('ImagesOf v5.1 /u/amici_ursi')
 submission_stream = praw.helpers.submission_stream(r, 'all')
 
 print("Getting global user blacklist")
@@ -699,7 +700,7 @@ def swim(r, goodregex, postinto, getfromthese, submission, badregex=r"(\bbadrege
         title = submission.title
         if (submission.over_18  or
                 submission.author.name.lower() in globaluserblacklist or
-                not re.search(urlregex, submission.url, flags=re.IGNORECASE)):
+                not re.search(domainregex, submission.domain, flags=re.IGNORECASE)):
             return
         if ((submission.subreddit.display_name.lower() not in globalsubredditblacklist | smallsubredditblacklist and
                 re.search(goodregex, title, flags=re.IGNORECASE) and
