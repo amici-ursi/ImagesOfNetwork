@@ -703,13 +703,15 @@ def search_for_places(r):
             getfromthese = {'yemen', 'yemenpics', 'yemenicrisis'},
             )
 
-#gets the OP's account age in days. for new accounts
+#gets the OP's account age in days for use in criteria
 def getage(r, author):
+    print("Getting age")
     user = r.get_redditor(author)
     print(user.created_utc)
     user_date = datetime.utcfromtimestamp(user.created_utc)
-    print(user_date)
+    print("{} was born on {}".format(author, user_date))
     age = (datetime.utcnow() - user_date).days
+    print("They are {} days old".format(age))
     return age
 
 #defines how critera get applied to each post 
