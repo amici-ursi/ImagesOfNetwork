@@ -3,12 +3,18 @@ import time
 import praw
 import re
 import requests
+from datetime import datetime
 
-urlregex = r"\.(amazonaws.com|dropboxusercontent.com).*(\.jpg|\.jpeg|\.png|\.gif|\.gifv|\.apng|\.tiff|\.bmp|\.pdf|\.xcf)$"
+#unused regex to match urls that aren't allowed domains
+#urlregex = r"\.(amazonaws.com|dropboxusercontent.com).*(\.jpg|\.jpeg|\.png|\.gif|\.gifv|\.apng|\.tiff|\.bmp|\.pdf|\.xcf)$"
+#regex for all the allowed domains
 domainregex = r"^(500px\.com|abload\.de|cdn\.theatlantic\.com|.*\.deviantart\.com|.*\.deviantart\.net|fav\.me|.*\.fbcdn\.net|.*\.files\.wordpress\.com|flic\.kr|flickr\.com|forgifs\.com|gfycat\.com|(.*\.)?gifsoup\.com|(.*\.)?gyazo\.com|(.*\.)?imageshack\.us|imgclean\.com|(i\.)?imgur\.com|instagr\.am|instagram\.com|(cdn\.)?mediacru\.sh|(.*\.)?media\.tumblr\.com|(.*\.)?min\.us|(.*\.)?minus\.com|(.*\.)?panoramio\.com|photoburst\.net|(.*\.)?photoshelter\.com|pbs\.twimg\.com|(.*\.)?photobucket\.com|picsarus\.com|puu\.sh|scontent\.cdninstagram\.com|(.*\.)?staticflickr\.com|(.*\.)?tinypic\.com|twitpic\.com|upload.wikimedia\.org)"
+#fires up praw and reddit, and identifies the bot
 r = praw.Reddit('ImagesOf v5.1 /u/amici_ursi')
+#identifies the stream of submissions that we're going swim in.
 submission_stream = praw.helpers.submission_stream(r, 'all')
 
+#get's all the blacklists. these need to be publicly viewable because praw bugs out on private wiki pages
 print("Getting global user blacklist")
 globaluserblacklist_wiki = r.get_wiki_page("ImagesOfNetwork","userblacklist")
 globaluserblacklist = set([name.strip().lower()[3:] for name in globaluserblacklist_wiki.content_md.split("\n") if name.strip() != ""])
@@ -30,6 +36,7 @@ indiasubredditblacklist_wiki = r.get_wiki_page("ImagesOfIndia","subredditblackli
 indiasubredditblacklist = set([name.strip().lower()[3:] for name in indiasubredditblacklist_wiki.content_md.split("\n") if name.strip() != ""])
 print(indiasubredditblacklist)
 
+#searches the stream for all the criteria
 def search_for_places(r):
     print("searching for posts...")
     for post in submission_stream:
@@ -696,6 +703,16 @@ def search_for_places(r):
             getfromthese = {'yemen', 'yemenpics', 'yemenicrisis'},
             )
 
+#gets the OP's account age in days. for new accounts
+def getage(r, author):
+    user = r.get_redditor(author)
+    print(user.created_utc)
+    user_date = datetime.utcfromtimestamp(user.created_utc)
+    print(user_date)
+    age = (datetime.utcnow() - user_date).days
+    return age
+
+#defines how critera get applied to each post 
 def swim(r, goodregex, postinto, getfromthese, submission, badregex=r"(\bbadregex\b)", badcaseregex=r"(\bBadCaseRegex\b)", smallsubredditblacklist={'blacklistedsubreddit'}):
         title = submission.title
         if (submission.over_18  or
@@ -707,8 +724,11 @@ def swim(r, goodregex, postinto, getfromthese, submission, badregex=r"(\bbadrege
                 not re.search(badregex, title, flags=re.IGNORECASE) and
                 not re.search(badcaseregex, title)) or
                 submission.subreddit.display_name.lower() in getfromthese):
-            make_post(r, submission, postinto)
+            age = getage(r, submission.author.name.lower())
+            if age > 2:
+                make_post(r, submission, postinto)
 
+#makes the post and comment
 def make_post(r, originalsubmission, subreddit):
     title = originalsubmission.title
     comment = '[Original post]({}) by /u/{} in /r/{}'.format(originalsubmission.permalink, originalsubmission.author, originalsubmission.subreddit)
@@ -723,6 +743,7 @@ def make_post(r, originalsubmission, subreddit):
         print(e)
         print("API error. Skipping.")
 
+#defines how to log in using the credentials stored in the OS.
 def praw_oauth_login(r):
     
     print('authorizing...')
@@ -742,7 +763,7 @@ def praw_oauth_login(r):
     
     print('...done')
 
-
+#runs all the things
 def main():
     print("Logging in...")
 
