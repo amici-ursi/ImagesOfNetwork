@@ -719,7 +719,7 @@ def swim(r, goodregex, postinto, getfromthese, submission, badregex=r"(\bbadrege
         title = submission.title
         if (submission.over_18  or
                 submission.author.name.lower() in globaluserblacklist or
-                not (re.search(domainregex, submission.domain, flags=re.IGNORECASE) or re.search(urlregex, submission.url, flags=re.IGNORECASE)):
+                not (re.search(domainregex, submission.domain, flags=re.IGNORECASE) or re.search(urlregex, submission.url, flags=re.IGNORECASE))):
             return
         if ((submission.subreddit.display_name.lower() not in globalsubredditblacklist | smallsubredditblacklist and
                 re.search(goodregex, title, flags=re.IGNORECASE) and
