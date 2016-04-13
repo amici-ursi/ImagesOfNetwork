@@ -5,8 +5,8 @@ import re
 import requests
 from datetime import datetime
 
-#unused regex to match urls that aren't allowed domains
-#urlregex = r"\.(amazonaws.com|dropboxusercontent.com).*(\.jpg|\.jpeg|\.png|\.gif|\.gifv|\.apng|\.tiff|\.bmp|\.pdf|\.xcf)$"
+#regex to match urls that aren't allowed domains
+urlregex = r"(\.jpg|\.jpeg|\.png|\.gif|\.gifv|\.apng|\.tiff|\.bmp|\.pdf|\.xcf)$"
 #regex for all the allowed domains
 domainregex = r"^(500px\.com|abload\.de|cdn\.theatlantic\.com|.*\.deviantart\.com|.*\.deviantart\.net|fav\.me|.*\.fbcdn\.net|.*\.files\.wordpress\.com|flic\.kr|flickr\.com|forgifs\.com|gfycat\.com|(.*\.)?gifsoup\.com|(.*\.)?gyazo\.com|(.*\.)?imageshack\.us|imgclean\.com|(i\.)?imgur\.com|instagr\.am|instagram\.com|(cdn\.)?mediacru\.sh|(.*\.)?media\.tumblr\.com|(.*\.)?min\.us|(.*\.)?minus\.com|(.*\.)?panoramio\.com|photoburst\.net|(.*\.)?photoshelter\.com|pbs\.twimg\.com|(.*\.)?photobucket\.com|picsarus\.com|puu\.sh|scontent\.cdninstagram\.com|(.*\.)?staticflickr\.com|(.*\.)?tinypic\.com|twitpic\.com|upload.wikimedia\.org)"
 #fires up praw and reddit, and identifies the bot
@@ -719,7 +719,7 @@ def swim(r, goodregex, postinto, getfromthese, submission, badregex=r"(\bbadrege
         title = submission.title
         if (submission.over_18  or
                 submission.author.name.lower() in globaluserblacklist or
-                not re.search(domainregex, submission.domain, flags=re.IGNORECASE)):
+                not (re.search(domainregex, submission.domain, flags=re.IGNORECASE) or re.search(urlregex, submission.url, flags=re.IGNORECASE)):
             return
         if ((submission.subreddit.display_name.lower() not in globalsubredditblacklist | smallsubredditblacklist and
                 re.search(goodregex, title, flags=re.IGNORECASE) and
