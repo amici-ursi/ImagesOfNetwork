@@ -142,7 +142,7 @@ def search_for_places(r):
             badcaseregex = r"(\bchile\b)",
             smallsubredditblacklist = {'food', 'foodporn', 'supremeclothing','caldera'},
             postinto = "imagesofchile",
-            getfromthese = {'Santiago', 'LaRoja', 'ChilENTs', 'ChileCringe', 'ChileCirclejerk', 'TopMusicChile'}
+            getfromthese = {'santiago', 'laroja', 'chilents', 'chilecringe', 'chilecirclejerk', 'topmusicchile'}
             )
     #china
         swim(r,
@@ -170,7 +170,7 @@ def search_for_places(r):
             badregex = r"(\bct.(scan|machine|unit)\b|\bc(onnecticu)?t river\b|\bct-|\b(a|p)\.?m\.? ct\b)",
             badcaseregex = r"(\bCt\b|\bct\b|\bcT\b)",
             postinto = 'imagesofconnecticut',
-            getfromthese =  {'connecticut', 'movingtoCT', 'ctbeer', 'newhaven', 'hartford', 'UCONN', 'stamfordct', 'oldsaybrook', 'connecticutkayakers', 'SoNo', 'ctjobs', 'wcsu', 'WaterburyCT', 'subaru_ct', 'enfieldct', 'EasternCT', 'milford', 'ConnecticutR4R', 'woodburyCT', 'tolland', 'norwalk'}
+            getfromthese =  {'connecticut', 'movingtoct', 'ctbeer', 'newhaven', 'hartford', 'uconn', 'stamfordct', 'oldsaybrook', 'connecticutkayakers', 'sono', 'ctjobs', 'wcsu', 'waterburyct', 'subaru_ct', 'enfieldct', 'easternct', 'milford', 'connecticutr4r', 'woodburyct', 'tolland', 'norwalk'}
             )
     #delaware
         swim(r,
@@ -319,7 +319,7 @@ def search_for_places(r):
             submission = post,
             goodregex = r"(\bkansas\b)",
             postinto = 'imagesofkansas',
-            getfromthese = {'kansas', 'placesubreddit2'}
+            getfromthese = {'kansas'}
             )
     #kentucky
         swim(r,
@@ -614,7 +614,7 @@ def search_for_places(r):
             submission = post,
             goodregex = r"(\btoronto\b)",
             postinto = 'imagesoftoronto',
-            getfromthese = {'toronto', 'UofT', 'Ryerson', 'YorkU', 'Humber', 'Brampton', 'GeorgeBrownCollege', 'TorontoBiking', 'TOmaps', 'TOFoodie', 'FoodToronto', 'TOtrees', 'TorontoArt', 'FishingOntario', 'TorontoCraftBeer', 'TorontoParks', 'TorontoUrbanFishing', 'Leafs', 'TorontoBlueJays', 'TorontoRaptors', 'TFC', 'TorontoRenting', 'TorontoRealEstate', 'TorontoJobs', 'VolunteerToronto', 'TorontoTransit', 'TorontoCityHall', 'FrugalTO', 'TorontoDriving'}
+            getfromthese = {'toronto', 'uoft', 'ryerson', 'yorku', 'humber', 'brampton', 'georgebrowncollege', 'torontobiking', 'tomaps', 'tofoodie', 'foodtoronto', 'totrees', 'torontoart', 'fishingontario', 'torontocraftbeer', 'torontoparks', 'torontourbanfishing', 'leafs', 'torontobluejays', 'torontoraptors', 'tfc', 'torontorenting', 'torontorealestate', 'torontojobs', 'volunteertoronto', 'torontotransit', 'torontocityhall', 'frugalto', 'torontodriving'}
             )
     #usa
         swim(r,
