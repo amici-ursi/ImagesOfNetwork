@@ -2,7 +2,7 @@ import os
 import time
 import praw
 import re
-import requests
+#import requests
 from datetime import datetime
 
 #regex to match urls that aren't allowed domains
