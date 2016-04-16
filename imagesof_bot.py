@@ -87,8 +87,8 @@ def search_for_places(r):
     #australia
         swim(r,
             submission = post,
-            goodregex = r"(\baustralia\b|\bsydney\b|\bmelbourne\b|\bperth\b|\bbrisbane\b|\bgold coast\b|\bcairns\b|\badelaide\b|\bfraser island\b|\bcanberra\b|\bport douglas\b|\bmargaret river\b|\bkakadu national park\b|\bhobart\b|\bsunshine coast\b|\bbroome\b|\bphillip island\b|\bbarossa valley\b|\bbyron bay\b|\blaunceston\b|\bkangaroo island\b|\bsurgers paradise\b|\bwollongong\b|\btownsville\b|\bexmouth\b|\bcape tribulation\b|\bblue mountains national park\b|\bkuranda\b|\bmoreton island\b|\bcoffs harbour\b|\brockhampton\b|\bmandurah\b|\bpemberton\b|\bhervey bay\b|\bcentral coast\b|\btamworth\b|\bbowen\b|\bbunbury\b|\bbrisbane\b|\bbrusselton\b|\bgrampians national park\b|\bnorth stradbroke island\b|\bkalbarri\b|\btoowoomba\b|\bport arthur\b|\bbundaberg\b|\bgeelong\b|\bmount gambier\b|\bport jackson\b|\bsydney\b|\bmelbourne\b|\bgreat ocean road\b|\bbondi beach\b|\buluru\b|\bgreat barrier reef\b|\bkings park\b|\bmanly beach\b|\btaronga zoo\b|\bkakadu national park\b|\bfraser island\b|\bhunter region\b|\bwhitsunday islands?\b|\bshrine of remembrance\b|\bnoosa national park\b|\bwhitehaven beach\b|\bquestacon\b|\badelaide zoo\b|\blake burley griffin\b|\bnational gallery of victoria\b|\bhealesville santuary\b|\bwilsons promontory\b|\bsea world gold coast\b|\bcurrumbin wildlife sanctuary\b|\bgrampians national park\b|\bbarossa valley\b|\bburleigh heads\b|\bdaintree rainforest\b|\bcape tribulation\b|\bcapitol theatre\b|\btamborine mountain\b|\badelaide botanic garden\b|\bshelly beach\b|\bmount ainslie)",
-            badregex = r"(\bsydney sierota\b|\bflorida\b|\bfl\b|\bport chester\b|\bnew york\b|\bny\b|\bcalifornia\bca\b)",
+            goodregex = r"(\baustralia\b|\bsydney\b|\bmelbourne\b|\bperth\b|\bbrisbane\b|\bgold coast\b|\bcairns\b|\badelaide\b|\bfraser island\b|\bcanberra\b|\bport douglas\b|\bmargaret river\b|\bkakadu national park\b|\bhobart\b|\bsunshine coast\b|\bbroome\b|\bphillip island\b|\bbarossa valley\b|\bbyron bay\b|\blaunceston\b|\bkangaroo island\b|\bsurgers paradise\b|\bwollongong\b|\btownsville\b|\bexmouth\b|\bcape tribulation\b|\bblue mountains national park\b|\bkuranda\b|\bmoreton island\b|\bcoffs harbour\b|\brockhampton\b|\bmandurah\b|\bpemberton\b|\bhervey bay\b|\bcentral coast\b|\btamworth\b|\bbowen\b|\bbunbury\b|\bbrisbane\b|\bbrusselton\b|\bgrampians national park\b|\bnorth stradbroke island\b|\bkalbarri\b|\btoowoomba\b|\bport arthur\b|\bbundaberg\b|\bgeelong\b|\bmount gambier\b|\bport jackson\b|\bsydney\b|\bmelbourne\b|\bgreat ocean road\b|\bbondi beach\b|\buluru\b|\bgreat barrier reef\b|\bkings park\b|\bmanly beach\b|\btaronga zoo\b|\bkakadu national park\b|\bfraser island\b|\bhunter region\b|\bwhitsunday islands?\b|\bshrine of remembrance\b|\bnoosa national park\b|\bwhitehaven beach\b|\bquestacon\b|\blake burley griffin\b|\bnational gallery of victoria\b|\bhealesville santuary\b|\bwilsons promontory\b|\bsea world gold coast\b|\bcurrumbin wildlife sanctuary\b|\bgrampians national park\b|\bbarossa valley\b|\bburleigh heads\b|\bdaintree rainforest\b|\bcape tribulation\b|\bcapitol theatre\b|\btamborine mountain\b|\badelaide botanic garden\b|\bshelly beach\b|\bmount ainslie)",
+            badregex = r"(\bsydney sierota\b|\bflorida\b|\bfl\b|\bport chester\b|\bnew york\b|\bny\b|\bcalifornia\bca\b|\badelaide kane\b)",
             postinto = "imagesofaustralia",
             getfromthese = {'australia', 'australiapics', 'adelaide', 'askanaustralian', 'australianagriculture', 'afl', 'australiantelevision', 'aleague', 'australiagonewild', 'ausbeer', 'ballarat', 'ausbike', 'bluemountains', 'ausbookexchange', 'brisbane', 'canberra', 'cairns', 'carsaustralia', 'circlejerkaustralia', 'centralcoastnsw', 'centralqueensland', 'cquni', 'darwinaustralia', 'doublej', 'drugsaustralia', 'ausecon', 'australianev', 'auselt', 'ausents', 'ausenviro', 'ausfemalefashion', 'australianfilm', 'australianfilmmakers', 'ausfinance', 'fishingaustralia', 'ausfood', 'ausfreebies', 'aufrugal', 'geelong', 'goldcoast', 'ausguns', 'aussiehiphop', 'australianhistory', 'hobart', 'aushomebrew', 'koalas', 'koalasgonewild', 'auslaw', 'libertarianaustralia', 'australianmakeup', 'melbourne', 'melbournemusic', 'melbtrade', 'ausmemes', 'australianmfa', 'ausmetal', 'modelaustralia', 'modelparliament', 'ausmotoring', 'australianmilitary', 'ausmusic', 'nbn', 'netflixaustralia', 'newcastle', 'nrl', 'northqueensland', 'outdooraus', 'paulkelly', 'perth', 'australianpolitics', 'auspol', 'austpropertyponzi', 'queensland', 'australiarebooted', 'regionalaustralia', 'aussieriders', 'australianright', 'r4raustralia', 'r4rbris', 'r4rmelbourne', 'r4rperth', 'r4rsydney', 'savethenbn', 'ausskincare', 'australiasnow', 'startupsaustralia', 'straya', 'ausstocks', 'sunshinecoast', 'sydney', 'sydneymusic', 'tasmania', 'austechsupport', 'townsville', 'triplej', 'tweedshire', 'vego', 'warrnambool', 'westernaustralia', 'wollongong', 'ausmemes'}
             )
@@ -138,7 +138,7 @@ def search_for_places(r):
         swim(r,
             submission = post,
             goodregex = r"(\bchile\b|\bsantiago\b|\btorres del paine\b|\bvalpara(i|í)so\b|\bpunta arenas\b|\bsan pedro de atacama\b|\bpuerto montt\b|\biquique\b|\barica\b|\bchilo(é|e) island\b|\bVi(n|ñ)a del Mar\b|\bPuc(o|ó)n\b|\bpuerto varas\b|\bpuetro natales\b|\bantofagasta\b|\bla serena\b|\bconcepci(o|ó)n\b|\btemuco\b|\bosorno\b|\bchill(a|á)n\b|\bcoyhaique\b|\bcalama\b|\bvillarrica\b|\brobinson crusoe island\b|\bfrutillar\b|\blos andes\b|\blauca national park\b|\bcopiap(ó|o)\b|\brancagua\b|\b(lake san rafael|san rafael lake)\b|\bcaldera\b|\bla campana\b|\btalca\b|\bConguill(í|i)o\b|\bpichilemu\b|\balgarrobo\b|\bpuerto williams\b|\bpuerto chacabuco\b|\bsanta cruz\b|\bprovidencia\b|\bsan felipe\b|\bpanguipulli\bolmu(e|é)\b|valle nevado\b|\bancud\b|\bhuilo-huilo\b|\bCuric(ó|o)\b|\bchile chico\b|\btorres del paine\b|\bsan Crist(o|ó)bal\b|\blauca national park\b|\bvalle de la luna\b|\bsantiago metropolitan park\b|\bla moneda palace\b|\bplaza de armas\b|\bLos Pingüinos\b|\bmagdalena island\b|\bmuseo chileno de arte precolombino\b|\bsan rafael glacier\b|\bsanta Luc(i|í)a\b|\bCaj(o|ó)n del Maipo|\bmuseum of memory and human rights\b|\bvalle nevado\b|\bchilean national museum of fine arts\b|\bvillarrica\b|\bcordillera paine\b|\bparque forestal\b|\bcostanera center\b|\bosomo\b|\bhumberstone and santa laura saltpeper works\b|\bChungar(a|á)\b|\bttodos los santos\b|\bel morado\b|\bfantasilandia\b|\bsan rafael lake\b|\bcentro cultural palacio de la moneda\b|\bojos del salado\b|\bpumalin park\b|\bConguill(i|í)o national park\b|\bvillarrica lake\b|\bchilean national zoo\b|\bbosque de fray jorge national park\b|\bbeagle channel\b|\bcasa colorada\b|\bPukar(a|á) de quitor\b|\bRe(n|ñ)aca beach\b|\bcalbuco\b|\bEstaci(o|ó)n Mapocho\b|\btronador\b|\bgrey glacier\b|\blake Peho(e|é)\b|\bpuyehue lake\b|\bojos del caburgua\b|\bPuntiagudo-Cord(o|ó)n Cenizos\b|\bchurch of san pedro de atacama\b|\bFitz Roy\b|\bchalt(e|é)n\b|\bandes\b|\beaster island\b|\bw(e|é)on\b|\bcerro castillo\b|\bcarlos ib(a|á)(ñ|n)ez\b|\bla paz\b|\bdynevor\b|\bmapuche\b|\bchilla\b|\bla silla\b|\batacama\b|\bel potre chico\b)",
-            badregex = r"(\bcalifornia\b|\bca\b|\bbolivia\b|\bargentina\b|\bindiana\b|\bspain\bcamino de santiago\b)",
+            badregex = r"(\bcalifornia\b|\bca\b|\bbolivia\b|\bargentina\b|\bindiana\b|\bspain\bcamino de santiago\b|\bsantiago de la vega\b|\bjamaica\b)",
             badcaseregex = r"(\bchile\b)",
             smallsubredditblacklist = {'food', 'foodporn', 'supremeclothing','caldera'},
             postinto = "imagesofchile",
@@ -167,7 +167,7 @@ def search_for_places(r):
         swim(r,
             submission = post,
             goodregex = r"(\bconnecticut\b|\bct\b|\bconnecticuters?\b|\bmystic seaport\b|\blake compounce\b|\bgillette castle state park\b|\bmark twain house\b|\bmystic aquarium and institute\b|\bbridgeport\b|\bnew\bhaven\b|\bhartford\b|\bstamford\b|\bwaterbury\b|\bnorwalk\b|\bdanbury\b|\bnew\bbritain\b)",
-            badregex = r"(\bct.(scan|machine|unit)\b|\bc(onnecticu)?t river\b|\bct-|\b(a|p)\.?m\.? ct\b)",
+            badregex = r"(\bct.(scan|machine|unit|precisa)\b|\bc(onnecticu)?t river\b|\bct-|\b(a|p)\.?m\.? ct\b|\blincolnshire\b)",
             badcaseregex = r"(\bCt\b|\bct\b|\bcT\b)",
             postinto = 'imagesofconnecticut',
             getfromthese =  {'connecticut', 'movingtoct', 'ctbeer', 'newhaven', 'hartford', 'uconn', 'stamfordct', 'oldsaybrook', 'connecticutkayakers', 'sono', 'ctjobs', 'wcsu', 'waterburyct', 'subaru_ct', 'enfieldct', 'easternct', 'milford', 'connecticutr4r', 'woodburyct', 'tolland', 'norwalk'}
@@ -187,7 +187,7 @@ def search_for_places(r):
             goodregex = r"(\bengland\b|\blondon\b|\boxford\b|\bmanchester\b|\bnew castle upon tyne\b|\bbirmingham\b|\byork\b|\bcambridge\b|\bwindsor\b|\bcanterbury\b|\bbrighton\b|\bbristol\b|\bleeds\b|\bnew forest\b|\bstraford-upon-avon\b|\bnottingham\b|\bbournemouth\b|\bgreenwich\b|\bportsmouth\b|\bpeak district\b|\bsheffield\b|\bwarwick\b|\bexeter\b|\bsalisbury\b|\byorkshire dales\b|\bnewquay\b|\bgreater manchester\b|\blake district national park\b|\bleicester\b|\bwindermere\b|\bkeswick\b|\bharrogate\b|\bwinchester\b|\bcheltenham\b|\bpeterborough\b|\bsouthport\b|\bpenrith\b|\bglastonbury\b|\bashford\b|\bmilton keynes\b|\bcoventry\b|\bcolchester\b)",
             badregex = r"(\bnew england\b|\bpete ashford\b|\bnew york\b|\bcanterbury tales\b|\balabama\b|\bal\b|\bconnecticut\b|\bct\b|\bpalin\b|\bmassachusetts\b|\bma\b|\bn(orth)? carolina\b|\bnc\b|\bontario\b|\bcanada\b|\bdevon windsor\b|\bdean winchester\b|\boxford english dictionary\b)",
             badcaseregex = r"(\bON\b|\boN\b)",
-            smallsubredditblacklist = {'londonontario', 'newzealand', 'nascar', 'guns', 'gunporn', 'hunting', 'supremeclothing', 'birmingham', 'fo4', 'ockytop', 'boston'},
+            smallsubredditblacklist = {'londonontario', 'newzealand', 'nascar', 'guns', 'gunporn', 'hunting', 'supremeclothing', 'birmingham', 'fo4', 'ockytop', 'boston', 'australia'},
             postinto = 'imagesofengland',
             getfromthese = {'england', 'englandpics'}
             )
@@ -204,7 +204,7 @@ def search_for_places(r):
         swim(r,
             submission = post,
             goodregex = r"(\bfrance\b|\bparis\b|\bmarseille\b|\bcannes\b|\bstrasbourg\b|\btoulouse\b|\beiffel tower\b|\blouvre\b|\bfrench riviera\b|\barc de triomphe\b|\bversailles\b|\bMusée d'Orsay\b|\bSacré-C(oe|œ)ur\b|\bjardin du luxembourg\b)",
-            badregex = r"(\bparis (tx|texas|island|hilton|dylan)\b|\bbrian france\b)",
+            badregex = r"(\bparis (tx|texas|island|hilton|dylan)\b|\b(bob|brian) france\b)",
             postinto = 'imagesoffrance',
             getfromthese = {'france', 'francepics'}
             )
@@ -212,7 +212,7 @@ def search_for_places(r):
         swim(r,
             submission = post,
             goodregex = r"(\bgeorgia\b|\bga\b|\bGeorgians?\b|\batlanta\b|\bcolumbus\b(georgia|ga)\b|\bSavannah\b|\bathens\b(ga|georgia)\b|\bsandy\bsprings\b|\bmacon\b|\broswell\b(ga|georgia)\b|\balbany\b(ga|georgia)\b|\bjohns\bcreek\b|\bwarner\brobins\b)",
-            badregex = r"(\bgeorgia graham\b|\brepublic of georgia\b)",
+            badregex = r"(\bgeorgia graham\b|\brepublic of georgia\b|\ba savannah\b)",
             badcaseregex = r"(\bga\b|\bgA\b)",
 
             postinto = 'imagesofgeorgia',
@@ -251,7 +251,7 @@ def search_for_places(r):
         swim(r,
             submission = post,
             goodregex = r"(\bidaho\b|\bIdahoans?\b|\bboise\b|\bnampa\b|\bMeridian\b|\bIdaho\bFalls\b|\bPocatello\b|\bCaldwell\b|\bCoeur\bd'Alene\b|\bTwin\bFalls\b|\blewiston\b)",
-            badregex = r"(\bidaho springs\b)",
+            badregex = r"(\bidaho springs\b|\bghosts of meridian\b)",
             postinto = 'imagesofidaho',
             getfromthese = {'idaho'}
             )
@@ -259,7 +259,7 @@ def search_for_places(r):
         swim(r,
             submission = post,
             goodregex = r"(\billinois\b|\bIllinoisans?\b|\bIL\b|\bchicago\b|\bAurora\b(IL|Illinois)\b|\brockford\b|\bJoliet\b|\bnaperville\b|\bspringfield\b|\bpeopria\b|\belgin\b(IL|illinois)\b|\bWaukegan\b)",
-            badregex = r"(\bil\b|\bIl\b|\biL\b|\bchicago('s)? pizza\b)",
+            badregex = r"(\bil\b|\bIl\b|\biL\b|\bchicago('s)? (style)? pizza\b)",
             smallsubredditblacklist = {'thesimpsons', 'guns'},
             postinto = 'imagesofillinois',
             getfromthese = {'illinois'}
@@ -277,7 +277,7 @@ def search_for_places(r):
         swim(r,
             submission = post,
             goodregex = r"(\bindiana\b|\bIndianians?\b|\bhoosiers?\b|\bIndianapolis\b|\bF(or)?t\bWayne\b|\bevansville\b|\bsouth\bbend\b|\bhammond\b|\bbloomington\b|\bgary\bindiana\b|\bcarmel\bindiana\b|\bfishers\bindiana\b|\bmuncie\b)",
-            badregex = r"(\bindiana jones\b)",
+            badregex = r"(\bindiana (jones|evans)\b|\b(richard|albert) hammond\b|\bhammond a\b)",
             postinto = 'imagesofindiana',
             getfromthese = {'indiana'}
             )
@@ -285,7 +285,7 @@ def search_for_places(r):
         swim(r,
             submission = post,
             goodregex = r"(\biowa\b|\bIowans?\b|\bdes moines\b|\bcedar rapids\b|\bdavenport\b|\bsioux city\b|\bwaterloo (IA|iowa)\b|\bcouncil bluffs\b|\bames\b|\bDubuque\b)",
-            badregex = r"(\b(kennedy|adam) davenport\b|\bca\b|\bcalifornia\b)",
+            badregex = r"(\b(kennedy|adam) davenport\b|\bca(lifornia)?\b|\bNew Mexico\b|\bNM\b)",
             smallsubredditblacklist = {'toronto'},
             postinto = 'imagesofiowa',
             getfromthese = {'iowa'}
@@ -437,6 +437,7 @@ def search_for_places(r):
         swim(r,
            submission = post,
             goodregex = r"(\bnevada\b)",
+            badregex = r"(\bnevada city\b)",
             postinto = 'imagesofnevada',
             getfromthese = {'nevada'}
             )
@@ -459,7 +460,7 @@ def search_for_places(r):
         swim(r,
             submission = post,
             goodregex = r"(\bnew mexico\b|\bsanta fe\b|\balbuquerque\b|\broswell\b|\btaos\b|\bcarlsbad\b|\bruidoso\b|\blas cruces\b|\bwhite sands\b|\blos alamos\b|\balamogordo\b|\bcarlsbad\b|\bchaco culture\b|\btucumcari\b|\bbandelier\b|\bsilver city\b|\bred river\b|\bfarmington\b|\bsanta rosa\b|\bdeming\b|\bacoma pueblo\b|\blordsburg\b|\bangel fire\b|\bclayton\b|\bTruth or consequences\b|\bEspa(n|ñ)ola\b|\bzuni\b|\bclovis\b|\bmesilla\b|\bartesia\b|\bsocorro\b|\beagle nest lake\b|\bportales\b|\bAbiqui(ú|u)\b|\bshiprock\b|\btaos pueblo\b|\btaos ski valley\b|\bcity of rocks\b|\bchama\b|\belephant butte\b)",
-            badregex = r"(\bminnesota\b|\bclayton bigsby\bfilipe albuquerque\b|\bred river gorge\b|\bkentucky\b|\bky\b)",
+            badregex = r"(\bminnesota\b|\bclayton bigsby\bfilipe albuquerque\b|\bred river gorge\b|\bk(entuck)?y\b|\bc(aliforni)?a\b)",
             badcaseregex = r"(\bchama\b|\bsspa(n|ñ)ola\b)",
             smallsubredditblacklist = {'atlanta'},
             postinto = 'imagesofnewmexico',
@@ -469,6 +470,8 @@ def search_for_places(r):
         swim(r,
             submission = post,
             goodregex = r"(\bnew york\b|\bNYC?\b|\blong island\b|\balbany\b|\bthousand islands\b|\bfinger lakes\b|\brochester\b|\bsyracuse\b|\blake placid\b|\bithaca\b|\blake george\b|\bbinghampton\b|\bmontauk\b|\bplattsburgh\b|\bwoodstock\b|\bpoughkeepsie\b|\bwoodbury\b|\bnew paltz\b|\bbethel\b|\bsaratoga springs\b|\bwatkins glen\b|\balexandria bay\b|\bwest point\b|\bsleepy hollow\b|\belmira\b|\brhinebeck\b|\btarrytown\b|\bcooperstown\b|\bellicottville\b|\bfire island\b|\bcold spring\b|\bbear (mountain|mt)\b|\butica\b|\bcorning\b|\bwhite plains\b|\bp(or)?t chester\b|\bshelter island\b|\bcayuga lake\b|\bletchworth state park\b|\bhyde park\b|\bwatertown\b|\bamityville\b|\bwestbury\b|\bmargaret lewis norrie state park\b|\bogdensburg\b|\bport jefferson\b)",
+            badcaseregex = r"(\b(Ny|ny|nY)\b)",
+            badregex = r"(\baustin\b|\blondon\b|\balbany-fraser\b)",
             smallsubredditblacklist = {'austin'},
             postinto = 'imagesofnewyork',
             getfromthese = {'newyork', 'nyc', 'nycpics', 'nycstreetart', 'nychistory'}
@@ -537,7 +540,7 @@ def search_for_places(r):
         swim(r,
             submission = post,
             goodregex = r"(\bperu\b|\blima\b|\bcusco\b|\barequipa\b|\biquitos\b|\bpuno\b|\bcolca canyon\b|\bMan(ú|u) National Park\b|\bhuaraz\b|\bmachu picchu\b|\bsacred valley\b|\bsaksaywaman\b|\bqurikancha\b|\bUrubamba\b|\bsanta catalina monastery\b|\bhuayna picchu\b|\bhuaca pucllana\b)",
-            badregex = r"(\blima bean\b|\bAdriana Lima\b)",
+            badregex = r"(\blima bean\b|\bAdriana Lima\b|\boh(io)?\b)",
             postinto = 'imagesofperu',
             getfromthese = {'peru', 'perupics'}
             )
@@ -604,7 +607,7 @@ def search_for_places(r):
         swim(r,
             submission = post,
             goodregex = r"(\btexas\b|\btx\b|\btexans?\b|\baustin\b|\bdallas\b|\bhouston\b|\bsan antonio\b|\bfo?r?t worth\b|\bel paso\b|\barlington\b|\bcorpus christi\b|\bplano\b|\blaredo\b)",
-            badregex = r"(\baustin (powers|seven)\b|\b(blake|lana|steve|jane|terry) austin\b|\balexis texas\b|\bbryce dallas\b|\barlington national cemetery\b|\bdallas keuchel\b|\bvirginia\b|\bva\b|\bnova\b|\bdevin houston\b)",
+            badregex = r"(\baustin (powers|seven|taylor)\b|\b(blake|lana|steve|jane|terry) austin\b|\balexis texas\b|\bbryce dallas\b|\barlington national cemetery\b|\bdallas (keuchel|mccarver)\b|\bvirginia\b|\bva\b|\bnova\b|\bdevin houston\b)",
             smallsubredditblacklist = {'nova', 'virginia'},
             postinto = 'imagesoftexas',
             getfromthese = {'lonestar', 'texas', 'texasbeer', 'texaschl', 'texas_classifieds', 'texasfavors', 'texascountry', 'texasguns', 'texashistory', 'texashistoryporn', 'texents', 'txmoto', 'texaspolitics', 'texas_reddirt', 'texasskateboarding', 'truetexas', 'abilenetexas', 'abilene', 'allen', 'amarillo', 'aransaspass', 'arlington', 'arlingtontx', 'atascocitatx', 'atascocita', 'austin', 'austintexas', 'askaustin', 'fireteamaustin', 'austinbeer', 'bitcoinaustin', 'austinbloggers', 'austincarpangler', 'austincirclejerk', 'austinclassifieds', 'austinclimbing', 'austincomedy', 'bikingatx', 'depressionaustin', 'austindiscgolf', 'austindogs', 'eastsidechess', 'effaustin', 'austinevents', 'austinfilmmakers', 'austinfood', 'austinfrugal', 'atxgaybros', 'austingaymers', 'austingonewild', 'atxgooglefiber', 'austingreenbelt', 'austinguns', 'helpmeaustin', 'austinintrovertsocial', 'austinjeeps', 'austinjobs', 'austinkids', 'austinliving', 'keepaustinweird', 'atxlostandfound', 'austinmtg', 'austincannabis', 'austents', 'austinents', 'austintrees', 'austin_metal', 'austinmotorcycles', 'atxmusic', 'austintxmusic', 'livemusiccapital', 'austinshowlistings', 'austinmusicians', 'austinbiz', 'pedicabatx', 'austinpetlostandfound', 'atxpix', 'austinphotography', 'austinpoker', 'queeraustin', 'atx4atx', 'austinrecsandreviews', 'atxrecords', 'atxrecsports', 'rentaustin', 'restorethefourthatx', 'austinrp', 'austinrunning', 'austinscience', 'austinshows', 'socialanxietyaustin', 'barcraftaustin', 'austinstartups', 'austinswap', 'austintrades', 'austintraffic', 'austinurbex', 'austinveg', 'austinyoga', 'occupyaustin', 'semisaltyeggsinaustin', 'trueaustin', 'bastroptx', 'baycitytx', 'baytown', 'belton', 'benbrook', 'boerne', 'boyd', 'brownwood_texas', 'carrolltontx', 'castroville', 'cedarcreek', 'cedarpark', 'clearlake', 'collegestation', 'collegestationbeer', 'commercetx', 'conroe', 'copperascove', 'corpus', 'corpuschristi', 'corsicanatx', 'cypresstx', 'dallas', 'dallasfood', 'dallasmeetups', 'dallasriders', 'deerpark', 'denton', 'truedenton', 'drippingsprings', 'edinburg', 'elpaso', 'elpasobeer', 'euless', 'flowermound', 'forney', 'fortbend', 'fortworth', 'friendswood', 'frisco', 'fulshear', 'galveston', 'garland', 'georgetowntx', 'granbury', 'gptx', 'greenvilletx', 'heartland', 'heidenheimer', 'highlandvillage', 'houston', 'houstonbeer', 'houstonclassifieds', 'bikehouston', 'houstonevents', 'houstonfood', 'houstonguns', 'houstonjob', 'houstonents', 'houstonsocials', 'houstonriders', 'houstonmusic', 'houstonr4r', 'houstonsocials', 'houstonsoccer', 'huntsvilletx', 'huntsvilletexas', 'hurst', 'irvingtexas', 'jerseyvillage', 'jollyville', 'katytx', 'katy_texas', 'katy', 'keller', 'kerrville', 'killeen', 'kingwood', 'laredo', 'cityoflaredo', 'leander', 'lewisville', 'lockhart', 'longviewtexas', 'lubbock', 'lubbocktx', 'lubbockdogs', 'lubbockmusicians', 'marblefalls', 'marfa', 'manor', 'mckinney', 'mineralwells', 'newbraunfels', 'oakcliff', 'palestinetx', 'paristx', 'paristexas', 'pearland', 'pflugerville', 'plano', 'planotx', 'portaransas', 'richardson', 'riveroaks', 'rockwall', 'roundrock', 'roundrocktexas', 'san_angelo', 'sanantonio', 'bikesanantonio', 'sanantoniofood', 'satx4satx', 'sanmarcos', 'sanger', 'springbranch', 'sugarland', 'stephenville', 'terlingua', 'texarkana', 'thecolony', 'thewoodlands', 'tomball', 'tylertx', 'wichitafalls', 'waco', 'weatherford', 'whitesettlement', 'wimberley', 'austinsanantonio', 'bigbend', 'bigbendtx', 'bigbendnationalpark', 'brazoriacounty', 'bcstx', 'dfw', 'dfwart', 'dfwbeer', 'dfwclassifieds', 'dallist', 'dfwbike', 'dfwfilmmakers', 'dfwgaming', 'dfwgameswap', 'dfwgaymers', 'dfwguns', 'dfwjobs', 'dfwmarketplace', 'dfwmusic', 'dfwpets', 'r4rdfw', 'dfwroommates', 'gasmonkey', 'theticket', 'east_texas', 'easttexas', 'easttx', 'hillcountry', 'laketravis', 'leandercedarpark', 'midessa', 'northtexas', 'nwatx', 'riograndevalley', 'audirgv', 'gayrgv', 'rgvstandup', 'southtexas', 'setx', 'setxmusic', 'valley956', 'westcentraltexas', 'westtexas', 'wilcocorruption', 'alamocolleges', 'acu', 'austinisd', 'atxcommcollege', 'austincc', 'baylor', 'boydhighschool', 'collincollege', 'lamaruniversity', 'northwestvista', 'riceuniversity', 'shsu', 'smu', 'sasaustin', 'stedwards', 'stmu', 'aggies', 'tamuc', 'tcu', 'tccstudentsconnect', 'txstate', 'tstcharlingen', 'texassouthern', 'texastech', 'trinityu', 'universityofhouston', 'uhd', 'uhlc', 'coogshouse', 'unt', 'stthomas', 'universityoftexas', 'utarlington', 'uttrees', 'utmemes', 'longhorn', 'universityoftexas', 'utaustin', 'shadownet', 'utbrownsville', 'utdallas', 'utep', 'utsa', 'longhornnation', 'uiw', 'wtamu', 'cowboys', 'mavericks', 'dallasstars', 'fcdallas', 'astros', 'dynamo', 'rockets', 'texans', 'texansff', 'roundrockexpress', 'sascorpionsfc', 'nbaspurs', 'texasrangers', 'txrangersexpress', '12thmanfootball', 'longhornnation', 'aclfestival', 'austincitylimits', 'funfunfunfest', 'txrenaissancefestival', 'sxsw', 'sxswi'}
@@ -658,7 +661,7 @@ def search_for_places(r):
         swim(r,
             submission = post,
             goodregex = r"(\bwashington\b)",
-            badregex = r"(\bd\.?c\.?\b|\bgeorge washington\b|\bdenzel washington\b|\bil\b|\billinois\b|\bwashington monument\b|\bwashington post\b)",
+            badregex = r"(\bd\.?c\.?\b|\b(george|denzel) washington\b|\bil\b|\billinois\b|\bwashington (monument|post|street)\b)",
             postinto = 'imagesofwashington',
             getfromthese = {'washington', 'mount_rainier'}
             )
@@ -691,7 +694,7 @@ def search_for_places(r):
         swim(r,
             submission = post,
             goodregex = r"(\bwyoming\b\|\bwy\b|\byellowstone\b|\bgrand teton\b|\blaramie\b|\bteton village\b|\bjackson lake\b|\brawlins\b|\brock springs\b|\bdevils tower\b|\bthermopolis\b|\bmoran\b|\bevanston\b|\bjenny lake\b|\bboysen reservoir\b|\blander\b|\briverton\b|\bcolter bay\b|\bglendo state park\b|\bgreen river\b|\bdubois\b|\btorrington\b|\bsignal (mountain|mtn)\b|\bguernsey state park\b|\blusk\b|\bgreybull\b|\bsaratoga\b|\bkeyhole state park\b|\bworland\b|\bsinks canyon\b|\bshoshoni\b|\bpine bluffs\b|\bbighorn national forest\b|\bguernsey\b|\bpinedale\b|\bnewcastle\b|\bold faithful\b)",
-            badregex = r"(\bnewcastle united\b|\bbailiwick of guernsey\b|\blander probe\b)",
+            badregex = r"(\bnewcastle united\b|\bbailiwick of guernsey\b|\blander probe\b|\bUK\b)",
             postinto = 'imagesofwyoming',
             getfromthese = {'wyoming'}
             )
