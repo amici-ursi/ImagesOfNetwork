@@ -772,10 +772,10 @@ def main():
     praw_oauth_login(r)
 
     try:
-    search_for_places(r) 
-        except praw.errors.HTTPException:
-            print("Reddit is down. Sleeping...")
-            time.sleep(360)
+        search_for_places(r) 
+    except praw.errors.HTTPException:
+        print("Reddit is down. Sleeping...")
+        time.sleep(360)
 
 
 if __name__ == '__main__':
