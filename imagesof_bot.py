@@ -771,19 +771,12 @@ def main():
 
     praw_oauth_login(r)
 
-    while True:
-        try:
-            search_for_places(r) 
+    try:
+    search_for_places(r) 
         except praw.errors.HTTPException:
             print("Reddit is down. Sleeping...")
             time.sleep(360)
-        except requests.exceptions.ReadTimeout as error:
-            print("Handling ReadTimeout: ", error)
-        except praw.errors.RateLimitExceeded as e:
-            print(("ERROR: Rate limit exceeded. Sleeping for " +
-                   "{} seconds".format(e.sleep_time)))
-            time.sleep(e.sleep_time)
-            
+
 
 if __name__ == '__main__':
     main()
