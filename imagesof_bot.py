@@ -259,7 +259,7 @@ def search_for_places(r):
         swim(r,
             submission = post,
             goodregex = r"(\billinois\b|\bIllinoisans?\b|\bIL\b|\bchicago\b|\bAurora\b(IL|Illinois)\b|\brockford\b|\bJoliet\b|\bnaperville\b|\bspringfield\b|\bpeopria\b|\belgin\b(IL|illinois)\b|\bWaukegan\b)",
-            badregex = r"(\bil\b|\bIl\b|\biL\b|\bchicago('s)? (style)? pizza\b)",
+            badregex = r"(\bil\b|\bIl\b|\biL\b|\bchicago('s)? (style)? pizza\b|\bVehk Springfield\b)",
             smallsubredditblacklist = {'thesimpsons', 'guns'},
             postinto = 'imagesofillinois',
             getfromthese = {'illinois'}
