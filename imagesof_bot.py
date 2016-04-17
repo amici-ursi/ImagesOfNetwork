@@ -62,7 +62,7 @@ def search_for_places(r):
             goodregex = r"(\balaska\b|\bak\b|\balaskans?\b|\banchorage\b|\bfairbanks\b|\bdenali national park\b|\bketchikan\b|\bskagway\b|\bkenai fjords\b|\bmendenhall glacier\b|\bjuneau\b|\beagle river\b|\bbadger\b(alaska|ak)\b|\bknik\-fairview\b|\bcollege\b(alaska|ak)\b|\bsitka\b|\blakes\b(alaska|ak)\b|\btanaina\b(alaska|ak)\b)",
             badregex = r"(\bmalamute\b|\balaskan salmon\b|\bDouglas Fairbanks\b|ak.?47|ak.?107,|\bak-|\brupaul\b|\bcable anchorage\b|\bbaked alaskan?\b)",
             badcaseregex = r"(\bak\b|\bAk\b|\baK\b)",
-            smallsubredditblacklist = {'rupaulsdragrace', 'rpdrcirclejerk'},
+            smallsubredditblacklist = {'rupaulsdragrace', 'rpdrcirclejerk', 'ak47'},
             postinto = "imagesofalaska",
             getfromthese = {'alaska', 'alaskanporn', 'alaskabeer', 'akgaming', 'anchorage', 'uaa', 'fairbanks', 'skagway', 'juneau', 'uasjuneau', 'yukon', 'kodiak'}
             )
