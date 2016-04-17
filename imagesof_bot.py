@@ -185,7 +185,7 @@ def search_for_places(r):
         swim(r,
             submission = post,
             goodregex = r"(\bengland\b|\blondon\b|\boxford\b|\bmanchester\b|\bnew castle upon tyne\b|\bbirmingham\b|\byork\b|\bcambridge\b|\bwindsor\b|\bcanterbury\b|\bbrighton\b|\bbristol\b|\bleeds\b|\bnew forest\b|\bstraford-upon-avon\b|\bnottingham\b|\bbournemouth\b|\bgreenwich\b|\bportsmouth\b|\bpeak district\b|\bsheffield\b|\bwarwick\b|\bexeter\b|\bsalisbury\b|\byorkshire dales\b|\bnewquay\b|\bgreater manchester\b|\blake district national park\b|\bleicester\b|\bwindermere\b|\bkeswick\b|\bharrogate\b|\bwinchester\b|\bcheltenham\b|\bpeterborough\b|\bsouthport\b|\bpenrith\b|\bglastonbury\b|\bashford\b|\bmilton keynes\b|\bcoventry\b|\bcolchester\b)",
-            badregex = r"(\bnew england\b|\bpete ashford\b|\bnew york\b|\bcanterbury tales\b|\balabama\b|\bal\b|\bconnecticut\b|\bct\b|\bpalin\b|\bmassachusetts\b|\bma\b|\bn(orth)? carolina\b|\bnc\b|\bontario\b|\bcanada\b|\bdevon windsor\b|\bdean winchester\b|\boxford english dictionary\b)",
+            badregex = r"(\bnew england\b|\bpete ashford\b|\bnew york\b|\bcanterbury tales\b|\balabama\b|\bal\b|\bconnecticut\b|\bct\b|\bpalin\b|\bmassachusetts\b|\bma\b|\bn(orth)? carolina\b|\bnc\b|\bontario\b|\bcanada\b|\bdevon windsor\b|\bdean winchester\b|\boxford (english dictionary|tan)\b|\bgreenwich villiage\b)",
             badcaseregex = r"(\bON\b|\boN\b)",
             smallsubredditblacklist = {'londonontario', 'newzealand', 'nascar', 'guns', 'gunporn', 'hunting', 'supremeclothing', 'birmingham', 'fo4', 'ockytop', 'boston', 'australia'},
             postinto = 'imagesofengland',
