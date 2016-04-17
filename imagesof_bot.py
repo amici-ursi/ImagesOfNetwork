@@ -204,7 +204,7 @@ def search_for_places(r):
         swim(r,
             submission = post,
             goodregex = r"(\bfrance\b|\bparis\b|\bmarseille\b|\bcannes\b|\bstrasbourg\b|\btoulouse\b|\beiffel tower\b|\blouvre\b|\bfrench riviera\b|\barc de triomphe\b|\bversailles\b|\bMusée d'Orsay\b|\bSacré-C(oe|œ)ur\b|\bjardin du luxembourg\b)",
-            badregex = r"(\bparis (tx|texas|island|hilton|dylan)\b|\b(bob|brian) france\b)",
+            badregex = r"(\bparis (tx|texas|island|hilton|dylan)\b|\b(bob|brian|nathalie) paris\b)",
             postinto = 'imagesoffrance',
             getfromthese = {'france', 'francepics'}
             )
@@ -562,7 +562,7 @@ def search_for_places(r):
         swim(r,
             submission = post,
             goodregex = r"(\bscotland\b|\bedinburgh\b|\bglasgow\b|\bloch ness\b|\bskye\b|\bscottish highlands\b|\bdundee\b|\bislay\b|\baviemore\b|\bloch lomond\b|\bpitlochry\b|\bcallander\b|\bgretna green\b|\binveraray\b|\bballater\b|\bmelrose\b|\bdrunkeld\b|\bbraemar\b|\bleith\b|\baberfoyle\b|\bfalkirk\b|\bbarra\b|\bkillin\b|\bcairngorms\b|\bdrumnadrochit\b|\bpeebles\b|\bgrantown-on-spey\b|\binverurie\b|\bfort augustus\b|\bluss\b|\baberfeldy\b|\bnewtonmore\b|\bcrieff\b|\bcastle douglas\b|\bstrathpeffer\b|\bballoch\b|\blewis and harris\b|\bauchterarder\b|\bballachulish\b|\brothesay\b|\bedinburgh\b|\bholyrood\b|\bkelvingrove\b|\barthur's seat\b|\bglasgow\b|\bprinces st(reet)?\b|\bburrell collection\b|\bs(ain)?t gile'?s cathedral\b|\bfalkirk wheel\b|\bmary king'?s close\b|\burquhart\b|\bmelrose abbey\b|\bkelvingrove park\b|\bcairngorms\b|\bblair drummond safari\b|\bour dynamic earth\b|\bhunterian museum\b|\bmcmanus galleries\b|\bwallace monument\b|\briverside museum\b|\bculzean castle\b|\bs(ain)?t andrews cathedral\b|\bfalkland palace\b|\bbroughty castle\b|\bbalmoral castle\b|\brosslyn chapel\b|\bgleneagles hotel\b|\bskara brae\b|\bglamis castle\b|\bsse hydro\b)",
-            badcaseregex = r"(\bkillin\b)"
+            badcaseregex = r"(\bkillin\b)",
             postinto = 'imagesofscotland',
             getfromthese = {'scotland', 'scottishphotos'}
             )
