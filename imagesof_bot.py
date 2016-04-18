@@ -124,7 +124,7 @@ def search_for_places(r):
             badcaseregex = r"(\bca\b|\bCa\b|\bcA\b)",
             smallsubredditblacklist = californiasubredditblacklist,
             postinto = "imagesofcalifornia",
-            getfromthese = {'california', 'californiapics', 'calipornia'}
+            getfromthese = {'california', 'californiapics', 'calipornia', 'bayarea', 'dirty530', 'eastbay', 'norcal', 'ncal', 'arcata', 'auburncalifornia', 'alameda', 'berkeley', 'burlingame', 'calistoga', 'chicoca', 'davisca', 'elkgrove', 'folsom', 'fremont', 'halfmoonbay', 'humboldt', 'humboldtcounty', 'humboldt_county', 'lincolnca', 'livermore', 'lgcalifornia', 'inmenlo', 'menlopark', 'millbrae', 'napa', 'napavalley', 'novato', 'oakland', 'orangevale', 'orinda', 'pacifica', 'pacificgrove', 'paloalto', 'petaluma', 'pleasanton', 'redding', 'roseville', 'sacramento', 'sanfrancisco', 'excelsiordistrict', 'sanjose', 'sanmateo', 'coastside', 'sanmateocounty', 'santarosa', 'sevastopol', 'sonoma', 'sonomacounty', 'siliconvalley', 'sunnyvale', 'tahoe', 'laketahoe', 'northlaketahoe', 'ukiah', 'vacaville', 'westoakland', 'westsacramento', 'woodland', 'yosemite', 'humboldt', 'norcalgolf', 'norcalweather', 'sacramentoparents', 'bayareaseddit', 'sfbayhousing', 'sfbayjobs', 'sfbc', 'sfbst', 'sfbayarea', 'norcalhiking', 'sfr4r', 'sfbarf', 'sfbayhousing', 'sfbsurf', 'babike', 'centralvalley', 'atascadero', 'avenal', 'bakersfield', 'cambria', 'cayucos', 'ceres', 'fresno', 'gilroy', 'greenvilleca', 'hanford', 'kernvalley', 'modesto', 'morrobay', 'ridgecrest', 'shaverlake', 'sonoma', 'stocktonca', 'taft', 'vacaville', 'visalia', 'waterford', 'sierras', 'camarillo', 'islavista', 'lompoc', 'oxnard', 'montereybay', 'slo', 'santacruz', 'santabarbara', 'santamaria', 'simivalley', 'simi_valley', 'ventura', 'venturacounty', 'everythingsantacruz', 'santacruzlocals', 'scsurf', 'slominecraft', 'slotrees', 'socal', 'southerncalifornia', 'southland', 'agourahills', 'anaheim', 'antelopevalley', 'beverlyhills', 'calabasas', 'carsonca', 'claremont', 'conejovalley', 'culvercity', 'dtla', 'huntingtonbeach', 'irvine', 'eastla', 'elsegundo', 'fountainvalley', 'longbeach', 'losangeles', 'lynwood', 'malibu', 'missionviejo', 'newportbeach', 'redondobeach', 'oakpark', 'ojai', 'orangecounty', 'pasadena', 'reseda', 'sanclemente', 'sfv', 'sgv', 'sanmarino', 'sanpedro', 'santaclarita', 'santamonica', 'silverlake', 'southbayla', 'thousandoaks', 'tustinca', 'tustin', 'weho', 'lawestside', 'venice', 'westwood', 'bikela', 'cityofla', 'disneylandresort', 'disneyland', 'disneyparks', 'lameetup', 'lajobs', 'lar4r', 'filmindustryla', 'losangelesrams', 'losangelesseddit', 'motola', 'octrees', 'ocparents', 'orangecountyseddit', 'wikicitywalk', 'socalhiking', 'socalr4r', 'inlandempire', 'antelopevalley', 'bigbear', 'coachellavalley', 'corona', 'highdesert', 'indio', 'joshuatree', 'eastvale', 'mojave', 'palmdale', 'palmsprings', 'redlands', 'riverside', 'riversidecounty', 'sanbernardino', '909', 'chulavista', 'lajolla', 'lamesa', 'missionbeach', 'northcounty', 'sandiego', 'asksandiego', 'beersandiego', 'tree enthusiasts', 'sandiegogonewild', 'sandiegojobs', 'sdmeetup', 'sandiegooutdoors', 'sandiegoshows', 'berkeley', 'ischool', 'berkeleybooks', 'ucdavis', 'uci', 'ucla', 'ucmered', 'ucr', 'ucsd', 'ucsb', 'ucsc', 'calpolypomona', 'cpslo', 'csub', 'csuci', 'chicostate', 'fresnostate', 'csuf', 'csudh', 'csueb', 'csulb', 'csula', 'csumb', 'csunorthridge', 'csus', 'csusb', 'csusm', 'humboldtstate', 'sdsu', 'sfsu', 'sjsu', 'ssu', 'calcommunitycolleges', 'cuestacollege', 'dvc', 'flc', 'foothill', 'grossmont', 'mpc', 'mtsanjacintocollege', 'occ', 'scc', 'sbcc', 'sierracollege', 'vcccd', 'aisd', 'apu', 'biola', 'homfloor', 'cca', 'caltech', 'chapmanuniversity', 'theclaremontcolleges', 'harveymudd', 'lmu', 'oxy', 'pepperdine', 'pomonacollege', 'scu', 'scrippscollege', 'stanford', 'touro', 'uop', 'toreros', 'usfca', 'usc', 'mayfieldcollege', 'anaheimducks', 'warriors', 'angelsbaseball', 'chivasusa', 'laclippers', 'dodgers', 'lafc', 'lagalaxy', 'losangeleskings', 'lakers', 'oaklandathletics', 'oaklandraiders', 'kings', 'chargers', 'sandiegogulls', 'padres', '49ers', 'sfgiants', 'sanjosebarracuda', 'sjearthquakes', 'sanjosesharks', 'calpolitics', 'californialaw', 'californiaelection', 'californiadisasters', 'californiadrought', 'caguns', 'californiabeer', 'calireggae', 'californiaforsanders', 'ceanothus', 'ca4neoprogs', 'californiacannabis', 'prop19', 'octrees', 'wtfcalifornia', 'savecali', 'comiccon', 'burningman', 'coachella2011', 'coachella', 'westtoo', 'socalhiking', 'norcalhiking', 'socalr4r', 'sfr4r', 'immovingtocalifornia', 'californialaw', 'immovingtocalifornia', 'centralvalley', 'lakerses', 'AskLosAngeles', 'asksandiego', 'AskSF', 'Bakersfield', 'bayarea', 'CentralValley', 'Dirty530', 'fresno', 'InlandEmpire', 'longbeach', 'LosAngeles', 'norcal', 'northcounty', 'oakland', 'orangecounty', 'PoliticalCalifornia', 'Sacramento', 'sandiego', 'sanfrancisco', 'SanJose', 'SantaBarbara', 'santacruz', 'SLO'}
             )
     #canada
         swim(r,
@@ -151,7 +151,7 @@ def search_for_places(r):
             badregex = r"(\b(from|made in) china\b|\bchina harbor\b|\bshanghai gp3\b)",
             smallsubredditblacklist = californiasubredditblacklist,
             postinto = "imagesofchina",
-            getfromthese = {'china', 'chinapics', 'chinaart'}
+            getfromthese = {'china', 'chinapics', 'chinaart', 'shanghai', 'beijing', 'shenzhen', 'guangzhou', 'chengdu', 'hongkong', 'taiwan', 'macau', 'dalian', 'wuhan', 'nanjing', 'harbin_china', 'travelchina', 'chinesereddit'}
             )
     #colorado
         swim(r,
@@ -161,7 +161,7 @@ def search_for_places(r):
             badcaseregex = r"(\bCo\b|\bco\b|\bcO\b)",
             smallsubredditblacklist = {'trees', 'london', 'panthers'},
             postinto = 'imagesofcolorado',
-            getfromthese = {'colorado', 'cowx', 'denverpics'}
+            getfromthese = {'colorado', 'cowx', 'denverpics', 'vacationcolorado', 'boulderuncut', 'c710lorado', 'cobeer', 'cobike', 'coclimbing', 'coents', 'cofishing', 'coguns', 'cohiphop', 'cosnow', 'cotreegifting', 'coloradohikers', 'coloradojobs', 'coloradooffroad', 'coloradoscene', 'coloradosports', 'vacationcolorado', 'couplesofcos', 'coclimbing', 'denvercomiccon', 'denverfood', 'denvergardener', 'denvergaymers', 'denverjobs', 'denverlist', 'denvermotorcycles', 'denvermusic', 'denversoccer', 'denvervolunteers', 'littlebigdenver', 'denvercirclejerk', 'auraria_campus', 'coloradocollege', 'coloradoschoolofmines', 'comines', 'csufoco', 'cuboulder', 'cudenver', 'denveru', 'fortlewiscollege', 'msdc', 'rrcc', 'uccs', 'unco', 'coloradoavalanche', 'denverbroncos', 'denvernuggets', 'rapids', 'coloradorockies', 'denvercutthroats/', 'switchbacksfc', 'auroraco', 'beavercreek', 'boulder', 'breckenridge', 'castlerock', 'centennialdtc', 'coloradosprings', 'cortez', 'denver', 'durango', 'erieco', 'fortcollins', 'fourcorners', 'fruita', 'goldenco', 'grandjunction', 'greeley', 'gunnison', 'pbville', 'littleton', 'longmont', 'loveland', 'pueblo', 'roaringfork', 'steamboat/', 'summit', 'twn', 'vail'}
             )
     #connecticut
         swim(r,
@@ -179,7 +179,7 @@ def search_for_places(r):
             badregex = r"(\bnew jersey\b|\bnj\b|\bwilmington island\b|\bwilmington.*\b(nc|north carolina)\b|\bdover bridge\b)",
             smallsubredditblacklist = {'easternshoremd'},
             postinto = 'imagesofdelaware',
-            getfromthese = {'delaware'}
+            getfromthese = {'delaware', 'fireflyfestival', 'udel', 'wilmingtonde', 'delawarepolitics', 'newarkde', 'hopheadsde', 'delawarent', 'hirede', 'bikede', 'delaware4sanders', 'deguns', 'netde', 'motde', 'delawareamiibo', 'delmoto', 'slowerlower', 'asylum13'}
             )
     #england
         swim(r,
@@ -198,7 +198,7 @@ def search_for_places(r):
             badregex = r"(\bfl studios?\b)",
             smallsubredditblacklist = {'edmprodcirclejerk', 'edmproduction'},
             postinto = 'imagesofflorida',
-            getfromthese =  {'florida', 'floridabrew', 'miabeer', 'jaxbeer', 'soflabeer', 'tampabaybeer'}
+            getfromthese =  {'florida', 'floridabrew', 'miabeer', 'jaxbeer', 'soflabeer', 'tampabaybeer', 'tallahassee', 'fsu', 'pensacola', 'panamacity', 'tlh', 'nwfl', 'orlando', 'ucf', 'ucfknights', 'orlandodisneyarea', 'centralflorida', 'lakeland', 'floridapoly', 'northlakecounty', 'miami', 'fortlauderdale', 'naples_fl', 'southflorida', 'swfl', 'umiami', 'miamihurricanes', 'bocaraton', 'gnv', 'ufl', 'floridagators', 'tampa', 'stpetersburgfl', 'sarasota', 'usf', 'riverviewfl', '321', 'daytonabeach', 'jacksonville', 'unf', 'palmcoast', 'daytonastate', 'staugustine', 'treasurecoast', 'flaglercollege', 'portstlucie', 'keyshappenings', 'onthewaterfront', 'wtf_florida', 'floridaman', 'flvs'}
             )
     #france
         swim(r,
