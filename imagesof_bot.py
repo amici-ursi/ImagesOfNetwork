@@ -167,7 +167,7 @@ def search_for_places(r):
         swim(r,
             submission = post,
             goodregex = r"(\bconnecticut\b|\bct\b|\bconnecticuters?\b|\bmystic seaport\b|\blake compounce\b|\bgillette castle state park\b|\bmark twain house\b|\bmystic aquarium and institute\b|\bbridgeport\b|\bnew\bhaven\b|\bhartford\b|\bstamford\b|\bwaterbury\b|\bnorwalk\b|\bdanbury\b|\bnew\bbritain\b)",
-            badregex = r"(\bct.(scan|machine|unit|precisa)\b|\bc(onnecticu)?t river\b|\bct-|\b(a|p)\.?m\.? ct\b|\blincolnshire\b)",
+            badregex = r"(\bct.(scan|machine|unit|precisa)\b|\bc(onnecticu)?t river\b|\bct-|\b(a|p)\.?m\.? ct\b|\blincolnshire\b|\buss hartford\b)",
             badcaseregex = r"(\bCt\b|\bct\b|\bcT\b)",
             postinto = 'imagesofconnecticut',
             getfromthese =  {'connecticut', 'movingtoct', 'ctbeer', 'newhaven', 'hartford', 'uconn', 'stamfordct', 'oldsaybrook', 'connecticutkayakers', 'sono', 'ctjobs', 'wcsu', 'waterburyct', 'subaru_ct', 'enfieldct', 'easternct', 'milford', 'connecticutr4r', 'woodburyct', 'tolland', 'norwalk'}
@@ -301,8 +301,8 @@ def search_for_places(r):
         swim(r,
             submission = post,
             goodregex = r"(\bisle of man\b|\bcastle rushen\b|\bpeel castle\b|\bcalf of man\b|\bleece museum\b|\bsnaefell\b|\blangness peninsula\b|\bpeel cathedral\b|\bsouth barrule|\bmaughold head\b|\bbradda hill\b|\bnorth barrule\b|\bchicken rock\b|\bmull hill\b|\bspanish head\b|\bcastletown\b|\bporn erin\b|\bramsey\b)",
-            badregex = r"(\b(aaron|gordon|laura|steve|geoff|the|mega|kelly).ramsey\b)",
-            smallsubredditblacklist = {'ck2gameofthrones', 'gameofthrones', 'hbogameofthrones', 'soccer', 'gunners', 'fantasypl'},
+            badregex = r"(\b(aaron|david|gordon|jalen|hms|laura|steve|geoff|the|mega|kelly|jonbenet).ramsey\b|\bramsey.ksar\b)",
+            smallsubredditblacklist = {'ck2gameofthrones', 'gameofthrones', 'hbogameofthrones', 'soccer', 'gunners', 'fantasypl', 'shitgunnerssay', 'tennesseetitans'},
             postinto = 'imagesofisleofman',
             getfromthese = {'isleofman'}
             )
