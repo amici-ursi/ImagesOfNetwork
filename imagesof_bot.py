@@ -206,7 +206,7 @@ def search_for_places(r):
             goodregex = r"(\bfrance\b|\bparis\b|\bmarseille\b|\bcannes\b|\bstrasbourg\b|\btoulouse\b|\beiffel tower\b|\blouvre\b|\bfrench riviera\b|\barc de triomphe\b|\bversailles\b|\bMusée d'Orsay\b|\bSacré-C(oe|œ)ur\b|\bjardin du luxembourg\b)",
             badregex = r"(\bparis (tx|texas|island|hilton|dylan)\b|\b(bob|brian|nathalie) paris\b)",
             postinto = 'imagesoffrance',
-            getfromthese = {'france', 'francepics'}
+            getfromthese = {'france', 'francepics', 'bretagne', 'grandsud', 'normandie', 'reunionisland', 'bourgogne', 'aixmarseille', 'bordeaux', 'clermontfd', 'grenoble', 'lille', 'lyon', 'montpellier', 'nantes', 'paris', 'strasbourg', 'toulouse', 'tours', 'acadie'}
             )
     #georgia
         swim(r,
@@ -214,16 +214,15 @@ def search_for_places(r):
             goodregex = r"(\bgeorgia\b|\bga\b|\bGeorgians?\b|\batlanta\b|\bcolumbus\b(georgia|ga)\b|\bSavannah\b|\bathens\b(ga|georgia)\b|\bsandy\bsprings\b|\bmacon\b|\broswell\b(ga|georgia)\b|\balbany\b(ga|georgia)\b|\bjohns\bcreek\b|\bwarner\brobins\b)",
             badregex = r"(\bgeorgia graham\b|\brepublic of georgia\b|\ba savannah\b)",
             badcaseregex = r"(\bga\b|\bgA\b)",
-
             postinto = 'imagesofgeorgia',
-            getfromthese = {'georgia'}
+            getfromthese = {'georgia', 'acworth', 'AlbanyGA', 'alpharetta', 'athens', 'atlanta', 'augusta', 'BarrowCounty', 'BrunswickGA', 'CarrolltonGeorgia', 'cartersville', 'cherokeecountyga', 'columbiacounty', 'columbusga', 'conyers', 'dacula', 'dahlonega', 'daltonga', 'decaturga', 'dublinga', 'Dunwoody', 'dvillega', 'snobbery', 'eastpoint', 'FayCo', 'flowerybranch', 'forsyth', 'franklincountyga', 'gwinnett', 'HenryCounty', 'HinesvilleGA', 'JasperGA', 'JekyllIsland', 'johnscreek', 'kennesaw', 'lagrange', 'leesburgga', 'lilburn', 'ludowici', 'mableton', 'macon', 'marietta', 'mariettaga', 'middlegeorgia', 'midtownatlanta', 'newnan', 'paulding', 'PeachtreeCity', 'romega', 'roswell', 'stsimonsisland', 'sandysprings', 'savannah', 'smyrna', 'statesboro', 'SummervilleGA', 'valdosta', 'waycross', 'woodstockga'}
             )
     #guatemala
         swim(r,
             submission = post,
             goodregex = r"(\bguatemala\b|\btikal\b|\bLake Atitl(á|a)n\b|\bpacaya\b|\bdulce river\b|\blake Pet(é|e)n Itz(á|a)|\bpet(é|e)n department\b|\bpanajachel\b|\bcobán\b)",
             postinto = 'imagesofguatemala',
-            getfromthese = {'guatemala'}
+            getfromthese = {'guatemala', 'guatemalapics'}
             )
     #hawaii
         swim(r,
@@ -231,7 +230,7 @@ def search_for_places(r):
             goodregex = r"(\bhawaii\b|\bHawaiians?\b|\bHonolulu\b|\bpearly\bcity\b|\bhilo\b|\bkailua\b|\bWaipahu\b|\bKaneohe\b|\bMililani\bTown\b|\bKahului\b|\bEwa\bGentry\b|\bwarner\brobins\b|kihei\b)",
             badregex = r"(\bhawaiian rolls?\b)",
             postinto = 'imagesofhawaii',
-            getfromthese = {'hawaii', 'maui', 'kauai', 'bigisland', 'oahu', 'honolulu', 'hawaiijobs', 'universityofhawaii', 'bicyclehawaii', 'hawaiigardening', 'himusic', 'hawaiipics'}
+            getfromthese = {'hawaii', 'maui', 'kauai', 'bigisland', 'oahu', 'honolulu', 'hawaiijobs', 'universityofhawaii', 'bicyclehawaii', 'hawaiigardening', 'himusic', 'hawaiipics', 'hawaiifit', 'himusic'}
             )
     #hongkong
         swim(r,
@@ -245,7 +244,7 @@ def search_for_places(r):
             submission = post,
             goodregex = r"(\biceland\b)",
             postinto = 'imagesoficeland',
-            getfromthese = {'iceland', 'island'}
+            getfromthese = {'iceland', 'island', 'klakinn'}
             )
     #idaho
         swim(r,
@@ -253,7 +252,7 @@ def search_for_places(r):
             goodregex = r"(\bidaho\b|\bIdahoans?\b|\bboise\b|\bnampa\b|\bMeridian\b|\bIdaho\bFalls\b|\bPocatello\b|\bCaldwell\b|\bCoeur\bd'Alene\b|\bTwin\bFalls\b|\blewiston\b)",
             badregex = r"(\bidaho springs\b|\bghosts of meridian\b)",
             postinto = 'imagesofidaho',
-            getfromthese = {'idaho'}
+            getfromthese = {'idaho', 'courdalene', 'boise', 'twinfalls', 'mountainhome', 'pocatello', 'idahodogcommunity'}
             )
     #illinois
         swim(r,
@@ -262,7 +261,7 @@ def search_for_places(r):
             badregex = r"(\bil\b|\bIl\b|\biL\b|\bchicago('s)? (style)? pizza\b|\bVehk Springfield\b)",
             smallsubredditblacklist = {'thesimpsons', 'guns'},
             postinto = 'imagesofillinois',
-            getfromthese = {'illinois'}
+            getfromthese = {'illinois', 'chicago', 'southernillinois', 'centralillinois', 'salukis', 'grayslakeillinois', 'lasallecounty', 'rockford', 'chicagogaming', 'chibears', 'chicagobulls', 'chicubs', 'whitesox', 'hawks'}
             )
     #india
         swim(r,
@@ -277,7 +276,7 @@ def search_for_places(r):
         swim(r,
             submission = post,
             goodregex = r"(\bindiana\b|\bIndianians?\b|\bhoosiers?\b|\bIndianapolis\b|\bF(or)?t\bWayne\b|\bevansville\b|\bsouth\bbend\b|\bhammond\b|\bbloomington\b|\bgary\bindiana\b|\bcarmel\bindiana\b|\bfishers\bindiana\b|\bmuncie\b)",
-            badregex = r"(\bindiana (jones|evans)\b|\b(richard|albert) hammond\b|\bhammond a\b)",
+            badregex = r"(\bindiana (jon|jones|evans)\b|\b(richard|albert) hammond\b|\bhammond a\b)",
             postinto = 'imagesofindiana',
             getfromthese = {'indiana'}
             )
@@ -288,14 +287,14 @@ def search_for_places(r):
             badregex = r"(\b(kennedy|adam) davenport\b|\bca(lifornia)?\b|\bNew Mexico\b|\bNM\b)",
             smallsubredditblacklist = {'toronto'},
             postinto = 'imagesofiowa',
-            getfromthese = {'iowa'}
+            getfromthese = {'iowa', 'ames', 'ankeny', 'cedarrapids', 'councilbluffs', 'desmoines', 'dubuque', 'iowacity', 'masoncity', 'okoboji', 'quadcity', 'siouxcity', 'waterlooiowa', 'iastate', 'uiowa', 'uni', 'grinnell', 'decorah', 'cornellcollege', 'clarkeu', 'iowabeer', 'iowajobs', 'iowagamers'}
             )
     #iran
         swim(r,
             submission = post,
             goodregex = r"(\biran\b|\btehran\b|\bmashhad\b|\bshiraz\b|\bisfahan\b|\btabriz\b|\byazd\b|\bqeshm\b|\bkashan\b)",
             postinto = 'imagesofiran',
-            getfromthese = {'iran', 'iranpics'}
+            getfromthese = {'iran', 'iranpics', 'iranpolitics', 'iranlgbt', 'iranianmusic', 'teammelli'}
             )
     #isleofman
         swim(r,
@@ -304,7 +303,7 @@ def search_for_places(r):
             badregex = r"(\b(aaron|david|gordon|jalen|hms|laura|steve|geoff|the|mega|kelly|jonbenet).ramsey\b|\bramsey.ksar\b)",
             smallsubredditblacklist = {'ck2gameofthrones', 'gameofthrones', 'hbogameofthrones', 'soccer', 'gunners', 'fantasypl', 'shitgunnerssay', 'tennesseetitans'},
             postinto = 'imagesofisleofman',
-            getfromthese = {'isleofman'}
+            getfromthese = {'isleofman', 'isleofmanphotos'}
             )
     #japan
         swim(r,
@@ -312,35 +311,35 @@ def search_for_places(r):
             goodregex = r"(\bjapan\b|\btokyo\b|\bkyoto\b|\bm(oun)?t\bfuji\b|\bmeiji shrine\b|\bkinkaku-ji\b|\bkiyomizu-dera\b|\bsenso-ji\b|\bosaka\b|\bnagoya\b|\bhakone\b)",
             badregex = r"(\btokyo (ghoul|mew)\b)",
             postinto = 'imagesofjapan',
-            getfromthese = {'japan', 'japanpics', 'normaldayinjapan'}
+            getfromthese = {'japan', 'japanpics', 'normaldayinjapan', 'japanlife', 'japannews', 'japantravel', 'japanparents', 'japanart', 'japanplaces', 'rideitjapan', 'fukushimachronicles', 'japanesefood', 'japansports', 'npb', 'jleague', 'japanesemusic', 'jpop', 'otaku', 'japanesefiction', 'tokyo', 'nagoya', 'kansai', 'kyoto', 'osaka', 'hiroshima', 'fukuoka', 'okinawa'}
             )
     #kansas
         swim(r,
             submission = post,
             goodregex = r"(\bkansas\b)",
             postinto = 'imagesofkansas',
-            getfromthese = {'kansas'}
+            getfromthese = {'kansas', 'wichita', 'overlandpark', 'topeka', 'littleapple', 'lawrence', 'kansascity', 'emporia', 'salina', 'hutchinson', 'atchison', 'southwestkansas', 'kstate', 'universityofkansas', 'pittstate', 'washburn', 'ksguns'}
             )
     #kentucky
         swim(r,
             submission = post,
             goodregex = r"(\bkentucky\b)",
             postinto = 'imagesofkentucky',
-            getfromthese = {'kentucky'}
+            getfromthese = {'kentucky', 'ashlandkentucky', 'bardstown', 'bowlinggreen', 'covington', 'danvilleky', 'frankfort', 'lexington', 'louisville', 'morehead', 'mountvernonkentucky', 'newportky', 'owensboro', 'paducah', 'pikeville', 'winchesterky', 'eku', 'moreheadstate', 'murray', 'nku', 'universityofkentucky', 'allhail', 'wku'}
             )
     #libya
         swim(r,
             submission = post,
             goodregex = r"(\blibyan?\b|\btripoli\b|\bleptis magna\b|\bbenghazi\b|\btobruk\b|\bghadames\b|\bshahhat\b|\bsabha\b|\bsabratha\b|\bzuwarah\b|\bgharyan\b|\bkhoms\b|\bghat\b|\bal ayda\b|\bsirte\b|\bmisurata\b|\bzawiya\b|\bbani walid\b|\bzintan\b|\bjanzur\b|\bdarnah\b|\bzliten\b|\bmarj\b|\bajdabiya\b|\bsirte district\b|\bnalut\b|\b ra's lanuf\b|\bmurzuq district\b|byafran\b|\bawjila\b|\bsorman\b|\bal jawf\b)",
             postinto = 'imagesoflibya',
-            getfromthese = {'libya'}
+            getfromthese = {'libya', 'libyanconflict'}
             )
     #louisiana
         swim(r,
             submission = post,
             goodregex = r"(\blouisiana\b)",
             postinto = 'imagesoflouisiana',
-            getfromthese = {'louisiana'}
+            getfromthese = {'louisiana', 'louisianajobs', 'laworks', 'cajunhistory', 'acadiana', 'ascensionparish', 'batonrouge', 'bellechasse', 'centrallouisiana', 'hammond', 'houma', 'jeffersonparish', 'lakecharles', 'neworleans', 'plaqueminesparish', 'ponchatoula', 'shreveport', 'louisianatech', 'lsu', 'nsu', 'nsula', 'ull', 'ulmonroe', 'uno', 'cajunmusic', 'lsufootball'}
             )
     #maine
         swim(r,
@@ -348,7 +347,7 @@ def search_for_places(r):
             goodregex = r"(\bmaine\b)",
             badregex = r"(\bmaine coon\b)",
             postinto = 'imagesofmaine',
-            getfromthese = {'maine'}
+            getfromthese = {'maine', 'mainebeer', 'mainehistory', 'mainefood', 'skimaine', 'portlandme'}
             )
     #maldives
         swim(r,
@@ -412,7 +411,7 @@ def search_for_places(r):
         swim(r,
             submission = post,
             goodregex = r"(\bmontana\b|\bMT\b|\bglacier national park\b|\bbozeman\b|\bwhitefish\b|\bgreat falls\b|\bmissoula\b|\bwest yellowstone\b|\bkalispell\b|\bhelena\b|\bbig sky\b|\blittle bighorn battlefield\b|\bgardiner\b|\blivingston\b|\bflathead lake\b|\bwest glacier\b|\bbutte\b|\bred lodge\b|\bvirginia city\b|\bhavre\b|\bpolson\b|\bcolumbia falls\b|\bgiant springs state park\b|\banaconda\b|\bmiles city\b|\bglendive\b|\blewistown\b|\bcooke city\b|\bsilver gate\b|\bthompson falls\b|\bbigfork\b|\blake mcdonald\b|\bwild horse island\b|\beast glacier park\b|\bfort benton\b|\bthree forks\b|\bgrinnell glacier\b|\blogan pass\b|\bhungry horse\b|\bmonarch\b|\bgallatin gateway\b|\bdeer lodge\b|\bdillon\b|\bforsyth\b|\bhardin\b|\bcut bank\b|\bhot springs\b|\bbig timber\b)",
-            badregex = r"(\b(hannah|joe|tony) montana\b|\bmaine\b|\bsan diego\b|\bgarrett hardin\b|\btexas\b|\btx\b|\bar\b|\barkansas\b|\bmontana de oro\b|\bmt-|\bnikulina\b|\bhelena soares\b|\bco\b|\bcolorado\b|\bcrested butte\b|\b(academy's|the|nammor|air|kvd) monarch\b|\bmonarch (bars|rhapsody)\b|\banaconda vice\b|\ble havre\b|\bpc mt\b|\bcolorado\b|\b(by|from|julie|matt) dillon\b|\bdillon (danis|thomas|fancis)\b|\blake whitefish\b|\bjonathan livingston\b|\bbruce forsyth|\bvirginia\b|\bmaryland\b|\bmd\b)",
+            badregex = r"(\b(hannah|joe|tony) montana\b|\bmaine\b|\bsan diego\b|\bgarrett hardin\b|\btexas\b|\btx\b|\bar\b|\barkansas\b|\bmontana de oro\b|\bmt-|\bnikulina\b|\bhelena soares\b|\bco\b|\bcolorado\b|\bcrested butte\b|\b(academy's|the|nammor|air|kvd) monarch\b|\bmonarch (bars|rhapsody)\b|\banaconda vice\b|\ble havre\b|\bpc mt\b|\bcolorado\b|\b(by|from|julie|matt) dillon\b|\bdillon (danis|thomas|fancis)\b|\blake whitefish\b|\bjonathan livingston\b|\bbruce forsyth|\bmaryland\b|\bmd\b)",
             badcaseregex = r"(\bMt\b|\bmt\b|\bmT\b|\bME\b|\banaconda\b|\bmonarch\b|\bCO\b|\bbutte\b|\bVA\b)",
             smallsubredditblacklist = {'arkansas', 'yugioh', 'silverbugs', 'elitedangerous', 'flytying', 'washingtondc', 'nova', 'sneks'},
             postinto = 'imagesofmontana',
@@ -471,7 +470,7 @@ def search_for_places(r):
             submission = post,
             goodregex = r"(\bnew york\b|\bNYC?\b|\blong island\b|\balbany\b|\bthousand islands\b|\bfinger lakes\b|\brochester\b|\bsyracuse\b|\blake placid\b|\bithaca\b|\blake george\b|\bbinghampton\b|\bmontauk\b|\bplattsburgh\b|\bwoodstock\b|\bpoughkeepsie\b|\bwoodbury\b|\bnew paltz\b|\bbethel\b|\bsaratoga springs\b|\bwatkins glen\b|\balexandria bay\b|\bwest point\b|\bsleepy hollow\b|\belmira\b|\brhinebeck\b|\btarrytown\b|\bcooperstown\b|\bellicottville\b|\bfire island\b|\bcold spring\b|\bbear (mountain|mt)\b|\butica\b|\bcorning\b|\bwhite plains\b|\bp(or)?t chester\b|\bshelter island\b|\bcayuga lake\b|\bletchworth state park\b|\bhyde park\b|\bwatertown\b|\bamityville\b|\bwestbury\b|\bmargaret lewis norrie state park\b|\bogdensburg\b|\bport jefferson\b)",
             badcaseregex = r"(\b(Ny|ny|nY)\b)",
-            badregex = r"(\baustin\b|\blondon\b|\balbany-fraser\b)",
+            badregex = r"(\baustin\b|\blondon\b|\balbany-fraser\b|\bny strip\b)",
             smallsubredditblacklist = {'austin'},
             postinto = 'imagesofnewyork',
             getfromthese = {'newyork', 'nyc', 'nycpics', 'nycstreetart', 'nychistory'}
@@ -646,7 +645,7 @@ def search_for_places(r):
         swim(r,
             submission = post,
             goodregex = r"(\bvirginia\b)",
-            badregex = r"(\bwest virginia\b)",
+            badregex = r"(\bwest virginia\b|\bvirginia city\b)",
             postinto = 'imagesofvirginia',
             getfromthese = {'virginia'}
             )
