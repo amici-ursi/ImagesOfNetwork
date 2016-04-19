@@ -695,6 +695,7 @@ def search_for_places(r):
             submission = post,
             goodregex = r"(\bwyoming\b\|\bwy\b|\byellowstone\b|\bgrand teton\b|\blaramie\b|\bteton village\b|\bjackson lake\b|\brawlins\b|\brock springs\b|\bdevils tower\b|\bthermopolis\b|\bmoran\b|\bevanston\b|\bjenny lake\b|\bboysen reservoir\b|\blander\b|\briverton\b|\bcolter bay\b|\bglendo state park\b|\bgreen river\b|\bdubois\b|\btorrington\b|\bsignal (mountain|mtn)\b|\bguernsey state park\b|\blusk\b|\bgreybull\b|\bsaratoga\b|\bkeyhole state park\b|\bworland\b|\bsinks canyon\b|\bshoshoni\b|\bpine bluffs\b|\bbighorn national forest\b|\bguernsey\b|\bpinedale\b|\bnewcastle\b|\bold faithful\b)",
             badregex = r"(\bnewcastle united\b|\bbailiwick of guernsey\b|\blander probe\b|\bUK\b)",
+            badcaseregex = r"(\blander\b)",
             postinto = 'imagesofwyoming',
             getfromthese = {'wyoming'}
             )
