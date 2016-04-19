@@ -167,7 +167,7 @@ def search_for_places(r):
         swim(r,
             submission = post,
             goodregex = r"(\bconnecticut\b|\bct\b|\bconnecticuters?\b|\bmystic seaport\b|\blake compounce\b|\bgillette castle state park\b|\bmark twain house\b|\bmystic aquarium and institute\b|\bbridgeport\b|\bnew\bhaven\b|\bhartford\b|\bstamford\b|\bwaterbury\b|\bnorwalk\b|\bdanbury\b|\bnew\bbritain\b)",
-            badregex = r"(\bct.(scan|machine|unit|precisa)\b|\bc(onnecticu)?t river\b|\bct-|\b(a|p)\.?m\.? ct\b|\blincolnshire\b|\buss hartford\b)",
+            badregex = r"(\bct.(scan|machine|unit|precisa)\b|\bc(onnecticu)?t (river|bridge)\b|\bct-|\b(a|p)\.?m\.? ct\b|\blincolnshire\b|\buss hartford\b)",
             badcaseregex = r"(\bCt\b|\bct\b|\bcT\b)",
             postinto = 'imagesofconnecticut',
             getfromthese =  {'connecticut', 'movingtoct', 'ctbeer', 'newhaven', 'hartford', 'uconn', 'stamfordct', 'oldsaybrook', 'connecticutkayakers', 'sono', 'ctjobs', 'wcsu', 'waterburyct', 'subaru_ct', 'enfieldct', 'easternct', 'milford', 'connecticutr4r', 'woodburyct', 'tolland', 'norwalk'}
