@@ -82,7 +82,7 @@ def search_for_places(r):
             badregex = r"(\b(hannah|joe|tony) montana\b|\bmaine\b|\bsan diego\b|\bgarrett hardin\b|\btexas\b|\btx\b|\bar\b|\barkansas\b|\bmontana de oro\b|\bmt-|\bnikulina\b|\bhelena soares\b|\bco\b|\bcolorado\b|\bcrested butte\b|\b(academy's|the|nammor|air|kvd) monarch\b|\bmonarch (bars|rhapsody)\b|\banaconda vice\b|\ble havre\b|\bpc mt\b|\bcolorado\b|\b(by|from|julie|matt) dillon\b|\bdillon (danis|thomas|fancis)\b|\blake whitefish\b|\bjonathan livingston\b|\bbruce forsyth|\bvirginia\b|\bmaryland\b|\bmd\b)",
             smallsubredditblacklist = {'ar15'},
             postinto = "imagesofarkansas",
-            getfromthese = {'arkansas', 'universityofarkansas', 'lyoncollege', 'hendersonstate', 'uca', 'asu_jonesboro', 'uafs', 'ualr', 'uam', 'ozarka', 'razorbacks', 'fayetteville', 'littlerock', 'fortsmith', 'jonesboro', 'texarkana', 'conwayar', 'arkieoutdoors', 'arkansashomeschoolers'}
+            getfromthese = {'arkansas', 'universityofarkansas', 'lyoncollege', 'hendersonstate', 'uca', 'asu_jonesboro', 'uafs', 'ualr', 'uam', 'ozarka', 'razorbacks', 'fayetteville', 'littlerock', 'fortsmith', 'jonesboro', 'texarkana', 'conwayar', 'arkieoutdoors', 'arkansashomeschoolers', 'arkansasnature'}
             )
     #australia
         swim(r,
