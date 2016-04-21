@@ -1,5 +1,4 @@
 import praw
-import OAuth2Util
 
 import traceback, time
 
@@ -11,90 +10,7 @@ make_slaves = True
 
 username = "amici_ursi"
 
-slave_subs = [ImagesOfAfghanistan',
-              'ImagesOfalabama',
-              'ImagesOfAlaska',
-              'ImagesOfArizona',
-              'ImagesOfArkansas',
-              'ImagesOfAustralia',
-              'ImagesOfBelgium',
-              'ImagesOfBelize',
-              'ImagesOfBrazil',
-              'ImagesOfCalifornia',
-              'ImagesOfCanada',
-              'ImagesOfChile',
-              'ImagesOfChina',
-              'ImagesOfColorado',
-              'ImagesOfConnecticut',
-              'ImagesOfDelaware',
-              'ImagesOfEngland',
-              'ImagesOfFlorida',
-              'ImagesOfFrance',
-              'ImagesOfGeorgia',
-              'ImagesOfGuatemala',
-              'ImagesOfHawaii',
-              'ImagesOfHongKong',
-              'ImagesOfIceland',
-              'ImagesOfIdaho',
-              'ImagesOfIllinois',
-              'ImagesOfIndia',
-              'ImagesOfIndiana',
-              'ImagesOfIowa',
-              'ImagesOfIran',
-              'ImagesOfIsleOfMan',
-              'ImagesOfJapan',
-              'ImagesOfKansas',
-              'ImagesOfKentucky',
-              'ImagesOfLibya',
-              'ImagesOfLouisiana',
-              'ImagesOfMaine',
-              'ImagesOfMaldives',
-              'ImagesOfMaryland',
-              'ImagesOfMassachusetts',
-              'ImagesOfMexico',
-              'ImagesOfMichigan',
-              'ImagesOfMinnesota',
-              'ImagesOfMississippi',
-              'ImagesOfMissouri',
-              'ImagesOfMontana',
-              'ImagesOfNebraska',
-              'ImagesOfNetherlands',
-              'ImagesOfNetwork',
-              'ImagesOfNevada',
-              'ImagesOfNewHampshire',
-              'ImagesOfNewJersey',
-              'ImagesOfNewMexico',
-              'ImagesOfNewYork',
-              'ImagesOfNewZealand',
-              'ImagesOfNorthCarolina',
-              'ImagesOfNorthDakota',
-              'ImagesOfNorway',
-              'ImagesOfOhio',
-              'ImagesOfOklahoma',
-              'ImagesOfOregon',
-              'ImagesOfPennsylvania',
-              'ImagesOfPeru',
-              'ImagesOfRhodeIsland',
-              'ImagesOfRussia',
-              'ImagesOfScotland',
-              'ImagesOfSouthCarolina',
-              'ImagesOfSouthDakota',
-              'ImagesOfSyria',
-              'ImagesOfTennessee',
-              'ImagesOfTexas',
-              'ImagesOfToronto',
-              'ImagesOfUSA',
-              'ImagesOfUtah',
-              'ImagesOfVermont',
-              'ImagesOfVirginia',
-              'ImagesOfWales',
-              'ImagesOfWashington',
-              'ImagesOfwashingtondc',
-              'ImagesOfWestVirginia',
-              'ImagesOfWisconsin',
-              'ImagesOfWyoming',
-              'ImagesOfYemen'
-              ]
+slave_subs = ['ImagesOfEgypt']
 
 INVITE_MODS = ['Automoderator', 'BotWatchman']
 
@@ -148,7 +64,7 @@ def whipslaves(reddit_session, base_settings, do_mods=False, base_mods=None):
                                     title=settings['title'], # title, ie slashdot
                                     description=settings['description'], # subreddit description
                                     wiki_edit_age=settings['wiki_edit_age'], # age of accounts that will edit the wiki
-                                    hide_ads=settings['hide_ads'], # gold only hide ads feature. Defaults to false if the slaver is not gold only
+                                    hide_ads=settings['hide_ads'], # gold only hide ads feature.
                                     spam_comments=settings['spam_comments'], # spam filter strength on comments
                                     public_traffic=settings['public_traffic'],
                                     subreddit_type=settings['subreddit_type'], # public, restricted, etc
@@ -195,6 +111,11 @@ def main(reddit_session, do_mods=False):
         
 if __name__ == '__main__':
     r = praw.Reddit(USERAGENT)
-    o = OAuth2Util.OAuth2Util(r)
-    o.refresh(force=True)
+    client_id = "clientid"
+    client_secret = "clientsecret"
+    redirect_uri = "http://127.0.0.1:65010/authorize_callback"
+    refresh_token = "refreshtoken"
+    r.set_oauth_app_info(client_id, client_secret, redirect_uri)
+    r.refresh_access_information(refresh_token)
+
     main(r)
