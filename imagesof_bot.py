@@ -278,7 +278,7 @@ def search_for_places(r):
             goodregex = r"(\bindiana\b|\bIndianians?\b|\bhoosiers?\b|\bIndianapolis\b|\bF(or)?t\bWayne\b|\bevansville\b|\bsouth\bbend\b|\bhammond\b|\bbloomington\b|\bgary\bindiana\b|\bcarmel\bindiana\b|\bfishers\bindiana\b|\bmuncie\b)",
             badregex = r"(\bindiana (jon|jones|evans)\b|\b(richard|albert|phillip|john|dr\.?|zachary|general|devin) hammond\b|\bhammond.(a|la|robotics|dr(ive)?)\b|\bflycatcher\b|\btop gear\b)",
             postinto = 'imagesofindiana',
-            smallsubredditblacklist = {'jurassicworldapp', 'topgear'}
+            smallsubredditblacklist = {'jurassicworldapp', 'topgear'}, 
             getfromthese = {'indiana'}
             )
     #iowa
