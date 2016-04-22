@@ -196,7 +196,7 @@ def search_for_places(r):
             submission = post,
             goodregex = r"(\bflorida\b|\bfl\b|\bFloridians?\b|\bjacksonville\b|\bmiami\b|\btampa\b|\bSaint\bPetersburg\b|\borlando\b|\bHialeah\b|\bTallahassee\b|\bFo?r?t\bLauderdale\b|\bPort\bSaint\bLucie\b|\bPembroke\bPines\b)",
             badregex = r"(\bfl studios?\b)",
-            smallsubredditblacklist = {'edmprodcirclejerk', 'edmproduction'},
+            smallsubredditblacklist = {'edmprodcirclejerk', 'edmproduction', 'mechanicalkeyboards'},
             postinto = 'imagesofflorida',
             getfromthese =  {'florida', 'floridabrew', 'miabeer', 'jaxbeer', 'soflabeer', 'tampabaybeer', 'tallahassee', 'fsu', 'pensacola', 'panamacity', 'tlh', 'nwfl', 'orlando', 'ucf', 'ucfknights', 'orlandodisneyarea', 'centralflorida', 'lakeland', 'floridapoly', 'northlakecounty', 'miami', 'fortlauderdale', 'naples_fl', 'southflorida', 'swfl', 'umiami', 'miamihurricanes', 'bocaraton', 'gnv', 'ufl', 'floridagators', 'tampa', 'stpetersburgfl', 'sarasota', 'usf', 'riverviewfl', '321', 'daytonabeach', 'jacksonville', 'unf', 'palmcoast', 'daytonastate', 'staugustine', 'treasurecoast', 'flaglercollege', 'portstlucie', 'keyshappenings', 'onthewaterfront', 'wtf_florida', 'floridaman', 'flvs'}
             )
