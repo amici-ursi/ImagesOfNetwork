@@ -39,10 +39,13 @@ def whipslaves(reddit_session, base_settings, do_mods=False, base_mods=None):
         slaver_mods = [user.name for user in reddit_session.get_moderators(slaver_sub)]
     for subreddit in slave_subs:
         if add_to_multi:
+            print("adding to multireddit")
             add_to_multi.add_subreddit(subreddit)
         if subnotification_setup:
+            print("setting up sub notifier")
             reddit_session.send_message('Sub_Mentions', 'Action: Subscribe', subnotification_setup.replace('{{subreddit}}', subreddit))
         if settings == base_settings:
+            print("skipping {0}, no settings in need of change".format(subreddit.display_name))
             continue
         dummy = True
         settings2 = reddit_session.get_settings(subreddit)
@@ -76,14 +79,18 @@ def whipslaves(reddit_session, base_settings, do_mods=False, base_mods=None):
                                     public_description=settings['public_description'], # sidebar
                                     domain_css=settings['domain_css'], # legacy thing related to domains
                                     )
+        print("{0}'s settings have been set".format(subreddit.display_name))
     for subreddit in slave_subs:
         if do_mods and (slaver_mods != base_mods):
             dummy = True
             slave_mods = [user.name for user in reddit_session.get_moderators(subreddit)]
             intersected_mods = [name for name in slaver_mods if name not in slave_mods]
             slave_obj = reddit_session.get_subreddit(subreddit)
+            if not intersected_mods:
+                continue
+            print("copying appropiate moderators")
             for name in intersected_mods:
-              slave_obj.add_moderator(name)
+                slave_obj.add_moderator(name)
             
     return [settings, slaver_mods, dummy]
     
@@ -106,8 +113,8 @@ def main(reddit_session, do_mods=False):
         try:
             ret = whipslaves(reddit_session, base_settings, do_mods, base_mods)
             if ret[2]:
-              base_settings = ret[0]
-              base_mods = ret[1]
+                base_settings = ret[0]
+                base_mods = ret[1]
         except KeyboardInterrupt:
             raise
         except Exception as e:
