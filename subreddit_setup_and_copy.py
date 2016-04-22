@@ -30,7 +30,9 @@ def whipslaves(reddit_session, base_settings, do_mods=False, base_mods=None):
     settings = reddit_session.get_settings(slaver_sub)
     dummy = False
     slaver_mods = None
-    if add_to_multi:
+    global add_to_multi
+    if add_to_multi and isinstance(add_to_multi, str):
+        print(add_to_multi)
         add_to_multi = reddit_session.get_multireddit(username, add_to_multi)
     if do_mods:
         slaver_mods = [user.name for user in reddit_session.get_moderators(slaver_sub)]
