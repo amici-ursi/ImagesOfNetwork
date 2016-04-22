@@ -662,7 +662,7 @@ def search_for_places(r):
         swim(r,
             submission = post,
             goodregex = r"(\bwashington\b)",
-            badregex = r"(\bd\.?c\.?\b|\b(george|denzel) washington\b|\bil\b|\billinois\b|\bwashington (monument|post|street)\b)",
+            badregex = r"(\bd\.?c\.?\b|\b(george|denzel|m(oun)?t\.?) washington\b|\bil\b|\billinois\b|\bwashington (monument|post|street)\b)",
             postinto = 'imagesofwashington',
             getfromthese = {'washington', 'mount_rainier'}
             )
