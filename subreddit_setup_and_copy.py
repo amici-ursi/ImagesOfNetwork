@@ -1,3 +1,4 @@
+from praw.errors import SubredditExists
 import praw
 
 import traceback, time
@@ -95,10 +96,12 @@ def main(reddit_session, do_mods=False):
     if make_slaves:
         for i in slave_subs[:]:
             try:
-              r.create_subreddit(i, i)
+                r.create_subreddit(i, i)
+            except SubredditExists:
+                print("/r/{0}, skipping creation".format(i))
             except:
-              traceback.print_exc()
-              slave_subs.remove(i)
+                traceback.print_exc()
+                slave_subs.remove(i)
     while True:
         try:
             ret = whipslaves(reddit_session, base_settings, do_mods, base_mods)
