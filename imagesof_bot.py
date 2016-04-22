@@ -204,7 +204,7 @@ def search_for_places(r):
         swim(r,
             submission = post,
             goodregex = r"(\bfrance\b|\bparis\b|\bmarseille\b|\bcannes\b|\bstrasbourg\b|\btoulouse\b|\beiffel tower\b|\blouvre\b|\bfrench riviera\b|\barc de triomphe\b|\bversailles\b|\bMusée d'Orsay\b|\bSacré-C(oe|œ)ur\b|\bjardin du luxembourg\b)",
-            badregex = r"(\bparis (tx|texas|island|hilton|dylan)\b|\b(bob|brian|nathalie) paris\b)",
+            badregex = r"(\bparis (tx|texas|island|hilton|dylan|abra)\b|\b(bob|brian|nathalie) paris\b)",
             postinto = 'imagesoffrance',
             getfromthese = {'france', 'francepics', 'bretagne', 'grandsud', 'normandie', 'reunionisland', 'bourgogne', 'aixmarseille', 'bordeaux', 'clermontfd', 'grenoble', 'lille', 'lyon', 'montpellier', 'nantes', 'paris', 'strasbourg', 'toulouse', 'tours', 'acadie'}
             )
