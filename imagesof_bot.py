@@ -213,7 +213,7 @@ def search_for_places(r):
             submission = post,
             goodregex = r"(\bgeorgia\b|\bga\b|\bGeorgians?\b|\batlanta\b|\bcolumbus\b(georgia|ga)\b|\bSavannah\b|\bathens\b(ga|georgia)\b|\bsandy\bsprings\b|\bmacon\b|\broswell\b(ga|georgia)\b|\balbany\b(ga|georgia)\b|\bjohns\bcreek\b|\bwarner\brobins\b)",
             badregex = r"(\bgeorgia graham\b|\brepublic of georgia\b|\ba savannah\b)",
-            badcaseregex = r"(\bga\b|\bgA\b)",
+            badcaseregex = r"(\bga\b|\bgA\b|Ga)",
             postinto = 'imagesofgeorgia',
             getfromthese = {'georgia', 'acworth', 'AlbanyGA', 'alpharetta', 'athens', 'atlanta', 'augusta', 'BarrowCounty', 'BrunswickGA', 'CarrolltonGeorgia', 'cartersville', 'cherokeecountyga', 'columbiacounty', 'columbusga', 'conyers', 'dacula', 'dahlonega', 'daltonga', 'decaturga', 'dublinga', 'Dunwoody', 'dvillega', 'snobbery', 'eastpoint', 'FayCo', 'flowerybranch', 'forsyth', 'franklincountyga', 'gwinnett', 'HenryCounty', 'HinesvilleGA', 'JasperGA', 'JekyllIsland', 'johnscreek', 'kennesaw', 'lagrange', 'leesburgga', 'lilburn', 'ludowici', 'mableton', 'macon', 'marietta', 'mariettaga', 'middlegeorgia', 'midtownatlanta', 'newnan', 'paulding', 'PeachtreeCity', 'romega', 'roswell', 'stsimonsisland', 'sandysprings', 'savannah', 'smyrna', 'statesboro', 'SummervilleGA', 'valdosta', 'waycross', 'woodstockga'}
             )
