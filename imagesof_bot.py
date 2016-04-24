@@ -213,7 +213,7 @@ def search_for_places(r):
             submission = post,
             goodregex = r"(\bgeorgia\b|\bga\b|\bGeorgians?\b|\batlanta\b|\bcolumbus\b(georgia|ga)\b|\bSavannah\b|\bathens\b(ga|georgia)\b|\bsandy\bsprings\b|\bmacon\b|\broswell\b(ga|georgia)\b|\balbany\b(ga|georgia)\b|\bjohns\bcreek\b|\bwarner\brobins\b)",
             badregex = r"(\bgeorgia graham\b|\brepublic of georgia\b|\ba savannah\b)",
-            badcaseregex = r"(\bga\b|\bgA\b|Ga)",
+            badcaseregex = r"(\bga\b|\bgA\bexitquit|Ga)",
             postinto = 'imagesofgeorgia',
             getfromthese = {'georgia', 'acworth', 'AlbanyGA', 'alpharetta', 'athens', 'atlanta', 'augusta', 'BarrowCounty', 'BrunswickGA', 'CarrolltonGeorgia', 'cartersville', 'cherokeecountyga', 'columbiacounty', 'columbusga', 'conyers', 'dacula', 'dahlonega', 'daltonga', 'decaturga', 'dublinga', 'Dunwoody', 'dvillega', 'snobbery', 'eastpoint', 'FayCo', 'flowerybranch', 'forsyth', 'franklincountyga', 'gwinnett', 'HenryCounty', 'HinesvilleGA', 'JasperGA', 'JekyllIsland', 'johnscreek', 'kennesaw', 'lagrange', 'leesburgga', 'lilburn', 'ludowici', 'mableton', 'macon', 'marietta', 'mariettaga', 'middlegeorgia', 'midtownatlanta', 'newnan', 'paulding', 'PeachtreeCity', 'romega', 'roswell', 'stsimonsisland', 'sandysprings', 'savannah', 'smyrna', 'statesboro', 'SummervilleGA', 'valdosta', 'waycross', 'woodstockga'}
             )
@@ -258,7 +258,7 @@ def search_for_places(r):
         swim(r,
             submission = post,
             goodregex = r"(\billinois\b|\bIllinoisans?\b|\bIL\b|\bchicago\b|\bAurora\b(IL|Illinois)\b|\brockford\b|\bJoliet\b|\bnaperville\b|\bspringfield\b|\bpeopria\b|\belgin\b(IL|illinois)\b|\bWaukegan\b)",
-            badregex = r"(\bil\b|\bIl\b|\biL\b|\bchicago('s)? (style)? pizza\b|\bVehk Springfield\b)",
+            badregex = r"(\bil\b|\bIl\b|\biL\b|\bchicago('s)? (style|pizza)\b|\bVehk Springfield\b)",
             smallsubredditblacklist = {'thesimpsons', 'guns'},
             postinto = 'imagesofillinois',
             getfromthese = {'illinois', 'chicago', 'southernillinois', 'centralillinois', 'salukis', 'grayslakeillinois', 'lasallecounty', 'rockford', 'chicagogaming', 'chibears', 'chicagobulls', 'chicubs', 'whitesox', 'hawks'}
