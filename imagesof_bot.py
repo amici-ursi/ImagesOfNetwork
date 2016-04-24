@@ -8,7 +8,7 @@ from datetime import datetime
 #regex to match urls that aren't allowed domains
 urlregex = r"(\.jpg|\.jpeg|\.png|\.gif|\.gifv|\.apng|\.tiff|\.bmp|\.xcf)$"
 #regex for all the allowed domains
-domainregex = r"^(500px\.com|abload\.de|cdn\.theatlantic\.com|.*\.deviantart\.com|.*\.deviantart\.net|fav\.me|.*\.fbcdn\.net|.*\.files\.wordpress\.com|flic\.kr|flickr\.com|forgifs\.com|gfycat\.com|(.*\.)?gifsoup\.com|(.*\.)?gyazo\.com|(.*\.)?imageshack\.us|imgclean\.com|(i\.)?imgur\.com|instagr\.am|instagram\.com|(cdn\.)?mediacru\.sh|(.*\.)?media\.tumblr\.com|(.*\.)?min\.us|(.*\.)?minus\.com|(.*\.)?panoramio\.com|photoburst\.net|(.*\.)?photoshelter\.com|pbs\.twimg\.com|(.*\.)?photobucket\.com|picsarus\.com|puu\.sh|scontent\.cdninstagram\.com|(.*\.)?staticflickr\.com|(.*\.)?tinypic\.com|twitpic\.com|upload.wikimedia\.org)"
+domainregex = r"^(500px\.com|abload\.de|cdn\.theatlantic\.com|.*\.deviantart\.com|.*\.deviantart\.net|fav\.me|.*\.fbcdn\.net|.*\.files\.wordpress\.com|flic\.kr|flickr\.com|forgifs\.com|gfycat\.com|(.*\.)?gifsoup\.com|(.*\.)?gyazo\.com|(.*\.)?imageshack\.us|imgclean\.com|(i\.)?imgur\.com|instagr\.am|instagram\.com|(cdn\.)?mediacru\.sh|(.*\.)?media\.tumblr\.com|(.*\.)?min\.us|(.*\.)?minus\.com|(.*\.)?panoramio\.com|photoburst\.net|(.*\.)?photoshelter\.com|pbs\.twimg\.com|(.*\.)?photobucket\.com|picsarus\.com|puu\.sh|scontent\.cdninstagram\.com|(.*\.)?staticflickr\.com|(.*\.)?tinypic\.com|twitpic\.com|upload.wikimedia\.org|i\.reddituploads.com)"
 #fires up praw and reddit, and identifies the bot
 r = praw.Reddit('ImagesOf v5.1 /u/amici_ursi')
 #identifies the stream of submissions that we're going swim in.
