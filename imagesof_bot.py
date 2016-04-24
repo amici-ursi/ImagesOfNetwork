@@ -687,7 +687,12 @@ def search_for_places(r):
     #wisconsin
         swim(r,
             submission = post,
-            goodregex = r"(\bwisconsin\b|\bwisc\b|\bgreen bay\b(?!.*packers)|\bmilwaukee\b(?!.*brewers)|\bnew glarus\b|\bspotted cow\b|\buw oshkosh\b|\buw madison\b|\bmsoe\b|\bsummerfest\b|\bdoor county\b|\bfox valley\b|\blake winnebago\b|\bhouse on the rock\b|\bcave on the mounds\b|\bharley-davidson museum\b|\bdevil's lake state park\b|\bkettle moraine\b|\bsturgeon bay\b|\bappleton\b|\beau claire\b|\bminocqua\b|\beagle river\b|\begg harbor\b|\bstevens point\b|\bfond du lac\b|\blambeau field\b|\beaa airventure\b|\beaa air venture\b|\bmiller park\b|\bpabst theater\b|\balpine valley\b|\bEAA\b.*\bOshkosh\b|\bOshkosh\b.*\bEAA\b|\bUW\b.*\b(Oshkosh|Madison|)\b|\bMadison\b.*\bWI.*\b)",
+            goodregex = r"(\bwisconsin\b|\bwisc\b|\bgreen bay\b(?!.*packers)|\bmilwaukee\b(?!.*brewers)|\bnew glarus\b|\bspotted cow\b|\bmsoe\b|\bsummerfest\b|\bdoor county\b|\bfox valley\b|\blake winnebago\b|\bhouse on the rock\b|\bcave on the mounds\b|\bharley-davidson museum\b|\bdevil's lake state park\b|\bkettle moraine\b|\bsturgeon bay\b|\bappleton\b|\beau claire\b|\bminocqua\b|\beagle river\b|\begg harbor\b|\bstevens point\b|\bfond du lac\b|\blambeau field\b|\beaa airventure\b|\beaa air venture\b|\bmiller park\b|\bpabst theater\b|\balpine valley\b|\beaa\b.*\boshkosh\b|\boshkosh\b.*\beaa\b|\buw\b.*\b(oshkosh|madison|)\b|\bmadison\b.*\bwi.*\b)",
+            badregex = r"(\bwisconsin ave\b|\bwisconsin blvd\b)",
+            postinto = 'imagesofwisconsin',
+            getfromthese = {'wisconsin'}
+            )
+
             badregex = r"(\bwisconsin ave\b|\bwisconsin blvd\b)",
             postinto = 'imagesofwisconsin',
             getfromthese = {'wisconsin'}
