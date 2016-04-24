@@ -687,7 +687,8 @@ def search_for_places(r):
     #wisconsin
         swim(r,
             submission = post,
-            goodregex = r"(\bwisconsin\b)",
+            goodregex = r"(\bwisconsin\b|\bwisc\b|\bgreen bay\b|\bmilwaukee\b|\bnew glarus\b|\bspotted cow\b|\buw oshkosh\b|\buw madison\b|\bmsoe\b|\bsummerfest\b|\bdoor county\b|\bfox valley\b|\blake winnebago\b|\bhouse on the rock\b|\bcave on the mounds\b|\bharley-davidson museum\b|\bdevil's lake state park\b|\bkettle moraine\b|\bsturgeon bay\b|\bappleton\b|\beau claire\b|\bminocqua\b|\beagle river\b|\begg harbor\b|\bstevens point\b|\bfond du lac\b|\blambeau field\b|\beaa airventure\b|\beaa air venture\b|\bmiller park\b|\bpabst theater\b|\balpine valley)",
+            badregex = r"(\bgreen bay packers\b|\bmilwaukee brewers\b|\bwisconsin ave\b|\bwisconsin blvd\b)",
             postinto = 'imagesofwisconsin',
             getfromthese = {'wisconsin'}
             )
