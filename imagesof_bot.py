@@ -692,11 +692,7 @@ def search_for_places(r):
             postinto = 'imagesofwisconsin',
             getfromthese = {'wisconsin'}
             )
-
-            badregex = r"(\bwisconsin ave\b|\bwisconsin blvd\b)",
-            postinto = 'imagesofwisconsin',
-            getfromthese = {'wisconsin'}
-            )
+            
     #wyoming
         swim(r,
             submission = post,
