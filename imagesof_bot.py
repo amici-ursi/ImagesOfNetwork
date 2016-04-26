@@ -286,7 +286,7 @@ def search_for_places(r):
             submission = post,
             goodregex = r"(\biowa\b|\bIowans?\b|\bdes moines\b|\bcedar rapids\b|\bdavenport\b|\bsioux city\b|\bwaterloo (IA|iowa)\b|\bcouncil bluffs\b|\bames\b|\bDubuque\b)",
             badregex = r"(\b(kennedy|adam) davenport\b|\bca(lifornia)?\b|\bNew Mexico\b|\bNM\b)",
-            smallsubredditblacklist = {'toronto'},
+            smallsubredditblacklist = {'toronto', 'sandersforpresident', 'whatisthisthing', 'mycology', 'whatisthisplant'},
             postinto = 'imagesofiowa',
             getfromthese = {'iowa', 'ames', 'ankeny', 'cedarrapids', 'councilbluffs', 'desmoines', 'dubuque', 'iowacity', 'masoncity', 'okoboji', 'quadcity', 'siouxcity', 'waterlooiowa', 'iastate', 'uiowa', 'uni', 'grinnell', 'decorah', 'cornellcollege', 'clarkeu', 'iowabeer', 'iowajobs', 'iowagamers'}
             )
