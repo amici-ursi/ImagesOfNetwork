@@ -687,10 +687,10 @@ def search_for_places(r):
     #wisconsin
         swim(r,
             submission = post,
-            goodregex = r"(\bwisconsin\b|\bwisc\b|\bgreen bay\b(?!.packers)|\bmilwaukee\b(?!.brewers)|\bnew glarus\b|\bspotted cow\b|\bmsoe\b|\bsummerfest\b|\bdoor county\b|\bfox valley\b|\blake winnebago\b|\bhouse on the rock\b|\bcave on the mound.?\b|\bharley.davidson museum\b|\bdevil's lake state park\b|\bkettle moraine\b|\bsturgeon bay\b|\bappleton\b|\beau claire\b|\bminocqua\b|\beagle river\b|\begg harbor\b|\bstevens point\b|\bfond du lac\b|\blambeau field\b|\beaa airventure\b|\beaa air venture\b|\bmiller park\b|\bpabst theater\b|\balpine valley\b|\beaa\b.*\boshkosh\b|\boshkosh\b.*\beaa\b|\b(uw.oshkosh|uw.madison)\b|\bmadison\b.*\bwi.*\b)",
+            goodregex = r"(\bwisconsin\b|\bwisc\b|\bgreen bay\b(?!.packers|gamblers)|\bmilwaukee\b(?!.brewers|bucks)|\bnew glarus\b|\bspotted cow\b|\bmsoe\b|\bsummerfest\b|\bdoor county\b|\bfox valley\b|\blake winnebago\b|\bhouse on the rock\b|\bcave on the mound.?\b|\bharley.davidson museum\b|\bdevil's lake state park\b|\bkettle moraine\b|\bsturgeon bay\b|\bappleton\b|\beau claire\b|\bminocqua\b|\beagle river\b|\begg harbor\b|\bstevens point\b|\bfond du lac\b|\blambeau field\b|\beaa airventure\b|\beaa air venture\b|\bmiller park\b|\bpabst theater\b|\balpine valley\b|\beaa\b.*\boshkosh\b|\boshkosh\b.*\beaa\b|\b(uw.oshkosh|uw.madison)\b|\bmadison\b.*\bwi.*\b|\bmke\b|\bscott walker\b|\bgov(\.|ernor)? walker\b)",
             badregex = r"(\bwisconsin ave.*\b|\bwisconsin blvd\b)",
             postinto = 'imagesofwisconsin',
-            getfromthese = {'wisconsin'}
+            getfromthese = {'wisconsin', 'madisonwi', 'milwaukee', 'greenbay', 'kenosha', 'wausau', 'westallis', 'sheboygan', 'eau_claire', 'oshkosh', 'lacrossewi', 'manitowoc', 'mequon', 'janesville', 'racine', 'fonddulac', 'hudsonwi', 'foxvalleywi', 'doorcounty', 'Chequamegon_Bay_WI', 'northernwi', 'waukeshacounty', 'uwmadison', 'uwmilwaukee', 'uwwhitewater', 'riverfallswi', 'uwl', 'uwm', 'uweaauclaire', 'uwstout', 'uwsp', 'uwplatteville', 'marquette', 'matc', 'miad', 'msoe', 'wisconsinbeer', 'motorcyclewisconsin', 'paddlewisconsin', 'wisconsinfishing', 'greenbaypackers', 'brewers', 'wisconsinbadgers', 'mkebucks', 'wisconsinpolitics', 'greenwisconsin', 'madisonmusic', 'wauwatosa'}
             )
             
     #wyoming
