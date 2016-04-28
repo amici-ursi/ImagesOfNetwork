@@ -383,6 +383,7 @@ def search_for_places(r):
         swim(r,
             submission = post,
             goodregex = r"(\bmichigan\b)",
+            badregex = r"(\bmichigan city\b)",
             postinto = 'imagesofmichigan',
             getfromthese = {'michigan'}
             )
