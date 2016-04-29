@@ -693,7 +693,6 @@ def search_for_places(r):
             postinto = 'imagesofwisconsin',
             getfromthese = {'wisconsin', 'madisonwi', 'milwaukee', 'greenbay', 'kenosha', 'wausau', 'westallis', 'sheboygan', 'eau_claire', 'oshkosh', 'lacrossewi', 'manitowoc', 'mequon', 'janesville', 'racine', 'fonddulac', 'hudsonwi', 'foxvalleywi', 'doorcounty', 'chequamegon_bay_wi', 'northernwi', 'waukeshacounty', 'uwmadison', 'uwmilwaukee', 'uwwhitewater', 'riverfallswi', 'uwl', 'uwm', 'uweaauclaire', 'uwstout', 'uwsp', 'uwplatteville', 'marquette', 'matc', 'miad', 'msoe', 'wisconsinbeer', 'motorcyclewisconsin', 'paddlewisconsin', 'wisconsinfishing', 'wisconsinbadgers', 'wisconsinpolitics', 'greenwisconsin', 'madisonmusic', 'wauwatosa'}
             )
-            
     #wyoming
         swim(r,
             submission = post,
