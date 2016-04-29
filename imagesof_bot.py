@@ -692,7 +692,6 @@ def search_for_places(r):
             postinto = 'imagesofwisconsin',
             getfromthese = {'wisconsin', 'madisonwi', 'milwaukee', 'greenbay', 'kenosha', 'wausau', 'westallis', 'sheboygan', 'eau_claire', 'oshkosh', 'lacrossewi', 'manitowoc', 'mequon', 'janesville', 'racine', 'fonddulac', 'hudsonwi', 'foxvalleywi', 'doorcounty', 'chequamegon_bay_wi', 'northernwi', 'waukeshacounty', 'uwmadison', 'uwmilwaukee', 'uwwhitewater', 'riverfallswi', 'uwl', 'uwm', 'uweaauclaire', 'uwstout', 'uwsp', 'uwplatteville', 'marquette', 'matc', 'miad', 'msoe', 'wisconsinbeer', 'motorcyclewisconsin', 'paddlewisconsin', 'wisconsinfishing', 'greenbaypackers', 'brewers', 'wisconsinbadgers', 'mkebucks', 'wisconsinpolitics', 'greenwisconsin', 'madisonmusic', 'wauwatosa'}
             )
-            
     #wyoming
         swim(r,
             submission = post,
@@ -744,7 +743,7 @@ def make_post(r, originalsubmission, subreddit):
     print("Making post in {}: ".format(subreddit))
     print(("    " + title +"\n").encode('utf-8', 'ignore'))
     try:
-        xpost = r.submit(subreddit, title, url=originalsubmission.url, captcha=None, send_replies=True)
+        xpost = r.submit(subreddit, title, url=originalsubmission.url, captcha=None, send_replies=True, resubmit=False)
         xpost.add_comment(comment)
     except praw.errors.AlreadySubmitted as e:
         print("Already submitted. Skipping.\n")
