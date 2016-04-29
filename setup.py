@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name = "images_of_network",
+    name = "images_of",
     version = "0.1",
 
     author = "acimi-ursi",
