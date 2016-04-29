@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from praw.errors import SubredditExists
 import praw
 
