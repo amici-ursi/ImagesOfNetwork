@@ -4,14 +4,15 @@ from images_of import settings
 
 class Reddit(praw.Reddit):
     def oauth(self, **kwargs):
-        new_kwargs = {
-            'client_id': settings.CLIENT_ID,
-            'client_secret': settings.CLIENT_SECRET,
-            'redirect_uri': settings.REDIRECT_URI,
-        }
+        self.set_oauth_app_info(
+            client_id = kwargs.get('client_id') or settings.CLIENT_ID,
+            client_secret = kwargs.get('client_secret') or settings.CLIENT_SECRET,
+            redirect_uri = kwargs.get('redirect_uri') or settings.REDIRECT_URI
+        )
 
-        new_kwargs.update(kwargs)
-        super().set_oauth_app_info(**new_kwargs)
+        self.refresh_access_information(
+                kwargs.get('refresh_token') or settings.REFRESH_TOKEN
+        )
 
     def login(self, username=None, password=None):
         # this is depricated, just ignore the warning.
