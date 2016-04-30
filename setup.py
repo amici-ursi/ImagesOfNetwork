@@ -16,8 +16,8 @@ setup(
     ],
 
     scripts = [
-        "scripts/copy_wiki_pages.py",
-        "scripts/imagesof_bot.py",
-        "scripts/subreddit_setup_and_copy.py",
+        "copy_wiki_pages.py",
+        "imagesof_bot.py",
+        "subreddit_setup_and_copy.py",
     ],
 )
