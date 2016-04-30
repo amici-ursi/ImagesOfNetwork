@@ -7,6 +7,8 @@ from praw.errors import SubredditExists
 
 from images_of import settings, Reddit
 
+AUTOMOD_CONF_PAGE = 'config/automoderator'
+
 
 def create_sub(r, sub):
     try:
@@ -19,11 +21,11 @@ def create_sub(r, sub):
         logging.warning(traceback.format_exc())
 
 
-def invite_mods(r, sub):
+def invite_mods(r, sub, mods):
     cur_mods = [u.name for u in r.get_moderators(sub)]
     logging.debug('current mods for /r/{}: {}'.format(sub, cur_mods))
 
-    need_mods = [mod for mod in settings.DEFAULT_MODS if mod not in cur_mods]
+    need_mods = [mod for mod in mods if mod not in cur_mods]
     logging.debug('inviting {}'.format(need_mods))
 
     if not need_mods:
@@ -34,6 +36,11 @@ def invite_mods(r, sub):
         s.add_moderator(mod)
 
     logging.info('invited {} to moderate')
+
+
+def setup_automod(r, sub, conf):
+    r.edit_wiki_page(sub, AUTOMOD_CONF_PAGE, content=conf,
+                     reason='setting up automod')
 
 
 def setup_notifications(r, sub):
@@ -50,8 +57,9 @@ def setup_notifications(r, sub):
     r.send_message('Sub_Mentions', 'Action: Subscribe',
                    setup.replace('{{subreddit}}', sub))
 
-def setup_sub(r, sub, sub_settings, multi, skip_creation,
-           skip_mods, skip_notifications):
+
+def setup_sub(r, sub, sub_settings, multi, automod_conf,
+              skip_creation, skip_mods, skip_notifications):
 
     if not skip_creation:
         create_sub(r, sub)
@@ -60,8 +68,16 @@ def setup_sub(r, sub, sub_settings, multi, skip_creation,
         logging.info('Copying settings to /r/{}'.format(sub))
         r.set_settings(sub, **sub_settings)
 
+    mods = set()
+    if automod_conf:
+        mods.update(['Automoderator'])
     if not skip_mods:
-        invite_mods(r, sub)
+        mods.update(settings.DEFAULT_MODS)
+    if mods:
+        invite_mods(r, sub, mods)
+
+    if automod_conf:
+        setup_automod(r, sub)
 
     if multi:
         logging.info('Adding /r/{} to /user/{}/m/{}'
@@ -76,10 +92,11 @@ def setup_sub(r, sub, sub_settings, multi, skip_creation,
 @click.option('--skip-creation', is_flag=True, help="Don't create, only configure subreddits.")
 @click.option('--skip-settings', is_flag=True, help="Don't replace subreddit settings.")
 @click.option('--skip-mods', is_flag=True, help="Don't invite mods.")
+@click.option('--skip-automod', is_flag=True, help="Don't bring in the automoderator")
 @click.option('--skip-multi', is_flag=True, help="Don't add subreddits to multireddit.")
 @click.option('--skip-notifications', is_flag=True, help="Don't set up notifications.")
 @click.argument('subs', required=True, nargs=-1)
-def main(subs, skip_multi, skip_settings, **kwargs):
+def main(subs, skip_multi, skip_settings, skip_automod, **kwargs):
     """Prop up new subreddits and set them up for the network."""
 
     r = Reddit('Expand {} Network /u/{}'
@@ -90,14 +107,19 @@ def main(subs, skip_multi, skip_settings, **kwargs):
     if not skip_settings:
         sub_settings = r.get_settings(settings.MASTER_SUB)
     logging.debug('Copied information from {}: {}'
-                  .format(settings.MASTER_SUB, sub_settings)
+                  .format(settings.MASTER_SUB, sub_settings))
 
     multi = None
     if not skip_multi and settings.MULTIREDDIT:
         multi = r.get_multireddit(settings.USERNAME, settings.MULTIREDDIT)
 
+    automod_conf = None
+    if not skip_automod:
+        automod_conf = r.get_wiki_page(settings.MASTER_SUB,
+                                       AUTOMOD_CONF_PAGE).content_md
+
     for sub in subs:
-        setup_sub(r, sub, sub_settings, multi, **kwargs)
+        setup_sub(r, sub, sub_settings, multi, automod_conf, **kwargs)
 
 if __name__ == '__main__':
     main()
