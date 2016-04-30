@@ -19,6 +19,7 @@ setup(
     entry_points = {
         "console_scripts": [
             "ion_expand = images_of.entrypoints.expand:main",
+            "ion_setup_oauth = images_of.entrypoints.oauth:main",
         ],
     },
 
