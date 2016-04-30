@@ -13,28 +13,11 @@ domainregex = r"^(500px\.com|abload\.de|cdn\.theatlantic\.com|.*\.deviantart\.co
 r = praw.Reddit('ImagesOf v5.1 /u/amici_ursi')
 #identifies the stream of submissions that we're going swim in.
 submission_stream = praw.helpers.submission_stream(r, 'all')
-
-#get's all the blacklists. these need to be publicly viewable because praw bugs out on private wiki pages
-print("Getting global user blacklist")
-globaluserblacklist_wiki = r.get_wiki_page("ImagesOfNetwork","userblacklist")
-globaluserblacklist = set([name.strip().lower()[3:] for name in globaluserblacklist_wiki.content_md.split("\n") if name.strip() != ""])
-print(globaluserblacklist)
-print("Getting global subreddit blacklist")
-globalsubredditblacklist_wiki = r.get_wiki_page("ImagesOfNetwork","subredditblacklist")
-globalsubredditblacklist = set([name.strip().lower()[3:] for name in globalsubredditblacklist_wiki.content_md.split("\n") if name.strip() != ""])
-print(globalsubredditblacklist)
-print("Getting California subreddit blacklist")
-californiasubredditblacklist_wiki = r.get_wiki_page("ImagesOfCalifornia","subredditblacklist")
-californiasubredditblacklist = set([name.strip().lower()[3:] for name in californiasubredditblacklist_wiki.content_md.split("\n") if name.strip() != ""])
-print(californiasubredditblacklist)
-print("Getting China subreddit blacklist")
-chinasubredditblacklist_wiki = r.get_wiki_page("ImagesOfChina","subredditblacklist")
-chinasubredditblacklist = set([name.strip().lower()[3:] for name in chinasubredditblacklist_wiki.content_md.split("\n") if name.strip() != ""])
-print(chinasubredditblacklist)
-print("Getting India subreddit blacklist")
-indiasubredditblacklist_wiki = r.get_wiki_page("ImagesOfIndia","subredditblacklist")
-indiasubredditblacklist = set([name.strip().lower()[3:] for name in indiasubredditblacklist_wiki.content_md.split("\n") if name.strip() != ""])
-print(indiasubredditblacklist)
+globalsubredditblacklist = set()
+globaluserblacklist = set()
+californiasubredditblacklist = set()
+chinasubredditblacklist = set()
+indiasubredditblacklist = set()
 
 #searches the stream for all the criteria
 def search_for_places(r):
@@ -776,8 +759,34 @@ def praw_oauth_login(r):
 #runs all the things
 def main():
     print("Logging in...")
-
     praw_oauth_login(r)
+    
+    #get's all the blacklists.
+    print("Getting global user blacklist")
+    global globaluserblacklist
+    globaluserblacklist_wiki = r.get_wiki_page("ImagesOfNetwork","userblacklist")
+    globaluserblacklist = set([name.strip().lower()[3:] for name in globaluserblacklist_wiki.content_md.split("\n") if name.strip() != ""])
+    print(globaluserblacklist)
+    print("Getting global subreddit blacklist")
+    global globalsubredditblacklist
+    globalsubredditblacklist_wiki = r.get_wiki_page("ImagesOfNetwork","subredditblacklist")
+    globalsubredditblacklist = set([name.strip().lower()[3:] for name in globalsubredditblacklist_wiki.content_md.split("\n") if name.strip() != ""])
+    print(globalsubredditblacklist)
+    print("Getting California subreddit blacklist")
+    global californiasubredditblacklist
+    californiasubredditblacklist_wiki = r.get_wiki_page("ImagesOfCalifornia","subredditblacklist")
+    californiasubredditblacklist = set([name.strip().lower()[3:] for name in californiasubredditblacklist_wiki.content_md.split("\n") if name.strip() != ""])
+    print(californiasubredditblacklist)
+    print("Getting China subreddit blacklist")
+    global chinasubredditblacklist
+    chinasubredditblacklist_wiki = r.get_wiki_page("ImagesOfChina","subredditblacklist")
+    chinasubredditblacklist = set([name.strip().lower()[3:] for name in chinasubredditblacklist_wiki.content_md.split("\n") if name.strip() != ""])
+    print(chinasubredditblacklist)
+    print("Getting India subreddit blacklist")
+    global indiasubredditblacklist
+    indiasubredditblacklist_wiki = r.get_wiki_page("ImagesOfIndia","subredditblacklist")
+    indiasubredditblacklist = set([name.strip().lower()[3:] for name in indiasubredditblacklist_wiki.content_md.split("\n") if name.strip() != ""])
+    print(indiasubredditblacklist)
 
     try:
         search_for_places(r) 
