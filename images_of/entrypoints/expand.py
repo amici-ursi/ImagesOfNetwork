@@ -67,7 +67,19 @@ def setup_sub(r, sub, sub_settings, multi, automod_conf,
     if sub_settings:
         logging.info('Copying settings to /r/{}'.format(sub))
         sub_obj = r.get_subreddit(sub)
-        r.set_settings(sub_obj, **sub_settings)
+        try:
+            r.set_settings(sub_obj, **sub_settings)
+        except praw.errors.RateLimitExceeded:
+            # When we change settings on a subreddit
+            # immediately following creation, reddit decides
+            # to let us know that we have another 9 minutes
+            # before we can create a new subreddit. Well
+            # that's nice, but it's stupid and shouldn't
+            # be an exception.
+
+            # unless we didn't create a sub
+            if skip_creation:
+                raise
 
     mods = set()
     if automod_conf:
