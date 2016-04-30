@@ -1,0 +1,10 @@
+import logging
+from .settings import *
+
+logging.setLevel(logging.INFO)
+
+USERNAME = 'yammajr'
+PASSWORD = 'hunter2'
+
+CLIENT_ID = '2Rzj4WiytxMnaA'
+CLIENT_SECRET = '47ThvyuWx-Rqlkj526ZrbrprWur'
