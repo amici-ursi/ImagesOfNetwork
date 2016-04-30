@@ -22,6 +22,6 @@ REDIRECT_URI = 'http://127.0.0.1:65010/authorize_callback'
 NETWORK_NAME = "ImagesOf"
 MULTIREDDIT = "ImagesOfPlaces"
 
-DEFAULT_MODS = ['Automoderator', 'BotWatchman']
+DEFAULT_MODS = ['BotWatchman'] # Automoderator is handled separately
 
 MASTER_SUB = "ImagesOfNetwork"
