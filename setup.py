@@ -12,8 +12,15 @@ setup(
     packages = find_packages(),
 
     install_requires = [
+        "click",
         "praw==3.4",
     ],
+
+    entry_points = {
+        "console_scripts": [
+            "ion_expand = images_of.entrypoints.expand:main",
+        ],
+    },
 
     scripts = [
         "copy_wiki_pages.py",
