@@ -6,7 +6,7 @@ to all clients. Anything that is, or needs to be tested elsewhere should be
 set in local_settings.
 """
 import logging
-logging.setLevel(logging.WARNING)
+logging.getLogger().setLevel(logging.WARNING)
 
 # Reddit Auth Info
 
