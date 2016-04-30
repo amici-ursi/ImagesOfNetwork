@@ -54,7 +54,8 @@ def setup_notifications(r, sub):
 
     logging.info('Requesting notifications about /r/{} from /u/Sub_Mentions'
                  .format(sub))
-    r.send_message('Sub_Mentions', 'Action: Subscribe',
+    s = r.get_subreddit(sub)
+    s.send_message('Sub_Mentions', 'Action: Subscribe',
                    setup.replace('{{subreddit}}', sub))
 
 
