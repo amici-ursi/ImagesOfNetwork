@@ -35,7 +35,7 @@ def invite_mods(r, sub, mods):
     for mod in need_mods:
         s.add_moderator(mod)
 
-    logging.info('invited {} to moderate')
+    logging.info('invited {} to moderate'.format(mod))
 
 
 def setup_automod(r, sub, conf):
@@ -66,7 +66,8 @@ def setup_sub(r, sub, sub_settings, multi, automod_conf,
 
     if sub_settings:
         logging.info('Copying settings to /r/{}'.format(sub))
-        r.set_settings(sub, **sub_settings)
+        sub_obj = r.get_subreddit(sub)
+        r.set_settings(sub_obj, **sub_settings)
 
     mods = set()
     if automod_conf:
@@ -77,7 +78,7 @@ def setup_sub(r, sub, sub_settings, multi, automod_conf,
         invite_mods(r, sub, mods)
 
     if automod_conf:
-        setup_automod(r, sub)
+        setup_automod(r, sub, automod_conf)
 
     if multi:
         logging.info('Adding /r/{} to /user/{}/m/{}'
@@ -99,14 +100,14 @@ def setup_sub(r, sub, sub_settings, multi, automod_conf,
 def main(subs, skip_multi, skip_settings, skip_automod, **kwargs):
     """Prop up new subreddits and set them up for the network."""
 
-    r = Reddit('Expand {} Network /u/{}'
+    r = Reddit('Expand {} Network v0.1 /u/{}'
                .format(settings.NETWORK_NAME, settings.USERNAME))
     r.oauth()
 
     sub_settings = None
     if not skip_settings:
         sub_settings = r.get_settings(settings.MASTER_SUB)
-    logging.debug('Copied information from {}: {}'
+        logging.debug('Copied information from {}: {}'
                   .format(settings.MASTER_SUB, sub_settings))
 
     multi = None
