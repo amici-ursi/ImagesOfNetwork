@@ -3,7 +3,7 @@ from textwrap import dedent
 import traceback
 
 import click
-from praw.errors import SubredditExists
+from praw.errors import SubredditExists, RateLimitExceeded
 
 from images_of import settings, Reddit
 
@@ -69,7 +69,7 @@ def setup_sub(r, sub, sub_settings, multi, automod_conf,
         sub_obj = r.get_subreddit(sub)
         try:
             r.set_settings(sub_obj, **sub_settings)
-        except praw.errors.RateLimitExceeded:
+        except RateLimitExceeded:
             # When we change settings on a subreddit
             # immediately following creation, reddit decides
             # to let us know that we have another 9 minutes
@@ -95,6 +95,7 @@ def setup_sub(r, sub, sub_settings, multi, automod_conf,
     if multi:
         logging.info('Adding /r/{} to /user/{}/m/{}'
                      .format(sub, settings.USERNAME, multi))
+        r.login()
         multi.add_subreddit(sub)
 
     if not skip_notifications:
