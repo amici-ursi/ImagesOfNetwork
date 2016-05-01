@@ -1,4 +1,5 @@
 import logging
+import re
 from textwrap import dedent
 import traceback
 
@@ -7,7 +8,7 @@ from praw.errors import SubredditExists, RateLimitExceeded
 
 from images_of import settings, Reddit
 
-AUTOMOD_CONF_PAGE = 'config/automoderator'
+WIKI_PAGES = ['config/automoderator', 'toolbox']
 
 
 def create_sub(r, sub):
@@ -17,30 +18,86 @@ def create_sub(r, sub):
         logging.info('Created /r/{}'.format(sub))
     except SubredditExists:
         logging.warning('/r/{} exists'.format(sub))
-    except:
-        logging.warning(traceback.format_exc())
 
 
-def invite_mods(r, sub, mods):
+def copy_settings(r, sub, description):
+    logging.info('Copying settings from {}'.format(settings.MASTER_SUB))
+    sub_settings = r.get_settings(settings.MASTER_SUB)
+    logging.debug('{}'.format(sub_settings))
+
+    if description:
+        sub_settings['public_description'] = description
+    elif sub.startswith('ImagesOf'):
+        # XXX this is hardly bulletproof
+        place = re.findall('[A-Z][^A-Z]*', sub)[2:].join(' ')
+        sub_settings['public_description'] = 'Pictures and images of {}'.format(place)
+    else:
+        sub_settings['pucblic_description'] = settings.DEFAULT_DESCRIPTION
+
+    logging.info('Copying settings to /r/{}'.format(sub))
+    sub_obj = r.get_subreddit(sub)
+    try:
+        r.set_settings(sub_obj, **sub_settings)
+    except RateLimitExceeded:
+        # when we change settings on a subreddit,
+        # if it's been created within the last 10 minutes,
+        # reddit alwasy issues a rate limiting warning
+        # informing us about how long we have until we
+        # can create a new subreddit, and PRAW interprets
+        # this as an error. It's not.
+        pass
+
+
+def invite_mods(r, sub):
+    mods = settings.DEFAULT_MODS
+
     cur_mods = [u.name for u in r.get_moderators(sub)]
     logging.debug('current mods for /r/{}: {}'.format(sub, cur_mods))
 
     need_mods = [mod for mod in mods if mod not in cur_mods]
-    logging.debug('inviting {}'.format(need_mods))
-
     if not need_mods:
+        logging.info('All mods already invited.')
         return
+    else:
+        logging.info('Inviting moderators: {}'.format(need_mods))
 
     s = r.get_subreddit(sub)
     for mod in need_mods:
         s.add_moderator(mod)
 
-    logging.info('invited {} to moderate'.format(mod))
+    logging.info('Mods invited.'.format(mod))
 
 
-def setup_automod(r, sub, conf):
-    r.edit_wiki_page(sub, AUTOMOD_CONF_PAGE, content=conf,
-                     reason='setting up automod')
+def copy_wiki_pages(r, sub):
+    for page in WIKI_PAGES:
+        logging.info('Copying wiki page "{}"'.format(page))
+        content = r.get_wiki_page(settings.MASTER_SUB,page).content_md
+        r.edit_wiki_page(sub, page, content=content, reason='Subreddit stand-up')
+
+
+def setup_flair(r, sub):
+    # XXX should this be copied from the master?
+    r.configure_flair(sub,
+                      flair_enabled=True,
+                      flair_position='right',
+                      link_flair_enabled=True,
+                      link_flair_position='right',
+                      flair_self_assign=False)
+
+def add_to_multi(r, sub):
+    if not settings.MULTIREDDIT:
+        logging.WARNING("No multireddit to add /r/{} to.".format(sub))
+        return
+
+    logging.info('Adding /r/{} to /user/{}/m/{}'
+                 .format(sub, settings.USERNAME, settings.MULTIREDDIT))
+
+    m = r.get_multireddit(settings.USERNAME, settings.MULTIREDDIT)
+
+    # NOTE: for some reason, at least for this version of PRAW,
+    # adding a sub to a multireddit requires us to be logged in.
+    r.login()
+    m.add_subreddit(sub)
 
 
 def setup_notifications(r, sub):
@@ -58,82 +115,55 @@ def setup_notifications(r, sub):
                    setup.replace('{{subreddit}}', sub), from_sr=sub)
 
 
-def setup_sub(r, sub, sub_settings, multi, automod_conf,
-              skip_creation, skip_mods, skip_notifications):
-
-    if not skip_creation:
-        create_sub(r, sub)
-
-    if sub_settings:
-        logging.info('Copying settings to /r/{}'.format(sub))
-        sub_obj = r.get_subreddit(sub)
-        try:
-            r.set_settings(sub_obj, **sub_settings)
-        except RateLimitExceeded:
-            # When we change settings on a subreddit
-            # immediately following creation, reddit decides
-            # to let us know that we have another 9 minutes
-            # before we can create a new subreddit. Well
-            # that's nice, but it's stupid and shouldn't
-            # be an exception.
-
-            # unless we didn't create a sub
-            if skip_creation:
-                raise
-
-    mods = set()
-    if automod_conf:
-        mods.update(['Automoderator'])
-    if not skip_mods:
-        mods.update(settings.DEFAULT_MODS)
-    if mods:
-        invite_mods(r, sub, mods)
-
-    if automod_conf:
-        setup_automod(r, sub, automod_conf)
-
-    if multi:
-        logging.info('Adding /r/{} to /user/{}/m/{}'
-                     .format(sub, settings.USERNAME, multi))
-        r.login()
-        multi.add_subreddit(sub)
-
-    if not skip_notifications:
-        setup_notifications(r, sub)
-
+start_points = ['creation', 'settings', 'mods', 'wiki', 'flair', 'multireddit', 'notifications']
 
 @click.command()
-@click.option('--skip-creation', is_flag=True, help="Don't create, only configure subreddits.")
-@click.option('--skip-settings', is_flag=True, help="Don't replace subreddit settings.")
-@click.option('--skip-mods', is_flag=True, help="Don't invite mods.")
-@click.option('--skip-automod', is_flag=True, help="Don't bring in the automoderator")
-@click.option('--skip-multi', is_flag=True, help="Don't add subreddits to multireddit.")
-@click.option('--skip-notifications', is_flag=True, help="Don't set up notifications.")
-@click.argument('subs', required=True, nargs=-1)
-def main(subs, skip_multi, skip_settings, skip_automod, **kwargs):
-    """Prop up new subreddits and set them up for the network."""
+@click.option('--start-at', type=click.Choice(start_points),
+              help='Where to start the process from.')
+@click.option('--only', type=click.Choice(start_points),
+              help='Only run one section of expansion script.')
+@click.option('--description', help='Subreddit description.')
+@click.argument('sub', required=True)
+def main(sub, start_at, only, description):
+    """Prop up new subreddit and set it for the network."""
 
     r = Reddit('Expand {} Network v0.1 /u/{}'
                .format(settings.NETWORK_NAME, settings.USERNAME))
     r.oauth()
 
-    sub_settings = None
-    if not skip_settings:
-        sub_settings = r.get_settings(settings.MASTER_SUB)
-        logging.debug('Copied information from {}: {}'
-                  .format(settings.MASTER_SUB, sub_settings))
+    # little helper script to check if we're at or after
+    # where we want to start.
+    def should_do(point):
+        point_idx = start_points.index(point)
+        if only:
+            only_idx = start_points.index(only)
+            return only_idx == point_idx
+        elif start_at:
+            start_idx = start_points.index(start_at)
+            return start_idx <= point_idx
+        return True
 
-    multi = None
-    if not skip_multi and settings.MULTIREDDIT:
-        multi = r.get_multireddit(settings.USERNAME, settings.MULTIREDDIT)
 
-    automod_conf = None
-    if not skip_automod:
-        automod_conf = r.get_wiki_page(settings.MASTER_SUB,
-                                       AUTOMOD_CONF_PAGE).content_md
+    if should_do('creation'):
+        create_sub(r, sub)
 
-    for sub in subs:
-        setup_sub(r, sub, sub_settings, multi, automod_conf, **kwargs)
+    if should_do('settings'):
+        copy_settings(r, sub, description)
+
+    if should_do('mods'):
+        invite_mods(r, sub)
+
+    if should_do('wiki'):
+        copy_wiki_pages(r, sub)
+
+    if should_do('flair'):
+        setup_flair(r, sub)
+
+    if should_do('multireddit'):
+        add_to_multi(r, sub)
+
+    if should_do('notifications'):
+        setup_notifications(r, sub)
 
 if __name__ == '__main__':
     main()
