@@ -22,6 +22,7 @@ REDIRECT_URI = 'http://127.0.0.1:65010/authorize_callback'
 NETWORK_NAME = "ImagesOf"
 MULTIREDDIT = "ImagesOfPlaces"
 
-DEFAULT_MODS = ['BotWatchman'] # Automoderator is handled separately
+DEFAULT_MODS = ['AutoModerator', 'BotWatchman']
+DEFAULT_DESCRIPTION = 'An __ImagesOf__ Network Subreddit'
 
 MASTER_SUB = "ImagesOfNetwork"
