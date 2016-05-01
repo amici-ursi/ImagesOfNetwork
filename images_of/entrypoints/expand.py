@@ -17,19 +17,12 @@ def create_sub(r, sub):
         logging.warning('/r/{} exists'.format(sub))
 
 
-def copy_settings(r, sub, description):
+def copy_settings(r, sub, topic):
     logging.info('Copying settings from {}'.format(settings.MASTER_SUB))
     sub_settings = r.get_settings(settings.MASTER_SUB)
     logging.debug('{}'.format(sub_settings))
 
-    if description:
-        sub_settings['public_description'] = description
-    elif sub.startswith('ImagesOf'):
-        # XXX this is hardly bulletproof
-        place = re.findall('[A-Z][^A-Z]*', sub)[2:].join(' ')
-        sub_settings['public_description'] = 'Pictures and images of {}'.format(place)
-    else:
-        sub_settings['pucblic_description'] = settings.DEFAULT_DESCRIPTION
+    sub_settings['public_description'] = 'Pictures and images of {}'.format(topic)
 
     logging.info('Copying settings to /r/{}'.format(sub))
     sub_obj = r.get_subreddit(sub)
@@ -120,14 +113,16 @@ _start_points = ['creation', 'settings', 'mods', 'wiki', 'flair', 'multireddit',
               help='Where to start the process from.')
 @click.option('--only', type=click.Choice(_start_points),
               help='Only run one section of expansion script.')
-@click.option('--description', help='Subreddit description.')
-@click.argument('sub', required=True)
-def main(sub, start_at, only, description):
+@click.argument('topic', required=True, nargs=-1)
+def main(topic, start_at, only):
     """Prop up new subreddit and set it for the network."""
 
-    r = Reddit('Expand {} Network v0.1 /u/{}'
+    r = Reddit('Expand {} Network v0.2 /u/{}'
                .format(settings.NETWORK_NAME, settings.USERNAME))
     r.oauth()
+
+    nice_topic = [''.join(re.findall('[A-Za-z0-9]', x)) for x in topic]
+    sub = settings.NETWORK_NAME + ''.join(nice_topic)
 
     # little helper script to check if we're at or after
     # where we want to start.
@@ -145,7 +140,7 @@ def main(sub, start_at, only, description):
         create_sub(r, sub)
 
     if should_do('settings'):
-        copy_settings(r, sub, description)
+        copy_settings(r, sub, topic)
 
     if should_do('mods'):
         invite_mods(r, sub)
