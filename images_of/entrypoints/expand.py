@@ -1,14 +1,11 @@
 import logging
 import re
 from textwrap import dedent
-import traceback
 
 import click
 from praw.errors import SubredditExists, RateLimitExceeded
 
 from images_of import settings, Reddit
-
-WIKI_PAGES = ['config/automoderator', 'toolbox']
 
 
 def create_sub(r, sub):
@@ -69,9 +66,9 @@ def invite_mods(r, sub):
 
 
 def copy_wiki_pages(r, sub):
-    for page in WIKI_PAGES:
+    for page in settings.WIKI_PAGES:
         logging.info('Copying wiki page "{}"'.format(page))
-        content = r.get_wiki_page(settings.MASTER_SUB,page).content_md
+        content = r.get_wiki_page(settings.MASTER_SUB, page).content_md
         r.edit_wiki_page(sub, page, content=content, reason='Subreddit stand-up')
 
 
@@ -83,6 +80,7 @@ def setup_flair(r, sub):
                       link_flair_enabled=True,
                       link_flair_position='right',
                       flair_self_assign=False)
+
 
 def add_to_multi(r, sub):
     if not settings.MULTIREDDIT:
@@ -115,12 +113,12 @@ def setup_notifications(r, sub):
                    setup.replace('{{subreddit}}', sub), from_sr=sub)
 
 
-start_points = ['creation', 'settings', 'mods', 'wiki', 'flair', 'multireddit', 'notifications']
+_start_points = ['creation', 'settings', 'mods', 'wiki', 'flair', 'multireddit', 'notifications']
 
 @click.command()
-@click.option('--start-at', type=click.Choice(start_points),
+@click.option('--start-at', type=click.Choice(_start_points),
               help='Where to start the process from.')
-@click.option('--only', type=click.Choice(start_points),
+@click.option('--only', type=click.Choice(_start_points),
               help='Only run one section of expansion script.')
 @click.option('--description', help='Subreddit description.')
 @click.argument('sub', required=True)
@@ -134,15 +132,14 @@ def main(sub, start_at, only, description):
     # little helper script to check if we're at or after
     # where we want to start.
     def should_do(point):
-        point_idx = start_points.index(point)
+        point_idx = _start_points.index(point)
         if only:
-            only_idx = start_points.index(only)
+            only_idx = _start_points.index(only)
             return only_idx == point_idx
         elif start_at:
-            start_idx = start_points.index(start_at)
+            start_idx = _start_points.index(start_at)
             return start_idx <= point_idx
         return True
-
 
     if should_do('creation'):
         create_sub(r, sub)
