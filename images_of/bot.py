@@ -1,8 +1,12 @@
+import logging
 import re
-import datetime
+from datetime import datetime
 
 from praw.helpers import submission_stream
 from praw.errors import AlreadySubmitted, APIException
+
+from images_of import settings
+from images_of.subreddit import Subreddit
 
 class Bot:
     def __init__(self, r):
@@ -13,7 +17,7 @@ class Bot:
 
         self.subreddits = []
         for sub_settings in settings.SLAVE_SUBS:
-            sub = Subreddit(**slave_settings)
+            sub = Subreddit(**sub_settings)
             sub.load_wiki_blacklist(r)
             self.subreddits.append(sub)
 
@@ -24,8 +28,8 @@ class Bot:
         self.domain_re = re.compile(domain_pattern, flags=re.IGNORECASE)
 
     def _read_blacklist(self, wiki_page):
-        content = r.get_wiki_page(settings.MASTER_SUB, wiki_page).content_md
-        entries = [line.srip().lower()[3:] for line in content.splitlines() if line]
+        content = self.r.get_wiki_page(settings.MASTER_SUB, wiki_page).content_md
+        entries = [line.strip().lower()[3:] for line in content.splitlines() if line]
         return set(entries)
 
     def check(self, post):
@@ -59,8 +63,9 @@ class Bot:
 
         logging.info('X-Posting into /r/{}: {}'.format(sub.name, title))
         try:
-            xpost = r.submit(
-                        sub.name
+            xpost = self.r.submit(
+                        sub.name,
+                        title,
                         url=post.url,
                         captcha=None,
                         send_replies=True,
@@ -71,10 +76,12 @@ class Bot:
         except APIException as e:
             logging.warning(e)
         
+
     def check_age(self, post):
         created = datetime.utcfromtimestamp(post.author.created_utc)
         age = (datetime.utcnow() - created).days
         return age > 2
+
 
     def run(self):
         stream = submission_stream(self.r, 'all')
@@ -83,10 +90,10 @@ class Bot:
                 continue
 
             age_ok = None
-            for sub in self.subreddits
+            for sub in self.subreddits:
                 if sub.check(post):
                     if age_ok is None:
-                        age_ok = self.check_age()
+                        age_ok = self.check_age(post)
                     
                     if not age_ok:
                         break
