@@ -22,6 +22,7 @@ def copy_settings(r, sub, topic):
     sub_settings = r.get_settings(settings.MASTER_SUB)
     logging.debug('{}'.format(sub_settings))
 
+    sub_settings['title'] = "{} {}".format(sub_settings['title'], topic)
     sub_settings['public_description'] = 'Pictures and images of {}'.format(topic)
 
     logging.info('Copying settings to /r/{}'.format(sub))
