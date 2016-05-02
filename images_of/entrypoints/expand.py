@@ -71,7 +71,7 @@ def invite_mods(r, sub):
         for mod in need_mods:
             s.add_moderator(mod)
 
-    logging.info('Mods invited.'.format(mod))
+    logging.info('Mods invited.')
 
 
 def copy_wiki_pages(r, sub):
