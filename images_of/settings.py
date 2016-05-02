@@ -23,7 +23,6 @@ NETWORK_NAME = "ImagesOf"
 MULTIREDDIT = "ImagesOfPlaces"
 
 DEFAULT_MODS = ['AutoModerator', 'BotWatchman']
-DEFAULT_DESCRIPTION = 'An __ImagesOf__ Network Subreddit'
 WIKI_PAGES = ['config/automoderator', 'toolbox']
 
 MASTER_SUB = "ImagesOfNetwork"
