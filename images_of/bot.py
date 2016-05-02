@@ -1,5 +1,6 @@
 import logging
 import re
+from collections import deque
 from datetime import datetime
 
 from praw.helpers import submission_stream
@@ -12,6 +13,7 @@ class Bot:
     def __init__(self, r, should_post=True):
         self.r = r
         self.should_post = should_post
+        self.recent_posts = deque(maxlen=50)
 
         logging.info('Loading global user blacklist from wiki')
         self.blacklist_users = self._read_blacklist('userblacklist')
@@ -64,6 +66,15 @@ class Bot:
                 post.permalink,
                 post.author,
                 post.subreddit)
+
+        log_entry = (post.url, sub.name)
+        if log_entry in self.recent_posts:
+            logging.info('Already posted {} to /r/{}. Skipping.'.format(title, sub.name))
+            return
+        else:
+            self.recent_posts.append(log_entry)
+            logging.debug('Added {} to recent posts. Now tracking {} items.'
+                          .format(log_entry, len(self.recent_posts)))
 
         try:
             logging.info('X-Posting into /r/{}: {}'.format(sub.name, title))
