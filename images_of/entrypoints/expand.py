@@ -151,7 +151,8 @@ def main(topic, start_at, only, dry_run):
     else:
         r = None
 
-    nice_topic = [''.join(re.findall('[A-Za-z0-9]', x)) for x in topic]
+    topic = ' '.join(topic)
+    nice_topic = ''.join(re.findall('[A-Za-z0-9]', topic))
     sub = settings.NETWORK_NAME + ''.join(nice_topic)
 
     # little helper script to check if we're at or after
