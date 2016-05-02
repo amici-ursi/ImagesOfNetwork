@@ -30,7 +30,7 @@ class Bot:
 
     def check(self, post):
         """Check global conditions on a post"""
-        if post.over_18:
+        if not settings.NSFW_OK and post.over_18:
             return False
 
         user = post.author.name.lower()

@@ -24,6 +24,7 @@ MULTIREDDIT = "ImagesOfPlaces"
 
 DEFAULT_MODS = ['AutoModerator', 'BotWatchman']
 WIKI_PAGES = ['config/automoderator', 'toolbox']
+NSFW_OK = False
 
 MASTER_SUB = "ImagesOfNetwork"
 # SLAVE_SUBS at bottom.
