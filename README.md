@@ -70,10 +70,88 @@ to operate on your behalf.
 
 ### Rock-em Sock-em Robots
 
-We're off to the races. Well, today, there's a considerable amount of configuration
-laying around various scripts that totally need to be changed, but you have all the
-information you need to do it now... right?
+We're ready to roll. We've got everything we need installed, all the priveledges
+with reddit, and it looks like we're good to go. Let's take a moment here to pat
+ourselves on the back. We've done some good work.
+
+Ok, I suppose we should get back to the real work here.
+
+### Network Preparation
+
+If you're working on the ImagesOf network, skip this, it's already done.
+
+Otherwise, this is for you. These scripts follow a model of one central subreddit
+forming a model for a bunch of other subreddits. We're going to create a network
+of subreddits, and each of those are going to copy settings from the master.
+
+Go ahead and create your master subreddit. Set it up the way you want. Privacy
+settings, flairs, you name it, the basic settings, at least, will all be copied
+over when we start making the *real* subs in our netowrk. Just not wiki pages.
+They're handled separately, mostly for moderation purposes.
+
+Make sure you at least create the wiki pages 'userblacklist' and 'subredditblacklist'.
+You don't have to put anything in them if you don't want, but they need to be there.
+If you do want to blacklist some things off the bat, each should contain a list of
+users or subreddits, prefixed by /u/ or /r/, one per line.
+
+Great, we've got something to work off of now. Let's move on.
+
+### Network Expansion
+
+Adding new subreddits to the network should be a fairly simple process. We have
+A nice simple script to do the job for us. It assumes that our network name is a
+prefix, so if that's not what you want, you'll need to make some code adjustments.
+Otherwise, here's the command:
+
+```
+ion_expand Topic
+```
+
+Now watch it work it's magic. When it's done, you should have a nice, all prepared
+subreddit called NetworkNameTopic.
+
+If you're nervous about automagically creating subreddits, you can take a look at
+what it's going to do by using the `--dry-run flag`. We won't hit reddit, but it
+should at least give you an idea of what's going to happen.
+
+Now we probably want to do something with it. It's time to move back to our settings
+file. In settings.py, you'll find a `SLAVE_SUBS` settings. Put your new subreddit
+there, with all the configuration you need. There's a template to give you an idea
+of how things work.
+
+Note: reddit only allows subreddit creation once every 10 minutes or so. Don't get
+too excited, take your time. Maybe use the time between creations to make sure
+everything looks right. If we didn't copy something right, let us know.
+
+### Running The Bot
+
+We have credentials, we have a network, now let's start copying posts!
+
+```
+ion_bot
+```
+
+That's really all there is to it. Everything should be set up already. Maybe keep
+an eye on it amd make sure what it's doing is sane, but we should be in business.
 
 ### Supervisord
 
-Yeah, we should talk about that.
+Ok, ok, so nothing's perfect. We want to monitor our process so that if the bot
+fails, we can prop it back up again. `supervisord` is a sane choice. Make sure
+it's installed on your machine (excercise left up to the reader). Here's a little
+bit of configuration to get you started, assuming you went ahead and used the
+virtualenv as instructed.
+
+```
+[group:ion]
+programs=ion_bot
+directory=/path/to/ImagesOfNetwork
+
+[program:ion_bot]
+command=/path/to/ImagesOfNetwork/venv-imagesof/bin/ion_bot
+stderr_logfile=/var/log/ion_bot.log
+```
+
+Replace /path/to with the appropriate path, of course. Make sure supervisord
+is set up and running. You can then use `supervisorctl` to check on the status
+of the daemon, and see what we're logging in the specified logfile.
