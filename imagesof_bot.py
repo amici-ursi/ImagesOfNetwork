@@ -2,7 +2,6 @@ import os
 import time
 import praw
 import re
-#import requests
 from datetime import datetime
 
 #regex to match urls that aren't allowed domains
@@ -18,6 +17,7 @@ globaluserblacklist = set()
 californiasubredditblacklist = set()
 chinasubredditblacklist = set()
 indiasubredditblacklist = set()
+log = []
 
 #searches the stream for all the criteria
 def search_for_places(r):
@@ -698,9 +698,7 @@ def search_for_places(r):
 def getage(r, author):
     print("Getting age")
     user = r.get_redditor(author)
-    print(user.created_utc)
     user_date = datetime.utcfromtimestamp(user.created_utc)
-    print("{} was born on {}".format(author, user_date))
     age = (datetime.utcnow() - user_date).days
     print("They are {} days old".format(age))
     return age
@@ -727,6 +725,7 @@ def make_post(r, originalsubmission, subreddit):
     comment = '[Original post]({}) by /u/{} in /r/{}'.format(originalsubmission.permalink, originalsubmission.author, originalsubmission.subreddit)
     print("Making post in {}: ".format(subreddit))
     print(("    " + title +"\n").encode('utf-8', 'ignore'))
+    lumberjack(r, originalsubmission, subreddit)
     try:
         xpost = r.submit(subreddit, title, url=originalsubmission.url, captcha=None, send_replies=True, resubmit=False)
         xpost.add_comment(comment)
@@ -736,6 +735,21 @@ def make_post(r, originalsubmission, subreddit):
         print(e)
         print("API error. Skipping.")
 
+def lumberjack(r, submission, postinto):
+    wood = submission.url + postinto
+    global log
+    print("Checking the log for {}".format(wood))
+    if wood not in log:
+        print("this wood isn't in the {} woods long log, adding it.".format(len(log)))
+        log.append(wood)
+        if len(log) > 49:
+            print("the log is {} woods long. removing one.".format(len(log)))
+            del log[0]
+        return False
+    else:
+        print("this item is in the log. doing nothing.")
+        return True
+
 #defines how to log in using the credentials stored in the OS.
 def praw_oauth_login(r):
     
@@ -743,12 +757,9 @@ def praw_oauth_login(r):
     
     #Load keys from OS variables
     client_id = os.environ.get("imagesof_client_id")
-    print(client_id)
     client_secret = os.environ.get("imagesof_client_secret")
-    print(client_secret)
     redirect_uri = "http://127.0.0.1:65010/authorize_callback"
     refresh_token=os.environ.get("imagesof_refresh_token")
-    print(refresh_token)
     
     #Set the oauth app info and get authorization
     r.set_oauth_app_info(client_id, client_secret, redirect_uri)
@@ -766,27 +777,22 @@ def main():
     global globaluserblacklist
     globaluserblacklist_wiki = r.get_wiki_page("ImagesOfNetwork","userblacklist")
     globaluserblacklist = set([name.strip().lower()[3:] for name in globaluserblacklist_wiki.content_md.split("\n") if name.strip() != ""])
-    print(globaluserblacklist)
     print("Getting global subreddit blacklist")
     global globalsubredditblacklist
     globalsubredditblacklist_wiki = r.get_wiki_page("ImagesOfNetwork","subredditblacklist")
     globalsubredditblacklist = set([name.strip().lower()[3:] for name in globalsubredditblacklist_wiki.content_md.split("\n") if name.strip() != ""])
-    print(globalsubredditblacklist)
     print("Getting California subreddit blacklist")
     global californiasubredditblacklist
     californiasubredditblacklist_wiki = r.get_wiki_page("ImagesOfCalifornia","subredditblacklist")
     californiasubredditblacklist = set([name.strip().lower()[3:] for name in californiasubredditblacklist_wiki.content_md.split("\n") if name.strip() != ""])
-    print(californiasubredditblacklist)
     print("Getting China subreddit blacklist")
     global chinasubredditblacklist
     chinasubredditblacklist_wiki = r.get_wiki_page("ImagesOfChina","subredditblacklist")
     chinasubredditblacklist = set([name.strip().lower()[3:] for name in chinasubredditblacklist_wiki.content_md.split("\n") if name.strip() != ""])
-    print(chinasubredditblacklist)
     print("Getting India subreddit blacklist")
     global indiasubredditblacklist
     indiasubredditblacklist_wiki = r.get_wiki_page("ImagesOfIndia","subredditblacklist")
     indiasubredditblacklist = set([name.strip().lower()[3:] for name in indiasubredditblacklist_wiki.content_md.split("\n") if name.strip() != ""])
-    print(indiasubredditblacklist)
 
     try:
         search_for_places(r) 
