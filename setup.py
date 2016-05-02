@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = "images_of",
-    version = "0.1",
+    version = "0.1.0",
 
     author = "acimi-ursi",
     description = "Tools for managing the ImagesOfNetwork on reddit",
