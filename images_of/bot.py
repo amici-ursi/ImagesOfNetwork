@@ -14,6 +14,7 @@ class Bot:
         self.subreddits = []
         for sub_settings in settings.SLAVE_SUBS:
             sub = Subreddit(**slave_settings)
+            sub.load_wiki_blacklist(r)
             self.subreddits.append(sub)
 
         ext_pattern = '({})$'.format('|'.join(settings.EXTENSIONS))
