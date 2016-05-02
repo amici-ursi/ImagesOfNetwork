@@ -7,11 +7,14 @@ from praw.errors import SubredditExists, RateLimitExceeded
 
 from images_of import settings, Reddit
 
+DRY_RUN = False
+
 
 def create_sub(r, sub):
     try:
         logging.info('Attempting to create /r/{}'.format(sub))
-        r.create_subreddit(sub, sub)
+        if not DRY_RUN:
+            r.create_subreddit(sub, sub)
         logging.info('Created /r/{}'.format(sub))
     except SubredditExists:
         logging.warning('/r/{} exists'.format(sub))
@@ -19,13 +22,21 @@ def create_sub(r, sub):
 
 def copy_settings(r, sub, topic):
     logging.info('Copying settings from {}'.format(settings.MASTER_SUB))
-    sub_settings = r.get_settings(settings.MASTER_SUB)
+    if not DRY_RUN:
+        sub_settings = r.get_settings(settings.MASTER_SUB)
+    else:
+        sub_settings = {'title': settings.NETWORK_NAME}
+
     logging.debug('{}'.format(sub_settings))
 
     sub_settings['title'] = "{} {}".format(sub_settings['title'], topic)
     sub_settings['public_description'] = 'Pictures and images of {}'.format(topic)
 
     logging.info('Copying settings to /r/{}'.format(sub))
+
+    if DRY_RUN:
+        return
+
     sub_obj = r.get_subreddit(sub)
     try:
         r.set_settings(sub_obj, **sub_settings)
@@ -42,7 +53,10 @@ def copy_settings(r, sub, topic):
 def invite_mods(r, sub):
     mods = settings.DEFAULT_MODS
 
-    cur_mods = [u.name for u in r.get_moderators(sub)]
+    if not DRY_RUN:
+        cur_mods = [u.name for u in r.get_moderators(sub)]
+    else:
+        cur_mods = []
     logging.debug('current mods for /r/{}: {}'.format(sub, cur_mods))
 
     need_mods = [mod for mod in mods if mod not in cur_mods]
@@ -52,9 +66,10 @@ def invite_mods(r, sub):
     else:
         logging.info('Inviting moderators: {}'.format(need_mods))
 
-    s = r.get_subreddit(sub)
-    for mod in need_mods:
-        s.add_moderator(mod)
+    if not DRY_RUN:
+        s = r.get_subreddit(sub)
+        for mod in need_mods:
+            s.add_moderator(mod)
 
     logging.info('Mods invited.'.format(mod))
 
@@ -62,27 +77,33 @@ def invite_mods(r, sub):
 def copy_wiki_pages(r, sub):
     for page in settings.WIKI_PAGES:
         logging.info('Copying wiki page "{}"'.format(page))
-        content = r.get_wiki_page(settings.MASTER_SUB, page).content_md
-        r.edit_wiki_page(sub, page, content=content, reason='Subreddit stand-up')
+        if not DRY_RUN:
+            content = r.get_wiki_page(settings.MASTER_SUB, page).content_md
+            r.edit_wiki_page(sub, page, content=content, reason='Subreddit stand-up')
 
 
 def setup_flair(r, sub):
     # XXX should this be copied from the master?
-    r.configure_flair(sub,
-                      flair_enabled=True,
-                      flair_position='right',
-                      link_flair_enabled=True,
-                      link_flair_position='right',
-                      flair_self_assign=False)
+    logging.info('Setting up flair')
+    if not DRY_RUN:
+        r.configure_flair(sub,
+                          flair_enabled=True,
+                          flair_position='right',
+                          link_flair_enabled=True,
+                          link_flair_position='right',
+                          flair_self_assign=False)
 
 
 def add_to_multi(r, sub):
     if not settings.MULTIREDDIT:
-        logging.WARNING("No multireddit to add /r/{} to.".format(sub))
+        logging.warning("No multireddit to add /r/{} to.".format(sub))
         return
 
     logging.info('Adding /r/{} to /user/{}/m/{}'
                  .format(sub, settings.USERNAME, settings.MULTIREDDIT))
+
+    if DRY_RUN:
+        return
 
     m = r.get_multireddit(settings.USERNAME, settings.MULTIREDDIT)
 
@@ -103,8 +124,10 @@ def setup_notifications(r, sub):
 
     logging.info('Requesting notifications about /r/{} from /u/Sub_Mentions'
                  .format(sub))
-    r.send_message('Sub_Mentions', 'Action: Subscribe',
-                   setup.replace('{{subreddit}}', sub), from_sr=sub)
+
+    if not DRY_RUN:
+        r.send_message('Sub_Mentions', 'Action: Subscribe',
+                       setup.replace('{{subreddit}}', sub), from_sr=sub)
 
 
 _start_points = ['creation', 'settings', 'mods', 'wiki', 'flair', 'multireddit', 'notifications']
@@ -114,13 +137,19 @@ _start_points = ['creation', 'settings', 'mods', 'wiki', 'flair', 'multireddit',
               help='Where to start the process from.')
 @click.option('--only', type=click.Choice(_start_points),
               help='Only run one section of expansion script.')
+@click.option('--dry-run', is_flag=True, help='Don\'t hit reddit')
 @click.argument('topic', required=True, nargs=-1)
-def main(topic, start_at, only):
+def main(topic, start_at, only, dry_run):
     """Prop up new subreddit and set it for the network."""
+    global DRY_RUN
+    DRY_RUN = dry_run
 
-    r = Reddit('Expand {} Network v0.2 /u/{}'
-               .format(settings.NETWORK_NAME, settings.USERNAME))
-    r.oauth()
+    if not DRY_RUN:
+        r = Reddit('Expand {} Network v0.2 /u/{}'
+                   .format(settings.NETWORK_NAME, settings.USERNAME))
+        r.oauth()
+    else:
+        r = None
 
     nice_topic = [''.join(re.findall('[A-Za-z0-9]', x)) for x in topic]
     sub = settings.NETWORK_NAME + ''.join(nice_topic)
