@@ -21,7 +21,7 @@ class Subreddit:
                 return None
             if isinstance(x, str):
                 x = [x]
-            
+
             terms = '(\\b{}\\b)'.format('\\b|\\b'.join(x))
             return re.compile(terms, flags)
 

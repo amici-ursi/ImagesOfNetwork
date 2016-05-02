@@ -84,6 +84,18 @@ DOMAINS = [
 
 # Slaves
 
+# Template:
+#   {
+#     'name': 'subname',
+#     'search': [],         # list of regexes
+#     'ignore': [],         # list of regexes
+#     'ignore_case': [],    # list of regexes, case sensitive
+#     'whitelist': [],      # list of reddits
+#     'blacklist': [],      # list of reddits
+#     'blacklist_wiki': False,
+#           # True if sub has 'subredditblacklist' wiki page
+#   }
+
 SLAVE_SUBS = [
   {
     "name": "imagesofafghanistan",
