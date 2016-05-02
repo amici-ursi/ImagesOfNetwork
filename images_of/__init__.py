@@ -1,3 +1,5 @@
+__version__ == '0.1.0'
+
 # that's all of em. I'm sure we can trim it down a bit
 OAUTH_SCOPE = [
         'account',
