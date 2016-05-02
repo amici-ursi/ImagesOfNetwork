@@ -3312,14 +3312,16 @@ SLAVE_SUBS = [
       "zealandia",
     ],
     'ignore': [
-      "eorge|willie\\reggie|jj|major|liam|rogers) nelson|\\b(beef|pork) wellington",
+      "(george|willie|reggie|jj|major|liam|rogers) nelson",
+      "(beef|pork) wellington",
       "kaohsiung",
       "nelson mandela",
       "poland",
       "river thames",
       "taiwan",
       "tasmania",
-      "thames river|\\blondon",
+      "thames river",
+      "blondon",
       "united kingdom",
       "wroclaw",
     ],
@@ -4235,7 +4237,8 @@ SLAVE_SUBS = [
       "usa",
     ],
     'ignore': [
-      "orth|central|south|captain) (america|murica)|\\bamerican cheese",
+      "(north|central|south|captain) (america|murica)",
+      "american cheese",
     ],
     "whitelist": [
       "unitedstatesofamerica",
