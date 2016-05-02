@@ -715,9 +715,10 @@ def swim(r, goodregex, postinto, getfromthese, submission, badregex=r"(\bbadrege
                 not re.search(badregex, title, flags=re.IGNORECASE) and
                 not re.search(badcaseregex, title)) or
                 submission.subreddit.display_name.lower() in getfromthese):
-            age = getage(r, submission.author.name.lower())
-            if age > 2:
-                make_post(r, submission, postinto)
+            if lumberjack(r, submission, postinto) == False:
+                age = getage(r, submission.author.name.lower())
+                if age > 2:
+                    make_post(r, submission, postinto)
 
 #makes the post and comment
 def make_post(r, originalsubmission, subreddit):
@@ -725,7 +726,6 @@ def make_post(r, originalsubmission, subreddit):
     comment = '[Original post]({}) by /u/{} in /r/{}'.format(originalsubmission.permalink, originalsubmission.author, originalsubmission.subreddit)
     print("Making post in {}: ".format(subreddit))
     print(("    " + title +"\n").encode('utf-8', 'ignore'))
-    lumberjack(r, originalsubmission, subreddit)
     try:
         xpost = r.submit(subreddit, title, url=originalsubmission.url, captcha=None, send_replies=True, resubmit=False)
         xpost.add_comment(comment)
@@ -740,14 +740,14 @@ def lumberjack(r, submission, postinto):
     global log
     print("Checking the log for {}".format(wood))
     if wood not in log:
-        print("this wood isn't in the {} woods long log, adding it.".format(len(log)))
+        print("this wood isn't one of the {} in the log, adding it.".format(len(log)))
         log.append(wood)
         if len(log) > 49:
             print("the log is {} woods long. removing one.".format(len(log)))
             del log[0]
         return False
     else:
-        print("this item is in the log. doing nothing.")
+        print("this wood is one of the {} in the log. skipping it.".format(len(log)))
         return True
 
 #defines how to log in using the credentials stored in the OS.
