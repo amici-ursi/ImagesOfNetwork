@@ -1,3 +1,5 @@
+import re
+
 class Subreddit:
     def __init__(self, name, search, ignore=None, ignore_case=None, whitelist=[],
                  blacklist=[], wiki_blacklist=False, **kwargs):
@@ -14,17 +16,19 @@ class Subreddit:
         :param wiki_blacklist: subreddit has a blacklist on it's wiki
         """
 
-        def search_terms(x):
+        def make_regex(x, flags=0):
             if x is None:
                 return None
             if isinstance(x, str):
                 x = [x]
-            return '(\\b{}\\b)'.format('\\b|\\b'.join(x))
+            
+            terms = '(\\b{}\\b)'.format('\\b|\\b'.join(x))
+            return re.compile(terms, flags)
 
         self.name = name
-        self.search_re = search_terms(search)
-        self.ignore_re = search_terms(ignore)
-        self.ignore_case_re = search_terms(ignore_case)
+        self.search_re = make_regex(search, re.IGNORECASE)
+        self.ignore_re = make_regex(ignore, re.IGNORECASE)
+        self.ignore_case_re = make_regex(ignore_case)
         self.whitelist = [sub.lower() for sub in whitelist]
         self.blacklist = [sub.lower() for sub in blacklist]
         self.wiki_blacklist = wiki_blacklist
