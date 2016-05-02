@@ -9,10 +9,14 @@ from images_of import settings
 from images_of.subreddit import Subreddit
 
 class Bot:
-    def __init__(self, r):
+    def __init__(self, r, should_post=True):
         self.r = r
+        self.should_post = should_post
 
+        logging.info('Loading global user blacklist from wiki')
         self.blacklist_users = self._read_blacklist('userblacklist')
+
+        logging.info('Loading global subreddit blacklist from wiki')
         self.blacklist_subs = self._read_blacklist('subredditblacklist')
 
         self.subreddits = []
@@ -61,16 +65,21 @@ class Bot:
                 post.author,
                 post.subreddit)
 
-        logging.info('X-Posting into /r/{}: {}'.format(sub.name, title))
         try:
-            xpost = self.r.submit(
-                        sub.name,
-                        title,
-                        url=post.url,
-                        captcha=None,
-                        send_replies=True,
-                        resubmit=False)
-            xpost.add_comment(comment)
+            logging.info('X-Posting into /r/{}: {}'.format(sub.name, title))
+            if self.should_post:
+                xpost = self.r.submit(
+                            sub.name,
+                            title,
+                            url=post.url,
+                            captcha=None,
+                            send_replies=True,
+                            resubmit=False)
+
+            logging.debug('Commenting: {}'.format(comment))
+            if self.should_post:
+                xpost.add_comment(comment)
+
         except AlreadySubmitted:
             logging.info('Already submitted. Skipping.')
         except APIException as e:

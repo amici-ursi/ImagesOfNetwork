@@ -1,4 +1,7 @@
 import re
+import logging
+
+from praw.errors import Forbidden
 
 class Subreddit:
     def __init__(self, name, search, ignore=None, ignore_case=None, whitelist=[],
@@ -15,6 +18,8 @@ class Subreddit:
         :param blacklist: list of subreddits to never accept
         :param wiki_blacklist: subreddit has a blacklist on it's wiki
         """
+
+        logging.debug('Setting up /r/{}'.format(name))
 
         def make_regex(x, flags=0):
             if x is None:
@@ -54,10 +59,16 @@ class Subreddit:
         if not self.wiki_blacklist or hasattr(self, 'wiki_blacklist_loaded'):
             return
 
-        logging.info('Loading wiki blacklist for /r/{}'.format(self.name))
-        content = r.get_wiki_page(self.name, 'subredditblacklist').content_md
-        subs = set(sub for sub in content.splitlines() if sub)
-        self.blacklist = subs.union(self.blacklist)
+        try:
+            logging.info('Loading wiki blacklist for /r/{}'.format(self.name))
+            content = r.get_wiki_page(self.name, 'subredditblacklist').content_md
+            subs = set(sub for sub in content.splitlines() if sub)
+            wiki_blacklist = subs.union(self.blacklist)
+        except Forbidden:
+            logging.warning('Forbidden from reading blacklist on /r/{}'.format(self.name))
+            wiki_blacklist = set()
+
+        self.blacklist = wiki_blacklist.union(self.blacklist)
         self.wiki_blacklist_loaded = True
 
     def check(self, post):
