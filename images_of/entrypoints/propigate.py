@@ -29,7 +29,7 @@ def split_content(content, start_delim, end_delim, tags_required=True):
 
     return (head, content, tail)
 
-def copy_wiki_page(r, page, dom, subs):
+def copy_wiki_page(r, page, dom, subs, force):
     start_delim = "#Start-{}-Network-Config".format(settings.NETWORK_NAME)
     end_delim = "#End-{}-Network-Config".format(settings.NETWORK_NAME)
 
@@ -40,7 +40,7 @@ def copy_wiki_page(r, page, dom, subs):
 
     for sub in subs:
         sub_content = r.get_wiki_page(sub, page).content_md
-        parts = split_contents(sub_content, start_delim, end_delim)
+        parts = split_contents(sub_content, start_delim, end_delim, not force)
 
         new_content = ''.join(
                 parts[0],
@@ -49,11 +49,15 @@ def copy_wiki_page(r, page, dom, subs):
                 end_delim,
                 parts[2])
 
+        logging.debug('New content for /r/{}/wiki/{}: {}'.format(
+                            sub, page, new_content))
+
         r.edit_wiki_page(sub, page, new_content)
 
 @click.command()
 @click.option('--wiki', multiple=True, help='Wiki page to copy')
-def main(wiki):
+@click.option('-f', '--force', is_flag=True, help='Overwrite even if section tags not found')
+def main(wiki, force):
     """Propigate settings across the network"""
 
     dom = settings.MASTER_SUB
@@ -63,7 +67,7 @@ def main(wiki):
     r.oauth()
 
     for page in wiki:
-        copy_wiki_page(r, page, dom, subs)
+        copy_wiki_page(r, page, dom, subs, force)
 
 if __name__ == '__main__':
     main()
