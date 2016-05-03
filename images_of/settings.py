@@ -1796,6 +1796,7 @@ SLAVE_SUBS = [
     ],
     'ignore': [
       "fl studios?",
+      "hotline miami",
     ],
     "whitelist": [
       "321",
@@ -1853,6 +1854,7 @@ SLAVE_SUBS = [
     "blacklist": [
       "edmprodcirclejerk",
       "edmproduction",
+      "hotlinemiami",
       "mechanicalkeyboards",
     ],
   },
@@ -2138,6 +2140,7 @@ SLAVE_SUBS = [
     ],
     "blacklist": [
       "guns",
+      "springfieldmo",
       "thesimpsons",
     ],
   },
@@ -4237,7 +4240,7 @@ SLAVE_SUBS = [
       "usa",
     ],
     'ignore': [
-      "(north|central|south|captain) (america|murica)",
+      "(north|central|south|captain) (american?s?|murica)",
       "american cheese",
     ],
     "whitelist": [
