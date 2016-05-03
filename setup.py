@@ -23,9 +23,4 @@ setup(
             "ion_bot = images_of.entrypoints.bot:main",
         ],
     },
-
-    scripts = [
-        "imagesof_bot.py",
-        "subreddit_setup_and_copy.py",
-    ],
 )
