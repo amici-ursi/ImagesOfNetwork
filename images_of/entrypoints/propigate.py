@@ -55,9 +55,11 @@ def copy_wiki_page(r, page, dom, subs, force):
         r.edit_wiki_page(sub, page, new_content)
 
 @click.command()
+@click.option('--automod', is_flag=True,
+              help='Copy automod settings. This is an alias for \'--wiki config/automoderator\'')
 @click.option('--wiki', multiple=True, help='Wiki page to copy')
 @click.option('-f', '--force', is_flag=True, help='Overwrite even if section tags not found')
-def main(wiki, force):
+def main(automod, wiki, force):
     """Propigate settings across the network"""
 
     dom = settings.MASTER_SUB
@@ -65,6 +67,11 @@ def main(wiki, force):
 
     r = Reddit('Copy Network Settings v0.1 /u/{}'.format(settings.USERNAME))
     r.oauth()
+
+    if automod:
+        wiki = set(wiki)
+        wiki.update('config/automoderator')
+        wiki = list(wiki)
 
     for page in wiki:
         copy_wiki_page(r, page, dom, subs, force)
