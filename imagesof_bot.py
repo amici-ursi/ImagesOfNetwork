@@ -242,7 +242,7 @@ def search_for_places(r):
             submission = post,
             goodregex = r"(\billinois\b|\bIllinoisans?\b|\bIL\b|\bchicago\b|\bAurora\b(IL|Illinois)\b|\brockford\b|\bJoliet\b|\bnaperville\b|\bspringfield\b|\bpeopria\b|\belgin\b(IL|illinois)\b|\bWaukegan\b)",
             badregex = r"(\bil\b|\bIl\b|\biL\b|\bchicago('s)? (style|pizza)\b|\bVehk Springfield\b)",
-            smallsubredditblacklist = {'thesimpsons', 'guns'},
+            smallsubredditblacklist = {'thesimpsons', 'guns', 'springfieldmo'},
             postinto = 'imagesofillinois',
             getfromthese = {'illinois', 'chicago', 'southernillinois', 'centralillinois', 'salukis', 'grayslakeillinois', 'lasallecounty', 'rockford', 'chicagogaming', 'chibears', 'chicagobulls', 'chicubs', 'whitesox', 'hawks'}
             )
