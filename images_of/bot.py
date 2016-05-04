@@ -104,7 +104,7 @@ class Bot:
 
 
     def run(self):
-        stream = submission_stream(self.r, 'all')
+        stream = submission_stream(self.r, 'all', verbosity=0)
         for post in stream:
             if not self.check(post):
                 continue
