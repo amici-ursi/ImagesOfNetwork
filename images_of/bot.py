@@ -11,6 +11,7 @@ from images_of import settings
 from images_of.subreddit import Subreddit
 
 RETRY_MINUTES = 3
+LOG = logging.getLogger(__name__)
 
 class Bot:
     def __init__(self, r, should_post=True):
@@ -18,10 +19,10 @@ class Bot:
         self.should_post = should_post
         self.recent_posts = deque(maxlen=50)
 
-        logging.info('Loading global user blacklist from wiki')
+        LOG.info('Loading global user blacklist from wiki')
         self.blacklist_users = self._read_blacklist('userblacklist')
 
-        logging.info('Loading global subreddit blacklist from wiki')
+        LOG.info('Loading global subreddit blacklist from wiki')
         self.blacklist_subs = self._read_blacklist('subredditblacklist')
 
         self.subreddits = []
@@ -72,15 +73,15 @@ class Bot:
 
         log_entry = (post.url, sub.name)
         if log_entry in self.recent_posts:
-            logging.info('Already posted {} to /r/{}. Skipping.'.format(title, sub.name))
+            LOG.info('Already posted {} to /r/{}. Skipping.'.format(title, sub.name))
             return
         else:
             self.recent_posts.append(log_entry)
-            logging.debug('Added {} to recent posts. Now tracking {} items.'
+            LOG.debug('Added {} to recent posts. Now tracking {} items.'
                           .format(log_entry, len(self.recent_posts)))
 
         try:
-            logging.info('X-Posting into /r/{}: {}'.format(sub.name, title))
+            LOG.info('X-Posting into /r/{}: {}'.format(sub.name, title))
             if self.should_post:
                 xpost = self.r.submit(
                             sub.name,
@@ -90,14 +91,14 @@ class Bot:
                             send_replies=True,
                             resubmit=False)
 
-            logging.debug('Commenting: {}'.format(comment))
+            LOG.debug('Commenting: {}'.format(comment))
             if self.should_post:
                 xpost.add_comment(comment)
 
         except AlreadySubmitted:
-            logging.info('Already submitted. Skipping.')
+            LOG.info('Already submitted. Skipping.')
         except APIException as e:
-            logging.warning(e)
+            LOG.warning(e)
         
 
     def verify_age(self, post):
@@ -129,13 +130,13 @@ class Bot:
                 for post in stream:
                     self._do_post(post)
             except HTTPException as e:
-                logging.warning('Reddit is down. Sleeping.')
-                logging.debug(e)
+                LOG.warning('Reddit is down. Sleeping.')
+                LOG.debug(e)
                 sleep(60 * RETRY_MINUTES)
                 continue
             except requests.ConnectionError as e:
-                logging.warning('Connection failed - trying again.')
+                LOG.warning('Connection failed - trying again.')
                 continue
 
-            logging.warning('Stream ended. Restarting.')
+            LOG.warning('Stream ended. Restarting.')
 

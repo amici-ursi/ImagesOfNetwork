@@ -5,15 +5,17 @@ import click
 from images_of import settings, Reddit
 from images_of.subreddit import Subreddit
 
+LOG = logging.getLogger(__name__)
+
 def split_content(content, start_delim, end_delim, tags_required=True):
     if tags_required:
         ok = True
         if start_delim not in content:
-            logging.warning('Missing {}'.format(start_delim))
+            LOG.warning('Missing {}'.format(start_delim))
             ok = False
 
         if end_delim not in content:
-            logging.warning('Missing {}'.format(start_delim))
+            LOG.warning('Missing {}'.format(start_delim))
             ok = False
 
         if not ok:
@@ -49,7 +51,7 @@ def copy_wiki_page(r, page, dom, subs, force):
                 end_delim,
                 parts[2])
 
-        logging.debug('New content for /r/{}/wiki/{}: {}'.format(
+        LOG.debug('New content for /r/{}/wiki/{}: {}'.format(
                             sub, page, new_content))
 
         r.edit_wiki_page(sub, page, new_content)

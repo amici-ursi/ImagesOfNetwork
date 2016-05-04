@@ -12,6 +12,9 @@ import praw
 
 from images_of import settings, OAUTH_SCOPE
 
+LOG = logging.getLogger(__name__)
+
+
 class RedditRedirectRequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         try:
@@ -69,15 +72,15 @@ def main(host, port):
 
     # Step 3: Get access ID from server
     status, code = q.get()
-    logging.info('Shutting down server.')
+    LOG.info('Shutting down server.')
     server.shutdown()
     server.server_close()
 
     if status == 'err':
-        logging.error('Failed to collect access information')
+        LOG.error('Failed to collect access information')
         return
 
-    logging.info('Gathering access information.')
+    LOG.info('Gathering access information.')
     access_info = r.get_access_information(code)
 
     print("Write this down, y'hear!? Like put it in your local_settings.py")
