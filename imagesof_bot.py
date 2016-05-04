@@ -5,6 +5,8 @@ import re
 import requests
 from datetime import datetime
 
+RETRY_MINUTES = 5
+
 #regex to match urls that aren't allowed domains
 urlregex = r"(\.jpg|\.jpeg|\.png|\.gif|\.gifv|\.apng|\.tiff|\.bmp|\.xcf)$"
 #regex for all the allowed domains
@@ -800,7 +802,11 @@ def main():
             search_for_places(r)
         except praw.errors.HTTPException:
             print("Reddit is down. Sleeping...")
-            time.sleep(360)
+            time.sleep(60 * RETRY_MINUTES)
+            continue
+        except requests.exceptions.ReadTimeout:
+            print("Timed out reading Reddit. Sleeping...")
+            time.sleep(60 * RETRY_MINUTES)
             continue
         except requests.exceptions.ConnectionError:
             print("Bad response from server. Restarting loop...")
