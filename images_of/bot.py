@@ -134,6 +134,10 @@ class Bot:
                 LOG.debug(e)
                 sleep(60 * RETRY_MINUTES)
                 continue
+            except requests.ReadTimeout as e:
+                LOG.warning('Timed out reading Reddit data. Sleeping.')
+                sleep(60 * RETRY_MINUTES)
+                continue
             except requests.ConnectionError as e:
                 LOG.warning('Connection failed - trying again.')
                 continue
