@@ -3,11 +3,14 @@ import re
 from collections import deque
 from datetime import datetime
 
+import requests
 from praw.helpers import submission_stream
-from praw.errors import AlreadySubmitted, APIException
+from praw.errors import AlreadySubmitted, APIException, HTTPException
 
 from images_of import settings
 from images_of.subreddit import Subreddit
+
+RETRY_MINUTES = 3
 
 class Bot:
     def __init__(self, r, should_post=True):
@@ -97,25 +100,42 @@ class Bot:
             logging.warning(e)
         
 
-    def check_age(self, post):
+    def verify_age(self, post):
+        if hasattr(post, 'age_verified'):
+            return True
+
         created = datetime.utcfromtimestamp(post.author.created_utc)
         age = (datetime.utcnow() - created).days
-        return age > 2
+        if age > 2:
+            post.age_verified = True
+            return True
+        return False
 
+    def _do_post(self, post):
+        if not self.check(post):
+            return
+
+        for sub in self.subreddits:
+            if sub.check(post):
+                if not self.verify_age(post):
+                    return
+                self.crosspost(post, sub)
 
     def run(self):
         stream = submission_stream(self.r, 'all', verbosity=0)
-        for post in stream:
-            if not self.check(post):
+
+        while True:
+            try:
+                for post in stream:
+                    self._do_post(post)
+            except HTTPException as e:
+                logging.warning('Reddit is down. Sleeping.')
+                logging.debug(e)
+                sleep(60 * RETRY_MINUTES)
+                continue
+            except requests.ConnectionError as e:
+                logging.warning('Connection failed - trying again.')
                 continue
 
-            age_ok = None
-            for sub in self.subreddits:
-                if sub.check(post):
-                    if age_ok is None:
-                        age_ok = self.check_age(post)
-                    
-                    if not age_ok:
-                        break
+            logging.warning('Stream ended. Restarting.')
 
-                    self.crosspost(post, sub)
