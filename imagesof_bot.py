@@ -2,6 +2,7 @@ import os
 import time
 import praw
 import re
+import requests
 from datetime import datetime
 
 #regex to match urls that aren't allowed domains
@@ -794,11 +795,18 @@ def main():
     indiasubredditblacklist_wiki = r.get_wiki_page("ImagesOfIndia","subredditblacklist")
     indiasubredditblacklist = set([name.strip().lower()[3:] for name in indiasubredditblacklist_wiki.content_md.split("\n") if name.strip() != ""])
 
-    try:
-        search_for_places(r) 
-    except praw.errors.HTTPException:
-        print("Reddit is down. Sleeping...")
-        time.sleep(360)
+    while True:
+        try:
+            search_for_places(r)
+        except praw.errors.HTTPException:
+            print("Reddit is down. Sleeping...")
+            time.sleep(360)
+            continue
+        except requests.exceptions.ConnectionError:
+            print("Bad response from server. Restarting loop...")
+            continue
+
+        print("Submission stream ended. Restarting...")
 
 
 if __name__ == '__main__':
