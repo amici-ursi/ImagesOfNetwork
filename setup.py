@@ -21,6 +21,7 @@ setup(
             "ion_expand = images_of.entrypoints.expand:main",
             "ion_setup_oauth = images_of.entrypoints.oauth:main",
             "ion_bot = images_of.entrypoints.bot:main",
+            "ion_invite_mods = images_of.entrypoints.invite_mods:main",
         ],
     },
 )
