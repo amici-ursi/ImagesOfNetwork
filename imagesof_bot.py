@@ -613,6 +613,7 @@ def search_for_places(r):
             goodregex = r"(\busa\b|\bamerican?s?\b|\bmurica\b|\bunited states\b)",
             badregex = r"(\b(north|central|south|captain) (american?s?|murica)\b|\bamerican cheese\b)",
             postinto = 'imagesofusa',
+            smallsubredditblacklist = {'adviceanimals', 'vexillology', 'forwardsfromgrandma'}
             getfromthese = {'unitedstatesofamerica'}
             )
     #utah
