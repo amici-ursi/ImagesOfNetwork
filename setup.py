@@ -29,6 +29,6 @@ setup(
     },
 
     data_files = [
-        ('images_of', 'data/settings.default.toml'),
+        ('images_of', 'data/*.toml'),
     ],
 )

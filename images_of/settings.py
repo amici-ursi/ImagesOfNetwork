@@ -21,10 +21,10 @@ def _conf_get(conf, *args, default=None):
 
 class Settings:
     def __init__(self):
-        conf = pkg_resources.resource_string(__name__, 'data/settings.default.toml')
+        conf = pkg_resources.resource_string(__name__, 'data/settings.toml')
         self.loads(conf)
 
-        self._try_load(os.path.expanduser('~/.config/ion.toml'))
+        self._try_load(os.path.expanduser('~/.config/ion/settings.toml'))
         self._try_load('ion.toml')
 
     def _try_load(self, fname):

@@ -69,12 +69,12 @@ domains = [
 # Template:
 #
 # [slave.{SUB_NAME}]
-# search = []
-# ignore = []
-# ignore-case = []
-# whitelist = []
-# blacklist = []
-# wiki-blacklist = false
+# search = []			# regexes for title search
+# ignore = []			# regexes for title search
+# ignore-case = []		# case-sensitive regexes for title search
+# whitelist = []		# list of subreddits to search, regardless of tiltle
+# blacklist = []		# list of subreddits never to accept from
+# wiki-blacklist = false	# does this sub use a wiki page for blacklist?
 
 [slave.imagesofafghanistan]
 search = [
