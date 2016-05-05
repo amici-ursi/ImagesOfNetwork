@@ -14,6 +14,7 @@ setup(
     install_requires = [
         "click",
         "praw==3.4",
+        "pytoml",
     ],
 
     entry_points = {
@@ -26,4 +27,8 @@ setup(
             "ion_bulkmail = images_of.entrypoints.bulkmail:main",
         ],
     },
+
+    data_files = [
+        ('images_of', 'data/settings.default.toml'),
+    ],
 )

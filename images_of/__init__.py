@@ -29,9 +29,5 @@ OAUTH_SCOPE = [
         'wikiread',
 ]
 
-try:
-    from . import local_settings as settings
-except ImportError:
-    from . import settings
-
+from .settings import settings
 from .connect import Reddit
