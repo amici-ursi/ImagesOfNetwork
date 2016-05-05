@@ -78,7 +78,12 @@ class Settings:
             old_slaves.update(slaves)
             slaves = old_slaves
 
-        self.SLAVE_SUBS = [{'name': k, **v} for k, v in slaves.items()]
+        new_slaves = []
+        for k, v in slaves.items():
+            v.update({'name': k})
+            new_slaves.append(v)
+
+        self.SLAVE_SUBS = new_slaves
 
 
     USERNAME = ""
