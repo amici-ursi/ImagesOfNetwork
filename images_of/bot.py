@@ -2,6 +2,7 @@ import logging
 import re
 from collections import deque
 from datetime import datetime
+from time import sleep
 
 import requests
 from praw.helpers import submission_stream
@@ -10,7 +11,7 @@ from praw.errors import AlreadySubmitted, APIException, HTTPException
 from images_of import settings
 from images_of.subreddit import Subreddit
 
-RETRY_MINUTES = 3
+RETRY_MINUTES = 2
 LOG = logging.getLogger(__name__)
 
 class Bot:
@@ -73,6 +74,9 @@ class Bot:
 
         log_entry = (post.url, sub.name)
         if log_entry in self.recent_posts:
+            # put it back at the end of the queue
+            self.recent_posts.remove(log_entry)
+            self.recent_posts.append(log_entry)
             LOG.info('Already posted {} to /r/{}. Skipping.'.format(title, sub.name))
             return
         else:
@@ -136,10 +140,12 @@ class Bot:
                 continue
             except requests.ReadTimeout as e:
                 LOG.warning('Timed out reading Reddit data. Sleeping.')
+                LOG.debug(e)
                 sleep(60 * RETRY_MINUTES)
                 continue
             except requests.ConnectionError as e:
-                LOG.warning('Connection failed - trying again.')
+                LOG.warning('Connection failed. Restarting.')
+                LOG.debug(e)
                 continue
 
             LOG.warning('Stream ended. Restarting.')
