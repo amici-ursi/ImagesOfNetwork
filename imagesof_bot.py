@@ -230,6 +230,7 @@ def search_for_places(r):
             submission = post,
             goodregex = r"(\biceland\b)",
             postinto = 'imagesoficeland',
+            smallsubredditblacklist = {'reykjaviktory'},
             getfromthese = {'iceland', 'island', 'klakinn'}
             )
     #idaho
