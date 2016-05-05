@@ -127,26 +127,20 @@ class Bot:
                 self.crosspost(post, sub)
 
     def run(self):
-        stream = submission_stream(self.r, 'all', verbosity=0)
-
         while True:
+            stream = submission_stream(self.r, 'all', verbosity=0)
+
             try:
                 for post in stream:
                     self._do_post(post)
             except HTTPException as e:
-                LOG.warning('Reddit is down. Sleeping.')
-                LOG.debug(e)
-                sleep(60 * RETRY_MINUTES)
-                continue
+                LOG.error('{}: {}'.format(type(e), e))
             except requests.ReadTimeout as e:
-                LOG.warning('Timed out reading Reddit data. Sleeping.')
-                LOG.debug(e)
-                sleep(60 * RETRY_MINUTES)
-                continue
+                LOG.error('{}: {}'.format(type(e), e))
             except requests.ConnectionError as e:
-                LOG.warning('Connection failed. Restarting.')
-                LOG.debug(e)
-                continue
+                LOG.error('{}: {}'.format(type(e), e))
+            else:
+                LOG.error('Stream ended.')
 
-            LOG.warning('Stream ended. Restarting.')
-
+            LOG.info('Sleeping for {} minutes.'.format(RETRY_MINUTES))
+            sleep(60 * RETRY_MINUTES)
