@@ -56,6 +56,9 @@ class Settings:
         self.WIKI_PAGES = _conf_get(conf, 'network', 'wiki-pages', default=self.WIKI_PAGES)
         self.NSFW_OK = _conf_get(conf, 'network', 'nsfw', default=self.NSFW_OK)
 
+        self.DOMAINS = _conf_get(conf, 'posts', 'domains', default=self.DOMAINS)
+        self.EXTENSIONS = _conf_get(conf, 'posts', 'extensions', default=self.EXTENSIONS)
+
         self.MASTER_SUB = _conf_get(conf, 'master', 'name', default=self.MASTER_SUB)
 
         update_slaves = _conf_get(conf, 'update_slaves', default=False)
