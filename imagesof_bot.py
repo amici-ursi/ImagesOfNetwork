@@ -370,9 +370,10 @@ def search_for_places(r):
         swim(r,
             submission = post,
             goodregex = r"(\bmichigan\b|\bmackina[wc]\b|\bu\.p\.\b|\bmichigander\b|\beuchre\b|\bdetroit\b|\bmitten\bstate\b)",
-            badregex = r"(\bmichigan city\b)",
+            badregex = r"(\bmichigan city\b|\bmichigan ave(nue)?\b)",
             postinto = 'imagesofmichigan',
-            getfromthese = {'michigan', 'annarbor', 'battlecreek', 'bentonharbor', 'birminghammi', 'centerline', 'detroit', 'downriver', 'ferndale', 'flint', 'grandhavenmi', 'grandrapids', 'grossepointe', 'hamtramck', 'harborsprings', 'hollandmichigan', 'imlaycity', 'jacksonmi', 'kzoo', 'lansing', 'livonia', 'midland_mi', 'monroemi', 'muskegon', 'newaygocounty', 'nwmi', 'pentwater', 'petosky', 'plymouthmi', 'porthuron', 'rochesterhills', 'royaloak', 'saginaw', 'st_joseph', 'traversecity', 'yooper', 'ypsi', 'aquinas', 'bakercollege', 'calvincollege', 'centralmich', 'emu', 'ferrisstateuniversity', 'gvsu', 'kettering', 'msu', 'mtu', 'nmu', 'uofm', 'wmu', 'waynestate'}
+            getfromthese = {'michigan', 'annarbor', 'battlecreek', 'bentonharbor', 'birminghammi', 'centerline', 'detroit', 'downriver', 'ferndale', 'flint', 'grandhavenmi', 'grandrapids', 'grossepointe', 'hamtramck', 'harborsprings', 'hollandmichigan', 'imlaycity', 'jacksonmi', 'kzoo', 'lansing', 'livonia', 'midland_mi', 'monroemi', 'muskegon', 'newaygocounty', 'nwmi', 'pentwater', 'petosky', 'plymouthmi', 'porthuron', 'rochesterhills', 'royaloak', 'saginaw', 'st_joseph', 'traversecity', 'yooper', 'ypsi', 'aquinas', 'bakercollege', 'calvincollege', 'centralmich', 'emu', 'ferrisstateuniversity', 'gvsu', 'kettering', 'msu', 'mtu', 'nmu', 'uofm', 'wmu', 'waynestate'},
+            smallsubredditblacklist = {'vexillology', 'edc', 'trees' }
             )
     #minnesota
         swim(r,
