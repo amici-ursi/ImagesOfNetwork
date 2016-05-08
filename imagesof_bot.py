@@ -167,6 +167,13 @@ def search_for_places(r):
             postinto = 'imagesofdelaware',
             getfromthese = {'delaware', 'fireflyfestival', 'udel', 'wilmingtonde', 'delawarepolitics', 'newarkde', 'hopheadsde', 'delawarent', 'hirede', 'bikede', 'delaware4sanders', 'deguns', 'netde', 'motde', 'delawareamiibo', 'delmoto', 'slowerlower', 'asylum13'}
             )
+    #egypt
+        swim(r,
+            submission = post,
+            goodregex = r"(\begypt\b|\bcairo\b|\bsharm el-sheikh\b|\bhurghada\b|\bluxor\b|\bmarsa alam\b|\balexandria\b|\baswan\b|\bdahab\b|\btaba\b|\bgiza\b|\bel gouna\b|\bras muhammad\b|\bsafaga\b|\bsiwa oasis\b|\bmersa matruh\b|\bport said\b|\bel alamein\b|\bfaiyum\b|\bnuweiba\b|\bfarafra\b|\b6th of october city\b|\bain sukhna\b|\bberenice troglodytica\b|\bismailia\b|\brafah\b|\bbahariya oasis\b|\bsuez\b|\barish\b|\bminya\b|\bras sedr\b|\bhelwan\b|\bqena\b|\brosetta (?!stone)\b|\bras el bar\b|\babu qir\b|\babydos\b|\bedfu\b|\bfustat\b|\bdahshur\b|\besna\b|\bwadi elrayan\b|\bel matareya\b|\basyut\b|\blake mariout\b|\bbaltim\b|\bmansoura\b|\bvalley of the kings\b|\bkarnak\b|\bkhan el-khalili\b|\bmosque of muhammad ali\b|\bpyramid of khafre\b|\bdeir el-bahari\b|\bphilae\b|\bal-azhar park\b|\bmedinet habu\b|\bpyramid of djoser\b|\bmosque of ibn tulun\b|\bmount sinai\b|\b|\bthe hanging church\b|\bcolossi of memnon\b|\blibrary of alexandria\b|\bsaint catherine's monastery\b|\bal-azhar mosque\b|\bcoptic museum\b|\belephantine\b|\bvalley of the queens\b|\bcitadel of qaitbay\b|\bmontaza palace\b|\bpompey's pillar\b|\babu al-abbas al-mursi mosque\b|\btemple of edfu\b|\bmosque-madrassa of sultan hassan\b|\bunfinished obelisk\b|\bpyramid of menkaure\b|\bras muhammad national park\b|\bnaama bay\b|\btemple of kom ombo\b|\bcairo opera house\b|\bal-hussein mosque\b|\babdeen palace\b|\bkhufu ship\b|\bgezira island\b|\bramesseum\b|\bdeir el-medina\b|\bprecinct of amun-re\b)",
+            postinto = 'imagesofegypt',
+            getfromthese = {'egypt', 'egyptpics'}
+            )
     #england
         swim(r,
             submission = post,
