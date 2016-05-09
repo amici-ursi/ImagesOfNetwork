@@ -582,7 +582,7 @@ def search_for_places(r):
         swim(r,
             submission = post,
             goodregex = r"(\bsyria\b|\bdamascus\b|\baleppo\b|\blattakia\b|\bpalmyra\b|\btartus\b|\bkilis\b|\bkessab\b|\bal-raqqah\b|\bal-zabadani\b|\bhoms\b|\bas-suwayda\b|\bbaniyas\b|\bhama\b|\bmasyaf\b|\bmarmarita\b|\bbosra\b|\bmajdal shams\b|\bsafita\b|\bnimrod fortress\b|\bayn al-arab\b|\bmal'loula\b|\bdaraa\b|\bdeir ez-zor\b|\bafrin\b|\bidlib\b|\bal-hasakah\b|\bsaidnaya\b|\bal-qamishli\b|\bsayyidah zaynab\b|\bsalah ed-din\b|\blake assad\b|\bjaramana\b|\bjableh\b|\byabroud\b|\bharasta\b|\bras al-ayn\b|\bal-hasakah governorate\b|\bmashta al-helu\b|\blake homs\b|\byaafour\b)",
-            badregex = r"(\bdamascus steel\b)",
+            badregex = r"(\bdamascus.*steel\b)",
             smallsubredditblacklist = {'knifemaking', 'knifeclub', 'knives', 'knifeporn', 'bladesmith'},
             postinto = 'imagesofsyria',
             getfromthese = {'syria', 'syriancivilwar'}
