@@ -46,6 +46,18 @@ class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
 @click.option('-h', '--host', default='127.0.0.1', help='hostname to listen on')
 @click.option('-p', '--port', default=65010, type=int, help='port to listen on')
 def main(host, port):
+    """
+    Get an oauth Refresh Token with the appropriate priveledges
+    to run the ion_ family of scripts.
+
+    You should have a settings.toml containing your client-id and
+    client-secret, and possibly a redirect-uri if you've used a different
+    one than the default,  prior running this script.
+
+    Note that the host and port specified should match the configured
+    redirect-uri.
+    """
+
     # Step 1: Prop up a web server.
     q = Queue()
 
