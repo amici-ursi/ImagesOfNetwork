@@ -579,6 +579,13 @@ def search_for_places(r):
             postinto = 'imagesofsouthdakota',
             getfromthese = {'southdakota'}
             )
+    #singapore
+        swim(r,
+            submission = post,
+            goodregex = r"(\bsingapore\b|\bmerlion\b|\bmarina bay sands\b|\bsentosa\b|\bclarke quay\b|\besplanade\b|\borchard road\b)",
+            postinto = 'imagesofsingapore',
+            getfromthese = {'singapore'}
+            )
     #syria
         swim(r,
             submission = post,
