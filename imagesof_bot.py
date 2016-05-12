@@ -90,7 +90,7 @@ def search_for_places(r):
     #belize
         swim(r,
             submission = post,
-            goodregex = r"(\bbelize\b|\bambergris caye\b|\bcaye caulker\b|\bxunantunich\b|\blamanai\b|\bgreat blue hole\b|\bcaracol\b|\bactun tunichil muknal\b|\bcockscomb basin\b|\bhol chan\b|\bsan ignacio resort\b|\bbaron bliss light\b|\bguanacastle national park\b|\bplacencia\b|\bsan ignacio\b|\bbelmopan\b|\bpunta gorda\b|corozal town\b|\bdangriga\b|\borange walk town\b|\bcrooked tree wildlife sanctuary\b|\bmountain pine ridge forest reserve\b|\bbenque viejo del carmen\b|\bcaye chapel\b|\bladyville\b|\bs(ain)?t herman's blue hole\b|\brio bravo conservation\b|\bspanish lookout\b|\bturneffe atoll\b|\bcorozal bay\b|\bhattieville\b|\broaring creek\b|\bindependence and mango creek\b|\brockstone pond\b|\bla democracia\b)",
+            goodregex = r"(\bbelize\b|\bambergris caye\b|\bcaye caulker\b|\bxunantunich\b|\blamanai\b|\bgreat blue hole\b|\bcaracol\b|\bactun tunichil muknal\b|\bcockscomb basin\b|\bhol chan\b|\bsan ignacio resort\b|\bbaron bliss light\b|\bguanacastle national park\b|\bplacencia\b|\bsan ignacio\b|\bbelmopan\b|\bcorozal town\b|\bdangriga\b|\borange walk town\b|\bcrooked tree wildlife sanctuary\b|\bmountain pine ridge forest reserve\b|\bbenque viejo del carmen\b|\bcaye chapel\b|\bladyville\b|\bs(ain)?t herman's blue hole\b|\brio bravo conservation\b|\bspanish lookout\b|\bturneffe atoll\b|\bcorozal bay\b|\bhattieville\b|\broaring creek\b|\bindependence and mango creek\b|\brockstone pond\b|\bla democracia\b)",
             postinto = "imagesofbelize",
             getfromthese = {'belize', 'belizepics'}
             )
