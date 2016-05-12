@@ -52,7 +52,7 @@ class Bot:
         # 'author' comes up as None.
         try:
             user = post.author.name.lower()
-        except AttributError as e:
+        except AttributeError as e:
             logging.error('{}: {}'.format(post.url, e))
             return False
 
