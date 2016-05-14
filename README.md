@@ -9,6 +9,8 @@ Laying out the steps for getting it running here.
 ### Install package
 
 ```
+$ git clone git@github.com:amici-ursi/ImagesOfNetwork.git
+$ cd ImagesOfNetwork
 $ virtualenv -v venv-ion -p python3
 $ source venv-ion/bin/activate
 $ python setup.py install
