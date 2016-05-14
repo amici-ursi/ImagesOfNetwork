@@ -6,10 +6,21 @@ Tools for managing the ImagesOfNetwork on reddit
 
 Laying out the steps for getting it running here.
 
+### Install package
+
+```
+$ virtualenv -v venv-ion -p python3
+$ source venv-ion/bin/activate
+$ python setup.py install
+```
+
+NOTE: If you're developing rather than deploying, go ahead and use `python setup.py develop`
+instead. That way, as you make changes to the source, they'll get picked up as you go.
+
 ### Reddit
 
 These tools make extensive use of the Reddit API (duh), so lets make sure that
-that's all set up first. Head on over to your
+that's all set up. Head on over to your
 [apps preferences](https://www.reddit.com/prefs/apps/) and click the
 button to create a developer app. You should see 5 fields here.
 
@@ -17,33 +28,32 @@ button to create a developer app. You should see 5 fields here.
 - radio buttons: Make sure `script` is selected
 - description: Again just for you. You can even leave it blank.
 - about url: ditto
-- redirect url: This one's important for setting up OAuth. The suggested
-  path for these tools is `http://127.0.0.1:65010/authorize_callback`
+- redirect url: This one's important for setting up OAuth. The tools are
+  set up to use `http://127.0.0.1:65010/authorize_callback`
 
 Click create app, and note the series of digits under "personal use script".
 that's your client id. Also, you'll need to keep tabs on the value of `secret`.
 
-### local\_settings.py
+### Settings
 
-Now that we've got reddit ready for us, we need to configure our workspace.
-Go ahead and `cp images_of/local_settings.py.example images_of/local_settings.py`.
-This is where you'll keep all of your private settings at. Put your username and
-password in the appropriate fields, as well as the client-id and client-secret
-we got from reddit earlier. If you used a different redirect uri, you'll also need
-to add a field for that (REDIRECT\_URI).
-
-### Install package
-
-Now that reddit and the images\_of package are configured, it's time to install.
+Now that we've got reddit ready for us, we need to configure our program.
+Create an configuration file, either `ion.toml` in your working directory,
+or in `~/.config/ion/settings.toml`. This file will contain your api access
+information as well as any other settings overwriting the defaults. Here's a
+sample.
 
 ```
-$ virtualenv -v venv-imagesof -p python3
-$ source venv-imagesof/bin/activate
-$ python setup.py install
+[auth]
+username = 'your-username'
+password = 'your-password'
+
+client-id = 'your-client-id'
+client-secret = 'your-client-secret'
+refresh-token = 'your-refresh-token'
 ```
 
-NOTE: If you're developing rather than deploying, go ahead and use `python setup.py develop`
-instead. That way, as you make changes to the source, they'll get picked up as you go.
+If you don't have a refresh token yet, we'll set that up shortly, so don't worry
+about it. either leave it an empty string or just omit that line.
 
 ### OAuth
 
@@ -61,10 +71,10 @@ request on reddit, you can go ahead and close out of the browser, we're done wit
 The script should print out a line that looks something like
 
 ```
-REFRESH_TOKEN = '56208746x-eC0VB-j2J4T9JoD91xNqclWmGk'
+refresh-token = '56208746x-eC0VB-j2J4T9JoD91xNqclWmGk'
 ```
 
-Copy that line and stick it in your local\_settings.py. The scripts will use it, along
+Copy that line and stick it in your configuration file. The scripts will use it, along
 with the other information we got from reddit earlier to prove that it has permission
 to operate on your behalf.
 
@@ -110,14 +120,14 @@ ion_expand Topic
 Now watch it work it's magic. When it's done, you should have a nice, all prepared
 subreddit called NetworkNameTopic.
 
-If you're nervous about automagically creating subreddits, you can take a look at
-what it's going to do by using the `--dry-run flag`. We won't hit reddit, but it
+If you're nervous about automatically creating subreddits, you can take a look at
+what it's going to do by using the `--dry-run` flag. We won't hit reddit, but it
 should at least give you an idea of what's going to happen.
 
 Now we probably want to do something with it. It's time to move back to our settings
-file. In settings.py, you'll find a `SLAVE_SUBS` settings. Put your new subreddit
-there, with all the configuration you need. There's a template to give you an idea
-of how things work.
+file. In settings.toml, you'll find a number of [slave.subname] sections. Create a
+section for your new subreddit with all the configuration you need. There's a template
+to give you an idea of how things work.
 
 Note: reddit only allows subreddit creation once every 10 minutes or so. Don't get
 too excited, take your time. Maybe use the time between creations to make sure
@@ -143,15 +153,13 @@ bit of configuration to get you started, assuming you went ahead and used the
 virtualenv as instructed.
 
 ```
-[group:ion]
-programs=ion_bot
-directory=/path/to/ImagesOfNetwork
-
 [program:ion_bot]
-command=/path/to/ImagesOfNetwork/venv-imagesof/bin/ion_bot
-stderr_logfile=/var/log/ion_bot.log
+directory=/path/to/ImagesOfNetwork/
+command=/path/to/ImagesOfNetwork/venv-ion/bin/ion_bot
+stdout_logfile=/var/log/ion_bot.stdout.log
+stderr_logfile=/var/log/ion_bot.stderr.log
 ```
 
-Replace /path/to with the appropriate path, of course. Make sure supervisord
+Replace /path/to with the appropriate path. Make sure supervisord
 is set up and running. You can then use `supervisorctl` to check on the status
 of the daemon, and see what we're logging in the specified logfile.

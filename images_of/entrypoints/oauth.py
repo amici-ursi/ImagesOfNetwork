@@ -95,9 +95,9 @@ def main(host, port):
     LOG.info('Gathering access information.')
     access_info = r.get_access_information(code)
 
-    print("Write this down, y'hear!? Like put it in your local_settings.py")
+    print("Write this down, now! Put it in your ion.toml or settings.toml")
     print()
-    print("REFRESH_TOKEN = '{}'".format(access_info['refresh_token']))
+    print("refresh-token = '{}'".format(access_info['refresh_token']))
 
 if __name__ == '__main__':
     main()
