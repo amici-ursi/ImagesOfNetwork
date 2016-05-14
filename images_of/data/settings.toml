@@ -625,6 +625,7 @@ search = [
     'caye chapel',
     'cockscomb basin',
     'corozal bay',
+    'corozal town',
     'crooked tree wildlife sanctuary',
     'dangriga',
     'great blue hole',
@@ -638,14 +639,12 @@ search = [
     'mountain pine ridge forest reserve',
     'orange walk town',
     'placencia',
-    'punta gorda\b|corozal town',
     'rio bravo conservation',
     'roaring creek',
     'rockstone pond',
     "s(ain)?t herman's blue hole",
     'san ignacio',
     'san ignacio resort',
-    'san pedro',
     'spanish lookout',
     'turneffe atoll',
     'xunantunich',
@@ -3781,6 +3780,20 @@ whitelist = [
     'scottishphotos',
 ]
 
+[slave.imagesofsingapore]
+search = [
+    'clarke quay',
+    'esplanade',
+    'marina bay sands',
+    'merlion',
+    'orchard road',
+    'sentosa',
+    'singapore',
+]
+whitelist = [
+    'singapore',
+]
+
 [slave.imagesofsouthcarolina]
 search = [
     'south carolina',
@@ -4529,6 +4542,9 @@ whitelist = [
     'dcphotography',
     'washingtondc',
 ]
+blacklist = [
+    'forwardsfromgrandma',
+]
 
 [slave.imagesofwestvirginia]
 search = [
@@ -4637,6 +4653,7 @@ search = [
     'wisconsin',
 ]
 ignore = [
+    'madison pettis',
     'wisconsin ave.*',
     'wisconsin blvd',
 ]
@@ -4693,6 +4710,8 @@ blacklist = [
     'spiders',
     'tattoos',
     'trees',
+    'whatisthisthing',
+    'whatsthisbird',
     'whatsthisbug',
     'whatsthisplant',
 ]
