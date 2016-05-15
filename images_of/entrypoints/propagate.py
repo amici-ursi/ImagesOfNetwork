@@ -71,9 +71,10 @@ def copy_wiki_page(r, page, dom, subs, force):
 @click.command()
 @click.option('--automod', is_flag=True,
               help='Copy automod settings. This is an alias for \'--wiki config/automoderator\'')
+@click.option('--toolbox', is_flag=True, help='Copy toolbox settings')
 @click.option('--wiki', multiple=True, help='Wiki page to copy')
 @click.option('-f', '--force', is_flag=True, help='Overwrite even if section tags not found')
-def main(automod, wiki, force):
+def main(automod, toolbox, wiki, force):
     """Propigate settings across the network"""
 
     dom = settings.MASTER_SUB
@@ -89,6 +90,12 @@ def main(automod, wiki, force):
 
     for page in wiki:
         copy_wiki_page(r, page, dom, subs, force)
+
+    if toolbox:
+        page = 'toolbox'
+        content = r.get_wiki_page(dom, page).content_md
+        for sub in subs:
+            r.edit_wiki_page(sub, page, content)
 
 if __name__ == '__main__':
     main()
