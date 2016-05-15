@@ -8,7 +8,7 @@ import requests
 from praw.helpers import submission_stream
 from praw.errors import AlreadySubmitted, APIException, HTTPException
 
-from images_of import settings
+from images_of import settings, AcceptFlag
 from images_of.subreddit import Subreddit
 
 RETRY_MINUTES = 2
@@ -44,9 +44,18 @@ class Bot:
         return set(entries)
 
     def check(self, post):
-        """Check global conditions on a post"""
-        if not settings.NSFW_OK and post.over_18:
-            return False
+        """
+        Check global conditions on a post. Returns an `AcceptFlag` indicating
+        if the post should be accepted, denied, or the conditions under which
+        a subreddit may accept it.
+        """
+
+        ok_ret = AcceptFlag.OK
+        if post.over_18:
+            if not settings.NSFW_OK and settings.NSFW_WHITELIST_OK:
+                ok_ret = AcceptFlag.OK_IF_WHITELISTED
+            elif not settings.NSFW_OK:
+                return AcceptFlag.BAD
 
         # sometimes, we fail to load up the author information, in which case
         # 'author' comes up as None.
@@ -54,22 +63,22 @@ class Bot:
             user = post.author.name.lower()
         except AttributeError as e:
             logging.error('{}: {}'.format(post.url, e))
-            return False
+            return AcceptFlag.BAD
 
         if user in self.blacklist_users:
-            return False
+            return AcceptFlag.BAD
 
         sub = post.subreddit.display_name.lower()
         if sub in self.blacklist_subs:
-            return False
+            return AcceptFlag.BAD
 
         if self.domain_re.search(post.domain):
-            return True
+            return ok_ret
 
         if self.ext_re.search(post.url):
-            return True
+            return ok_ret
 
-        return False
+        return AcceptFlag.BAD
 
 
     def crosspost(self, post, sub):
@@ -101,6 +110,10 @@ class Bot:
                             captcha=None,
                             send_replies=True,
                             resubmit=False)
+            if post.over_18:
+                LOG.info('Marking NSFW')
+                if self.should_post:
+                    xpost.mark_as_nsfw()
 
             LOG.debug('Commenting: {}'.format(comment))
             if self.should_post:
@@ -124,11 +137,12 @@ class Bot:
         return False
 
     def _do_post(self, post):
-        if not self.check(post):
+        flag = self.check(post)
+        if flag is AcceptFlag.BAD:
             return
 
         for sub in self.subreddits:
-            if sub.check(post):
+            if sub.check(post, flag):
                 if not self.verify_age(post):
                     return
                 self.crosspost(post, sub)

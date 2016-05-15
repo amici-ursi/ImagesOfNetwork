@@ -3,7 +3,10 @@ import logging
 
 from praw.errors import Forbidden
 
+from images_of import AcceptFlag
+
 LOG = logging.getLogger(__name__)
+
 
 class Subreddit:
     def __init__(self, name, search, ignore=None, ignore_case=None, whitelist=[],
@@ -73,14 +76,19 @@ class Subreddit:
         self.blacklist = wiki_blacklist.union(self.blacklist)
         self.wiki_blacklist_loaded = True
 
-    def check(self, post):
+    def check(self, post, flag=AcceptFlag.OK):
         """See if post is appropriate for this subreddit"""
+
+        if flag is AcceptFlag.BAD:
+            return False
 
         title = post.title
         post_sub = post.subreddit.display_name.lower()
 
         if post_sub in self.whitelist:
             return True
+        if flag is AcceptFlag.OK_IF_WHITELISTED:
+            return False
         if post_sub in self.blacklist:
             return False
 

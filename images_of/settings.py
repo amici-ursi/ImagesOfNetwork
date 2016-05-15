@@ -55,6 +55,8 @@ class Settings:
         self.DEFAULT_MODS = _conf_get(conf, 'network', 'mods', default=self.DEFAULT_MODS)
         self.WIKI_PAGES = _conf_get(conf, 'network', 'wiki-pages', default=self.WIKI_PAGES)
         self.NSFW_OK = _conf_get(conf, 'network', 'nsfw', default=self.NSFW_OK)
+        self.NSFW_WHITELIST_OK = _conf_get(conf, 'network', 'nsfw-whitelist',
+                                           default=self.NSFW_WHITELIST_OK)
 
         self.DOMAINS = _conf_get(conf, 'posts', 'domains', default=self.DOMAINS)
         self.EXTENSIONS = _conf_get(conf, 'posts', 'extensions', default=self.EXTENSIONS)
@@ -103,6 +105,7 @@ class Settings:
     DEFAULT_MODS = []
     WIKI_PAGES = []
     NSFW_OK = False
+    NSFW_WHITELIST_OK = True
 
     MASTER_SUB = ""
     SLAVE_SUBS = []

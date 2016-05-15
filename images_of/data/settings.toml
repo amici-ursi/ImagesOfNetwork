@@ -14,6 +14,7 @@ multireddit = 'ImagesOfPlaces'
 mods = ['AutoModerator', 'BotWatchman', 'amici_ursi']
 wiki-pages = ['config/automoderator', 'toolbox']
 nsfw = false
+nsfw-whitelist = true
 
 [master]
 name = 'imagesofnetwork'

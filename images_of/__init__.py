@@ -1,6 +1,7 @@
 import os
 import logging.config
 import pkg_resources
+import enum
 
 import pytoml as toml
 
@@ -51,6 +52,12 @@ OAUTH_SCOPE = [
         'wikiedit',
         'wikiread',
 ]
+
+@enum.unique
+class AcceptFlag(enum.Enum):
+    OK = 1
+    OK_IF_WHITELISTED = 2
+    BAD = 3
 
 from .settings import settings
 from .connect import Reddit
