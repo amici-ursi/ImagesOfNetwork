@@ -81,13 +81,16 @@ class Bot:
         return AcceptFlag.BAD
 
 
-    def crosspost(self, post, sub):
+    def crosspost(self, post, sub, match):
         title = post.title
         comment = '[Original post]({}) by /u/{} in /r/{}\n{}'.format(
                 post.permalink,
                 post.author,
                 post.subreddit,
-                settings.COMMENT_FOOTER)
+                settings.COMMENT_FOOTER.format(
+                    reason=match.reason,
+                    detail=match.detail
+                ))
 
         log_entry = (post.url, sub.name)
         if log_entry in self.recent_posts:
@@ -143,10 +146,11 @@ class Bot:
             return
 
         for sub in self.subreddits:
-            if sub.check(post, flag):
+            match = sub.check(post, flag)
+            if match:
                 if not self.verify_age(post):
                     return
-                self.crosspost(post, sub)
+                self.crosspost(post, sub, match)
 
     def run(self):
         while True:

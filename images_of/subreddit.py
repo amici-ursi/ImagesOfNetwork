@@ -8,6 +8,12 @@ from images_of import AcceptFlag
 LOG = logging.getLogger(__name__)
 
 
+class Match:
+    def __init__(self, reason, detail):
+        self.reason = reason
+        self.detail = detail
+
+
 class Subreddit:
     def __init__(self, name, search, ignore=None, ignore_case=None, whitelist=[],
                  blacklist=[], wiki_blacklist=False, **kwargs):
@@ -80,25 +86,27 @@ class Subreddit:
         """See if post is appropriate for this subreddit"""
 
         if flag is AcceptFlag.BAD:
-            return False
+            return
 
         title = post.title
         post_sub = post.subreddit.display_name.lower()
 
         if post_sub in self.whitelist:
-            return True
+            return Match('whitelist', post_sub)
         if flag is AcceptFlag.OK_IF_WHITELISTED:
-            return False
+            return
         if post_sub in self.blacklist:
-            return False
+            return
 
 
         if self.ignore_case_re and self.ignore_case_re.search(title):
-            return False
+            return
         if self.ignore_re and self.ignore_re.search(title):
-            return False
-        if self.search_re.search(title):
-            return True
+            return
 
-        return False
+        match = self.search_re.search(title)
+        if match:
+            return Match('match', match.group())
+
+        return
 
