@@ -67,13 +67,13 @@ class Subreddit:
         try:
             LOG.info('Loading wiki blacklist for /r/{}'.format(self.name))
             content = r.get_wiki_page(self.name, 'subredditblacklist').content_md
-            subs = set(sub for sub in content.splitlines() if sub)
+            subs = set(sub.strip().lower()[3:] for sub in content.splitlines() if sub)
             wiki_blacklist = subs.union(self.blacklist)
         except Forbidden:
             LOG.warning('Forbidden from reading blacklist on /r/{}'.format(self.name))
             wiki_blacklist = set()
 
-        self.blacklist = wiki_blacklist.union(self.blacklist)
+        self.blacklist = sorted(wiki_blacklist.union(self.blacklist))
         self.wiki_blacklist_loaded = True
 
     def check(self, post, flag=AcceptFlag.OK):
