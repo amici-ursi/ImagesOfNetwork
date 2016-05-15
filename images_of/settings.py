@@ -57,7 +57,7 @@ class Settings:
         self.NSFW_OK = _conf_get(conf, 'network', 'nsfw', default=self.NSFW_OK)
         self.NSFW_WHITELIST_OK = _conf_get(conf, 'network', 'nsfw-whitelist',
                                            default=self.NSFW_WHITELIST_OK)
-
+        self.COMMENT_FOOTER = _conf_get(conf, 'network', 'comment-footer', default=self.COMMENT_FOOTER)
         self.DOMAINS = _conf_get(conf, 'posts', 'domains', default=self.DOMAINS)
         self.EXTENSIONS = _conf_get(conf, 'posts', 'extensions', default=self.EXTENSIONS)
 
@@ -106,6 +106,7 @@ class Settings:
     WIKI_PAGES = []
     NSFW_OK = False
     NSFW_WHITELIST_OK = True
+    COMMENT_FOOTER = ""
 
     MASTER_SUB = ""
     SLAVE_SUBS = []

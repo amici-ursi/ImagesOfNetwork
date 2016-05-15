@@ -15,6 +15,17 @@ mods = ['AutoModerator', 'BotWatchman', 'amici_ursi']
 wiki-pages = ['config/automoderator', 'toolbox']
 nsfw = false
 nsfw-whitelist = true
+comment-footer = """
+
+&nbsp;
+
+---
+
+^(This crosspost was performed automatically as a part of the ImagesOfNetwork.)
+[^(Learn more about the ImagesOfNetwork, how you can help, and other Frequently Asked Questions)](https://www.reddit.com/r/imagesofnetwork/wiki/faqandinstructions#wiki_what_is_images_of.3F)^, ^or [^(visit us on Discord!)](https://discordapp.com/invite/0tZsejLgM2vzaExR)
+
+^([)[^("Remove my post!")](https://www.reddit.com/r/imagesofnetwork/wiki/faqandinstructions#wiki_remove_my_post) ^| [^("The bot got this one wrong!")](https://www.reddit.com/r/imagesofnetwork/wiki/faqandinstructions#wiki_the_bot_got_this_one_wrong) ^| [^("Stop Crossposting My Stuff!")](https://www.reddit.com/r/imagesofnetwork/wiki/faqandinstructions#wiki_no_really._don.27t_ever_crosspost_me_or_my_subreddit.)  ^(])
+"""
 
 [master]
 name = 'imagesofnetwork'
@@ -66,6 +77,7 @@ domains = [
     'upload.wikimedia\.org',
     'i\.reddituploads\.com',
 ]
+
 
 # Template:
 #

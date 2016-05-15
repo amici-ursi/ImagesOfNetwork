@@ -83,10 +83,11 @@ class Bot:
 
     def crosspost(self, post, sub):
         title = post.title
-        comment = '[Original post]({}) by /u/{} in /r/{}'.format(
+        comment = '[Original post]({}) by /u/{} in /r/{}\n{}'.format(
                 post.permalink,
                 post.author,
-                post.subreddit)
+                post.subreddit,
+                settings.COMMENT_FOOTER)
 
         log_entry = (post.url, sub.name)
         if log_entry in self.recent_posts:
