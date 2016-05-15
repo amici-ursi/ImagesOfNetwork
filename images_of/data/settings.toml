@@ -11,7 +11,7 @@ redirect-uri = 'http://127.0.0.1:65010/authorize_callback'
 name = 'ImagesOf'
 multireddit = 'ImagesOfPlaces'
 
-mods = ['AutoModerator', 'BotWatchman']
+mods = ['AutoModerator', 'BotWatchman', 'amici_ursi']
 wiki-pages = ['config/automoderator', 'toolbox']
 nsfw = false
 

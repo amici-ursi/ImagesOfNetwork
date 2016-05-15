@@ -25,6 +25,7 @@ setup(
             "ion_propigate = images_of.entrypoints.propigate:main",
             "ion_invite_mods = images_of.entrypoints.invite_mods:main",
             "ion_bulkmail = images_of.entrypoints.bulkmail:main",
+            "ion_audit_mods = images_of.entrypoints.audit_mods:main",
         ],
     },
 
