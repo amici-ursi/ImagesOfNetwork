@@ -2911,11 +2911,15 @@ search = [
     'tulum',
 ]
 ignore = [
+    'donald',
     'new mexico',
+    'trump',
 ]
 whitelist = [
     'fotosmexico',
+    'mexicanhistory',
     'mexico',
+    'mexicolindo',
 ]
 
 [slave.imagesofmichigan]
