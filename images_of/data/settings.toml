@@ -2899,16 +2899,30 @@ whitelist = [
 
 [slave.imagesofmexico]
 search = [
-    'Canc(ú|u)n',
+    'aguascalientes',
+    'baja california',
     'cabo san lucas',
+    'canc(ú|u)n',
     'chapultepec castle',
     'chichen itza',
+    'chiapas',
+    'chihuahua',
     'coba',
+    'd.f.',
+    'estado de m(é|e)xico',
+    'guanajuato',
     'mexico',
     'museo nacional de antropolog(í|i)a',
+    'oaxaca',
+    'quer(é|e)taro',
     'playa del carmen',
+    'puebla',
     'puerto vallarta',
+    'sinaloa',
     'tulum',
+    'veracruz',
+    'yucat(á|a)n',
+    'zacatecas',
 ]
 ignore = [
     'donald',
