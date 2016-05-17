@@ -16,7 +16,6 @@ def main():
                .format(settings.NETWORK_NAME, settings.USERNAME))
     r.oauth()
 
-    orig_blacklist = get_user_blacklist(r)
     add_users = set()
 
     sub = settings.MASTER_SUB
@@ -26,6 +25,8 @@ def main():
     for m in [i for i in modmail_inbox if not i.replies]:
 
         if any('blacklist me' in i.lower() for i in (m.subject, m.body)):
+
+            orig_blacklist = get_user_blacklist(r)
 
             author = m.author.name.lower()
             if '/u/{}'.format(author) not in orig_blacklist:
