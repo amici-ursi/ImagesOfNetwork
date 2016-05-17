@@ -56,12 +56,12 @@ def copy_wiki_page(r, page, dom, subs, force):
         sub_content = r.get_wiki_page(sub, page).content_md
         parts = split_content(sub_content, start_delim, end_delim, not force)
 
-        new_content = ''.join(
+        new_content = ''.join([
                 parts[0],
                 start_delim,
                 parts[1],
                 end_delim,
-                parts[2])
+                parts[2]])
 
         LOG.debug('New content for /r/{}/wiki/{}: {}'.format(
                             sub, page, new_content))
