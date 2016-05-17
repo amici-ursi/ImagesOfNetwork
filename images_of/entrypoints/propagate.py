@@ -53,6 +53,7 @@ def copy_wiki_page(r, page, dom, subs, force):
     content = split_content(content, start_delim, end_delim, False, True)[1]
 
     for sub in subs:
+        LOG.info('Updating /r/{}/wiki/{}'.format(sub, page))
         sub_content = r.get_wiki_page(sub, page).content_md
         parts = split_content(sub_content, start_delim, end_delim, not force)
 
