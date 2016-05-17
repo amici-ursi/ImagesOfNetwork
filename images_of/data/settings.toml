@@ -4838,11 +4838,3 @@ whitelist = [
     'yemenpics',
 ]
 
-[slave.terlingua]
-search = [
-    'terlingua',
-]
-whitelist = [
-    'null',
-]
-
