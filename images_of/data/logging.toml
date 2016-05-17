@@ -24,3 +24,8 @@ handlers = ['default']
 level = 'INFO'
 propagate = false
 handlers = ['default', 'error']
+
+[loggers.__main__]
+level = 'INFO'
+propagate = false
+handlers = ['default', 'error']
