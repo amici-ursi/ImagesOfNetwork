@@ -85,7 +85,7 @@ def main(automod, toolbox, wiki, force):
 
     if automod:
         wiki = set(wiki)
-        wiki.update('config/automoderator')
+        wiki.update(['config/automoderator'])
         wiki = list(wiki)
 
     for page in wiki:
