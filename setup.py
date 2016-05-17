@@ -26,7 +26,7 @@ setup(
             "ion_invite_mods = images_of.entrypoints.invite_mods:main",
             "ion_bulkmail = images_of.entrypoints.bulkmail:main",
             "ion_audit_mods = images_of.entrypoints.audit_mods:main",
-            "ion_blacklist_requests = images_of.entrypoints.blacklist_requests.py:main",
+            "ion_blacklist_requests = images_of.entrypoints.blacklist_requests:main",
         ],
     },
 
