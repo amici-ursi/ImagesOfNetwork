@@ -39,7 +39,7 @@ def split_content(content, start_delim, end_delim, tags_required=True, case_inse
     if end_delim in content_match:
         start = content_match.find(end_delim)
         end = start + len(end_delim)
-        content, tail = content[:start] + content[end:]
+        content, tail = content[:start], content[end:]
 
     return (head, content, tail)
 
