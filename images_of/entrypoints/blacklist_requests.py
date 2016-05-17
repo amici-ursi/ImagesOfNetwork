@@ -50,13 +50,14 @@ def get_user_blacklist(r):
     dom = settings.MASTER_SUB
     page = 'userblacklist'
     dom_content = r.get_wiki_page(dom, page).content_md
-    orig_blacklist = set(dom_content.split())
+    orig_blacklist = dom_content.split()
 
-    return map(str.lower, orig_blacklist)
+    return set(map(str.lower, orig_blacklist))
 
 
 def update_user_blacklist(r, add_users, orig_blacklist):
-
+    dom = settings.MASTER_SUB
+    page = 'userblacklist'
     blacklist = set(orig_blacklist)
 
     LOG.debug('Original blacklist: {}'.format(orig_blacklist))
