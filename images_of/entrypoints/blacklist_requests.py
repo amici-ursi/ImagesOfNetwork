@@ -17,6 +17,7 @@ def main():
     r.oauth()
 
     add_users = set()
+    orig_blacklist = set()
 
     sub = settings.MASTER_SUB
 
@@ -26,7 +27,8 @@ def main():
 
         if any('blacklist me' in i.lower() for i in (m.subject, m.body)):
 
-            orig_blacklist = get_user_blacklist(r)
+            if not len(orig_blacklist):
+                orig_blacklist = get_user_blacklist(r)
 
             author = m.author.name.lower()
             if '/u/{}'.format(author) not in orig_blacklist:
@@ -37,13 +39,14 @@ def main():
                 LOG.info('User {} is already in blacklist; skipping'.format(m.author.name))
 
     if add_users:
-        update_user_blacklist(r, add_users)
+        update_user_blacklist(r, add_users, orig_blacklist)
     else:
         LOG.info('No new blacklist requests to process')
 
 
 def get_user_blacklist(r):
 
+    LOG.debug('Getting network blacklist...')
     dom = settings.MASTER_SUB
     page = 'userblacklist'
     dom_content = r.get_wiki_page(dom, page).content_md
@@ -52,12 +55,8 @@ def get_user_blacklist(r):
     return map(str.lower, orig_blacklist)
 
 
-def update_user_blacklist(r, add_users):
+def update_user_blacklist(r, add_users, orig_blacklist):
 
-    dom = settings.MASTER_SUB
-    page = 'userblacklist'
-
-    orig_blacklist = get_user_blacklist(r)
     blacklist = set(orig_blacklist)
 
     LOG.debug('Original blacklist: {}'.format(orig_blacklist))
