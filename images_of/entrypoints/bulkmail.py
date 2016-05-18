@@ -19,7 +19,7 @@ def main(subject, message):
     r = Reddit('{} Network Mailer v0.1 /u/{}'.format(settings.NETWORK_NAME, settings.USERNAME))
     r.oauth()
 
-    subs = ["/r/{}".format(sub['name']) for sub in settings.SLAVE_SUBS]
+    subs = ["/r/{}".format(sub['name']) for sub in settings.CHILD_SUBS]
     for sub in subs:
         print('Mailing {}'.format(sub))
         r.send_message(sub, subject, message)

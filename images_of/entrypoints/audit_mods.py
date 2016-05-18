@@ -12,11 +12,11 @@ def main(print_mods):
     r = Reddit('Moderator Auditor v0.1')
     r.oauth()
 
-    subs = sorted([sub['name'] for sub in settings.SLAVE_SUBS])
+    subs = sorted([sub['name'] for sub in settings.CHILD_SUBS])
     empty_subs = list()
     
     orphan_mods = dict()
-    s = r.get_subreddit(settings.MASTER_SUB)
+    s = r.get_subreddit(settings.PARENT_SUB)
     main_sub_mods = [u.name for u in s.get_moderators()]
     
     for sub in subs:
