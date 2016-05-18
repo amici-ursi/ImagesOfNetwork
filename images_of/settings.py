@@ -64,31 +64,43 @@ class Settings:
         self.PARENT_SUB = _conf_get(conf, 'parent', 'name', default=self.PARENT_SUB)
 
         update_children = _conf_get(conf, 'update_children', default=False)
-        children = _conf_get(conf, 'child')
-        if children is None:
-            return
+        self.CHILD_SUBS = self._load_group(conf, 'child', self.CHILD_SUBS, update_children)
 
-        fixed_children = {}
-        for name, vals in children.items():
-            fixed_children[name] = {}
+        update_cousins = _conf_get(conf, 'update_cousins', default=False)
+        self.COUSIN_SUBS = self._load_group(conf, 'cousin', self.COUSIN_SUBS, update_cousins)
+
+
+    def _load_group(self, conf, group, old_items, update=False):
+        # update indicates that we should update the group rather
+        # than overwrite it. This is useful for configurations
+        # outside the default that want to add subs instead of
+        # replace our defaults.
+
+        items = _conf_get(conf, group, default={})
+        if not items:
+            return old_items
+
+        fixed_items = {}
+        for name, vals in items.items():
+            fixed_items[name] = {}
             for k, v in vals.items():
                 nk = k.replace('-', '_')
-                fixed_children[name][nk] = children[name][k]
-        children = fixed_children
+                fixed_items[name][nk] = items[name][k]
+        items = fixed_items
 
-        if update_children:
-            old_children = {sub['name']: sub for sub in self.CHILD_SUBS}
-            for s in old_children:
+        if update:
+            old_items = {sub['name']: sub for sub in old_items}
+            for s in old_items:
                 del s['name']
-            old_children.update(children)
-            children = old_children
+            old_items.update(items)
+            items = old_items
 
-        new_children = []
-        for k, v in children.items():
+        new_items = []
+        for k, v in items.items():
             v.update({'name': k})
-            new_children.append(v)
+            new_items.append(v)
 
-        self.CHILD_SUBS = new_children
+        return new_items
 
 
     USERNAME = ""
@@ -110,6 +122,7 @@ class Settings:
 
     PARENT_SUB = ""
     CHILD_SUBS = []
+    COUSIN_SUBS = []
 
     EXTENSIONS = []
     DOMAINS = []
