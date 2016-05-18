@@ -22,9 +22,9 @@ def create_sub(r, sub):
 
 
 def copy_settings(r, sub, topic):
-    LOG.info('Copying settings from {}'.format(settings.MASTER_SUB))
+    LOG.info('Copying settings from {}'.format(settings.PARENT_SUB))
     if not DRY_RUN:
-        sub_settings = r.get_settings(settings.MASTER_SUB)
+        sub_settings = r.get_settings(settings.PARENT_SUB)
     else:
         sub_settings = {'title': settings.NETWORK_NAME}
 
@@ -79,12 +79,12 @@ def copy_wiki_pages(r, sub):
     for page in settings.WIKI_PAGES:
         LOG.info('Copying wiki page "{}"'.format(page))
         if not DRY_RUN:
-            content = r.get_wiki_page(settings.MASTER_SUB, page).content_md
+            content = r.get_wiki_page(settings.PARENT_SUB, page).content_md
             r.edit_wiki_page(sub, page, content=content, reason='Subreddit stand-up')
 
 
 def setup_flair(r, sub):
-    # XXX should this be copied from the master?
+    # XXX should this be copied from the parent?
     LOG.info('Setting up flair')
     if not DRY_RUN:
         r.configure_flair(sub,

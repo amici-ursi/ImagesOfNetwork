@@ -16,7 +16,7 @@ def main(print_mods):
     empty_subs = list()
     
     orphan_mods = dict()
-    s = r.get_subreddit(settings.MASTER_SUB)
+    s = r.get_subreddit(settings.PARENT_SUB)
     main_sub_mods = [u.name for u in s.get_moderators()]
     
     for sub in subs:

@@ -19,7 +19,7 @@ def main():
     add_users = set()
     orig_blacklist = set()
 
-    sub = settings.MASTER_SUB
+    sub = settings.PARENT_SUB
 
     modmail_inbox = r.get_mod_mail(sub)
 
@@ -47,7 +47,7 @@ def main():
 def get_user_blacklist(r):
 
     LOG.debug('Getting network blacklist...')
-    dom = settings.MASTER_SUB
+    dom = settings.PARENT_SUB
     page = 'userblacklist'
     dom_content = r.get_wiki_page(dom, page).content_md
     orig_blacklist = dom_content.split()
@@ -56,7 +56,7 @@ def get_user_blacklist(r):
 
 
 def update_user_blacklist(r, add_users, orig_blacklist):
-    dom = settings.MASTER_SUB
+    dom = settings.PARENT_SUB
     page = 'userblacklist'
     blacklist = set(orig_blacklist)
 

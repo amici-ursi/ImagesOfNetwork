@@ -78,7 +78,7 @@ def copy_wiki_page(r, page, dom, subs, force):
 def main(automod, toolbox, wiki, force):
     """Propigate settings across the network"""
 
-    dom = settings.MASTER_SUB
+    dom = settings.PARENT_SUB
     subs = [sub['name'] for sub in settings.CHILD_SUBS]
 
     r = Reddit('Copy Network Settings v0.1 /u/{}'.format(settings.USERNAME))
