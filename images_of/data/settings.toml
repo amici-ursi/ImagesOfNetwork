@@ -4842,7 +4842,5 @@ whitelist = [
 search = [
     'terlingua',
 ]
-whitelist = [
-    'null',
-]
+whitelist = []
 
