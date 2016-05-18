@@ -79,7 +79,7 @@ def main(automod, toolbox, wiki, force):
     """Propigate settings across the network"""
 
     dom = settings.MASTER_SUB
-    subs = [slave['name'] for slave in settings.SLAVE_SUBS]
+    subs = [sub['name'] for sub in settings.CHILD_SUBS]
 
     r = Reddit('Copy Network Settings v0.1 /u/{}'.format(settings.USERNAME))
     r.oauth()

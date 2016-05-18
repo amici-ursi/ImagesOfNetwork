@@ -19,7 +19,7 @@ def main(mods, defaults):
     r = Reddit('Mass Moderator Invite v0.1 /u/{}'.format(self.USERNAME))
     r.oauth()
 
-    subs = [sub['name'] for sub in settings.SLAVE_SUBS]
+    subs = [sub['name'] for sub in settings.CHILD_SUBS]
     for sub in subs:
         s = r.get_subreddit(sub)
         cur_mods = [u.name for u in s.get_moderators()]

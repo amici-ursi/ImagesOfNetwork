@@ -61,34 +61,34 @@ class Settings:
         self.DOMAINS = _conf_get(conf, 'posts', 'domains', default=self.DOMAINS)
         self.EXTENSIONS = _conf_get(conf, 'posts', 'extensions', default=self.EXTENSIONS)
 
-        self.MASTER_SUB = _conf_get(conf, 'master', 'name', default=self.MASTER_SUB)
+        self.PARENT_SUB = _conf_get(conf, 'parent', 'name', default=self.PARENT_SUB)
 
-        update_slaves = _conf_get(conf, 'update_slaves', default=False)
-        slaves = _conf_get(conf, 'slave')
-        if slaves is None:
+        update_children = _conf_get(conf, 'update_children', default=False)
+        children = _conf_get(conf, 'child')
+        if children is None:
             return
 
-        fixed_slaves = {}
-        for name, vals in slaves.items():
-            fixed_slaves[name] = {}
+        fixed_children = {}
+        for name, vals in children.items():
+            fixed_children[name] = {}
             for k, v in vals.items():
                 nk = k.replace('-', '_')
-                fixed_slaves[name][nk] = slaves[name][k]
-        slaves = fixed_slaves
+                fixed_children[name][nk] = children[name][k]
+        children = fixed_children
 
-        if update_slaves:
-            old_slaves = {sub['name']: sub for sub in self.SLAVE_SUBS}
-            for s in old_slaves:
+        if update_children:
+            old_children = {sub['name']: sub for sub in self.CHILD_SUBS}
+            for s in old_children:
                 del s['name']
-            old_slaves.update(slaves)
-            slaves = old_slaves
+            old_children.update(children)
+            children = old_children
 
-        new_slaves = []
-        for k, v in slaves.items():
+        new_children = []
+        for k, v in children.items():
             v.update({'name': k})
-            new_slaves.append(v)
+            new_children.append(v)
 
-        self.SLAVE_SUBS = new_slaves
+        self.CHILD_SUBS = new_children
 
 
     USERNAME = ""
@@ -108,8 +108,8 @@ class Settings:
     NSFW_WHITELIST_OK = True
     COMMENT_FOOTER = ""
 
-    MASTER_SUB = ""
-    SLAVE_SUBS = []
+    PARENT_SUB = ""
+    CHILD_SUBS = []
 
     EXTENSIONS = []
     DOMAINS = []

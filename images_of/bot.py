@@ -27,7 +27,7 @@ class Bot:
         self.blacklist_subs = self._read_blacklist('subredditblacklist')
 
         self.subreddits = []
-        for sub_settings in settings.SLAVE_SUBS:
+        for sub_settings in settings.CHILD_SUBS:
             sub = Subreddit(**sub_settings)
             sub.load_wiki_blacklist(r)
             self.subreddits.append(sub)
@@ -39,7 +39,7 @@ class Bot:
         self.domain_re = re.compile(domain_pattern, flags=re.IGNORECASE)
 
     def _read_blacklist(self, wiki_page):
-        content = self.r.get_wiki_page(settings.MASTER_SUB, wiki_page).content_md
+        content = self.r.get_wiki_page(settings.PARENT_SUB, wiki_page).content_md
         entries = [line.strip().lower()[3:] for line in content.splitlines() if line]
         return set(entries)
 

@@ -29,7 +29,7 @@ comment-footer = """
 [](#{reason} "{detail}")
 """
 
-[master]
+[parent]
 name = 'imagesofnetwork'
 
 [posts]
@@ -83,7 +83,7 @@ domains = [
 
 # Template:
 #
-# [slave.{SUB_NAME}]
+# [child.{SUB_NAME}]
 # search = []			# regexes for title search
 # ignore = []			# regexes for title search
 # ignore-case = []		# case-sensitive regexes for title search
@@ -91,7 +91,7 @@ domains = [
 # blacklist = []		# list of subreddits never to accept from
 # wiki-blacklist = false	# does this sub use a wiki page for blacklist?
 
-[slave.imagesofafghanistan]
+[child.imagesofafghanistan]
 search = [
     'afghanistan',
     'badghis province',
@@ -128,7 +128,7 @@ whitelist = [
     'afghanistanpics',
 ]
 
-[slave.imagesofalabama]
+[child.imagesofalabama]
 search = [
     'alabama',
     'alabami?ans?',
@@ -172,7 +172,7 @@ whitelist = [
     'wde',
 ]
 
-[slave.imagesofalaska]
+[child.imagesofalaska]
 search = [
     'ak',
     'alaska',
@@ -228,7 +228,7 @@ blacklist = [
     'snackexchange',
 ]
 
-[slave.imagesofarizona]
+[child.imagesofarizona]
 search = [
     'antelope canyon',
     'arizona',
@@ -279,7 +279,7 @@ blacklist = [
     'themsfightinherds',
 ]
 
-[slave.imagesofarkansas]
+[child.imagesofarkansas]
 search = [
     'arkansas',
     'arkansasans?',
@@ -339,7 +339,7 @@ blacklist = [
     'ar15',
 ]
 
-[slave.imagesofaustralia]
+[child.imagesofaustralia]
 search = [
     'adelaide',
     'adelaide botanic garden',
@@ -535,7 +535,7 @@ whitelist = [
     'wollongong',
 ]
 
-[slave.imagesofbelgium]
+[child.imagesofbelgium]
 search = [
     'Belgian Luxembourg',
     'Neufch(â|a)teau',
@@ -627,7 +627,7 @@ whitelist = [
     'leuven',
 ]
 
-[slave.imagesofbelize]
+[child.imagesofbelize]
 search = [
     'actun tunichil muknal',
     'ambergris caye',
@@ -669,7 +669,7 @@ whitelist = [
     'belizepics',
 ]
 
-[slave.imagesofbrazil]
+[child.imagesofbrazil]
 search = [
     ' cabo frio',
     'Arma(c|ç)(a|ã)o dos B(u|ú)zios',
@@ -811,7 +811,7 @@ whitelist = [
     'tocantins',
 ]
 
-[slave.imagesofcalifornia]
+[child.imagesofcalifornia]
 search = [
     'San Bernardino',
     'anaheim',
@@ -1173,7 +1173,7 @@ whitelist = [
 ]
 wiki-blacklist = true
 
-[slave.imagesofcanada]
+[child.imagesofcanada]
 search = [
     'canada',
     'montreal',
@@ -1261,7 +1261,7 @@ whitelist = [
     'yukon',
 ]
 
-[slave.imagesofchile]
+[child.imagesofchile]
 search = [
     '(lake san rafael|san rafael lake)',
     'Caj(o|ó)n del Maipo|\bmuseum of memory and human rights',
@@ -1398,7 +1398,7 @@ blacklist = [
     'supremeclothing',
 ]
 
-[slave.imagesofchina]
+[child.imagesofchina]
 search = [
     'beijing',
     'china',
@@ -1433,7 +1433,7 @@ whitelist = [
 ]
 wiki-blacklist = true
 
-[slave.imagesofcolorado]
+[child.imagesofcolorado]
 search = [
     'arvada',
     'aurora\b(co|colorado)',
@@ -1559,7 +1559,7 @@ blacklist = [
     'trees',
 ]
 
-[slave.imagesofconnecticut]
+[child.imagesofconnecticut]
 search = [
     'bridgeport',
     'connecticut',
@@ -1614,7 +1614,7 @@ whitelist = [
     'woodburyct',
 ]
 
-[slave.imagesofdelaware]
+[child.imagesofdelaware]
 search = [
     'Glasgow\b(de|delaware)',
     'Hockessin',
@@ -1663,7 +1663,7 @@ blacklist = [
     'easternshoremd',
 ]
 
-[slave.imagesofegypt]
+[child.imagesofegypt]
 search = [
     '6th of october city',
     'abdeen palace',
@@ -1761,7 +1761,7 @@ whitelist = [
     'egyptpics',
 ]
 
-[slave.imagesofengland]
+[child.imagesofengland]
 search = [
     'ashford',
     'birmingham',
@@ -1851,7 +1851,7 @@ blacklist = [
     'supremeclothing',
 ]
 
-[slave.imagesofflorida]
+[child.imagesofflorida]
 search = [
     'Floridians?',
     'Fo?r?t\bLauderdale',
@@ -1931,7 +1931,7 @@ blacklist = [
     'mechanicalkeyboards',
 ]
 
-[slave.imagesoffrance]
+[child.imagesoffrance]
 search = [
     "Musée d'Orsay",
     'Sacré-C(oe|œ)ur',
@@ -1975,7 +1975,7 @@ whitelist = [
     'tours',
 ]
 
-[slave.imagesofgeorgia]
+[child.imagesofgeorgia]
 search = [
     'Georgians?',
     'Savannah',
@@ -2062,7 +2062,7 @@ whitelist = [
     'woodstockga',
 ]
 
-[slave.imagesofguatemala]
+[child.imagesofguatemala]
 search = [
     'Lake Atitl(á|a)n',
     'cobán',
@@ -2078,7 +2078,7 @@ whitelist = [
     'guatemalapics',
 ]
 
-[slave.imagesofhawaii]
+[child.imagesofhawaii]
 search = [
     'Ewa\bGentry',
     'Hawaiians?',
@@ -2112,7 +2112,7 @@ whitelist = [
     'universityofhawaii',
 ]
 
-[slave.imagesofhongkong]
+[child.imagesofhongkong]
 search = [
     'Ngong Ping',
     'Po Lin Monastery',
@@ -2127,7 +2127,7 @@ whitelist = [
     'hongkongpics',
 ]
 
-[slave.imagesoficeland]
+[child.imagesoficeland]
 search = [
     'iceland',
 ]
@@ -2140,7 +2140,7 @@ blacklist = [
     'reykjaviktory',
 ]
 
-[slave.imagesofidaho]
+[child.imagesofidaho]
 search = [
     'Caldwell',
     "Coeur\\bd'Alene",
@@ -2168,7 +2168,7 @@ whitelist = [
     'twinfalls',
 ]
 
-[slave.imagesofillinois]
+[child.imagesofillinois]
 search = [
     'Aurora\b(IL|Illinois)',
     'IL',
@@ -2212,7 +2212,7 @@ blacklist = [
     'thesimpsons',
 ]
 
-[slave.imagesofindia]
+[child.imagesofindia]
 search = [
     '(mount|mt)\babu',
     'adaman islands?',
@@ -2528,7 +2528,7 @@ whitelist = [
 ]
 wiki-blacklist = true
 
-[slave.imagesofindiana]
+[child.imagesofindiana]
 search = [
     'F(or)?t\bWayne',
     'Indianapolis',
@@ -2559,7 +2559,7 @@ blacklist = [
     'topgear',
 ]
 
-[slave.imagesofiowa]
+[child.imagesofiowa]
 search = [
     'Dubuque',
     'Iowans?',
@@ -2612,7 +2612,7 @@ blacklist = [
     'whatsthisplant',
 ]
 
-[slave.imagesofiran]
+[child.imagesofiran]
 search = [
     'iran',
     'isfahan',
@@ -2633,7 +2633,7 @@ whitelist = [
     'teammelli',
 ]
 
-[slave.imagesofisleofman]
+[child.imagesofisleofman]
 search = [
     'bradda hill',
     'calf of man',
@@ -2672,7 +2672,7 @@ blacklist = [
     'tennesseetitans',
 ]
 
-[slave.imagesofjapan]
+[child.imagesofjapan]
 search = [
     'hakone',
     'japan',
@@ -2719,7 +2719,7 @@ whitelist = [
     'tokyo',
 ]
 
-[slave.imagesofkansas]
+[child.imagesofkansas]
 search = [
     'kansas',
 ]
@@ -2743,7 +2743,7 @@ whitelist = [
     'wichita',
 ]
 
-[slave.imagesofkentucky]
+[child.imagesofkentucky]
 search = [
     'kentucky',
 ]
@@ -2773,7 +2773,7 @@ whitelist = [
     'wku',
 ]
 
-[slave.imagesoflibya]
+[child.imagesoflibya]
 search = [
     " ra's lanuf",
     'ajdabiya',
@@ -2812,7 +2812,7 @@ whitelist = [
     'libyanconflict',
 ]
 
-[slave.imagesoflouisiana]
+[child.imagesoflouisiana]
 search = [
     'louisiana',
 ]
@@ -2845,7 +2845,7 @@ whitelist = [
     'uno',
 ]
 
-[slave.imagesofmaine]
+[child.imagesofmaine]
 search = [
     'maine',
 ]
@@ -2861,7 +2861,7 @@ whitelist = [
     'skimaine',
 ]
 
-[slave.imagesofmaldives]
+[child.imagesofmaldives]
 search = [
     'Hulhumal(é|e)',
     'Malé',
@@ -2881,7 +2881,7 @@ whitelist = [
     'maldives',
 ]
 
-[slave.imagesofmaryland]
+[child.imagesofmaryland]
 search = [
     'maryland',
 ]
@@ -2889,7 +2889,7 @@ whitelist = [
     'maryland',
 ]
 
-[slave.imagesofmassachusetts]
+[child.imagesofmassachusetts]
 search = [
     'massachusetts',
 ]
@@ -2897,7 +2897,7 @@ whitelist = [
     'massachusetts',
 ]
 
-[slave.imagesofmexico]
+[child.imagesofmexico]
 search = [
     'aguascalientes',
     'baja california',
@@ -2953,7 +2953,7 @@ whitelist = [
     'mexicolindo',
 ]
 
-[slave.imagesofmichigan]
+[child.imagesofmichigan]
 search = [
     '.*, mi',
     'detroit',
@@ -3034,7 +3034,7 @@ blacklist = [
     'vexillology',
 ]
 
-[slave.imagesofminnesota]
+[child.imagesofminnesota]
 search = [
     'minnesota',
 ]
@@ -3042,7 +3042,7 @@ whitelist = [
     'minnesota',
 ]
 
-[slave.imagesofmississippi]
+[child.imagesofmississippi]
 search = [
     'mississippi',
 ]
@@ -3053,7 +3053,7 @@ whitelist = [
     'mississippi',
 ]
 
-[slave.imagesofmissouri]
+[child.imagesofmissouri]
 search = [
     'missouri',
 ]
@@ -3061,7 +3061,7 @@ whitelist = [
     'missouri',
 ]
 
-[slave.imagesofmontana]
+[child.imagesofmontana]
 search = [
     'MT',
     'anaconda',
@@ -3165,7 +3165,7 @@ blacklist = [
     'yugioh',
 ]
 
-[slave.imagesofnebraska]
+[child.imagesofnebraska]
 search = [
     'nebraska',
 ]
@@ -3173,7 +3173,7 @@ whitelist = [
     'nebraska',
 ]
 
-[slave.imagesofnetherlands]
+[child.imagesofnetherlands]
 search = [
     'amsterdam',
     'anne frank house',
@@ -3197,7 +3197,7 @@ whitelist = [
     'thenetherlands',
 ]
 
-[slave.imagesofnevada]
+[child.imagesofnevada]
 search = [
     'nevada',
 ]
@@ -3209,7 +3209,7 @@ whitelist = [
     'nevada',
 ]
 
-[slave.imagesofnewhampshire]
+[child.imagesofnewhampshire]
 search = [
     'new hampshire',
 ]
@@ -3217,7 +3217,7 @@ whitelist = [
     'newhampshire',
 ]
 
-[slave.imagesofnewjersey]
+[child.imagesofnewjersey]
 search = [
     'new jersey',
 ]
@@ -3230,7 +3230,7 @@ whitelist = [
     'newjersey',
 ]
 
-[slave.imagesofnewmexico]
+[child.imagesofnewmexico]
 search = [
     'Abiqui(ú|u)',
     'Espa(n|ñ)ola',
@@ -3297,7 +3297,7 @@ blacklist = [
     'atlanta',
 ]
 
-[slave.imagesofnewyork]
+[child.imagesofnewyork]
 search = [
     'NYC?',
     'albany',
@@ -3366,7 +3366,7 @@ blacklist = [
     'austin',
 ]
 
-[slave.imagesofnewzealand]
+[child.imagesofnewzealand]
 search = [
     'Fiordland\bwaiotapu',
     'Toit(u|ū) Otago',
@@ -3592,7 +3592,7 @@ blacklist = [
     'eliteracers',
 ]
 
-[slave.imagesofnorthcarolina]
+[child.imagesofnorthcarolina]
 search = [
     'north carolina',
 ]
@@ -3600,7 +3600,7 @@ whitelist = [
     'northcarolina',
 ]
 
-[slave.imagesofnorthdakota]
+[child.imagesofnorthdakota]
 search = [
     'north dakota',
 ]
@@ -3611,7 +3611,7 @@ whitelist = [
     'northdakota',
 ]
 
-[slave.imagesofnorway]
+[child.imagesofnorway]
 search = [
     'norway',
 ]
@@ -3621,7 +3621,7 @@ whitelist = [
     'norwaypics',
 ]
 
-[slave.imagesofohio]
+[child.imagesofohio]
 search = [
     'ohio',
 ]
@@ -3629,7 +3629,7 @@ whitelist = [
     'ohio',
 ]
 
-[slave.imagesofoklahoma]
+[child.imagesofoklahoma]
 search = [
     'oklahoma',
 ]
@@ -3637,7 +3637,7 @@ whitelist = [
     'oklahoma',
 ]
 
-[slave.imagesoforegon]
+[child.imagesoforegon]
 search = [
     'oregon',
 ]
@@ -3648,7 +3648,7 @@ whitelist = [
     'oregon',
 ]
 
-[slave.imagesofpennsylvania]
+[child.imagesofpennsylvania]
 search = [
     'pennsylvania',
 ]
@@ -3656,7 +3656,7 @@ whitelist = [
     'pennsylvania',
 ]
 
-[slave.imagesofperu]
+[child.imagesofperu]
 search = [
     'Man(ú|u) National Park',
     'Urubamba',
@@ -3686,7 +3686,7 @@ whitelist = [
     'perupics',
 ]
 
-[slave.imagesofrhodeisland]
+[child.imagesofrhodeisland]
 search = [
     'rhode island',
 ]
@@ -3694,7 +3694,7 @@ whitelist = [
     'rhodeisland',
 ]
 
-[slave.imagesofrussia]
+[child.imagesofrussia]
 search = [
     'chelyabinsk',
     'gelendzhik',
@@ -3749,7 +3749,7 @@ whitelist = [
     'russiapics',
 ]
 
-[slave.imagesofscotland]
+[child.imagesofscotland]
 search = [
     'aberfeldy',
     'aberfoyle',
@@ -3830,7 +3830,7 @@ whitelist = [
     'scottishphotos',
 ]
 
-[slave.imagesofsingapore]
+[child.imagesofsingapore]
 search = [
     'clarke quay',
     'esplanade',
@@ -3844,7 +3844,7 @@ whitelist = [
     'singapore',
 ]
 
-[slave.imagesofsouthcarolina]
+[child.imagesofsouthcarolina]
 search = [
     'south carolina',
 ]
@@ -3875,7 +3875,7 @@ whitelist = [
     'westminstersc',
 ]
 
-[slave.imagesofsouthdakota]
+[child.imagesofsouthdakota]
 search = [
     'south dakota',
 ]
@@ -3883,7 +3883,7 @@ whitelist = [
     'southdakota',
 ]
 
-[slave.imagesofsyria]
+[child.imagesofsyria]
 search = [
     'afrin',
     'al-hasakah',
@@ -3942,7 +3942,7 @@ blacklist = [
     'knives',
 ]
 
-[slave.imagesoftennessee]
+[child.imagesoftennessee]
 search = [
     'tennessee',
 ]
@@ -3950,7 +3950,7 @@ whitelist = [
     'tennessee',
 ]
 
-[slave.imagesoftexas]
+[child.imagesoftexas]
 search = [
     'arlington',
     'austin',
@@ -4328,7 +4328,7 @@ blacklist = [
     'virginia',
 ]
 
-[slave.imagesoftoronto]
+[child.imagesoftoronto]
 search = [
     'toronto',
 ]
@@ -4364,7 +4364,7 @@ whitelist = [
     'yorku',
 ]
 
-[slave.imagesofusa]
+[child.imagesofusa]
 search = [
     'american?s?',
     'murica',
@@ -4384,7 +4384,7 @@ blacklist = [
     'vexillology',
 ]
 
-[slave.imagesofutah]
+[child.imagesofutah]
 search = [
     'utah',
 ]
@@ -4392,7 +4392,7 @@ whitelist = [
     'utah',
 ]
 
-[slave.imagesofvermont]
+[child.imagesofvermont]
 search = [
     'vermont',
 ]
@@ -4400,7 +4400,7 @@ whitelist = [
     'vermont',
 ]
 
-[slave.imagesofvirginia]
+[child.imagesofvirginia]
 search = [
     'virginia',
 ]
@@ -4412,7 +4412,7 @@ whitelist = [
     'virginia',
 ]
 
-[slave.imagesofwales]
+[child.imagesofwales]
 search = [
     ' cadair idris',
     'aberdare',
@@ -4519,7 +4519,7 @@ whitelist = [
     'wales',
 ]
 
-[slave.imagesofwashington]
+[child.imagesofwashington]
 search = [
     'washington',
 ]
@@ -4535,7 +4535,7 @@ whitelist = [
     'washington',
 ]
 
-[slave.imagesofwashingtondc]
+[child.imagesofwashingtondc]
 search = [
     '9:30 club',
     'anacostia community museum',
@@ -4596,7 +4596,7 @@ blacklist = [
     'forwardsfromgrandma',
 ]
 
-[slave.imagesofwestvirginia]
+[child.imagesofwestvirginia]
 search = [
     'WV\b|pipestem resort',
     'babcock',
@@ -4663,7 +4663,7 @@ blacklist = [
     'hdm_stuttgart',
 ]
 
-[slave.imagesofwisconsin]
+[child.imagesofwisconsin]
 search = [
     '(uw.oshkosh|uw.madison)',
     'alpine valley',
@@ -4767,7 +4767,7 @@ blacklist = [
     'whatsthisplant',
 ]
 
-[slave.imagesofwyoming]
+[child.imagesofwyoming]
 search = [
     'bighorn national forest',
     'boysen reservoir',
@@ -4819,7 +4819,7 @@ whitelist = [
     'wyoming',
 ]
 
-[slave.imagesofyemen]
+[child.imagesofyemen]
 search = [
     'Al Hudaydah',
     'Cisterns of Tawila',
