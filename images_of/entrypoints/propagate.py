@@ -60,7 +60,7 @@ def copy_wiki_page(r, page, dom, subs, force):
         new_content = ''.join([
                 parts[0],
                 start_delim,
-                parts[1],
+                content,
                 end_delim,
                 parts[2]])
 
