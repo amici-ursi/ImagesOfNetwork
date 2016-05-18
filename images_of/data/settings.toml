@@ -4838,3 +4838,11 @@ whitelist = [
     'yemenpics',
 ]
 
+[cousin.terlingua]
+search = [
+    'terlingua',
+]
+whitelist = [
+    'null',
+]
+
