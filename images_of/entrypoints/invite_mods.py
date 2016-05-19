@@ -4,8 +4,9 @@ from images_of import settings, Reddit
 
 @click.command()
 @click.option('--defaults', is_flag=True, help='Invite default moderators')
+@click.option('--cousins', is_flag=True, help='Invite to cousin subs as well as children')
 @click.argument('mods', nargs=-1)
-def main(mods, defaults):
+def main(mods, defaults, cousins):
 
     if defaults:
         mods = set(mods)
@@ -16,10 +17,15 @@ def main(mods, defaults):
         print('No moderators specified. Quitting.')
         return
 
-    r = Reddit('Mass Moderator Invite v0.1 /u/{}'.format(self.USERNAME))
+    r = Reddit('Mass Moderator Invite v0.1 /u/{}'.format(settings.USERNAME))
     r.oauth()
 
     subs = [sub['name'] for sub in settings.CHILD_SUBS]
+    if cousins:
+        cuzs = set(sub['name'] for sub in settings.COUSIN_SUBS)
+        cuzs.update(subs)
+        subs = sorted(cuzs)
+
     for sub in subs:
         s = r.get_subreddit(sub)
         cur_mods = [u.name for u in s.get_moderators()]
