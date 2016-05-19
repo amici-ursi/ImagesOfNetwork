@@ -4534,6 +4534,9 @@ whitelist = [
     'mount_rainier',
     'washington',
 ]
+blacklist = [
+    'washingtondc',
+]
 
 [child.imagesofwashingtondc]
 search = [
