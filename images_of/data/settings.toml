@@ -1458,13 +1458,18 @@ search = [
 ]
 ignore = [
     '(chevy|chevrolet) colorado',
-    '-|aurora borealis|co.?worker|co\.|\/co\/|\bthornton state',
+    'aurora borealis',
+    'co.?worker',
+    'co\.',
+    '\/co\/',
+    'thornton state',
     '\& co',
     '\&co',
     'denver harbor',
     'nc',
     'north carolina',
     'westminster (abbey|bridge)',
+    'taos pueblo',
 ]
 ignore-case = [
     'Co',
