@@ -808,6 +808,15 @@ whitelist = [
     'tocantins',
 ]
 
+[child.imagesofbulgaria]
+search = [
+    'bulgaria',
+]
+whitelist = [
+    'bulgaria',
+    'bulgariapics'
+]
+
 [child.imagesofcalifornia]
 search = [
     'San Bernardino',
