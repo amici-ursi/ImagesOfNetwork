@@ -12,7 +12,7 @@ import html.parser
 import time
 #import praw
 from images_of import settings, Reddit
-import os
+#import os
 
 # defines the main and sister subreddits, and how many posts to list in the sidebar
 CHILDREN = settings.CHILD_SUBS
