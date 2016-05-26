@@ -15,7 +15,7 @@ from images_of import settings, Reddit
 #import os
 
 # defines the main and sister subreddits, and how many posts to list in the sidebar
-CHILDREN = settings.CHILD_SUBS
+CHILDREN = sorted([sub['name'] for sub in settings.CHILD_SUBS])
 PLACES_MULTI_NAME = 'imagesofplaces'
 DECADES_MULTI_NAME = 'imagesofthedecades'
 POSTS_TO_LIST = 5
