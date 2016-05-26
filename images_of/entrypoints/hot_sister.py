@@ -16,9 +16,7 @@ from images_of import settings, Reddit
 
 # defines the main and sister subreddits, and how many posts to list in the sidebar
 CHILDREN = settings.CHILD_SUBS
-PLACES_MULTI_HOST = settings.USERNAME
 PLACES_MULTI_NAME = 'imagesofplaces'
-DECADES_MULTI_HOST = settings.USERNAME
 DECADES_MULTI_NAME = 'imagesofthedecades'
 POSTS_TO_LIST = 5
 START_DELIM = '[](/hot-sister-start)'
@@ -41,13 +39,13 @@ def main():
     #log in
     r.login(settings.USERNAME, settings.PASSWORD)
     #identify the places multireddit
-    PLACES_MULTI = r.get_multireddit(PLACES_MULTI_HOST, PLACES_MULTI_NAME)
+    PLACES_MULTI = r.get_multireddit(settings.USERNAME, PLACES_MULTI_NAME)
     #make the places post list
     PLACES_LIST_TEXT = str()
     for (i, post) in enumerate(PLACES_MULTI.get_hot(limit=POSTS_TO_LIST)):
         PLACES_LIST_TEXT += ' * [%s](%s)\n' % (post.title, post.permalink)
     #identify the decades multireddit
-    DECADES_MULTI = r.get_multireddit(DECADES_MULTI_HOST, DECADES_MULTI_NAME)
+    DECADES_MULTI = r.get_multireddit(settings.USERNAME, DECADES_MULTI_NAME)
     #make the decades post list
     DECADES_LIST_TEXT = str()
     for (i, post) in enumerate(DECADES_MULTI.get_hot(limit=POSTS_TO_LIST)):
