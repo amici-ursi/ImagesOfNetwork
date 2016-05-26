@@ -32,6 +32,10 @@ comment-footer = """
 [parent]
 name = 'imagesofnetwork'
 
+[discord]
+client_id = 'client_id'
+token = 'token'
+
 [posts]
 extensions = [
     '\.jpe?g',

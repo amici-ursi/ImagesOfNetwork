@@ -69,6 +69,8 @@ class Settings:
         update_cousins = _conf_get(conf, 'update_cousins', default=False)
         self.COUSIN_SUBS = self._load_group(conf, 'cousin', self.COUSIN_SUBS, update_cousins)
 
+        self.DISCORD_CLIENTID = _conf_get(conf, 'discord', 'client_id', default=self.DISCORD_CLIENTID)
+        self.DISCORD_TOKEN = _conf_get(conf, 'discord', 'token', default=self.DISCORD_TOKEN)
 
     def _load_group(self, conf, group, old_items, update=False):
         # update indicates that we should update the group rather
@@ -127,6 +129,8 @@ class Settings:
     EXTENSIONS = []
     DOMAINS = []
 
+    DISCORD_CLIENTID = ""
+    DISCORD_TOKEN = ""
 
 settings = Settings()
 
