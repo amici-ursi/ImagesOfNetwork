@@ -56,9 +56,9 @@ def main():
     for CHILD in CHILDREN:
         #say who we're updating
         print("running on {}".format(CHILD))
-        subreddit = r.get_subreddit(CHILD)
+        child = r.get_subreddit(CHILD)
         #get the child's sidebar
-        current_sidebar = CHILD.get_settings()['description']
+        current_sidebar = child.get_settings()['description']
         current_sidebar = html.parser.HTMLParser().unescape(current_sidebar)
         #find the delimiters and what's between them
         replace_pattern = re.compile('%s.*?%s' % (re.escape(START_DELIM), re.escape(END_DELIM)), re.IGNORECASE|re.DOTALL|re.UNICODE)
@@ -67,7 +67,7 @@ def main():
                             '%s\\n\\n%s\\n%s' % (START_DELIM, COMBINED_TEXT, END_DELIM),
                             current_sidebar)
         #update the child's sidebar
-        CHILD.update_settings(description=new_sidebar)
+        child.update_settings(description=new_sidebar)
 
 
 
