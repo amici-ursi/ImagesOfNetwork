@@ -16,9 +16,9 @@ from images_of import settings, Reddit
 
 # defines the main and sister subreddits, and how many posts to list in the sidebar
 CHILDREN = settings.CHILD_SUBS
-PLACES_MULTI_HOST = 'amici_ursi'
+PLACES_MULTI_HOST = settings.USERNAME
 PLACES_MULTI_NAME = 'imagesofplaces'
-DECADES_MULTI_HOST = 'noeatnosleep'
+DECADES_MULTI_HOST = settings.USERNAME
 DECADES_MULTI_NAME = 'imagesofthedecades'
 POSTS_TO_LIST = 5
 START_DELIM = '[](/hot-sister-start)'
