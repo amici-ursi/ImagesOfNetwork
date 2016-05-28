@@ -28,6 +28,7 @@ setup(
             "ion_audit_mods = images_of.entrypoints.audit_mods:main",
             "ion_blacklist_requests = images_of.entrypoints.blacklist_requests:main",
             "ion_hot_sister = images_of.entrypoints.hot_sister:main",
+            "ion_discord_bot = images_of.entrypoints.discord_announce_bot:main",
         ],
     },
 
