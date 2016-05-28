@@ -1,0 +1,374 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>images_of package &mdash; ImagesOfNetwork 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="ImagesOfNetwork 0.1.0 documentation" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="images-of-package">
+<h1>images_of package<a class="headerlink" href="#images-of-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="images_of.entrypoints.html">images_of.entrypoints package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="images_of.entrypoints.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="images_of.entrypoints.html#images-of-entrypoints-audit-modlog-module">images_of.entrypoints.audit_modlog module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="images_of.entrypoints.html#images-of-entrypoints-audit-mods-module">images_of.entrypoints.audit_mods module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="images_of.entrypoints.html#images-of-entrypoints-blacklist-requests-module">images_of.entrypoints.blacklist_requests module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="images_of.entrypoints.html#images-of-entrypoints-bot-module">images_of.entrypoints.bot module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="images_of.entrypoints.html#images-of-entrypoints-bulkmail-module">images_of.entrypoints.bulkmail module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="images_of.entrypoints.html#images-of-entrypoints-discord-announce-module">images_of.entrypoints.discord-announce module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="images_of.entrypoints.html#images-of-entrypoints-expand-module">images_of.entrypoints.expand module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="images_of.entrypoints.html#module-images_of.entrypoints.hot_sister">images_of.entrypoints.hot_sister module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="images_of.entrypoints.html#images-of-entrypoints-invite-mods-module">images_of.entrypoints.invite_mods module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="images_of.entrypoints.html#images-of-entrypoints-oauth-module">images_of.entrypoints.oauth module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="images_of.entrypoints.html#images-of-entrypoints-propagate-module">images_of.entrypoints.propagate module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="images_of.entrypoints.html#module-images_of.entrypoints">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-images_of.bot">
+<span id="images-of-bot-module"></span><h2>images_of.bot module<a class="headerlink" href="#module-images_of.bot" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="images_of.bot.Bot">
+<em class="property">class </em><code class="descclassname">images_of.bot.</code><code class="descname">Bot</code><span class="sig-paren">(</span><em>r</em>, <em>should_post=True</em><span class="sig-paren">)</span><a class="headerlink" href="#images_of.bot.Bot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="images_of.bot.Bot.check">
+<code class="descname">check</code><span class="sig-paren">(</span><em>post</em><span class="sig-paren">)</span><a class="headerlink" href="#images_of.bot.Bot.check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check global conditions on a post. Returns an <cite>AcceptFlag</cite> indicating
+if the post should be accepted, denied, or the conditions under which
+a subreddit may accept it.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="images_of.bot.Bot.crosspost">
+<code class="descname">crosspost</code><span class="sig-paren">(</span><em>post</em>, <em>sub</em>, <em>match</em><span class="sig-paren">)</span><a class="headerlink" href="#images_of.bot.Bot.crosspost" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="images_of.bot.Bot.run">
+<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#images_of.bot.Bot.run" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="images_of.bot.Bot.verify_age">
+<code class="descname">verify_age</code><span class="sig-paren">(</span><em>post</em><span class="sig-paren">)</span><a class="headerlink" href="#images_of.bot.Bot.verify_age" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-images_of.connect">
+<span id="images-of-connect-module"></span><h2>images_of.connect module<a class="headerlink" href="#module-images_of.connect" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="images_of.connect.Reddit">
+<em class="property">class </em><code class="descclassname">images_of.connect.</code><code class="descname">Reddit</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#images_of.connect.Reddit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">praw.Reddit</span></code></p>
+<dl class="method">
+<dt id="images_of.connect.Reddit.login">
+<code class="descname">login</code><span class="sig-paren">(</span><em>username=None</em>, <em>password=None</em><span class="sig-paren">)</span><a class="headerlink" href="#images_of.connect.Reddit.login" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="images_of.connect.Reddit.oauth">
+<code class="descname">oauth</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#images_of.connect.Reddit.oauth" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-images_of.settings">
+<span id="images-of-settings-module"></span><h2>images_of.settings module<a class="headerlink" href="#module-images_of.settings" title="Permalink to this headline">¶</a></h2>
+<p>images_of settings module.</p>
+<p>Anything that&#8217;s not secret should probably go in here, as it will be common
+to all clients. Anything that is, or needs to be tested elsewhere should be
+set in local_settings.</p>
+<dl class="class">
+<dt id="images_of.settings.Settings">
+<em class="property">class </em><code class="descclassname">images_of.settings.</code><code class="descname">Settings</code><a class="headerlink" href="#images_of.settings.Settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="images_of.settings.Settings.CHILD_SUBS">
+<code class="descname">CHILD_SUBS</code><em class="property"> = []</em><a class="headerlink" href="#images_of.settings.Settings.CHILD_SUBS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="images_of.settings.Settings.CLIENT_ID">
+<code class="descname">CLIENT_ID</code><em class="property"> = ''</em><a class="headerlink" href="#images_of.settings.Settings.CLIENT_ID" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="images_of.settings.Settings.CLIENT_SECRET">
+<code class="descname">CLIENT_SECRET</code><em class="property"> = ''</em><a class="headerlink" href="#images_of.settings.Settings.CLIENT_SECRET" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="images_of.settings.Settings.COMMENT_FOOTER">
+<code class="descname">COMMENT_FOOTER</code><em class="property"> = ''</em><a class="headerlink" href="#images_of.settings.Settings.COMMENT_FOOTER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="images_of.settings.Settings.COUSIN_SUBS">
+<code class="descname">COUSIN_SUBS</code><em class="property"> = []</em><a class="headerlink" href="#images_of.settings.Settings.COUSIN_SUBS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="images_of.settings.Settings.DEFAULT_MODS">
+<code class="descname">DEFAULT_MODS</code><em class="property"> = []</em><a class="headerlink" href="#images_of.settings.Settings.DEFAULT_MODS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="images_of.settings.Settings.DISCORD_CLIENTID">
+<code class="descname">DISCORD_CLIENTID</code><em class="property"> = ''</em><a class="headerlink" href="#images_of.settings.Settings.DISCORD_CLIENTID" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="images_of.settings.Settings.DISCORD_TOKEN">
+<code class="descname">DISCORD_TOKEN</code><em class="property"> = ''</em><a class="headerlink" href="#images_of.settings.Settings.DISCORD_TOKEN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="images_of.settings.Settings.DOMAINS">
+<code class="descname">DOMAINS</code><em class="property"> = []</em><a class="headerlink" href="#images_of.settings.Settings.DOMAINS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="images_of.settings.Settings.EXTENSIONS">
+<code class="descname">EXTENSIONS</code><em class="property"> = []</em><a class="headerlink" href="#images_of.settings.Settings.EXTENSIONS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="images_of.settings.Settings.MULTIREDDIT">
+<code class="descname">MULTIREDDIT</code><em class="property"> = ''</em><a class="headerlink" href="#images_of.settings.Settings.MULTIREDDIT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="images_of.settings.Settings.NETWORK_NAME">
+<code class="descname">NETWORK_NAME</code><em class="property"> = ''</em><a class="headerlink" href="#images_of.settings.Settings.NETWORK_NAME" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="images_of.settings.Settings.NSFW_OK">
+<code class="descname">NSFW_OK</code><em class="property"> = False</em><a class="headerlink" href="#images_of.settings.Settings.NSFW_OK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="images_of.settings.Settings.NSFW_WHITELIST_OK">
+<code class="descname">NSFW_WHITELIST_OK</code><em class="property"> = True</em><a class="headerlink" href="#images_of.settings.Settings.NSFW_WHITELIST_OK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="images_of.settings.Settings.PARENT_SUB">
+<code class="descname">PARENT_SUB</code><em class="property"> = ''</em><a class="headerlink" href="#images_of.settings.Settings.PARENT_SUB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="images_of.settings.Settings.PASSWORD">
+<code class="descname">PASSWORD</code><em class="property"> = ''</em><a class="headerlink" href="#images_of.settings.Settings.PASSWORD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="images_of.settings.Settings.REDIRECT_URI">
+<code class="descname">REDIRECT_URI</code><em class="property"> = ''</em><a class="headerlink" href="#images_of.settings.Settings.REDIRECT_URI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="images_of.settings.Settings.REFRESH_TOKEN">
+<code class="descname">REFRESH_TOKEN</code><em class="property"> = ''</em><a class="headerlink" href="#images_of.settings.Settings.REFRESH_TOKEN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="images_of.settings.Settings.USERNAME">
+<code class="descname">USERNAME</code><em class="property"> = ''</em><a class="headerlink" href="#images_of.settings.Settings.USERNAME" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="images_of.settings.Settings.WIKI_PAGES">
+<code class="descname">WIKI_PAGES</code><em class="property"> = []</em><a class="headerlink" href="#images_of.settings.Settings.WIKI_PAGES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="images_of.settings.Settings.load">
+<code class="descname">load</code><span class="sig-paren">(</span><em>fname</em><span class="sig-paren">)</span><a class="headerlink" href="#images_of.settings.Settings.load" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="images_of.settings.Settings.loads">
+<code class="descname">loads</code><span class="sig-paren">(</span><em>raw</em><span class="sig-paren">)</span><a class="headerlink" href="#images_of.settings.Settings.loads" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-images_of.subreddit">
+<span id="images-of-subreddit-module"></span><h2>images_of.subreddit module<a class="headerlink" href="#module-images_of.subreddit" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="images_of.subreddit.Match">
+<em class="property">class </em><code class="descclassname">images_of.subreddit.</code><code class="descname">Match</code><span class="sig-paren">(</span><em>reason</em>, <em>detail</em><span class="sig-paren">)</span><a class="headerlink" href="#images_of.subreddit.Match" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="images_of.subreddit.Subreddit">
+<em class="property">class </em><code class="descclassname">images_of.subreddit.</code><code class="descname">Subreddit</code><span class="sig-paren">(</span><em>name</em>, <em>search</em>, <em>ignore=None</em>, <em>ignore_case=None</em>, <em>whitelist=[]</em>, <em>blacklist=[]</em>, <em>wiki_blacklist=False</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#images_of.subreddit.Subreddit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="images_of.subreddit.Subreddit.check">
+<code class="descname">check</code><span class="sig-paren">(</span><em>post</em>, <em>flag=&lt;AcceptFlag.OK: 1&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#images_of.subreddit.Subreddit.check" title="Permalink to this definition">¶</a></dt>
+<dd><p>See if post is appropriate for this subreddit</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="images_of.subreddit.Subreddit.load_wiki_blacklist">
+<code class="descname">load_wiki_blacklist</code><span class="sig-paren">(</span><em>r</em><span class="sig-paren">)</span><a class="headerlink" href="#images_of.subreddit.Subreddit.load_wiki_blacklist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load blacklist from subreddit wiki.</p>
+<p>The subreddit may know that it needs to fetch pages externally,
+but is only a container for settings, and cannot fetch the
+contents of a wiki page by itself. Provided with a Reddit instance,
+it can go out and update it&#8217;s blacklist.</p>
+<p>The wiki page &#8216;subredditblacklist&#8217; should be a list of users,
+one per line, including the /u/ portion of the username.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>r</strong> &#8211; A praw.Reddit object.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-images_of">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-images_of" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="images_of.AcceptFlag">
+<em class="property">class </em><code class="descclassname">images_of.</code><code class="descname">AcceptFlag</code><a class="headerlink" href="#images_of.AcceptFlag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">enum.Enum</span></code></p>
+<p>An enumeration.</p>
+<dl class="attribute">
+<dt id="images_of.AcceptFlag.BAD">
+<code class="descname">BAD</code><em class="property"> = &lt;AcceptFlag.BAD: 3&gt;</em><a class="headerlink" href="#images_of.AcceptFlag.BAD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="images_of.AcceptFlag.OK">
+<code class="descname">OK</code><em class="property"> = &lt;AcceptFlag.OK: 1&gt;</em><a class="headerlink" href="#images_of.AcceptFlag.OK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="images_of.AcceptFlag.OK_IF_WHITELISTED">
+<code class="descname">OK_IF_WHITELISTED</code><em class="property"> = &lt;AcceptFlag.OK_IF_WHITELISTED: 2&gt;</em><a class="headerlink" href="#images_of.AcceptFlag.OK_IF_WHITELISTED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">images_of package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-images_of.bot">images_of.bot module</a></li>
+<li><a class="reference internal" href="#module-images_of.connect">images_of.connect module</a></li>
+<li><a class="reference internal" href="#module-images_of.settings">images_of.settings module</a></li>
+<li><a class="reference internal" href="#module-images_of.subreddit">images_of.subreddit module</a></li>
+<li><a class="reference internal" href="#module-images_of">Module contents</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/images_of.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, amici-ursi, 13steinj, /u/anon_amithsonian, scowcron, deimos.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/images_of.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

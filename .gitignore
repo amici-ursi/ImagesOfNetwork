@@ -1,8 +1,0 @@
-.eggs
-*.egg-info
-venv*
-__pycache__
-build
-dist
-**local_settings.py
-ion.toml
