@@ -11,7 +11,7 @@ redirect-uri = 'http://127.0.0.1:65010/authorize_callback'
 name = 'ImagesOf'
 multireddit = 'ImagesOfPlaces'
 
-mods = ['AutoModerator', 'BotWatchman', 'amici_ursi', 'ImagesOfNetwork']
+mods = ['AutoModerator', 'BotWatchman', 'amici_ursi']
 wiki-pages = ['config/automoderator', 'toolbox']
 nsfw = false
 nsfw-whitelist = true
@@ -35,16 +35,6 @@ name = 'imagesofnetwork'
 [discord]
 client_id = 'client_id'
 token = 'token'
-inbox_channel = 'channel_id'
-falsepos_channel = 'channel_id'
-oc_channel = 'channel_id'
-github_channel = 'channel_id'
-mod_channel = 'channel_id'
-
-[github]
-token = 'oauth_token'
-user = 'user_name'
-repo_name = 'repo_name'
 
 [posts]
 extensions = [
