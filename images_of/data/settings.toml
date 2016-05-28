@@ -2280,7 +2280,6 @@ whitelist = [
     'cuboulder',
     'cudenver',
     'denver',
-    'denverbroncos',
     'denvercirclejerk',
     'denvercomiccon',
     'denvercutthroats/',
@@ -2329,6 +2328,7 @@ blacklist = [
     'london',
     'panthers',
     'trees',
+    'tattoos',
 ]
 
 [child.imagesofconnecticut]
@@ -5353,6 +5353,7 @@ whitelist = [
 ]
 blacklist = [
     'forwardsfromgrandma',
+    'circlejerk',
 ]
 
 [child.imagesofwestvirginia]
