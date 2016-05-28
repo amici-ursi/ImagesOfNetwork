@@ -43,7 +43,7 @@ class Settings:
 
         self.USERNAME = _conf_get(conf, 'auth', 'username', default=self.USERNAME)
         self.PASSWORD = _conf_get(conf, 'auth', 'password', default=self.PASSWORD)
-        
+
         self.CLIENT_ID = _conf_get(conf, 'auth', 'client-id', default=self.CLIENT_ID)
         self.CLIENT_SECRET = _conf_get(conf, 'auth', 'client-secret', default=self.CLIENT_SECRET)
         self.REDIRECT_URI = _conf_get(conf, 'auth', 'redirect-uri', default=self.REDIRECT_URI)
@@ -51,6 +51,7 @@ class Settings:
 
         self.NETWORK_NAME = _conf_get(conf, 'network', 'name', default=self.NETWORK_NAME)
         self.MULTIREDDIT = _conf_get(conf, 'network', 'multireddit', default=self.MULTIREDDIT)
+        self.MULTI_OWNER = _conf_get(conf, 'network', 'multi-owner', default=self.USERNAME)
 
         self.DEFAULT_MODS = _conf_get(conf, 'network', 'mods', default=self.DEFAULT_MODS)
         self.WIKI_PAGES = _conf_get(conf, 'network', 'wiki-pages', default=self.WIKI_PAGES)
@@ -71,6 +72,15 @@ class Settings:
 
         self.DISCORD_CLIENTID = _conf_get(conf, 'discord', 'client_id', default=self.DISCORD_CLIENTID)
         self.DISCORD_TOKEN = _conf_get(conf, 'discord', 'token', default=self.DISCORD_TOKEN)
+        self.DISCORD_INBOX_CHAN_ID = _conf_get(conf, 'discord', 'inbox_channel', default=None)
+        self.DISCORD_FALSEPOS_CHAN_ID = _conf_get(conf, 'discord', 'falsepos_channel', default=None)
+        self.DISCORD_OC_CHAN_ID = _conf_get(conf, 'discord', 'oc_channel', default=None)
+        self.DISCORD_GITHUB_CHAN_ID = _conf_get(conf, 'discord', 'github_channel', default=None)
+        self.DISCORD_MOD_CHAN_ID = _conf_get(conf, 'discord', 'mod_channel', default=None)
+
+        self.GITHUB_OAUTH_TOKEN = _conf_get(conf, 'github', 'token', default=None)
+        self.GITHUB_REPO_USER = _conf_get(conf, 'github', 'user', default=None)
+        self.GITHUB_REPO_NAME = _conf_get(conf, 'github', 'repo_name', default=None)
 
     def _load_group(self, conf, group, old_items, update=False):
         # update indicates that we should update the group rather
