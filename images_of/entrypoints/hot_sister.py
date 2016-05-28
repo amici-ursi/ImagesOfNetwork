@@ -15,60 +15,55 @@ from images_of import settings, Reddit
 #import os
 
 # defines the main and sister subreddits, and how many posts to list in the sidebar
-CHILDREN = sorted([sub['name'] for sub in settings.CHILD_SUBS])
 PLACES_MULTI_NAME = 'imagesofplaces'
 DECADES_MULTI_NAME = 'imagesofthedecades'
 POSTS_TO_LIST = 5
 START_DELIM = '[](/hot-sister-start)'
 END_DELIM = '[](/hot-sister-end)'
 
-# log into reddit
-#print("logging into hot_sister")
-#client_username = os.environ.get("hot_sister_username")
-#print("client_username: {}".format(client_username))
-#client_password = os.environ.get("hot_sister_password")
-#print("client_password: {}".format(client_password))
-#r = praw.Reddit(user_agent="hot_sister fork by /u/amici_ursi")
-#r.login(client_username, client_password)
-
-
-
 def main():
-    #r is for ...
     r = Reddit('{} hot_sister v3 - /u/{}'.format(settings.NETWORK_NAME, settings.USERNAME))
-    #log in
-    r.login(settings.USERNAME, settings.PASSWORD)
-    #identify the places multireddit
-    PLACES_MULTI = r.get_multireddit(settings.USERNAME, PLACES_MULTI_NAME)
-    #make the places post list
-    PLACES_LIST_TEXT = str()
-    for (i, post) in enumerate(PLACES_MULTI.get_hot(limit=POSTS_TO_LIST)):
-        PLACES_LIST_TEXT += ' * [%s](%s)\n' % (post.title, post.permalink)
-    #identify the decades multireddit
-    DECADES_MULTI = r.get_multireddit(settings.USERNAME, DECADES_MULTI_NAME)
-    #make the decades post list
-    DECADES_LIST_TEXT = str()
-    for (i, post) in enumerate(DECADES_MULTI.get_hot(limit=POSTS_TO_LIST)):
-        DECADES_LIST_TEXT += ' * [%s](%s)\n' % (post.title, post.permalink)
-    #combine places and decades lists
-    COMBINED_TEXT = "* Places:\n{}\n\n* Times:\n{}".format(PLACES_LIST_TEXT, DECADES_LIST_TEXT)
-    #update the children sidebars
-    for CHILD in CHILDREN:
-        #say who we're updating
-        print("running on {}".format(CHILD))
-        child = r.get_subreddit(CHILD)
-        #get the child's sidebar
-        current_sidebar = child.get_settings()['description']
-        current_sidebar = html.parser.HTMLParser().unescape(current_sidebar)
-        #find the delimiters and what's between them
-        replace_pattern = re.compile('%s.*?%s' % (re.escape(START_DELIM), re.escape(END_DELIM)), re.IGNORECASE|re.DOTALL|re.UNICODE)
-        #replace the sidebar text with the combined list
-        new_sidebar = re.sub(replace_pattern,
-                            '%s\\n\\n%s\\n%s' % (START_DELIM, COMBINED_TEXT, END_DELIM),
-                            current_sidebar)
-        #update the child's sidebar
-        child.update_settings(description=new_sidebar)
+    r.oauth()
 
+    # places multireddit
+    places_multi = r.get_multireddit(settings.USERNAME, PLACES_MULTI_NAME)
+    places_list_text = str()
+    for post in places_multi.get_hot(limit=POSTS_TO_LIST):
+        places_list_text += ' * [%s](%s)\n' % (post.title, post.permalink)
+
+    # decades multireddit
+    decades_multi = r.get_multireddit(settings.USERNAME, DECADES_MULTI_NAME)
+    decades_list_text = str()
+    for (i, post) in enumerate(DECADES_MULTI.get_hot(limit=POSTS_TO_LIST)):
+        decades_list_text += ' * [%s](%s)\n' % (post.title, post.permalink)
+
+    # bring it together
+    combined_text= "* Places:\n{}\n\n* Times:\n{}".format(places_list_text, decades_list_text)
+
+    # set up all the children
+    children = sorted([sub['name'] for sub in settings.CHILD_SUBS])
+    for child in children:
+        print("running on {}".format(child))
+        sub = r.get_subreddit(child)
+
+        current_sidebar = sub.get_settings()['description']
+        current_sidebar = html.unescape(current_sidebar)
+
+        # ew
+        replace_pattern = re.compile('%s.*?%s'.format(
+                re.escape(START_DELIM),
+                re.escape(END_DELIM)),
+            re.IGNORECASE|re.DOTALL|re.UNICODE)
+
+        # ew
+        new_sidebar = re.sub(replace_pattern,
+                            '{}\\n\\n{}\\n{}'.format(
+                                START_DELIM,,
+                                combinex_text,
+                                END_DELIM),
+                            current_sidebar)
+
+        sub.update_settings(description=new_sidebar)
 
 
 if __name__ == '__main__':
