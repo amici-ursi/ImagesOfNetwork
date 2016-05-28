@@ -98,7 +98,7 @@ of subreddits, and each of those are going to copy settings from the master.
 
 Go ahead and create your master subreddit. Set it up the way you want. Privacy
 settings, flairs, you name it, the basic settings, at least, will all be copied
-over when we start making the *real* subs in our netowrk. Just not wiki pages.
+over when we start making the *real* subs in our network. Just not wiki pages.
 They're handled separately, mostly for moderation purposes.
 
 Make sure you at least create the wiki pages 'userblacklist' and 'subredditblacklist'.
@@ -127,7 +127,7 @@ what it's going to do by using the `--dry-run` flag. We won't hit reddit, but it
 should at least give you an idea of what's going to happen.
 
 Now we probably want to do something with it. It's time to move back to our settings
-file. In settings.toml, you'll find a number of [slave.subname] sections. Create a
+file. In settings.toml, you'll find a number of [child.subname] sections. Create a
 section for your new subreddit with all the configuration you need. There's a template
 to give you an idea of how things work.
 
