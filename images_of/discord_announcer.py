@@ -252,7 +252,7 @@ class DiscordBot:
         if action in ISSUE_ACTION_FILTER:
 
             title = event.payload['issue'].title
-            user = event.payload['issue'].user
+            user = event.actor.login
             url = event.payload['issue'].html_url
 
             desc = 'GitHub Issue __{}__ by **{}**:\n```\n{}\n```\r'.format(action, user, title)
