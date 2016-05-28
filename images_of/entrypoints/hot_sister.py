@@ -58,7 +58,7 @@ def main():
         # ew
         new_sidebar = re.sub(replace_pattern,
                             '{}\\n\\n{}\\n{}'.format(
-                                START_DELIM,,
+                                START_DELIM,
                                 combinex_text,
                                 END_DELIM),
                             current_sidebar)
