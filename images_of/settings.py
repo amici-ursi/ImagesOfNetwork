@@ -72,11 +72,13 @@ class Settings:
 
         self.DISCORD_CLIENTID = _conf_get(conf, 'discord', 'client_id', default=self.DISCORD_CLIENTID)
         self.DISCORD_TOKEN = _conf_get(conf, 'discord', 'token', default=self.DISCORD_TOKEN)
+
         self.DISCORD_INBOX_CHAN_ID = _conf_get(conf, 'discord', 'inbox_channel', default=None)
         self.DISCORD_FALSEPOS_CHAN_ID = _conf_get(conf, 'discord', 'falsepos_channel', default=None)
         self.DISCORD_OC_CHAN_ID = _conf_get(conf, 'discord', 'oc_channel', default=None)
         self.DISCORD_GITHUB_CHAN_ID = _conf_get(conf, 'discord', 'github_channel', default=None)
         self.DISCORD_MOD_CHAN_ID = _conf_get(conf, 'discord', 'mod_channel', default=None)
+        self.DISCORD_KEEPALIVE_CHAN_ID = _conf_get(conf, 'discord', 'keepalive_channel', default=None)
 
         self.GITHUB_OAUTH_TOKEN = _conf_get(conf, 'github', 'token', default=None)
         self.GITHUB_REPO_USER = _conf_get(conf, 'github', 'user', default=None)

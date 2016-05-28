@@ -40,6 +40,7 @@ falsepos_channel = 'channel_id'
 oc_channel = 'channel_id'
 github_channel = 'channel_id'
 mod_channel = 'channel_id'
+keepalive_channel = 'channel_id'
 
 [github]
 token = 'oauth_token'
