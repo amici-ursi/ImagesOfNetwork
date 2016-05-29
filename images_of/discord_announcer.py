@@ -132,7 +132,7 @@ class DiscordBot:
             if message.is_root:
                 msg_type = 'post comment'
             else:
-                msg_type == 'comment reply'
+                msg_type = 'comment reply'
 
         notification = ("New __{}__ from **/u/{}**: \n```\n{}\n```".format(
             msg_type, message.author.name, msg_body))
