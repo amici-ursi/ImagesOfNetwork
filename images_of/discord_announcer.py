@@ -227,11 +227,11 @@ class DiscordBot:
         """Takes a GitHub PushEvent and returns a markdown-formatted message
         that can be relayed to the Discord channel."""
 
-        push_message = 'New Push to branch: {}'.format(
-            event.payload['ref'].replace('refs/heads/', ''))
+        push_message = 'New Push to branch `{}` by **{}**`:\r\n'.format(
+            event.payload['ref'].replace('refs/heads/', ''), event.actor.login)
 
         for com in event.payload['commits']:
-            desc = '\n\r\nCommit `{}` by `{}`:\n'.format(com['sha'], com['author']['name'])
+            desc = '\nCommit `{}` by `{}`:\n'.format(com['sha'], com['author']['name'])
             desc += '```\n{}```\n'.format(com['message'])
             desc += 'https://github.com/amici-ursi/ImagesOfNetwork/commit/{}'.format(com['sha'])
             #desc += '\n---\n'
