@@ -3917,6 +3917,7 @@ ignore = [
     'san diego',
     'texas',
     'tx',
+    'xbox'
 ]
 ignore-case = [
     'CO',
@@ -3941,6 +3942,7 @@ blacklist = [
     'sneks',
     'washingtondc',
     'yugioh',
+    'nba2k',
 ]
 
 [child.imagesofnebraska]
