@@ -50,6 +50,7 @@ class DiscordBot:
         CLIENT.event(self.on_ready)
 
         self.last_oc_id = None
+        self.oc_stream_placeholder = None
         self.last_modlog_action = None
 
         self.ghub = github3.login(token=settings.GITHUB_OAUTH_TOKEN)
@@ -126,8 +127,15 @@ class DiscordBot:
                 i += 1
                 msg_body += '{}: {}\n'.format(i, msg[2])
 
+        msg_type = TYPES[message.name[:2]]
+        if msg_type == 'comment':
+            if message.is_root:
+                msg_type = 'post comment'
+            else:
+                msg_type == 'comment reply'
+
         notification = ("New __{}__ from **/u/{}**: \n```\n{}\n```".format(
-            TYPES[message.name[:2]], message.author.name, msg_body))
+            msg_type, message.author.name, msg_body))
 
         #Add permalink for comment replies
         if message.name[:2] == 't1':
@@ -141,23 +149,30 @@ class DiscordBot:
     async def _process_oc_stream(self):
         oc_multi = self.reddit.get_multireddit(settings.MULTI_OWNER, settings.MULTIREDDIT)
 
-        if self.last_oc_id is None:
+        if self.oc_stream_placeholder is None:
             limit = 125
         else:
             limit = round(25 * RETRY_MINUTES)
 
-        oc_stream = list(oc_multi.get_new(limit=limit, place_holder=self.last_oc_id))
-        LOG.debug('[OC] len(oc_stream)=%s self.last_oc_id=%s', len(oc_stream), self.last_oc_id)
+        oc_stream = list(oc_multi.get_new(limit=limit, place_holder=self.oc_stream_placeholder))
+        LOG.debug('[OC] len(oc_stream)=%s oc_stream_placeholder=%s',
+                  len(oc_stream), self.oc_stream_placeholder)
 
         x = 0
         for submission in oc_stream:
             x += 1
             if submission.id == self.last_oc_id:
+                LOG.debug('[OC] Found last announced OC; stopping processing')
+                break
+
+            elif submission.id == self.oc_stream_placeholder:
                 LOG.debug('[OC] Found start of last stream; stopping processing')
                 break
 
             else:
                 if submission.author.name.lower() != settings.USERNAME:
+
+                    self.last_oc_id = submission.id
 
                     LOG.info('[OC] OC Post from /u/%s found: %s',
                              submission.author.name, submission.permalink)
@@ -165,7 +180,9 @@ class DiscordBot:
                     await CLIENT.send_message(OC_CHAN,
                                               '---\n**New __OC__** by **/u/{}**:\r\n{}'.format(
                                                   submission.author.name, submission.permalink))
-        self.last_oc_id = oc_stream[0].id
+
+
+        self.oc_stream_placeholder = oc_stream[0].id
 
         LOG.info('[OC] Proccessed %s items', x)
     ## ======================================================
@@ -174,9 +191,11 @@ class DiscordBot:
 
         repo = self.ghub.repository(settings.GITHUB_REPO_USER, settings.GITHUB_REPO_NAME)
 
-        event_queue = deque(maxlen=25)
+        max_length = (10 * RETRY_MINUTES)
 
-        e_i = repo.iter_events(number=25)
+        event_queue = deque(maxlen=max_length)
+
+        e_i = repo.iter_events(number=max_length)
 
         cont_loop = True
         date_max = (datetime.datetime.today() + datetime.timedelta(days=-1)).utctimetuple()
@@ -189,7 +208,7 @@ class DiscordBot:
                 cont_loop = False
                 continue
 
-            if len(event_queue) == 5:
+            if len(event_queue) == max_length:
                 cont_loop = False
                 continue
 
@@ -284,7 +303,7 @@ class DiscordBot:
         if self.last_modlog_action is None:
             limit = 100
         else:
-            limit = 50
+            limit = round(25 * RETRY_MINUTES)
 
         LOG.debug('[ModLog] Getting network modlog: limit=%s place_holder=%s',
                   limit, self.last_modlog_action)
