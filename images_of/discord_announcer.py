@@ -131,7 +131,7 @@ class DiscordBot:
 
         #Add permalink for comment replies
         if message.name[:2] == 't1':
-            notification += ('\n**Permalink:** {}\r\n '.format(message.permalink))
+            notification += ('\n**Permalink:** {}?context=10\r\n '.format(message.permalink))
 
         return notification
 
