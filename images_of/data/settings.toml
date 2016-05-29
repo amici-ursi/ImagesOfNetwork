@@ -2761,21 +2761,15 @@ whitelist = [
 [child.imagesofgeorgia]
 search = [
     'Georgians?',
-    'Savannah',
-    'albany..?(ga|georgia)',
-    'athens..?(ga|georgia)',
     'atlanta',
-    'columbus..?(georgia|ga)',
     'ga',
     'georgia',
     'johns.creek',
     'macon',
-    'roswell..?(ga|georgia)',
     'sandy.springs',
     'warner.robins',
 ]
 ignore = [
-    'a savannah',
     'georgia graham',
     'republic of georgia',
 ]
