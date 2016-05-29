@@ -227,7 +227,7 @@ class DiscordBot:
         """Takes a GitHub PushEvent and returns a markdown-formatted message
         that can be relayed to the Discord channel."""
 
-        push_message = 'New Push to branch `{}` by **{}**`:\r\n'.format(
+        push_message = 'New Push to branch `{}` by **{}**:\r\n'.format(
             event.payload['ref'].replace('refs/heads/', ''), event.actor.login)
 
         for com in event.payload['commits']:
