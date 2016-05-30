@@ -45,6 +45,7 @@ class DiscordBot:
     def __init__(self, reddit):
         self.reddit = reddit
         self.keep_alive_time = datetime.datetime.now()
+        self.run_init = False
 
         global CLIENT
         CLIENT.event(self.on_ready)
@@ -392,8 +393,11 @@ class DiscordBot:
 
         await CLIENT.send_message(KEEPALIVE_CHAN, 'Ready : {}'.format(datetime.datetime.now()))
 
-        await self._run()
-        LOG.warning("Thread returning from 'await self._run'!")
+        if not self.run_init:
+            self.run_init = True
+            await self._run()
+            LOG.warning("Thread returning from 'await self._run'!")
+            self.run_init = False
 
     ##------------------------------------
 
