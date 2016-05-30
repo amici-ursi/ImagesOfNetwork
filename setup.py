@@ -15,6 +15,8 @@ setup(
         "click",
         "praw==3.4",
         "pytoml",
+        "github3.py",
+        "discord.py",
     ],
 
     entry_points = {
