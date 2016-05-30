@@ -12,10 +12,15 @@ def main():
     Check for blacklist requests and add users to blacklist.
     """
 
-    r = Reddit('{} Update User-Requested Blacklist v0.2 /u/{}'
+    r = Reddit('{} Update User-Requested Blacklist v0.3 /u/{}'
                .format(settings.NETWORK_NAME, settings.USERNAME))
     r.oauth()
 
+    process_modmail(r)
+    process_inbox(r)
+
+
+def process_modmail(r):
     add_users = set()
     orig_blacklist = set()
     requests = list()
@@ -23,6 +28,14 @@ def main():
     sub = settings.PARENT_SUB
 
     modmail_inbox = r.get_mod_mail(sub)
+
+
+    already_added_message = ('It appears that you are already on the {} Network blacklist.\r\n\n'
+                             .format(settings.NETWORK_NAME))
+    already_added_message += 'If your images are still being crossposted, please let us know so we can investigate.'
+
+    success_message = 'You have been added to the user blacklist and your images will no longer be'
+    success_message += (' crossposted on the {} Network.'.format(settings.NETWORK_NAME))
 
     for m in [i for i in modmail_inbox if not i.replies]:
 
@@ -37,19 +50,58 @@ def main():
                 requests.append(m)
 
             else:
-                m.reply('It appears that you are already on the {} Network blacklist. If your images are still being crossposted, please let us know so we can investigate.'
-                        .format(settings.NETWORK_NAME))
+                m.reply(already_added_message)
                 LOG.info('User {} is already in blacklist; skipping'.format(m.author.name))
 
     if add_users:
 
         if update_user_blacklist(r, add_users, orig_blacklist):
             for m in requests:
-                m.reply('You have been added to the user blacklist and your images will no longer be crossposted on the {} Network.'
-                        .format(settings.NETWORK_NAME))
+                m.reply(success_message)
 
     else:
-        LOG.info('No new blacklist requests to process')
+        LOG.info('No new modmail blacklist requests to process')
+
+def process_inbox(r):
+    add_users = set()
+    orig_blacklist = set()
+    requests = list()
+
+    inbox = r.get_messages()
+
+    already_added_message = ('It appears that you are already on the {} Network blacklist.\r\n\n'
+                             .format(settings.NETWORK_NAME))
+    already_added_message += 'If your images are still being crossposted, please let us know so we can investigate.'
+
+    success_message = 'You have been added to the user blacklist and your images will no longer be'
+    success_message += (' crossposted on the {} Network.'.format(settings.NETWORK_NAME))
+
+    for m in [i for i in inbox if not i.replies]:
+
+        if m.subject.lower() == 'please blacklist me':
+
+            if not len(orig_blacklist):
+                orig_blacklist = get_user_blacklist(r)
+
+            author = m.author.name.lower()
+            if '/u/{}'.format(author) not in orig_blacklist:
+                add_users.add(author)
+                requests.append(m)
+
+            else:
+                m.reply(already_added_message)
+                m.mark_as_read()
+                LOG.info('User %s is already in blacklist; skipping', m.author.name)
+
+    if add_users:
+
+        if update_user_blacklist(r, add_users, orig_blacklist):
+            for m in requests:
+                m.reply(success_message)
+                m.mark_as_read()
+
+    else:
+        LOG.info('No new inbox blacklist requests to process')
 
 
 
@@ -69,8 +121,8 @@ def update_user_blacklist(r, add_users, orig_blacklist):
     page = 'userblacklist'
     blacklist = set(orig_blacklist)
 
-    LOG.debug('Original blacklist: {}'.format(orig_blacklist))
-    LOG.info('Adding users: {}'.format(add_users))
+    LOG.debug('Original blacklist: %s', orig_blacklist)
+    LOG.info('Adding users: %s', add_users)
 
     blacklist.update(['/u/'+u for u in add_users])
 
