@@ -102,7 +102,7 @@ class DiscordBot:
             LOG.info('[Inbox] Not announcing message type: "remove"/"mod removal"')
             return False
 
-        elif 'blacklist me' in message.subject:
+        elif message.subject.lower() == 'please blacklist me':
             # Don't announce blacklist requests
             message.mark_as_read()
             LOG.info('[Inbox] Not announcing message type: "blacklist request"')
