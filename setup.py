@@ -13,10 +13,11 @@ setup(
 
     install_requires = [
         "click",
-        "praw==3.4",
+        "praw==3.5",
         "pytoml",
         "github3.py",
         "discord.py==0.10.0a0",
+        "sphinx",
     ],
 
     entry_points = {
