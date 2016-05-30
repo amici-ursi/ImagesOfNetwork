@@ -435,6 +435,7 @@ class DiscordBot:
         #e.set_debug(True)
 
         while True:
+            global CLIENT
             try:
                 LOG.info('[Discord] Starting Discord client...')
                 CLIENT.run(TOKEN)
@@ -442,5 +443,8 @@ class DiscordBot:
                 LOG.error('%s: %s', type(ex), ex)
             else:
                 LOG.warning("Thread returned from 'CLIENT.run()' blocking call!")
+                asyncio.sleep(30)
+
+                CLIENT = discord.Client()
 
 
