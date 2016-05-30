@@ -50,9 +50,9 @@ class DiscordBot:
         global CLIENT
         CLIENT.event(self.on_ready)
 
-        self.last_oc_id = None
-        self.oc_stream_placeholder = None
-        self.last_modlog_action = None
+        self.last_oc_id = dict()
+        self.oc_stream_placeholder = dict()
+        self.last_modlog_action = dict()
 
         self.count_messages = 0
         self.count_oc = 0
@@ -154,33 +154,33 @@ class DiscordBot:
 
     ## ======================================================
 
-    async def _process_oc_stream(self):
-        oc_multi = self.reddit.get_multireddit(settings.MULTI_OWNER, settings.MULTIREDDIT)
+    async def _process_oc_stream(self, multi):
+        oc_multi = self.reddit.get_multireddit(settings.MULTI_OWNER, multi)
 
-        if self.oc_stream_placeholder is None:
+        if self.oc_stream_placeholder.get(multi, None) is None:
             limit = 125
         else:
             limit = round(25 * RETRY_MINUTES)
 
-        oc_stream = list(oc_multi.get_new(limit=limit, place_holder=self.oc_stream_placeholder))
+        oc_stream = list(oc_multi.get_new(limit=limit, place_holder=self.oc_stream_placeholder.get(multi, None)))
         LOG.debug('[OC] len(oc_stream)=%s oc_stream_placeholder=%s',
-                  len(oc_stream), self.oc_stream_placeholder)
+                  len(oc_stream), self.oc_stream_placeholder.get(multi, None))
 
         x = 0
         for submission in oc_stream:
             x += 1
-            if submission.id == self.last_oc_id:
-                LOG.debug('[OC] Found last announced OC; stopping processing')
+            if submission.id == self.last_oc_id.get(multi, None):
+                LOG.debug('[OC] Found last announced %s OC; stopping processing', multi)
                 break
 
-            elif submission.id == self.oc_stream_placeholder:
-                LOG.debug('[OC] Found start of last stream; stopping processing')
+            elif submission.id == self.oc_stream_placeholder.get(multi, None):
+                LOG.debug('[OC] Found start of last %s stream; stopping processing', multi)
                 break
 
             else:
                 if submission.author.name.lower() != settings.USERNAME:
 
-                    self.last_oc_id = submission.id
+                    self.last_oc_id[multi] = submission.id
 
                     LOG.info('[OC] OC Post from /u/%s found: %s',
                              submission.author.name, submission.permalink)
@@ -190,10 +190,10 @@ class DiscordBot:
                                                   submission.author.name, submission.permalink))
 
 
-        self.oc_stream_placeholder = oc_stream[0].id
+        self.oc_stream_placeholder[multi] = oc_stream[0].id
 
         self.count_oc += x
-        LOG.info('[OC] Proccessed %s items', x)
+        LOG.info('[OC] Proccessed %s %s items', x, multi)
     ## ======================================================
 
     async def _process_github_events(self):
@@ -306,29 +306,31 @@ class DiscordBot:
 
     ## ======================================================
 
-    async def _process_network_modlog(self):
+    async def _process_network_modlog(self, multi):
         action_queue = deque(maxlen=25)
         url = 'https://www.reddit.com/user/{}/m/{}/about/log'.format(
-            settings.MULTI_OWNER, settings.MULTIREDDIT)
+            settings.MULTI_OWNER, multi)
 
-        if self.last_modlog_action is None:
+        if self.last_modlog_action.get(multi, None) is None:
             limit = 100
         else:
             limit = round(25 * RETRY_MINUTES)
 
-        LOG.debug('[ModLog] Getting network modlog: limit=%s place_holder=%s',
-                  limit, self.last_modlog_action)
-        content = self.reddit.get_content(url, limit=limit, place_holder=self.last_modlog_action)
+        LOG.debug('[ModLog] Getting %s modlog: limit=%s place_holder=%s',
+                  multi, limit, self.last_modlog_action.get(multi, None))
+
+        content = self.reddit.get_content(url, limit=limit,
+                                          place_holder=self.last_modlog_action.get(multi, None))
 
         modlog = list(content)
 
-        LOG.info('[ModLog] Processing %s modlog actions...', len(modlog))
+        LOG.info('[ModLog] Processing %s %s modlog actions...', len(modlog), multi)
         self.count_modlog += len(modlog)
 
         for entry in [e for e in modlog if e.action in MODLOG_ACTIONS]:
 
-            if entry.id == self.last_modlog_action:
-                LOG.debug('[ModLog] Found previous modlog placeholder entry.')
+            if entry.id == self.last_modlog_action.get(multi, None):
+                LOG.debug('[ModLog] Found previous %s modlog placeholder entry.', multi)
                 break
 
             else:
@@ -338,8 +340,8 @@ class DiscordBot:
             entry = action_queue.pop()
             await self._announce_mod_action(entry)
 
-        self.last_modlog_action = modlog[0].id
-        LOG.debug('[ModLog] Finished processing network modlog.')
+        self.last_modlog_action[multi] = modlog[0].id
+        LOG.debug('[ModLog] Finished processing %s modlog.', multi)
 
 
     ##------------------------------------
@@ -431,13 +433,15 @@ class DiscordBot:
                     await self._relay_inbox_message(message)
 
                 LOG.debug('[OC] Checking for new OC submissions...')
-                await self._process_oc_stream()
+                for multi in settings.MULTIREDDITS:
+                    await self._process_oc_stream(multi)
 
                 # Check GitHub RSS feed....
                 await self._process_github_events()
 
-                #Process network subreddit mod-log for new events...
-                await self._process_network_modlog()
+                for multi in settings.MULTIREDDITS:
+                    #Process network subreddit mod-log for new events...
+                    await self._process_network_modlog(multi)
 
                 await self._client_keepalive()
 

@@ -51,6 +51,7 @@ class Settings:
 
         self.NETWORK_NAME = _conf_get(conf, 'network', 'name', default=self.NETWORK_NAME)
         self.MULTIREDDIT = _conf_get(conf, 'network', 'multireddit', default=self.MULTIREDDIT)
+        self.MULTIREDDITS = _conf_get(conf, 'network', 'multireddits', default=self.MULTIREDDITS)
         self.MULTI_OWNER = _conf_get(conf, 'network', 'multi-owner', default=self.USERNAME)
 
         self.DEFAULT_MODS = _conf_get(conf, 'network', 'mods', default=self.DEFAULT_MODS)
@@ -127,6 +128,7 @@ class Settings:
 
     NETWORK_NAME = ""
     MULTIREDDIT = ""
+    MULTIREDDITS = []
 
     DEFAULT_MODS = []
     WIKI_PAGES = []
