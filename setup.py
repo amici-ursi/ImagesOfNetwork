@@ -16,7 +16,7 @@ setup(
         "praw==3.4",
         "pytoml",
         "github3.py",
-        "discord.py",
+        "discord.py==0.10.0a0",
     ],
 
     entry_points = {
