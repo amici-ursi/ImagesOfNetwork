@@ -53,6 +53,11 @@ class DiscordBot:
         self.oc_stream_placeholder = None
         self.last_modlog_action = None
 
+        self.count_messages = 0
+        self.count_oc = 0
+        self.count_gh_events = 0
+        self.count_modlog = 0
+
         self.ghub = github3.login(token=settings.GITHUB_OAUTH_TOKEN)
         repo = self.ghub.repository(settings.GITHUB_REPO_USER, settings.GITHUB_REPO_NAME)
         self.last_github_event = repo.iter_events(number=1).next().id
@@ -60,6 +65,8 @@ class DiscordBot:
     ## ======================================================
 
     async def _relay_inbox_message(self, message):
+
+        self.count_messages += 1
 
         # Determine if it's a message that we do NOT want to relay...
         if self._is_relayable_message(message):
@@ -184,6 +191,7 @@ class DiscordBot:
 
         self.oc_stream_placeholder = oc_stream[0].id
 
+        self.count_oc += x
         LOG.info('[OC] Proccessed %s items', x)
     ## ======================================================
 
@@ -207,6 +215,8 @@ class DiscordBot:
             if event.id == self.last_github_event:
                 cont_loop = False
                 continue
+
+            self.count_gh_events += 1
 
             if len(event_queue) == max_length:
                 cont_loop = False
@@ -312,6 +322,7 @@ class DiscordBot:
         modlog = list(content)
 
         LOG.info('[ModLog] Processing %s modlog actions...', len(modlog))
+        self.count_modlog += len(modlog)
 
         for entry in [e for e in modlog if e.action in MODLOG_ACTIONS]:
 
@@ -387,9 +398,21 @@ class DiscordBot:
     ##------------------------------------
 
     async def _client_keepalive(self):
+
         if (self.keep_alive_time + datetime.timedelta(minutes=15)) <= datetime.datetime.now():
-            await CLIENT.send_message(KEEPALIVE_CHAN, 'ping : {}'.format(datetime.datetime.now()))
+            msg = 'Messages: **{}**\n'.format(self.count_messages)
+            msg += 'Multireddit posts: **{}**\n'.format(self.count_oc)
+            msg += 'GitHub Events: **{}**\n'.format(self.count_gh_events)
+            msg += 'Network Modlog Actions: **{}**\r\n'.format(self.count_modlog)
+
+            await CLIENT.send_message(KEEPALIVE_CHAN, msg)
+
             self.keep_alive_time = datetime.datetime.now()
+            self.count_gh_events = 0
+            self.count_messages = 0
+            self.count_modlog = 0
+            self.count_oc = 0
+
     ##------------------------------------
 
     @asyncio.coroutine
