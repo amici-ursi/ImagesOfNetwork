@@ -151,11 +151,11 @@ def format_github_issue_event(event):
         user = event.actor.login
         url = event.payload['issue'].html_url
 
-        if action in ["unlabeled", "labeled"]:
+        if (action == "unlabeled") or (action == "labeled"):
             label = event.payload['label']
             desc = '**{}** __{}__ **{}** on  issue `{}`'.format(user, action, label, title)
 
-        elif action in ["unassigned", "assigned"]:
+        elif (action == "unassigned") or (action == "assigned"):
             assignee = event.payload['assignee']
             desc = '**{}** __{}__ `{}` on issue `{}`'.format(user, action, assignee, title)
 
