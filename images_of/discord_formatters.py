@@ -112,7 +112,7 @@ def format_github_issue_comment(event):
 
         desc = 'GitHub Comment by **{}** on Issue `{}`:'.format(user, title)
         desc += '\n```\n{}\n```\n'.format(comment)
-        desc += '**Link**: {}\r\n'.format(url)
+        desc += '**Link**: {}\r\n '.format(url)
 
         return desc
 
@@ -151,11 +151,11 @@ def format_github_issue_event(event):
         user = event.actor.login
         url = event.payload['issue'].html_url
 
-        if any(action in ["unlabeled", "labeled"]):
+        if action in ["unlabeled", "labeled"]:
             label = event.payload['label']
             desc = '**{}** __{}__ **{}** on  issue `{}`'.format(user, action, label, title)
 
-        elif any(action in ["unassigned", "assigned", ]):
+        elif action in ["unassigned", "assigned"]:
             assignee = event.payload['assignee']
             desc = '**{}** __{}__ `{}` on issue `{}`'.format(user, action, assignee, title)
 
