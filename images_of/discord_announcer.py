@@ -68,8 +68,8 @@ class DiscordBot:
         self.last_github_event = repo.iter_events(number=1).next().id
 
     def _setup_client(self):
-        loop = asyncio.get_event_loop()
-        loop.slow_callback_duration = 10
+        #loop = asyncio.get_event_loop()
+        #loop.slow_callback_duration = 10
         self.client = discord.Client()
         self.client.event(self.on_ready)
 
@@ -104,7 +104,7 @@ class DiscordBot:
         if self.oc_stream_placeholder.get(multi, None) is None:
             limit = 25
         else:
-            limit = round(25 * RUN_INTERVAL)
+            limit = round(40 * RUN_INTERVAL)
 
         oc_stream = list(oc_multi.get_new(limit=limit,
                                           place_holder=self.oc_stream_placeholder.get(multi, None)))
@@ -144,7 +144,7 @@ class DiscordBot:
         repo = self.ghub.repository(
             settings.GITHUB_REPO_USER, settings.GITHUB_REPO_NAME)
 
-        max_length = round(10 * RUN_INTERVAL)
+        max_length = round(20 * RUN_INTERVAL)
 
         event_queue = deque(maxlen=max_length)
 
@@ -205,9 +205,9 @@ class DiscordBot:
             settings.MULTIREDDIT_USER, multi)
 
         if self.last_modlog_action.get(multi, None) is None:
-            limit = 25
+            limit = 50
         else:
-            limit = round(25 * RUN_INTERVAL)
+            limit = round(50 * RUN_INTERVAL)
 
         LOG.debug('[ModLog] Getting %s modlog: limit=%s place_holder=%s',
                   multi, limit, self.last_modlog_action.get(multi, None))
@@ -264,7 +264,7 @@ class DiscordBot:
 
             await self.client.send_message(self.stats_chan, msg)
 
-            x = randint(1, 20)
+            x = randint(1, 40)
             if x == 5:
                 await self.client.send_message(self.github_chan, "*Bite my shiny, metal ass!*")
 
@@ -283,14 +283,18 @@ class DiscordBot:
         while True:
             await self._run_once()
             LOG.info('Sleeping for %s minute(s)...', RUN_INTERVAL)
+            print()
             await asyncio.sleep(60 * RUN_INTERVAL)
 
     async def _run_once(self):
         try:
             await self._process_messages()
+            asyncio.sleep(5)
             await self._process_github_events()
             for multi in settings.MULTIREDDITS:
+                asyncio.sleep(5)
                 await self._process_oc_stream(multi)
+                asyncio.sleep(5)
                 await self._process_network_modlog(multi)
 
         except HTTPException as ex:
