@@ -74,16 +74,25 @@ class Settings:
         self.DISCORD_CLIENTID = _conf_get(conf, 'discord', 'client_id', default=self.DISCORD_CLIENTID)
         self.DISCORD_TOKEN = _conf_get(conf, 'discord', 'token', default=self.DISCORD_TOKEN)
 
-        self.DISCORD_INBOX_CHAN_ID = _conf_get(conf, 'discord', 'inbox_channel', default=None)
-        self.DISCORD_FALSEPOS_CHAN_ID = _conf_get(conf, 'discord', 'falsepos_channel', default=None)
-        self.DISCORD_OC_CHAN_ID = _conf_get(conf, 'discord', 'oc_channel', default=None)
-        self.DISCORD_GITHUB_CHAN_ID = _conf_get(conf, 'discord', 'github_channel', default=None)
-        self.DISCORD_MOD_CHAN_ID = _conf_get(conf, 'discord', 'mod_channel', default=None)
-        self.DISCORD_KEEPALIVE_CHAN_ID = _conf_get(conf, 'discord', 'keepalive_channel', default=None)
+        self.DISCORD_INBOX_CHAN_ID = _conf_get(conf, 'discord', 'inbox_channel',
+                default=self.DISCORD_INBOX_CHAN_ID)
+        self.DISCORD_FALSEPOS_CHAN_ID = _conf_get(conf, 'discord', 'falsepos_channel',
+                default=self.DISCORD_FALSEPOS_CHAN_ID)
+        self.DISCORD_OC_CHAN_ID = _conf_get(conf, 'discord', 'oc_channel',
+                default=self.DISCORD_OC_CHAN_ID)
+        self.DISCORD_GITHUB_CHAN_ID = _conf_get(conf, 'discord', 'github_channel',
+                default=self.DISCORD_GITHUB_CHAN_ID)
+        self.DISCORD_MOD_CHAN_ID = _conf_get(conf, 'discord', 'mod_channel',
+                default=self.DISCORD_MOD_CHAN_ID)
+        self.DISCORD_KEEPALIVE_CHAN_ID = _conf_get(conf, 'discord', 'keepalive_channel',
+                default=self.DISCORD_KEEPALIVE_CHAN_ID)
 
-        self.GITHUB_OAUTH_TOKEN = _conf_get(conf, 'github', 'token', default=None)
-        self.GITHUB_REPO_USER = _conf_get(conf, 'github', 'user', default=None)
-        self.GITHUB_REPO_NAME = _conf_get(conf, 'github', 'repo_name', default=None)
+        self.GITHUB_OAUTH_TOKEN = _conf_get(conf, 'github', 'token',
+                default=self.GITHUB_OAUTH_TOKEN)
+        self.GITHUB_REPO_USER = _conf_get(conf, 'github', 'user',
+                default=self.GITHUB_REPO_USER)
+        self.GITHUB_REPO_NAME = _conf_get(conf, 'github', 'repo_name',
+                default=self.GITHUB_REPO_NAME)
 
     def _load_group(self, conf, group, old_items, update=False):
         # update indicates that we should update the group rather
@@ -145,6 +154,17 @@ class Settings:
 
     DISCORD_CLIENTID = ""
     DISCORD_TOKEN = ""
+
+    DISCORD_INBOX_CHAN_ID = None
+    DISCORD_FALSEPOS_CHAN_ID = None
+    DISCORD_OC_CHAN_ID = None
+    DISCORD_GITHUB_CHAN_ID = None
+    DISCORD_MOD_CHAN_ID = None
+    DISCORD_KEEPALIVE_CHAN_ID = None
+
+    GITHUB_OAUTH_TOKEN = ""
+    GITHUB_REPO_USER = ""
+    GITHUB_REPO_NAME = ""
 
 settings = Settings()
 

@@ -36,17 +36,17 @@ name = 'imagesofnetwork'
 [discord]
 client_id = 'client_id'
 token = 'token'
-inbox_channel = 'channel_id'
-falsepos_channel = 'channel_id'
-oc_channel = 'channel_id'
-github_channel = 'channel_id'
-mod_channel = 'channel_id'
-keepalive_channel = 'channel_id'
+inbox_channel = '183018837883617280'
+falsepos_channel = '183605928514420736'
+oc_channel = '160563031384915969'
+github_channel = '176076981857681418'
+mod_channel = '160484328206368771'
+keepalive_channel = '186235302480707585'
 
 [github]
 token = 'oauth_token'
-user = 'user_name'
-repo_name = 'repo_name'
+user = 'amici-ursi'
+repo_name = 'ImagesOfNetwork'
 
 [posts]
 extensions = [
