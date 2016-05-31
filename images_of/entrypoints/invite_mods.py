@@ -1,8 +1,8 @@
 import click
 
-from images_of import settings, Reddit
+from images_of import command, settings, Reddit
 
-@click.command()
+@command
 @click.option('--defaults', is_flag=True, help='Invite default moderators')
 @click.option('--cousins', is_flag=True, help='Invite to cousin subs as well as children')
 @click.argument('mods', nargs=-1)

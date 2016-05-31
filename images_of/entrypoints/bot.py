@@ -1,10 +1,10 @@
 import click
 
-from images_of import settings, Reddit
+from images_of import command, settings, Reddit
 from images_of.bot import Bot
 
 
-@click.command()
+@command
 @click.option('--no-post', is_flag=True, help='Do not post to reddit.')
 def main(no_post):
     """Reddit Network scraper and x-poster bot."""

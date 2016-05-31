@@ -1,10 +1,8 @@
-import click
-
-from images_of import settings, Reddit
+from images_of import command, settings, Reddit
 from images_of.discord_announcer import DiscordBot
 
 
-@click.command()
+@command
 def main():
     """Discord Announcer Bot to relay specified information to designated Discord channels."""
 

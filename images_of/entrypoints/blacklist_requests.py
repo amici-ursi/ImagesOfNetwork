@@ -1,12 +1,11 @@
-import click
 import logging
 
-from images_of import settings, Reddit
+from images_of import command, settings, Reddit
 
 LOG = logging.getLogger(__name__)
 
 
-@click.command()
+@command
 def main():
     """
     Check for blacklist requests and add users to blacklist.
