@@ -7,7 +7,7 @@ import images_of
 
 from time import sleep
 from discord.ext import commands
-from images_of import settings, Reddit
+from images_of import command, settings, Reddit
 
 LOG = logging.getLogger(__name__)
 
@@ -104,7 +104,7 @@ def format_message(message):
 
     return notification
 
-
+@command
 def main():
     global CLIENT
     CLIENT = discord.Client()

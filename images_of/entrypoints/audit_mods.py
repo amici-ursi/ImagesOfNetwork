@@ -1,8 +1,8 @@
 import click
 
-from images_of import settings, Reddit
+from images_of import command, settings, Reddit
 
-@click.command()
+@command
 @click.option('--print-mods', is_flag=True, help='List the non-default moderators for all subreddits')
 def main(print_mods):
     """Find subs without mods and disenfranchised mods"""

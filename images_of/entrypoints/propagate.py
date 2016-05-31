@@ -2,7 +2,7 @@ import logging
 
 import click
 
-from images_of import settings, Reddit
+from images_of import command, settings, Reddit
 from images_of.subreddit import Subreddit
 
 LOG = logging.getLogger(__name__)
@@ -69,7 +69,7 @@ def copy_wiki_page(r, page, dom, subs, force):
 
         r.edit_wiki_page(sub, page, new_content)
 
-@click.command()
+@command
 @click.option('--automod', is_flag=True,
               help='Copy automod settings. This is an alias for \'--wiki config/automoderator\'')
 @click.option('--toolbox', is_flag=True, help='Copy toolbox settings')

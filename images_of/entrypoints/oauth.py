@@ -10,7 +10,7 @@ from queue import Queue
 import click
 import praw
 
-from images_of import settings, OAUTH_SCOPE
+from images_of import command, settings, OAUTH_SCOPE
 
 LOG = logging.getLogger(__name__)
 
@@ -42,7 +42,7 @@ class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
         super().__init__(*args, **kwargs)
         self.q = q
 
-@click.command() # just so we have --help available
+@command
 @click.option('-h', '--host', default='127.0.0.1', help='hostname to listen on')
 @click.option('-p', '--port', default=65010, type=int, help='port to listen on')
 def main(host, port):

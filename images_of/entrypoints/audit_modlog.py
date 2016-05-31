@@ -3,9 +3,9 @@ import time
 import datetime
 from time import gmtime
 from datetime import date
-from images_of import settings, Reddit
+from images_of import command, settings, Reddit
 
-@click.command()
+@command
 @click.option('--history-days', help='How many days back into the modlog run. Default is 30 days', default=60)
 def main(history_days):
     """Process modlogs to identify inactive mods"""
@@ -76,8 +76,6 @@ def main(history_days):
         for m in real_mods:
             print('    {}:\n\tActions: {}  \tLast Active: {}'.format(m, mod_action_count.get(m, 0), mod_last_action.get(m, date(1901, 1, 1)))) 
         print()
-
-
 
 
 if __name__ == '__main__':

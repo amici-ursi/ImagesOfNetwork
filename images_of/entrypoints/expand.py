@@ -5,7 +5,7 @@ from textwrap import dedent
 import click
 from praw.errors import SubredditExists, RateLimitExceeded
 
-from images_of import settings, Reddit
+from images_of import command, settings, Reddit
 
 DRY_RUN = False
 LOG = logging.getLogger(__name__)
@@ -133,7 +133,7 @@ def setup_notifications(r, sub):
 
 _start_points = ['creation', 'settings', 'mods', 'wiki', 'flair', 'multireddit', 'notifications']
 
-@click.command()
+@command
 @click.option('-m', '--multi', type=click.Choice(settings.MULTIREDDITS),
               default=settings.MULTIREDDITS[0], help="Which multireddit to add the new sub to.")
 @click.option('--start-at', type=click.Choice(_start_points),

@@ -11,7 +11,7 @@ import re
 import html.parser
 import time
 #import praw
-from images_of import settings, Reddit
+from images_of import command, settings, Reddit
 #import os
 
 # defines the main and sister subreddits, and how many posts to list in the sidebar
@@ -21,6 +21,7 @@ POSTS_TO_LIST = 5
 START_DELIM = '[](/hot-sister-start)'
 END_DELIM = '[](/hot-sister-end)'
 
+@command
 def main():
     r = Reddit('{} hot_sister v3 - /u/{}'.format(settings.NETWORK_NAME, settings.USERNAME))
     r.oauth()

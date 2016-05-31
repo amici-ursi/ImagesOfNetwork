@@ -1,8 +1,8 @@
 import click
 
-from images_of import settings, Reddit
+from images_of import command, settings, Reddit
 
-@click.command()
+@command
 @click.option('-s', '--subject', required=True, help='Message subject')
 @click.option('-m', '--message', required=True, help='Message body')
 def main(subject, message):
