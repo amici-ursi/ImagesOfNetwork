@@ -34,7 +34,7 @@ def main():
     # decades multireddit
     decades_multi = r.get_multireddit(settings.USERNAME, DECADES_MULTI_NAME)
     decades_list_text = str()
-    for (i, post) in enumerate(DECADES_MULTI.get_hot(limit=POSTS_TO_LIST)):
+    for post in decades_multi.get_hot(limit=POSTS_TO_LIST):
         decades_list_text += ' * [%s](%s)\n' % (post.title, post.permalink)
 
     # bring it together
