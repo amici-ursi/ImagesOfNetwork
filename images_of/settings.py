@@ -41,6 +41,7 @@ class Settings:
     def loads(self, raw):
         conf = toml.loads(raw)
 
+        # reddit
         self.USERNAME = _conf_get(conf, 'auth', 'username', default=self.USERNAME)
         self.PASSWORD = _conf_get(conf, 'auth', 'password', default=self.PASSWORD)
 
@@ -49,10 +50,17 @@ class Settings:
         self.REDIRECT_URI = _conf_get(conf, 'auth', 'redirect-uri', default=self.REDIRECT_URI)
         self.REFRESH_TOKEN = _conf_get(conf, 'auth', 'refresh-token', default=self.REFRESH_TOKEN)
 
+        # network
         self.NETWORK_NAME = _conf_get(conf, 'network', 'name', default=self.NETWORK_NAME)
-        self.MULTIREDDIT = _conf_get(conf, 'network', 'multireddit', default=self.MULTIREDDIT)
+
+        multi_user = _conf_get(conf, 'network', 'multireddit-user')
+        if multi_user is not None:
+            self.MULTIREDDIT_USER = multi_user
+            self._multi_user_set = True
+        elif not hasattr(self, '_multi_user_set'):
+            self.MULTIREDDIT_USER = _conf_get(conf, 'auth', 'username', default=self.USERNAME)
+
         self.MULTIREDDITS = _conf_get(conf, 'network', 'multireddits', default=self.MULTIREDDITS)
-        self.MULTI_OWNER = _conf_get(conf, 'network', 'multi-owner', default=self.USERNAME)
 
         self.DEFAULT_MODS = _conf_get(conf, 'network', 'mods', default=self.DEFAULT_MODS)
         self.WIKI_PAGES = _conf_get(conf, 'network', 'wiki-pages', default=self.WIKI_PAGES)
@@ -71,6 +79,7 @@ class Settings:
         update_cousins = _conf_get(conf, 'update_cousins', default=False)
         self.COUSIN_SUBS = self._load_group(conf, 'cousin', self.COUSIN_SUBS, update_cousins)
 
+        # discord
         self.DISCORD_CLIENTID = _conf_get(conf, 'discord', 'client_id', default=self.DISCORD_CLIENTID)
         self.DISCORD_TOKEN = _conf_get(conf, 'discord', 'token', default=self.DISCORD_TOKEN)
 
@@ -87,6 +96,7 @@ class Settings:
         self.DISCORD_KEEPALIVE_CHAN_ID = _conf_get(conf, 'discord', 'keepalive_channel',
                 default=self.DISCORD_KEEPALIVE_CHAN_ID)
 
+        # github
         self.GITHUB_OAUTH_TOKEN = _conf_get(conf, 'github', 'token',
                 default=self.GITHUB_OAUTH_TOKEN)
         self.GITHUB_REPO_USER = _conf_get(conf, 'github', 'user',
@@ -136,7 +146,7 @@ class Settings:
     REFRESH_TOKEN = ""
 
     NETWORK_NAME = ""
-    MULTIREDDIT = ""
+    MULTIREDDIT_USER = None
     MULTIREDDITS = []
 
     DEFAULT_MODS = []

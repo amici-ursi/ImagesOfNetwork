@@ -9,7 +9,6 @@ redirect-uri = 'http://127.0.0.1:65010/authorize_callback'
 
 [network]
 name = 'ImagesOf'
-multireddit = 'ImagesOfPlaces'
 multireddits = ['ImagesOfPlaces', 'ImagesOfTheDecades']
 
 mods = ['AutoModerator', 'BotWatchman', 'amici_ursi', 'ImagesOfNetwork']

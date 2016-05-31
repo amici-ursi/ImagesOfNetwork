@@ -95,18 +95,18 @@ def setup_flair(r, sub):
                           flair_self_assign=False)
 
 
-def add_to_multi(r, sub):
+def add_to_multi(r, sub, multi):
     if not settings.MULTIREDDIT:
         LOG.warning("No multireddit to add /r/{} to.".format(sub))
         return
 
     LOG.info('Adding /r/{} to /user/{}/m/{}'
-                 .format(sub, settings.USERNAME, settings.MULTIREDDIT))
+                 .format(sub, settings.MULTIREDDIT_USER, multi))
 
     if DRY_RUN:
         return
 
-    m = r.get_multireddit(settings.USERNAME, settings.MULTIREDDIT)
+    m = r.get_multireddit(settings.MULTIREDDIT_USER, multi)
 
     # NOTE: for some reason, at least for this version of PRAW,
     # adding a sub to a multireddit requires us to be logged in.
@@ -134,13 +134,15 @@ def setup_notifications(r, sub):
 _start_points = ['creation', 'settings', 'mods', 'wiki', 'flair', 'multireddit', 'notifications']
 
 @click.command()
+@click.option('-m', '--multi', type=click.Choice(settings.MULTIREDDITS),
+              default=settings.MULTIREDDITS[0], help="Which multireddit to add the new sub to.")
 @click.option('--start-at', type=click.Choice(_start_points),
               help='Where to start the process from.')
 @click.option('--only', type=click.Choice(_start_points),
               help='Only run one section of expansion script.')
 @click.option('--dry-run', is_flag=True, help='Don\'t hit reddit')
 @click.argument('topic', required=True, nargs=-1)
-def main(topic, start_at, only, dry_run):
+def main(multi, topic, start_at, only, dry_run):
     """Prop up new subreddit and set it for the network."""
     global DRY_RUN
     DRY_RUN = dry_run
@@ -184,7 +186,7 @@ def main(topic, start_at, only, dry_run):
         setup_flair(r, sub)
 
     if should_do('multireddit'):
-        add_to_multi(r, sub)
+        add_to_multi(r, sub, multi)
 
     if should_do('notifications'):
         setup_notifications(r, sub)

@@ -155,7 +155,7 @@ class DiscordBot:
     ## ======================================================
 
     async def _process_oc_stream(self, multi):
-        oc_multi = self.reddit.get_multireddit(settings.MULTI_OWNER, multi)
+        oc_multi = self.reddit.get_multireddit(settings.MULTIREDDIT_USER, multi)
 
         if self.oc_stream_placeholder.get(multi, None) is None:
             limit = 125
@@ -309,7 +309,7 @@ class DiscordBot:
     async def _process_network_modlog(self, multi):
         action_queue = deque(maxlen=25)
         url = 'https://www.reddit.com/user/{}/m/{}/about/log'.format(
-            settings.MULTI_OWNER, multi)
+            settings.MULTIREDDIT_USER, multi)
 
         if self.last_modlog_action.get(multi, None) is None:
             limit = 100
