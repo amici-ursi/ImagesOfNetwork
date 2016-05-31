@@ -121,7 +121,7 @@ class DiscordBot:
 
     @staticmethod
     def _format_message(message):
-        msg_body = message.body
+        msg_body = message.body[:1500]
         msg_body = re.sub('\n\n', '\n', msg_body)
 
         #Strip markdown hyperlinks, append to bottom
