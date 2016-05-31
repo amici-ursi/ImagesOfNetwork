@@ -105,14 +105,14 @@ def format_github_issue_comment(event):
     """
     action = event.payload['action']
     if action == 'created':
-        url = event.payload['issue']['comment'].html_url
-        user = event.payload['issue']['comment']['user'].login
-        comment = event.payload['issue']['comment'].body[:1500]
+        url = event.payload['issue'].html_url
+        user = event.payload['comment'].user.login
+        comment = event.payload['comment'].body[:1500]
         title = event.payload['issue'].title
 
-        desc = 'GitHub Comment by **{}** on Issue `{}`:'.format(user, title) \
-             + '\n```\n{}\n```\n'.format(comment) \
-             + '**Link**: {}\r\n'.format(url)
+        desc = 'GitHub Comment by **{}** on Issue `{}`:'.format(user, title)
+        desc += '\n```\n{}\n```\n'.format(comment)
+        desc += '**Link**: {}\r\n'.format(url)
 
         return desc
 
