@@ -36,11 +36,10 @@ TYPES = {
 }
 MODLOG_ACTIONS = ['invitemoderator',
                   'acceptmoderatorinvite', 'removemoderator']
-EVENT_FILTER = ['IssuesEvent', 'PullRequestEvent', 'PushEvent']
-#edited, unlabeled, unassigned, assigned, labeled
-ISSUE_ACTION_FILTER = ["opened", "closed", "reopened"]
-PULL_REQUEST_ACTION_FILTER = ["opened", "edited",
-                              "closed", "reopened", "synchronize"]
+EVENT_FILTER = ['IssuesEvent', 'PullRequestEvent', 'PushEvent', 'IssueCommentEvent']
+ISSUE_ACTION_FILTER = ["opened", "closed", "reopened", "unlabeled",
+                       "unassigned", "assigned", "labeled"]
+PULL_REQUEST_ACTION_FILTER = ["opened", "edited", "closed", "reopened", "synchronize"]
 
 
 class DiscordBot:
