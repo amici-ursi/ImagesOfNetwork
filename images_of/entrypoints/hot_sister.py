@@ -29,13 +29,13 @@ def main():
     places_multi = r.get_multireddit(settings.USERNAME, PLACES_MULTI_NAME)
     places_list_text = str()
     for post in places_multi.get_hot(limit=POSTS_TO_LIST):
-        places_list_text += ' * [%s](%s)\n' % (post.title, post.permalink)
+        places_list_text += ' * [{}]({})\n'.format(post.title, post.permalink)
 
     # decades multireddit
     decades_multi = r.get_multireddit(settings.USERNAME, DECADES_MULTI_NAME)
     decades_list_text = str()
     for post in decades_multi.get_hot(limit=POSTS_TO_LIST):
-        decades_list_text += ' * [%s](%s)\n' % (post.title, post.permalink)
+        decades_list_text += ' * [{}]({})\n'.format(post.title, post.permalink)
 
     # bring it together
     combined_text= "* Places:\n{}\n\n* Times:\n{}".format(places_list_text, decades_list_text)
@@ -50,7 +50,7 @@ def main():
         current_sidebar = html.unescape(current_sidebar)
 
         # ew
-        replace_pattern = re.compile('%s.*?%s'.format(
+        replace_pattern = re.compile('{}.*?{}'.format(
                 re.escape(START_DELIM),
                 re.escape(END_DELIM)),
             re.IGNORECASE|re.DOTALL|re.UNICODE)
