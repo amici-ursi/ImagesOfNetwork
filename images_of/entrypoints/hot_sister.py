@@ -52,7 +52,8 @@ def main():
         # ew
         replace_pattern = re.compile('{}.*?{}'.format(
                 re.escape(START_DELIM),
-                re.escape(END_DELIM)),
+                re.escape(END_DELIM)
+            ),
             re.IGNORECASE|re.DOTALL|re.UNICODE)
 
         # ew
@@ -60,7 +61,8 @@ def main():
                             '{}\\n\\n{}\\n{}'.format(
                                 START_DELIM,
                                 combined_text,
-                                END_DELIM),
+                                END_DELIM
+                            ),
                             current_sidebar)
 
         sub.update_settings(description=new_sidebar)
