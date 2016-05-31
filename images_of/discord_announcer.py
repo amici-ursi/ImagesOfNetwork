@@ -20,7 +20,7 @@ from images_of.discord_formatters import format_github_issue_comment, format_git
 from images_of.discord_formatters import format_github_pull_request, format_github_push_event
 from images_of.discord_formatters import format_mod_action
 
-RUN_INTERVAL = 0.5  # minutes
+RUN_INTERVAL = 2  # minutes
 STATS_INTERVAL = 15  # minutes
 LOG = logging.getLogger(__name__)
 
@@ -336,7 +336,8 @@ class DiscordBot:
         while True:
             try:
                 LOG.info('[Discord] Starting Discord client...')
-                self.client.run(settings.DISCORD_TOKEN)
+                loop = asyncio.get_event_loop()
+                loop.run_until_complete(self.client.start(settings.DISCORD_TOKEN))
             except RuntimeError as ex:
                 LOG.error('%s: %s', type(ex), ex, exc_info=ex)
             else:
