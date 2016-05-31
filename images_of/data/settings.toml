@@ -3753,6 +3753,7 @@ search = [
 ignore = [
     'indiana',
     'michigan (ave(nue)?|city)',
+    'detroit.+or(egon)?',
 ]
 ignore-case = [
     'Mi',
