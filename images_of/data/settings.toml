@@ -1036,7 +1036,7 @@ search = [
     'tucson',
 ]
 ignore = [
-    'arizona (robins|tea)',
+    'arizona (robins|(iced)? tea)',
     'hyundai tucson',
 ]
 whitelist = [
