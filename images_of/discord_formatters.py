@@ -233,14 +233,14 @@ def format_mod_action(entry):
     sub = '/r/{}'.format(entry.subreddit.display_name)
     target = '/u/{}'.format(entry.target_author)
 
-    message = '__*{} Moderator Update*__:\r\n'.format(settings.NETWORK_NAME) \
+    message = '***{}*** **Moderator Update**:\r\n'.format(settings.NETWORK_NAME) \
             + '```\n{} has '.format(mod)
 
     if mod_action == 'invitemoderator':
         message += 'invited {} to be a moderator'.format(target)
 
     elif mod_action == 'acceptmoderatorinvite':
-        message += 'accepted a moderator invite'
+        message += 'accepted the moderator invite'
 
     elif mod_action == 'removemoderator':
         message += 'removed {} as a moderator'.format(target)

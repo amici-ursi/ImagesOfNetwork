@@ -124,7 +124,7 @@ class DiscordBot:
                          submission.author.name, submission.permalink)
 
                 await self.client.send_message(self.oc_chan,
-                                               '---\n**New __OC__** by **/u/{}**:\r\n{}'.format(
+                                               '---\nNew __OC__ by ``/u/{}``:\r\n{}'.format(
                                                    submission.author.name, submission.permalink))
 
         self.oc_stream_placeholder[multi] = oc_stream[0].id
