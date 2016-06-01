@@ -22,7 +22,9 @@ TYPES = {
     't8':'promocampaign'
 }
 
-ISSUE_ACTION_FILTER = ["opened", "closed", "reopened"]
+EVENT_FILTER = ['IssuesEvent', 'PullRequestEvent', 'PushEvent', 'IssueCommentEvent']
+ISSUE_ACTION_FILTER = ["opened", "closed", "reopened", "unlabeled",
+                       "unassigned", "assigned", "labeled"]
 PULL_REQUEST_ACTION_FILTER = ["opened", "edited", "closed", "reopened", "synchronize"]
 
 #Regex pattern for identifying and stripping out markdown links
@@ -47,6 +49,9 @@ def is_relayable_message(message):
         # Don't announce blacklist requests
         message.mark_as_read()
         LOG.info('[Inbox] Not announcing message type: "blacklist request"')
+        return False
+
+    elif message.author is None:
         return False
 
     elif (message.author.name == 'AutoModerator') or (message.author.name == 'reddit'):

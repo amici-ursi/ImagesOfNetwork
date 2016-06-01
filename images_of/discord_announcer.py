@@ -62,8 +62,7 @@ class DiscordBot:
         self.count_modlog = 0
 
         self.ghub = github3.login(token=settings.GITHUB_OAUTH_TOKEN)
-        repo = self.ghub.repository(
-            settings.GITHUB_REPO_USER, settings.GITHUB_REPO_NAME)
+        repo = self.ghub.repository(settings.GITHUB_REPO_USER, settings.GITHUB_REPO_NAME)
         self.last_github_event = repo.iter_events(number=1).next().id
 
     def _setup_client(self):
@@ -75,11 +74,9 @@ class DiscordBot:
     # ======================================================
 
     async def _relay_inbox_message(self, message):
-
-        self.count_messages += 1
-
         # Determine if it's a message that we do NOT want to relay...
         if is_relayable_message(message):
+            self.count_messages += 1
 
             if 'false positive' in message.body.lower():
                 LOG.info('[Inbox] Announcing false-positive reply.')
@@ -114,13 +111,11 @@ class DiscordBot:
         for submission in oc_stream:
             x += 1
             if submission.id == self.last_oc_id.get(multi, None):
-                LOG.debug(
-                    '[OC] Found last announced %s OC; stopping processing', multi)
+                LOG.debug('[OC] Found last announced %s OC; stopping processing', multi)
                 break
 
             elif submission.id == self.oc_stream_placeholder.get(multi, None):
-                LOG.debug(
-                    '[OC] Found start of last %s stream; stopping processing', multi)
+                LOG.debug('[OC] Found start of last %s stream; stopping processing', multi)
                 break
 
             elif submission.author.name.lower() != settings.USERNAME:
@@ -140,8 +135,7 @@ class DiscordBot:
 
     async def _process_github_events(self):
 
-        repo = self.ghub.repository(
-            settings.GITHUB_REPO_USER, settings.GITHUB_REPO_NAME)
+        repo = self.ghub.repository(settings.GITHUB_REPO_USER, settings.GITHUB_REPO_NAME)
 
         max_length = round(20 * RUN_INTERVAL)
 
@@ -150,8 +144,7 @@ class DiscordBot:
         e_i = repo.iter_events(number=max_length)
 
         cont_loop = True
-        date_max = (datetime.datetime.today() +
-                    datetime.timedelta(days=-1)).utctimetuple()
+        date_max = (datetime.datetime.today() + datetime.timedelta(days=-1)).utctimetuple()
 
         LOG.debug('[GitHub] Loading events from GitHub...')
         while cont_loop:
@@ -216,15 +209,13 @@ class DiscordBot:
 
         modlog = list(content)
 
-        LOG.info('[ModLog] Processing %s %s modlog actions...',
-                 len(modlog), multi)
+        LOG.info('[ModLog] Processing %s %s modlog actions...', len(modlog), multi)
         self.count_modlog += len(modlog)
 
         for entry in [e for e in modlog if e.action in MODLOG_ACTIONS]:
 
             if entry.id == self.last_modlog_action.get(multi, None):
-                LOG.debug(
-                    '[ModLog] Found previous %s modlog placeholder entry.', multi)
+                LOG.debug('[ModLog] Found previous %s modlog placeholder entry.', multi)
                 break
 
             else:
@@ -320,13 +311,11 @@ class DiscordBot:
         self.mod_chan = self.client.get_channel(settings.DISCORD_MOD_CHAN_ID)
         self.stats_chan = self.client.get_channel(settings.DISCORD_KEEPALIVE_CHAN_ID)
 
-        asyncio.ensure_future(self._report_client_stats(),
-                              loop=self.client.loop)
-
         await self.client.send_message(self.stats_chan, 'Ready: {}'.format(datetime.datetime.now()))
 
         if self.run_init:
             self.run_init = False
+            asyncio.ensure_future(self._report_client_stats(), loop=self.client.loop)
             await self._run_loop()
             LOG.warning("Thread returning from 'await self._run_loop'!")
             self.run_init = True
