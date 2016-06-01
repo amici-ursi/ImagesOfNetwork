@@ -1408,7 +1408,9 @@ whitelist = [
 [child.imagesofbelize]
 search = [
     'actun tunichil muknal',
+    'altun ha',
     'ambergris caye',
+    'ambergris key',
     'baron bliss light',
     'belize',
     'belmopan',
@@ -1416,11 +1418,13 @@ search = [
     'caracol',
     'caye caulker',
     'caye chapel',
+    'chan chich',
     'cockscomb basin',
     'corozal bay',
     'corozal town',
     'crooked tree wildlife sanctuary',
     'dangriga',
+    'glovers reef',
     'great blue hole',
     'guanacastle national park',
     'hattieville',
@@ -1429,6 +1433,8 @@ search = [
     'la democracia',
     'ladyville',
     'lamanai',
+    'lighthouse atoll',
+    'lighthouse caye',
     'mountain pine ridge forest reserve',
     'orange walk town',
     'placencia',
@@ -1440,6 +1446,7 @@ search = [
     'san ignacio resort',
     'spanish lookout',
     'turneffe atoll',
+    'xibalba',
     'xunantunich',
 ]
 whitelist = [
