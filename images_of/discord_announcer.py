@@ -256,6 +256,7 @@ class DiscordBot:
             await self.client.send_message(self.stats_chan, msg)
 
             x = randint(1, 120)
+            e_msg = ''
             if x == 30:
                 e_msg = "*I guess if you want children beaten, you have to do it yourself...*"
             elif x == 60:
@@ -263,7 +264,7 @@ class DiscordBot:
             elif x == 90:
                 e_msg = "*Bite my shiny, metal ass!*"
 
-            if len(e_msg) > 0:
+            if len(e_msg) > 1:
                 await self.client.send_message(self.github_chan, e_msg)
 
     # -------------------------------------
