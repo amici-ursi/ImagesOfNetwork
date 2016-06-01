@@ -280,10 +280,17 @@ class DiscordBot:
 
     async def _run_loop(self):
         while True:
-            await self._run_once()
+            try:
+                await self._run_once()
+            except HTTPException as ex:
+                LOG.error('%s: %s', type(ex), ex)
+            except Exception as ex:
+                LOG.error('%s: %s', type(ex), ex)
+
             LOG.info('Sleeping for %s minute(s)...', RUN_INTERVAL)
             print()
             await asyncio.sleep(60 * RUN_INTERVAL)
+
 
     async def _run_once(self):
         try:
@@ -357,6 +364,8 @@ class DiscordBot:
                 loop = asyncio.get_event_loop()
                 loop.run_until_complete(self.client.start(settings.DISCORD_TOKEN))
             except RuntimeError as ex:
+                LOG.error('%s: %s', type(ex), ex, exc_info=ex)
+            except HTTPException as ex:
                 LOG.error('%s: %s', type(ex), ex, exc_info=ex)
             else:
                 LOG.warning("Thread returned from 'client.run()' blocking call!")
