@@ -78,14 +78,15 @@ class DiscordBot:
         if is_relayable_message(message):
             self.count_messages += 1
 
-            if 'false positive' in message.body.lower():
+            if 'false positive' in message.body.lower() and self.settings.DO_FALSEPOS:
                 LOG.info('[Inbox] Announcing false-positive reply.')
                 notification = "New __false-positive__ report from **/u/{}**:\r\n{}\r\n ".format(
                     message.author.name, message.permalink[:-7])
 
                 await self.client.send_message(self.falsepos_chan, notification)
                 message.mark_as_read()
-            else:
+
+            elif self.settings.DO_INBOX:
                 LOG.info('[Inbox] Announcing inbox message.')
                 notification = format_inbox_message(message)
                 await self.client.send_message(self.inbox_chan, notification)
@@ -254,9 +255,16 @@ class DiscordBot:
 
             await self.client.send_message(self.stats_chan, msg)
 
-            x = randint(1, 40)
-            if x == 5:
-                await self.client.send_message(self.github_chan, "*Bite my shiny, metal ass!*")
+            x = randint(1, 120)
+            if x == 30:
+                e_msg = "*I guess if you want children beaten, you have to do it yourself...*"
+            elif x == 60:
+                e_msg = "*Hey sexy mama, wanna kill all humans?*"
+            elif x == 90:
+                e_msg = "*Bite my shiny, metal ass!*"
+
+            if len(e_msg) > 0:
+                await self.client.send_message(self.github_chan, e_msg)
 
     # -------------------------------------
 
@@ -278,14 +286,21 @@ class DiscordBot:
 
     async def _run_once(self):
         try:
-            await self._process_messages()
-            asyncio.sleep(5)
-            await self._process_github_events()
+            if self.settings.DO_INBOX or self.settings.DO_FALSEPOS:
+                await self._process_messages()
+                asyncio.sleep(5)
+
+            if self.settings.DO_GITHUB:
+                await self._process_github_events()
+
             for multi in settings.MULTIREDDITS:
-                asyncio.sleep(5)
-                await self._process_oc_stream(multi)
-                asyncio.sleep(5)
-                await self._process_network_modlog(multi)
+                if self.settings.DO_OC:
+                    asyncio.sleep(5)
+                    await self._process_oc_stream(multi)
+
+                if self.settings.DO_MODLOG:
+                    asyncio.sleep(5)
+                    await self._process_network_modlog(multi)
 
         except HTTPException as ex:
             LOG.error('%s: %s', type(ex), ex)
@@ -322,8 +337,18 @@ class DiscordBot:
 
     # ------------------------------------
 
-    def run(self):
+    def run(self, botsettings):
         """Initialize the Discord Bot and begin its processessing loop."""
+
+        if botsettings is None:
+            botsettings = DiscordBotSettings()
+
+        self.settings = botsettings
+
+        global RUN_INTERVAL
+        RUN_INTERVAL = botsettings.RUN_INTERVAL
+        global STATS_INTERVAL
+        STATS_INTERVAL = botsettings.STATS_INTERVAL
 
         while True:
             try:
@@ -337,3 +362,14 @@ class DiscordBot:
 
             sleep(30)
             self._setup_client()
+
+
+class DiscordBotSettings:
+    def __init__(self):
+        self.DO_GITHUB = True
+        self.DO_MODLOG = True
+        self.DO_OC = True
+        self.DO_INBOX = True
+        self.DO_FALSEPOS = True
+        self.RUN_INTERVAL = 2
+        self.STATS_INTERVAL = 15

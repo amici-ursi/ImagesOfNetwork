@@ -121,7 +121,7 @@ def format_github_issue_comment(event):
 
         return desc
 
-##------------------------------------
+    ##------------------------------------
 
 def format_github_push_event(event):
     """Takes a GitHub PushEvent and returns a markdown-formatted message
@@ -132,8 +132,8 @@ def format_github_push_event(event):
 
     for com in event.payload['commits']:
         desc = '\nCommit `{}` by `{}`:\n'.format(com['sha'][:7], com['author']['name']) \
-             + '```\n{}```\n'.format(com['message']) \
-             + 'https://github.com/amici-ursi/ImagesOfNetwork/commit/{}'.format(com['sha'])
+                + '```\n{}```\n'.format(com['message']) \
+                + 'https://github.com/amici-ursi/ImagesOfNetwork/commit/{}'.format(com['sha'])
 
         push_message += desc
 
@@ -143,7 +143,7 @@ def format_github_push_event(event):
 
 
 
-##------------------------------------
+    ##------------------------------------
 
 def format_github_issue_event(event):
     """Takes a GitHub IssuesEvent and returns a markdown-formatted message
@@ -156,18 +156,18 @@ def format_github_issue_event(event):
         user = event.actor.login
         url = event.payload['issue'].html_url
 
-        if (action == "unlabeled") or (action == "labeled"):
+        if action in ["unlabeled", "labeled"]:
             label = event.payload['label']
             desc = '**{}** __{}__ **{}** on  issue `{}`'.format(user, action, label, title)
 
-        elif (action == "unassigned") or (action == "assigned"):
+        elif action in ["unassigned", "assigned"]:
             assignee = event.payload['assignee']
             desc = '**{}** __{}__ `{}` on issue `{}`'.format(user, action, assignee, title)
 
         else:
             desc = 'GitHub Issue __{}__ by **{}**:\n```\n{}\n```\r'.format(action, user, title)
 
-        desc += '\n**Link**: {}\r\n'.format(url)
+        desc += '\n**Link**: {}\r\n '.format(url)
 
         return desc
 
@@ -185,40 +185,43 @@ def format_github_pull_request(event):
     url = event.payload['pull_request'].html_url
     state = event.payload['pull_request'].state
     title = event.payload['pull_request'].title
-    user = event.payload['pull_request']['user'].login
-    sender = event.payload['sender'].login
-    #merged = event.payload['pull_request'].merged
+    user = event.payload['pull_request'].user.login
 
     ## PR Opened
     if state == 'open':
-        mergable = event.payload['pull_request'].mergable
         commits = event.payload['pull_request'].commits
         additions = event.payload['pull_request'].additions
         deletions = event.payload['pull_request'].deletions
-        changed_files = event.payload['pull_request'].changed_files
 
         desc = 'Pull Request #{} __{}__'.format(pr_number, action) \
-                + ' by **{}**: `{}`\r\n'.format(sender, title)
+                + ' by **{}**: `{}`\r\n'.format(user, title)
 
-        desc_pr_info = 'Mergable: **{}**\n'.format(mergable) \
-                        + 'Commits: **{}**\n'.format(commits) \
-                        + 'Files Changed: **{}** '.format(changed_files) \
-                        + '(**+{}**/**-{}**)\r\n'.format(additions, deletions)
+        desc_pr_info = ' Commits: **{}** '.format(commits) \
+                        + '(**+{}**/**-{}**)\r\n '.format(additions, deletions)
 
-        return desc + desc_pr_info + url
+
+
+        return desc +  url + desc_pr_info
 
     ## PR Closed; Merged or Rejected?
     elif action == 'closed':
+        if event.payload['pull_request'].merged_at is None:
+            merged = False
+        else:
+            merged = True
 
-        if event.payload['pull_request'].merged:
+        sender = event.actor.login
+        if merged:
             desc = 'Pull Request #{} by **{}** __merged__'.format(pr_number, user) \
-                    + ' by **{}**: `{}`\r\n'.format(sender, title)
+                    + ' by **{}**: `{}`\r\n '.format(sender, title)
+
+            return desc + url
 
         else:
             desc = 'Pull Request #{} by **{}** __rejected__'.format(pr_number, user) \
-                    + ' by **{}**: `{}`\r\n'.format(sender, title)
+                    + ' by **{}**: `{}`\r\n '.format(sender, title)
 
-        return desc + url
+            return desc + url
 
 
 #--------------------
