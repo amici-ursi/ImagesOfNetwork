@@ -3821,6 +3821,7 @@ whitelist = [
 ]
 blacklist = [
     'chicago',
+    'chicagohelicopters',
     'edc',
     'trees',
     'vexillology',
