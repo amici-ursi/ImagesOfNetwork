@@ -4759,7 +4759,7 @@ ignore = [
     'bryce dallas',
     'dallas (keuchel|mccarver)',
     'devin houston',
-    'houston.? we('ve had| have) a problem',
+    "houston.? we('ve had| have) a problem",
     'nj',
     'nova',
     'va',
