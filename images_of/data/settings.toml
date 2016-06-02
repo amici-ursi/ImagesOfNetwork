@@ -4606,6 +4606,9 @@ search = [
     'urquhart',
     'wallace monument',
 ]
+ignore = [
+    'dakota skye',
+]
 ignore-case = [
     'killin',
 ]
