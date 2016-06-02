@@ -54,7 +54,7 @@ def is_relayable_message(message):
     elif message.author is None:
         return False
 
-    elif (message.author.name == 'AutoModerator') or (message.author.name == 'reddit'):
+    elif message.author.name == 'AutoModerator':
         # Don't announce AutoModerator or reddit messages
         message.mark_as_read()
         LOG.info('[Inbox] Not announcing message type: "AutoMod Response"')
