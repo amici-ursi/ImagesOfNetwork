@@ -32,6 +32,7 @@ setup(
             "ion_blacklist_requests = images_of.entrypoints.blacklist_requests:main",
             "ion_hot_sister = images_of.entrypoints.hot_sister:main",
             "ion_discord_bot = images_of.entrypoints.discord_announce_bot:main",
+            "ion_feeds = images_of.entrypoints.feeds:main",
         ],
     },
 

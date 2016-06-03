@@ -15,7 +15,7 @@ class Match:
 
 
 class Subreddit:
-    def __init__(self, name, search, ignore=None, ignore_case=None, whitelist=[],
+    def __init__(self, name, search, feeds=[], ignore=None, ignore_case=None, whitelist=[],
                  blacklist=[], wiki_blacklist=False, **kwargs):
         """
         Create new Subreddit object. This object is responsible for
@@ -23,6 +23,7 @@ class Subreddit:
         not a post belongs.
 
         :param name: Subreddit name
+        :param feeds: Atom feeds of content to be posted
         :param search: terms or regexes to be searched
         :param ignore: terms or regexes to ignore
         :param whitelist: list of subreddits to always accept
@@ -42,6 +43,7 @@ class Subreddit:
             return re.compile(terms, flags)
 
         self.name = name
+        self.feeds = feeds
         self.search_re = make_regex(search, re.IGNORECASE)
         self.ignore_re = make_regex(ignore, re.IGNORECASE)
         self.ignore_case_re = make_regex(ignore_case)

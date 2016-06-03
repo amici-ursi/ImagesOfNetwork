@@ -99,6 +99,7 @@ domains = [
 # Template:
 #
 # [child.{SUB_NAME}]
+# feeds = []            # Atom feeds for trusted off site content
 # search = []			# regexes for title search
 # ignore = []			# regexes for title search
 # ignore-case = []		# case-sensitive regexes for title search
@@ -4731,6 +4732,9 @@ blacklist = [
 ]
 
 [child.imagesoftennessee]
+feeds = [
+    'https://www.flickr.com/services/feeds/groups_pool.gne?id=52240379285@N01&lang=en-us&format=atom',
+]
 search = [
     'tennessee',
 ]
@@ -4739,6 +4743,10 @@ whitelist = [
 ]
 
 [child.imagesoftexas]
+feeds = [
+    'https://www.flickr.com/services/feeds/groups_pool.gne?id=47583010@N00&lang=en-us&format=atom',
+    'https://www.flickr.com/services/feeds/groups_pool.gne?id=1403197@N21&lang=en-us&format=atom',
+]
 search = [
     'arlington',
     'austin',
@@ -5638,4 +5646,5 @@ search = [
     'terlingua',
 ]
 whitelist = []
+
 
