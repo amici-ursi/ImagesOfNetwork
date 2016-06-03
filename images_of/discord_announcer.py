@@ -241,31 +241,35 @@ class DiscordBot:
 
     async def _report_client_stats(self):
         while True:
-            await asyncio.sleep(60 * STATS_INTERVAL)
+            try:
+                await asyncio.sleep(60 * STATS_INTERVAL)
 
-            msg = 'Messages: **{}**\n'.format(self.count_messages) \
-                + 'Multireddit posts: **{}**\n'.format(self.count_oc) \
-                + 'GitHub Events: **{}**\n'.format(self.count_gh_events) \
-                + 'Network Modlog Actions: **{}**\r\n'.format(self.count_modlog)
+                msg = 'Messages: **{}**\n'.format(self.count_messages) \
+                    + 'Multireddit posts: **{}**\n'.format(self.count_oc) \
+                    + 'GitHub Events: **{}**\n'.format(self.count_gh_events) \
+                    + 'Network Modlog Actions: **{}**\r\n'.format(self.count_modlog)
 
-            self.count_gh_events = 0
-            self.count_messages = 0
-            self.count_modlog = 0
-            self.count_oc = 0
+                self.count_gh_events = 0
+                self.count_messages = 0
+                self.count_modlog = 0
+                self.count_oc = 0
 
-            await self.client.send_message(self.stats_chan, msg)
+                await self.client.send_message(self.stats_chan, msg)
 
-            x = randint(1, 120)
-            e_msg = ''
-            if x == 30:
-                e_msg = "*I guess if you want children beaten, you have to do it yourself...*"
-            elif x == 60:
-                e_msg = "*Hey sexy mama, wanna kill all humans?*"
-            elif x == 90:
-                e_msg = "*Bite my shiny, metal ass!*"
+                x = randint(1, 100)
+                e_msg = ''
+                if x == 30:
+                    e_msg = "*I guess if you want children beaten, you have to do it yourself...*"
+                elif x == 60:
+                    e_msg = "*Hey sexy mama, wanna kill all humans?*"
+                elif x == 90:
+                    e_msg = "*Bite my shiny, metal ass!*"
 
-            if len(e_msg) > 1:
-                await self.client.send_message(self.github_chan, e_msg)
+                if len(e_msg) > 1:
+                    await self.client.send_message(self.github_chan, e_msg)
+
+            except Exception as ex:
+                LOG.error('%s: %s', type(ex), ex)
 
     # -------------------------------------
 
