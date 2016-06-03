@@ -310,6 +310,7 @@ class DiscordBot:
                     asyncio.sleep(5)
                     await self._process_oc_stream(multi)
 
+            for multi in settings.MULTIREDDITS + [settings.PARENT_SUB]:
                 if self.settings.DO_MODLOG:
                     asyncio.sleep(5)
                     await self._process_network_modlog(multi)
