@@ -1,4 +1,3 @@
-import logging
 import re
 from collections import deque
 from datetime import datetime
@@ -10,9 +9,10 @@ from praw.errors import AlreadySubmitted, APIException, HTTPException
 
 from images_of import settings, AcceptFlag
 from images_of.subreddit import Subreddit
+from images_of.logging import getLogger
 
 RETRY_MINUTES = 2
-LOG = logging.getLogger(__name__)
+LOG = getLogger(__name__)
 
 class Bot:
     def __init__(self, r, should_post=True):
@@ -102,15 +102,15 @@ class Bot:
             # put it back at the end of the queue
             self.recent_posts.remove(log_entry)
             self.recent_posts.append(log_entry)
-            LOG.info('Already posted {} to /r/{}. Skipping.'.format(title, sub.name))
+            LOG.info('Already posted {} to /r/{}. Skipping.', title, sub.name)
             return
         else:
             self.recent_posts.append(log_entry)
-            LOG.debug('Added {} to recent posts. Now tracking {} items.'
-                          .format(log_entry, len(self.recent_posts)))
+            LOG.debug('Added {} to recent posts. Now tracking {} items.',
+                      log_entry, len(self.recent_posts))
 
         try:
-            LOG.info('X-Posting into /r/{}: {}'.format(sub.name, title))
+            LOG.info('X-Posting into /r/{}: {}', sub.name, title)
             if self.should_post:
                 xpost = self.r.submit(
                             sub.name,
@@ -124,7 +124,7 @@ class Bot:
                 if self.should_post:
                     xpost.mark_as_nsfw()
 
-            LOG.debug('Commenting: {}'.format(comment))
+            LOG.debug('Commenting: {}', comment)
             if self.should_post:
                 xpost.add_comment(comment)
 
@@ -165,13 +165,13 @@ class Bot:
                 for post in stream:
                     self._do_post(post)
             except HTTPException as e:
-                LOG.error('{}: {}'.format(type(e), e))
+                LOG.error('{}: {}', type(e), e)
             except requests.ReadTimeout as e:
-                LOG.error('{}: {}'.format(type(e), e))
+                LOG.error('{}: {}', type(e), e)
             except requests.ConnectionError as e:
-                LOG.error('{}: {}'.format(type(e), e))
+                LOG.error('{}: {}', type(e), e)
             else:
                 LOG.error('Stream ended.')
 
-            LOG.info('Sleeping for {} minutes.'.format(RETRY_MINUTES))
+            LOG.info('Sleeping for {} minutes.', RETRY_MINUTES)
             sleep(60 * RETRY_MINUTES)

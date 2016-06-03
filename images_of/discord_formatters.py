@@ -5,11 +5,11 @@ Discord-friendly messages that can be relayed to the appropriate channels.
 
 
 import re
-import logging
 
 from images_of import settings
+from images_of.logging import getLogger
 
-LOG = logging.getLogger(__name__)
+LOG = getLogger(__name__)
 
 # message type mapping
 TYPES = {

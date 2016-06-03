@@ -1,11 +1,10 @@
-import logging
-
 import click
 
 from images_of import command, settings, Reddit
 from images_of.subreddit import Subreddit
+from images_of.logging import getLogger
 
-LOG = logging.getLogger(__name__)
+LOG = getLogger(__name__)
 
 def split_content(content, start_delim, end_delim, tags_required=True, case_insensitive=False):
     if case_insensitive:
@@ -18,11 +17,11 @@ def split_content(content, start_delim, end_delim, tags_required=True, case_inse
     if tags_required:
         ok = True
         if start_delim not in content_match:
-            LOG.warning('Missing {}'.format(start_delim))
+            LOG.warning('Missing {}', start_delim)
             ok = False
 
         if end_delim not in content_match:
-            LOG.warning('Missing {}'.format(start_delim))
+            LOG.warning('Missing {}', start_delim)
             ok = False
 
         if not ok:
@@ -53,7 +52,7 @@ def copy_wiki_page(r, page, dom, subs, force):
     content = split_content(content, start_delim, end_delim, False, True)[1]
 
     for sub in subs:
-        LOG.info('Updating /r/{}/wiki/{}'.format(sub, page))
+        LOG.info('Updating /r/{}/wiki/{}', sub, page)
         sub_content = r.get_wiki_page(sub, page).content_md
         parts = split_content(sub_content, start_delim, end_delim, not force)
 
@@ -64,8 +63,8 @@ def copy_wiki_page(r, page, dom, subs, force):
                 end_delim,
                 parts[2]])
 
-        LOG.debug('New content for /r/{}/wiki/{}: {}'.format(
-                            sub, page, new_content))
+        LOG.debug('New content for /r/{}/wiki/{}: {}',
+                  sub, page, new_content))
 
         r.edit_wiki_page(sub, page, new_content)
 

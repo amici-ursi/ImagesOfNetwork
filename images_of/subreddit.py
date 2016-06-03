@@ -1,11 +1,11 @@
 import re
-import logging
 
 from praw.errors import Forbidden
 
 from images_of import AcceptFlag
+from images_of.logging import getLogger
 
-LOG = logging.getLogger(__name__)
+LOG = getLogger(__name__)
 
 
 class Match:
@@ -31,7 +31,7 @@ class Subreddit:
         :param wiki_blacklist: subreddit has a blacklist on it's wiki
         """
 
-        LOG.debug('Setting up /r/{}'.format(name))
+        LOG.debug('Setting up /r/{}', name)
 
         def make_regex(x, flags=0):
             if x is None:
@@ -53,7 +53,7 @@ class Subreddit:
 
         if kwargs:
             bad_keys = list(kwargs.keys())
-            LOG.warning('Unrecognized subreddit settings: {}'.format(bad_keys))
+            LOG.warning('Unrecognized subreddit settings: {}', bad_keys)
 
     def load_wiki_blacklist(self, r):
         """
@@ -73,12 +73,12 @@ class Subreddit:
             return
 
         try:
-            LOG.info('Loading wiki blacklist for /r/{}'.format(self.name))
+            LOG.info('Loading wiki blacklist for /r/{}', self.name)
             content = r.get_wiki_page(self.name, 'subredditblacklist').content_md
             subs = set(sub.strip().lower()[3:] for sub in content.splitlines() if sub)
             wiki_blacklist = subs.union(self.blacklist)
         except Forbidden:
-            LOG.warning('Forbidden from reading blacklist on /r/{}'.format(self.name))
+            LOG.warning('Forbidden from reading blacklist on /r/{}', self.name)
             wiki_blacklist = set()
 
         self.blacklist = sorted(wiki_blacklist.union(self.blacklist))

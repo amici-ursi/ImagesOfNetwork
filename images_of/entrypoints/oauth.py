@@ -1,4 +1,3 @@
-import logging
 import threading
 import traceback
 import webbrowser
@@ -11,8 +10,9 @@ import click
 import praw
 
 from images_of import command, settings, OAUTH_SCOPE
+from images_of.logging import getLogger
 
-LOG = logging.getLogger(__name__)
+LOG = getLogger()
 
 
 class RedditRedirectRequestHandler(BaseHTTPRequestHandler):

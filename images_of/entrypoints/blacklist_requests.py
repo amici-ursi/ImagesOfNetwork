@@ -1,8 +1,4 @@
-import logging
-
 from images_of import command, settings, Reddit
-
-LOG = logging.getLogger(__name__)
 
 
 @command

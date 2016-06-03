@@ -6,7 +6,6 @@ import asyncio
 from collections import deque
 from random import randint
 import datetime
-import logging
 from time import sleep
 
 import discord
@@ -15,6 +14,7 @@ from praw.errors import HTTPException
 import requests
 
 from images_of import settings
+from images_of.logging import getLogger
 from images_of.discord_formatters import is_relayable_message, format_inbox_message
 from images_of.discord_formatters import format_github_issue_comment, format_github_issue_event
 from images_of.discord_formatters import format_github_pull_request, format_github_push_event
@@ -22,7 +22,7 @@ from images_of.discord_formatters import format_mod_action
 
 RUN_INTERVAL = 2  # minutes
 STATS_INTERVAL = 15  # minutes
-LOG = logging.getLogger(__name__)
+LOG = getLogger(__name__)
 
 # message type mapping
 TYPES = {
@@ -95,7 +95,7 @@ class DiscordBot:
     # ======================================================
 
     async def _process_oc_stream(self, multi):
-        LOG.debug('[OC] Checking for new %s OC submissions...', multi)
+        LOG.debug('[OC] Checking for new {} OC submissions...', multi)
         oc_multi = self.reddit.get_multireddit(settings.MULTIREDDIT_USER, multi)
 
         if self.oc_stream_placeholder.get(multi, None) is None:
@@ -105,23 +105,23 @@ class DiscordBot:
 
         oc_stream = list(oc_multi.get_new(limit=limit,
                                           place_holder=self.oc_stream_placeholder.get(multi, None)))
-        LOG.debug('[OC] len(oc_stream)=%s oc_stream_placeholder=%s',
+        LOG.debug('[OC] len(oc_stream)={} oc_stream_placeholder={}',
                   len(oc_stream), self.oc_stream_placeholder.get(multi, None))
 
         x = 0
         for submission in oc_stream:
             x += 1
             if submission.id == self.last_oc_id.get(multi, None):
-                LOG.debug('[OC] Found last announced %s OC; stopping processing', multi)
+                LOG.debug('[OC] Found last announced {} OC; stopping processing', multi)
                 break
 
             elif submission.id == self.oc_stream_placeholder.get(multi, None):
-                LOG.debug('[OC] Found start of last %s stream; stopping processing', multi)
+                LOG.debug('[OC] Found start of last {} stream; stopping processing', multi)
                 break
 
             elif submission.author.name.lower() != settings.USERNAME:
                 self.last_oc_id[multi] = submission.id
-                LOG.info('[OC] OC Post from /u/%s found: %s',
+                LOG.info('[OC] OC Post from /u/{} found: {}',
                          submission.author.name, submission.permalink)
 
                 await self.client.send_message(self.oc_chan,
@@ -131,7 +131,7 @@ class DiscordBot:
         self.oc_stream_placeholder[multi] = oc_stream[0].id
 
         self.count_oc += x
-        LOG.info('[OC] Proccessed %s %s items', x, multi)
+        LOG.info('[OC] Proccessed {} {} items', x, multi)
     # ======================================================
 
     async def _process_github_events(self):
@@ -168,7 +168,7 @@ class DiscordBot:
             else:
                 cont_loop = False
 
-        LOG.info('[GitHub] New GitHub Events: %s', len(event_queue))
+        LOG.info('[GitHub] New GitHub Events: {}', len(event_queue))
 
         # All events queued... now send events to channel
         while len(event_queue) > 0:
@@ -202,7 +202,7 @@ class DiscordBot:
         else:
             limit = round(50 * RUN_INTERVAL)
 
-        LOG.debug('[ModLog] Getting %s modlog: limit=%s place_holder=%s',
+        LOG.debug('[ModLog] Getting {} modlog: limit={} place_holder={}',
                   multi, limit, self.last_modlog_action.get(multi, None))
 
         content = self.reddit.get_content(url, limit=limit,
@@ -210,13 +210,13 @@ class DiscordBot:
 
         modlog = list(content)
 
-        LOG.info('[ModLog] Processing %s %s modlog actions...', len(modlog), multi)
+        LOG.info('[ModLog] Processing {} {} modlog actions...', len(modlog), multi)
         self.count_modlog += len(modlog)
 
         for entry in [e for e in modlog if e.action in MODLOG_ACTIONS]:
 
             if entry.id == self.last_modlog_action.get(multi, None):
-                LOG.debug('[ModLog] Found previous %s modlog placeholder entry.', multi)
+                LOG.debug('[ModLog] Found previous {} modlog placeholder entry.', multi)
                 break
 
             else:
@@ -227,14 +227,14 @@ class DiscordBot:
             await self._announce_mod_action(entry)
 
         self.last_modlog_action[multi] = modlog[0].id
-        LOG.debug('[ModLog] Finished processing %s modlog.', multi)
+        LOG.debug('[ModLog] Finished processing {} modlog.', multi)
 
     # ------------------------------------
 
     async def _announce_mod_action(self, entry):
         message = format_mod_action(entry)
 
-        LOG.info('[ModLog] Announcing modlog moderator %s action', entry.action)
+        LOG.info('[ModLog] Announcing modlog moderator {} action', entry.action)
         await self.client.send_message(self.mod_chan, message)
 
     # ------------------------------------
@@ -269,14 +269,14 @@ class DiscordBot:
                     await self.client.send_message(self.github_chan, e_msg)
 
             except Exception as ex:
-                LOG.error('%s: %s', type(ex), ex)
+                LOG.error('{}: {}', type(ex), ex)
 
     # -------------------------------------
 
     async def _process_messages(self):
         LOG.debug('[Inbox] Checking for new messages...')
         inbox = list(self.reddit.get_unread(limit=None))
-        LOG.info('[Inbox] Unread messages: %s', len(inbox))
+        LOG.info('[Inbox] Unread messages: {}', len(inbox))
         for message in inbox:
             await self._relay_inbox_message(message)
 
@@ -287,11 +287,11 @@ class DiscordBot:
             try:
                 await self._run_once()
             except HTTPException as ex:
-                LOG.error('%s: %s', type(ex), ex)
+                LOG.error('{}: {}', type(ex), ex)
             except Exception as ex:
-                LOG.error('%s: %s', type(ex), ex)
+                LOG.error('{}: {}', type(ex), ex)
 
-            LOG.info('Sleeping for %s minute(s)...', RUN_INTERVAL)
+            LOG.info('Sleeping for {} minute(s)...', RUN_INTERVAL)
             print()
             await asyncio.sleep(60 * RUN_INTERVAL)
 
@@ -316,11 +316,11 @@ class DiscordBot:
                     await self._process_network_modlog(multi)
 
         except HTTPException as ex:
-            LOG.error('%s: %s', type(ex), ex)
+            LOG.error('{}: {}', type(ex), ex)
         except requests.ReadTimeout as ex:
-            LOG.error('%s: %s', type(ex), ex)
+            LOG.error('{}: {}', type(ex), ex)
         except requests.ConnectionError as ex:
-            LOG.error('%s: %s', type(ex), ex)
+            LOG.error('{}: {}', type(ex), ex)
         else:
             LOG.debug('All tasks processed.')
 
@@ -330,7 +330,7 @@ class DiscordBot:
         """Event that fires once the Discord client has connected to Discord, logged in,
         and is ready to process new commands/events."""
 
-        LOG.info('[Discord] Logged in as %s', self.client.user.name)
+        LOG.info('[Discord] Logged in as {}', self.client.user.name)
 
         self.inbox_chan = self.client.get_channel(settings.DISCORD_INBOX_CHAN_ID)
         self.falsepos_chan = self.client.get_channel(settings.DISCORD_FALSEPOS_CHAN_ID)
@@ -369,9 +369,9 @@ class DiscordBot:
                 loop = asyncio.get_event_loop()
                 loop.run_until_complete(self.client.start(settings.DISCORD_TOKEN))
             except RuntimeError as ex:
-                LOG.error('%s: %s', type(ex), ex, exc_info=ex)
+                LOG.error('{}: {}', type(ex), ex, exc_info=ex)
             except HTTPException as ex:
-                LOG.error('%s: %s', type(ex), ex, exc_info=ex)
+                LOG.error('{}: {}', type(ex), ex, exc_info=ex)
             else:
                 LOG.warning("Thread returned from 'client.run()' blocking call!")
 

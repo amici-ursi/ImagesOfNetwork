@@ -1,4 +1,3 @@
-import logging
 import re
 from textwrap import dedent
 
@@ -6,34 +5,35 @@ import click
 from praw.errors import SubredditExists, RateLimitExceeded
 
 from images_of import command, settings, Reddit
+from images_of.logging import getLogger
 
 DRY_RUN = False
-LOG = logging.getLogger(__name__)
+LOG = getLogger(__name__)
 
 
 def create_sub(r, sub):
     try:
-        LOG.info('Attempting to create /r/{}'.format(sub))
+        LOG.info('Attempting to create /r/{}', sub)
         if not DRY_RUN:
             r.create_subreddit(sub, sub)
-        LOG.info('Created /r/{}'.format(sub))
+        LOG.info('Created /r/{}', sub)
     except SubredditExists:
-        LOG.warning('/r/{} exists'.format(sub))
+        LOG.warning('/r/{} exists', sub)
 
 
 def copy_settings(r, sub, topic):
-    LOG.info('Copying settings from {}'.format(settings.PARENT_SUB))
+    LOG.info('Copying settings from {}', settings.PARENT_SUB)
     if not DRY_RUN:
         sub_settings = r.get_settings(settings.PARENT_SUB)
     else:
         sub_settings = {'title': settings.NETWORK_NAME}
 
-    LOG.debug('{}'.format(sub_settings))
+    LOG.debug('{}', sub_settings)
 
     sub_settings['title'] = "{} {}".format(sub_settings['title'], topic)
     sub_settings['public_description'] = 'Pictures and images of {}'.format(topic)
 
-    LOG.info('Copying settings to /r/{}'.format(sub))
+    LOG.info('Copying settings to /r/{}', sub)
 
     if DRY_RUN:
         return
@@ -58,14 +58,14 @@ def invite_mods(r, sub):
         cur_mods = [u.name for u in r.get_moderators(sub)]
     else:
         cur_mods = []
-    LOG.debug('current mods for /r/{}: {}'.format(sub, cur_mods))
+    LOG.debug('current mods for /r/{}: {}', sub, cur_mods)
 
     need_mods = [mod for mod in mods if mod not in cur_mods]
     if not need_mods:
         LOG.info('All mods already invited.')
         return
     else:
-        LOG.info('Inviting moderators: {}'.format(need_mods))
+        LOG.info('Inviting moderators: {}', need_mods)
 
     if not DRY_RUN:
         s = r.get_subreddit(sub)
@@ -77,7 +77,7 @@ def invite_mods(r, sub):
 
 def copy_wiki_pages(r, sub):
     for page in settings.WIKI_PAGES:
-        LOG.info('Copying wiki page "{}"'.format(page))
+        LOG.info('Copying wiki page "{}"', page)
         if not DRY_RUN:
             content = r.get_wiki_page(settings.PARENT_SUB, page).content_md
             r.edit_wiki_page(sub, page, content=content, reason='Subreddit stand-up')
@@ -97,11 +97,11 @@ def setup_flair(r, sub):
 
 def add_to_multi(r, sub, multi):
     if not settings.MULTIREDDIT:
-        LOG.warning("No multireddit to add /r/{} to.".format(sub))
+        LOG.warning("No multireddit to add /r/{} to.", sub)
         return
 
-    LOG.info('Adding /r/{} to /user/{}/m/{}'
-                 .format(sub, settings.MULTIREDDIT_USER, multi))
+    LOG.info('Adding /r/{} to /user/{}/m/{}',
+             sub, settings.MULTIREDDIT_USER, multi)
 
     if DRY_RUN:
         return
@@ -123,8 +123,7 @@ def setup_notifications(r, sub):
         "filter-subreddits": []
         }""")
 
-    LOG.info('Requesting notifications about /r/{} from /u/Sub_Mentions'
-                 .format(sub))
+    LOG.info('Requesting notifications about /r/{} from /u/Sub_Mentions' ,sub)
 
     if not DRY_RUN:
         r.send_message('Sub_Mentions', 'Action: Subscribe',

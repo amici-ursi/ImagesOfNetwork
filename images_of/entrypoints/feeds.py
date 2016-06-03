@@ -1,9 +1,9 @@
 import feedparser
-import logging
 from images_of import command, settings, Reddit
+from images_of.logging import getLogger
 from praw.errors import AlreadySubmitted, APIException, HTTPException
 
-LOG = logging.getLogger(__name__)
+LOG = getLogger(__name__)
 
 @command
 def main():
@@ -16,7 +16,7 @@ def main():
             for feed in child['feeds']:
                 thisfeed = feedparser.parse(feed)
                 for i in range(len(thisfeed.entries)):
-                    LOG.info('Posting OC into /r/{}: {}'.format(child['name'], thisfeed.entries[i].title))
+                    LOG.info('Posting OC into /r/{}: {}', child['name'], thisfeed.entries[i].title)
                     try:
                         r.submit(child['name'], title=thisfeed.entries[i].title, url=thisfeed.entries[i].link, captcha=None, send_replies=True, resubmit=False)
                     except AlreadySubmitted:
