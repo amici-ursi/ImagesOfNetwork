@@ -3758,6 +3758,7 @@ search = [
     'u\.p\.',
 ]
 ignore = [
+    "detroit('s)?[ -](style|pizza)",
     'indiana',
     'michigan (ave(nue)?|city)',
     'detroit.+or(egon)?',
