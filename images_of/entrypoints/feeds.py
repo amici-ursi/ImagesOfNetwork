@@ -21,9 +21,12 @@ def main():
         sub = Subreddit(**child_settings)
         for feed in sub.feeds:
             thisfeed = feedparser.parse(feed)
-            comment = 'This content brought to you from {}{}'.format(
+            comment = 'This content brought to you from "{}"\n{}'.format(
                     thisfeed.feed.title,
-                    settings.COMMENT_FOOTER)
+                    settings.COMMENT_FOOTER.format(
+                        reason='off site feed',
+                        thisfeed.feed.title
+                    ))
             for item in thisfeed.entries:
                 LOG.info('Posting OC into /r/{}: {}'.format(
                     sub.name,
