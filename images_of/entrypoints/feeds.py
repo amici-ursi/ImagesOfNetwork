@@ -21,7 +21,7 @@ def main():
         sub = Subreddit(**child_settings)
         for feed in sub.feeds:
             thisfeed = feedparser.parse(feed)
-            comment = '[This content brought to you from {}{}'.format(
+            comment = 'This content brought to you from {}{}'.format(
                     thisfeed.feed.title,
                     COMMENT_FOOTER)
             for item in thisfeed.entries:
