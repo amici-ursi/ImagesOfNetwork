@@ -23,7 +23,7 @@ def main():
             thisfeed = feedparser.parse(feed)
             comment = 'This content brought to you from {}{}'.format(
                     thisfeed.feed.title,
-                    COMMENT_FOOTER)
+                    settings.COMMENT_FOOTER)
             for item in thisfeed.entries:
                 LOG.info('Posting OC into /r/{}: {}'.format(
                     sub.name,
