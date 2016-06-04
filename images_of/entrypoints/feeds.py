@@ -25,7 +25,7 @@ def main():
                     thisfeed.feed.title,
                     settings.COMMENT_FOOTER.format(
                         reason='off site feed',
-                        thisfeed.feed.title
+                        detail=thisfeed.feed.title
                     ))
             for item in thisfeed.entries:
                 LOG.info('Posting OC into /r/{}: {}'.format(
