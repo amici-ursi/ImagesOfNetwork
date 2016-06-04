@@ -4,7 +4,7 @@ import feedparser
 from praw.errors import AlreadySubmitted, APIException, HTTPException
 
 from images_of import command, settings, Reddit
-from imagesof.subreddit import Subreddit
+from images_of.subreddit import Subreddit
 
 
 LOG = logging.getLogger(__name__)
