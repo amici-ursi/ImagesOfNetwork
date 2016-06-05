@@ -4611,6 +4611,7 @@ search = [
     'wallace monument',
 ]
 ignore = [
+    'crocodile dundee',
     'dakota skye',
 ]
 ignore-case = [
