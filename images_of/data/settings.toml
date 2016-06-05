@@ -91,7 +91,7 @@ domains = [
     '(.*\.)?staticflickr\.com',
     '(.*\.)?tinypic\.com',
     'twitpic\.com',
-    'upload.wikimedia\.org',f
+    'upload.wikimedia\.org',
     'i\.reddituploads\.com',
 ]
 
