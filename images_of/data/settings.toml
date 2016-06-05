@@ -91,7 +91,7 @@ domains = [
     '(.*\.)?staticflickr\.com',
     '(.*\.)?tinypic\.com',
     'twitpic\.com',
-    'upload.wikimedia\.org',
+    'upload.wikimedia\.org',f
     'i\.reddituploads\.com',
 ]
 
@@ -5199,6 +5199,11 @@ whitelist = [
 ]
 
 [child.imagesofvirginia]
+feeds = [
+    'https://www.flickr.com/services/feeds/photos_public.gne?id=14571714@N08&lang=en-us&format=atom',
+    'https://www.flickr.com/services/feeds/photos_public.gne?id=37922399@N05&lang=en-us&format=atom',
+    'https://www.flickr.com/services/feeds/groups_pool.gne?id=47506614@N00&lang=en-us&format=atom',
+]
 search = [
     'virginia',
 ]
