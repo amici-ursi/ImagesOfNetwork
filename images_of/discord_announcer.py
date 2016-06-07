@@ -256,7 +256,7 @@ class DiscordBot:
 
                 await self.client.send_message(self.stats_chan, msg)
 
-                x = randint(1, 100)
+                x = randint(1, 200)
                 e_msg = ''
                 if x == 30:
                     e_msg = "*I guess if you want children beaten, you have to do it yourself...*"
