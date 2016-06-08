@@ -178,7 +178,7 @@ ignore = [
 blacklist = [
     '1911',
     'weekendgunnit',
-    'fullmetalgunnit'
+    'fullmetalgunnit',
     'eu4',
     'paradoxplaza',
     'airsoft',
