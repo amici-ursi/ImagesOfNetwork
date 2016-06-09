@@ -130,6 +130,9 @@ class Bot:
 
         except AlreadySubmitted:
             LOG.info('Already submitted. Skipping.')
+        except KeyError:
+            # XXX AlreadySubmitted isn't being raised for some reason
+            LOG.info('Already Submitted (KeyError). Skipping.')
         except APIException as e:
             LOG.warning(e)
         
