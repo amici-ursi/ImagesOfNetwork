@@ -31,10 +31,14 @@ def process_modmail(r):
 
     already_added_message = ('It appears that you are already on the {} Network blacklist.\r\n\n'
                              .format(settings.NETWORK_NAME))
-    already_added_message += 'If your images are still being crossposted, please let us know so we can investigate.'
+    already_added_message += 'If your images are still being crossposted, please let us know so we can investigate.\n'
+    already_added_message += '\n**Please note**: If you were recently added to the blacklist, it may take 24 hours '
+    already_added_message += 'before the blacklist is updated on the bot and takes effect.'
 
     success_message = 'You have been added to the user blacklist and your images will no longer be'
     success_message += (' crossposted on the {} Network.'.format(settings.NETWORK_NAME))
+    success_message += "\n\n**Please note**: it may take 24+ hours before the blacklist on the bot is updated "
+    success_message += 'and this change takes effect.' 
 
     for m in [i for i in modmail_inbox if not i.replies]:
 
@@ -70,10 +74,14 @@ def process_inbox(r):
 
     already_added_message = ('It appears that you are already on the {} Network blacklist.\r\n\n'
                              .format(settings.NETWORK_NAME))
-    already_added_message += 'If your images are still being crossposted, please let us know so we can investigate.'
+    already_added_message += 'If your images are still being crossposted, please let us know so we can investigate.\n'
+    already_added_message += '\n**Please note**: If you were recently added to the blacklist, it may take 24 hours '
+    already_added_message += 'before the blacklist is updated on the bot and takes effect.'
 
     success_message = 'You have been added to the user blacklist and your images will no longer be'
     success_message += (' crossposted on the {} Network.'.format(settings.NETWORK_NAME))
+    success_message += '\n\n**Please note**: it may take 24+ hours before blacklist on the bot is updated '
+    success_message += 'and this change takes effect.' 
 
     for m in [i for i in inbox if not i.replies]:
 
