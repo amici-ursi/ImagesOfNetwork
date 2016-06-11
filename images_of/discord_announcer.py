@@ -34,8 +34,8 @@ TYPES = {
     't6': 'award',
     't8': 'promocampaign'
 }
-MODLOG_ACTIONS = ['invitemoderator',
-                  'acceptmoderatorinvite', 'removemoderator']
+
+MODLOG_ACTIONS = ['invitemoderator', 'acceptmoderatorinvite', 'removemoderator']
 EVENT_FILTER = ['IssuesEvent', 'PullRequestEvent', 'PushEvent', 'IssueCommentEvent']
 ISSUE_ACTION_FILTER = ["opened", "closed", "reopened", "unlabeled",
                        "unassigned", "assigned", "labeled"]
@@ -80,7 +80,7 @@ class DiscordBot:
 
             if 'false positive' in message.body.lower() and self.settings.DO_FALSEPOS:
                 LOG.info('[Inbox] Announcing false-positive reply.')
-                notification = "New __false-positive__ report from **/u/{}**:\r\n{}\r\n ".format(
+                notification = "New __false-positive__ report from `/u/{}`:\r\n{}\r\n ".format(
                     message.author.name, message.permalink[:-7])
 
                 await self.client.send_message(self.falsepos_chan, notification)
@@ -110,7 +110,7 @@ class DiscordBot:
 
         x = 0
         for submission in oc_stream:
-            x += 1
+
             if submission.id == self.last_oc_id.get(multi, None):
                 LOG.debug('[OC] Found last announced %s OC; stopping processing', multi)
                 break
@@ -127,6 +127,8 @@ class DiscordBot:
                 await self.client.send_message(self.oc_chan,
                                                '---\nNew __OC__ by ``/u/{}``:\r\n{}'.format(
                                                    submission.author.name, submission.permalink))
+
+            x += 1
 
         self.oc_stream_placeholder[multi] = oc_stream[0].id
 
@@ -256,10 +258,11 @@ class DiscordBot:
 
                 await self.client.send_message(self.stats_chan, msg)
 
-                x = randint(1, 200)
+                x = randint(1, 400)
                 e_msg = ''
                 if x == 30:
-                    e_msg = "*I guess if you want children beaten, you have to do it yourself...*"
+                    e_msg = "*I'm going to start my OWN ImagesOf network! With blackjack!" \
+                          + " And hookers!*\n\n*On second thought, forget the ImagesOf network.*"
                 elif x == 60:
                     e_msg = "*Hey sexy mama, wanna kill all humans?*"
                 elif x == 90:
