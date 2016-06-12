@@ -67,7 +67,7 @@ class Bot:
         try:
             user = post.author.name.lower()
         except AttributeError as e:
-            logging.error('{}: {}'.format(post.url, e))
+            LOG.warning('No author information available for submission %s.', post.url)
             return AcceptFlag.BAD
 
         if user in self.blacklist_users:
