@@ -1033,14 +1033,13 @@ search = [
     'phoenix..?(arizona|az)',
     'scottsdale',
     'sedona',
-    'sitka',
     'tempe',
     'tucson',
 ]
 ignore = [
     'arizona (robins|(iced)? tea)',
     'hyundai tucson',
-    'peoria.? (il|illinois)',
+    'peoria..?(il|illinois)',
 ]
 whitelist = [
     'arizona',
