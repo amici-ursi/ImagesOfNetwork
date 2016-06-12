@@ -2677,6 +2677,7 @@ search = [
 ignore = [
     'fl studios?',
     'hotline miami',
+    'orlando bloom',
 ]
 whitelist = [
     '321',
