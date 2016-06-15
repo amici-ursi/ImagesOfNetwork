@@ -16,7 +16,7 @@ class Match:
 
 class Subreddit:
     def __init__(self, name, search, feeds=[], ignore=None, ignore_case=None, whitelist=[],
-                 blacklist=[], wiki_blacklist=False, **kwargs):
+                 blacklist=[], wiki_blacklist=False, feed_limit=None, **kwargs):
         """
         Create new Subreddit object. This object is responsible for
         checking if posts meet sub-specific criteria for whether or
@@ -50,6 +50,7 @@ class Subreddit:
         self.whitelist = [sub.lower() for sub in whitelist]
         self.blacklist = [sub.lower() for sub in blacklist]
         self.wiki_blacklist = wiki_blacklist
+        self.feed_limit = feed_limit
 
         if kwargs:
             bad_keys = list(kwargs.keys())

@@ -1,4 +1,5 @@
 import logging
+import random
 
 import feedparser
 from praw.errors import AlreadySubmitted, APIException, HTTPException
@@ -19,7 +20,11 @@ def main():
 
     for child_settings in settings.CHILD_SUBS:
         sub = Subreddit(**child_settings)
-        for feed in sub.feeds:
+        posted = 0
+
+        feeds = sub.feeds[:]
+        random.shuffle(feeds)
+        for feed in feeds:
             thisfeed = feedparser.parse(feed)
             comment = 'This content brought to you from "{}"\n{}'.format(
                     thisfeed.feed.title,
@@ -28,6 +33,9 @@ def main():
                         detail=thisfeed.feed.title
                     ))
             for item in thisfeed.entries:
+                if sub.feed_limit and posted >= sub.feed_limit:
+                    break
+
                 LOG.info('Posting OC into /r/{}: {}'.format(
                     sub.name,
                     item.title))
@@ -47,6 +55,10 @@ def main():
                     LOG.info('Already Submitted (KeyError). Skipping.')
                 except APIException as e:
                     LOG.warning(e)
+                else:
+                    posted += 1
+
+        log.info('Posted %s feed items into /r/%s', posted, sub.name)
 
 if __name__ == '__main__':
     main()
