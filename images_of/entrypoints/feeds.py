@@ -58,7 +58,7 @@ def main():
                 else:
                     posted += 1
 
-        log.info('Posted %s feed items into /r/%s', posted, sub.name)
+        LOG.info('Posted %s feed items into /r/%s', posted, sub.name)
 
 if __name__ == '__main__':
     main()
