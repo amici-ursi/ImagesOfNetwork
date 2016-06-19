@@ -1,24 +1,22 @@
 import click
-import time
-import datetime
-from time import gmtime
-from datetime import date
+from collections import defaultdict
+from datetime import date, datetime, timedelta
 from images_of import command, settings, Reddit
 
 @command
-@click.option('--history-days', help='How many days back into the modlog run. Default is 30 days', default=60)
+@click.option('--history-days', help='How many days back into the modlog run. Default is 60 days', default=60)
 def main(history_days):
     """Process modlogs to identify inactive mods"""
     
-    mods = settings.DEFAULT_MODS
+    exclude_mods = settings.DEFAULT_MODS
+    dummy_min_date = date(1901, 1, 1)
 
     r = Reddit('{} ModLog Auditor v0.1 - /u/{}'.format(settings.NETWORK_NAME, settings.USERNAME))
     r.oauth()
 
     subs = sorted([sub['name'] for sub in settings.CHILD_SUBS])
     
-    end_utc = gmtime(time.time() - 60 * 60 * 24 * history_days)
-    end_date = date(end_utc[0], end_utc[1], end_utc[2])
+    end_date = datetime.utcnow().date() - timedelta(days=history_days)
     
     for sub in subs:
         print('Processing {} modlog...'.format(sub))
@@ -29,17 +27,17 @@ def main(history_days):
         first_id = None
         
         s = r.get_subreddit(sub)
-        all_mods = [u.name for u in s.get_moderators()]
-        real_mods = [m for m in all_mods if m not in mods]
+        real_mods = [u.name for u in s.get_moderators()
+                     if u.name not in exclude_mods]
 
         if not real_mods:   ## If no real moderators, don't process this subreddit modlog
             continue
         else:
-            mod_action_count = dict()
+            mod_action_count = defaultdict(lambda: 0)
             mod_last_action = dict()
 
             while not done:
-                log = list(s.get_mod_log(limit=50, params={"after": last}))
+                log = list(s.get_mod_log(limit=500, params={"after": last}))
 
                 if len(log) == 0:
                     done = True
@@ -47,17 +45,16 @@ def main(history_days):
                 else:
                     last = log[-1].id
                 
-                for log_entry in [l for l in log if l.mod in real_mods]:
-                    
-                    created_utc = log_entry.created_utc
-                    time_utc = gmtime(created_utc)
-                    date_utc = date(time_utc[0], time_utc[1], time_utc[2])
+                for log_entry in log:
+                    if l.mod not in real_mods:
+                        continue
+
+                    date_utc = datetime.utcfromtimestamp(log_entry.created_utc).date()
 
                     if date_utc >= end_date:
-                        mod_action_count[log_entry.mod] = mod_action_count.get(log_entry.mod, 0) + 1
-                        
-                        if date_utc > mod_last_action.get(log_entry.mod, date(1901, 1, 1)):
-                            mod_last_action[log_entry.mod] = date_utc
+                        mod_action_count[log_entry.mod] += 1
+                        # set if not set, else ignore since actions are chronological
+                        mod_last_action.setdefault(log_entry.mod, date_utc)
                             
                     # Reached end date
                     else:
@@ -69,13 +66,12 @@ def main(history_days):
                     done = True
                     break
                     
-                count += 100
+                count += 500
 
 
         print('Subredit Moderation Log Stats for {}:\t\t({} entries parsed)'.format(sub, count))
         for m in real_mods:
-            print('    {}:\n\tActions: {}  \tLast Active: {}'.format(m, mod_action_count.get(m, 0), mod_last_action.get(m, date(1901, 1, 1)))) 
-        print()
+            print('    {}:\n\tActions: {}  \tLast Active: {}'.format(m, mod_action_count.get(m, 0), mod_last_action.get(m, dummy_min_date)))
 
 
 if __name__ == '__main__':
