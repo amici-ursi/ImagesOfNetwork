@@ -24,7 +24,8 @@ class Bot:
         self.blacklist_users = self._read_blacklist('userblacklist')
 
         LOG.info('Loading global subreddit blacklist from wiki')
-        self.blacklist_subs = self._read_blacklist('subredditblacklist')
+        blacklist_sub_pats = self._read_blacklist('subredditblacklist')
+        self.blacklist_sub_res = [re.compile(pat) for pat in blacklist_sub_pats]
 
         self.subreddits = []
         for sub_settings in settings.CHILD_SUBS:
@@ -74,7 +75,7 @@ class Bot:
             return AcceptFlag.BAD
 
         sub = post.subreddit.display_name.lower()
-        if sub in self.blacklist_subs:
+        if any(bl_sub.fullmatch(sub) for bl_sub in self.blacklist_sub_res):
             return AcceptFlag.BAD
 
         if self.domain_re.search(post.domain):
