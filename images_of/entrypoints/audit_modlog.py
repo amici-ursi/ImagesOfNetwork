@@ -33,7 +33,7 @@ def main(history_days):
             continue
         mod_action_count = defaultdict(lambda: 0)
         mod_last_action = {}
-        log = enumerate(s.get_mod_log(limit=None), start=1)
+        log = enumerate(s.get_mod_log(limit=5000), start=1)
         for count, log_entry in log:
             if l.mod not in real_mods:
                 continue
@@ -43,13 +43,9 @@ def main(history_days):
                 mod_action_count[log_entry.mod] += 1
                 # set if not set, else ignore since actions are chronological
                 mod_last_action.setdefault(log_entry.mod, date_utc)
-            # Reached end date
-            else:
+            else:  # Reached end date
                 break
             sub_count = count  # Used in intermediate sub-based stats
-            if count >= 5000:
-                break
-
 
         print('Subredit Moderation Log Stats for {}:\t\t({} entries parsed)'.format(sub, sub_count))
         for m in real_mods:
