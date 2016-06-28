@@ -3370,7 +3370,7 @@ search = [
     'waterloo..?(IA|iowa)',
 ]
 ignore = [
-    '(kennedy|adam) davenport',
+    '(kennedy|adam|madison) davenport',
     'NM',
     'New Mexico',
     'ca(lifornia)?',
