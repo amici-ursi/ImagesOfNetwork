@@ -2,6 +2,8 @@ import logging
 import re
 from collections import deque
 from datetime import datetime
+from multiprocessing import Pool
+from functools import partial
 from time import sleep
 
 import requests
@@ -14,8 +16,15 @@ from images_of.subreddit import Subreddit
 RETRY_MINUTES = 2
 LOG = logging.getLogger(__name__)
 
-class Bot:
+def re_fullmatch(regex, matchstr):
+    return regex.fullmatch(matchstr)
+    
+def sub_check(subreddit, submission, flag):
+    return subreddit.check(submission, flag)
+
+class Bot(object):
     def __init__(self, r, should_post=True):
+        self.working_pool = Pool(10)
         self.r = r
         self.should_post = should_post
         self.recent_posts = deque(maxlen=50)
@@ -75,7 +84,8 @@ class Bot:
             return AcceptFlag.BAD
 
         sub = post.subreddit.display_name.lower()
-        if any(bl_sub.fullmatch(sub) for bl_sub in self.blacklist_sub_res):
+        match_partial = partial(re_fullmatch, matchstr=sub)
+        if any(self.working_pool.map(match_partial, self.blacklist_sub_res)):
             return AcceptFlag.BAD
 
         if self.domain_re.search(post.domain):
@@ -154,8 +164,8 @@ class Bot:
         if flag is AcceptFlag.BAD:
             return
 
-        for sub in self.subreddits:
-            match = sub.check(post, flag)
+        check_partial = partial(sub_check, submission=post, flag=flag)
+        for match in self.working_pool.map(check_partial, self.subreddits):
             if match:
                 if not self.verify_age(post):
                     return
