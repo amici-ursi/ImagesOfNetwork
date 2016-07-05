@@ -3430,6 +3430,9 @@ whitelist = [
     'iranpolitics',
     'teammelli',
 ]
+blacklist = [
+    'wine',
+]
 
 [child.imagesofisleofman]
 search = [
