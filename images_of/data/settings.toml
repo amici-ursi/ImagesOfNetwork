@@ -3408,6 +3408,11 @@ blacklist = [
     'whatisthisplant',
     'whatisthisthing',
     'whatsthisplant',
+    'whatsthisbug',
+    'tattoos',
+    'awwnime',
+    'starlets',
+    'kancolle',
 ]
 
 [child.imagesofiran]
