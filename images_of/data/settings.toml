@@ -98,6 +98,23 @@ domains = [
 
 # Template:
 #
+# NB: any passed variables enable a feature if they match
+# NB: no passed variables set cause a default of False
+# NB: passed variables on experiments are precedents for randomization
+#
+# [feature.{FEATURE_NAME}] | [experiment.{EXPERIMENT_NAME}]
+# passedvariable = 'value'      # does passedvariable equal 'value'?
+# passedvariable2 = ['val1']    # is passedvariable in the value list
+# experiment_range = 1	        # range of values to check on experiments
+# experiment_randomization = 'onload' # either 'onload' or 'onread' (of config)
+
+[experiment.multiprocessingregex]
+experiment_range = 1
+experiment_randomization = 'onload'
+
+
+# Template:
+#
 # [child.{SUB_NAME}]
 # feeds = []            # Atom feeds for trusted off site content
 # feed-limit = 0        # maximum number of feed items to post per run of ion_feeds
