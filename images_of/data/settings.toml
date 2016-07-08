@@ -1069,6 +1069,7 @@ blacklist = [
     'funkopop',
     'silverbugs',
     'tattoos',
+    'pokemongo',
 ]
 
 [child.imagesofarkansas]
