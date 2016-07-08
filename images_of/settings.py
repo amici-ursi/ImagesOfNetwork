@@ -8,6 +8,7 @@ set in local_settings.
 import os.path
 import pytoml as toml
 import pkg_resources
+from .features import load_features_scope
 
 def _conf_get(conf, *args, default=None):
     try:
@@ -40,6 +41,7 @@ class Settings:
 
     def loads(self, raw):
         conf = toml.loads(raw)
+        load_features_scope(conf)
 
         # reddit
         self.USERNAME = _conf_get(conf, 'auth', 'username', default=self.USERNAME)
