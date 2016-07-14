@@ -3761,10 +3761,6 @@ whitelist = [
 ]
 
 [child.imagesofmichigan]
-feeds = [
-    #'https://www.flickr.com/services/feeds/groups_pool.gne?id=37718676416@N01&lang=en-us&format=atom', # official_michigan
-    'https://www.flickr.com/services/feeds/groups_pool.gne?id=501848@N25&lang=en-us&format=atom', #puremichigan
-]
 search = [
     '.*, mi',
     'detroit',
