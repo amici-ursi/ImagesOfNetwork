@@ -1041,6 +1041,7 @@ ignore = [
     'arizona (robins|(iced)? tea)',
     'hyundai tucson',
     'peoria..?(il|illinois)',
+    'alt/az',
 ]
 whitelist = [
     'arizona',
