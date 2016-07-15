@@ -2235,7 +2235,6 @@ whitelist = [
     'nanjing',
     'shanghai',
     'shenzhen',
-    'taiwan',
     'travelchina',
     'wuhan',
 ]
