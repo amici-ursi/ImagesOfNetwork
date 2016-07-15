@@ -258,19 +258,6 @@ class DiscordBot:
 
                 await self.client.send_message(self.stats_chan, msg)
 
-                x = randint(1, 400)
-                e_msg = ''
-                if x == 30:
-                    e_msg = "*I'm going to start my OWN ImagesOf network! With blackjack!" \
-                          + " And hookers!*\n\n*On second thought, forget the ImagesOf network.*"
-                elif x == 60:
-                    e_msg = "*Hey sexy mama, wanna kill all humans?*"
-                elif x == 90:
-                    e_msg = "*Bite my shiny, metal ass!*"
-
-                if len(e_msg) > 1:
-                    await self.client.send_message(self.github_chan, e_msg)
-
             except Exception as ex:
                 LOG.error('%s: %s', type(ex), ex)
 
