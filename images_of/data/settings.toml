@@ -4747,6 +4747,20 @@ blacklist = [
     'knives',
 ]
 
+[child.imagesoftaiwan]
+feeds = [
+    'https://www.flickr.com/services/feeds/groups_pool.gne?id=49503075090@N01&lang=en-us&format=atom',
+]
+search = [
+    'taiwan',
+]
+whitelist = [
+    'taiwan',
+    'taiwanpics',
+    'ohtaigi',
+    'twmusic',
+]
+
 [child.imagesoftennessee]
 feeds = [
     'https://www.flickr.com/services/feeds/groups_pool.gne?id=52240379285@N01&lang=en-us&format=atom',
@@ -5175,6 +5189,43 @@ whitelist = [
     'uoft',
     'volunteertoronto',
     'yorku',
+]
+
+[child.imagesofuae]
+feeds = [
+    'https://www.flickr.com/services/feeds/groups_pool.gne?id=70923591@N00&lang=en-us&format=atom',
+]
+search = [
+    'UAE',
+    'United Arab Emirates',
+    'Abu Dhabi',
+    'Dubai',
+    'Sharjah',
+    'Ras al-Khaimah',
+    'Fujairah',
+    'Al Ain',
+    'Ajman',
+    'Khor Fakkan',
+    'Yas Island',
+    'Jumeirah',
+    'Hatta',
+    'Dibba',
+    'Kalba',
+    'Jebel Ali',
+    'Saadiyat',
+    'Dalma',
+    'Masafi',
+    'Ruwais',
+    'Masdar',
+    'Swaihan',
+]
+whitelist = [
+    'uae',
+    'dubai',
+    'sharjah',
+    'fujairah',
+    'alaincity',
+    'abudhabi',
 ]
 
 [child.imagesofusa]
