@@ -96,7 +96,7 @@ def setup_flair(r, sub):
 
 
 def add_to_multi(r, sub, multi):
-    if not settings.MULTIREDDIT:
+    if not multi:
         LOG.warning("No multireddit to add /r/{} to.".format(sub))
         return
 
