@@ -4688,6 +4688,22 @@ whitelist = [
     'southdakota',
 ]
 
+[child.imagesofspain]
+feeds = [
+    'https://www.flickr.com/services/feeds/groups_pool.gne?id=37996655186@N01&lang=en-us&format=atom',]
+search = [
+    'spain',
+]
+whitelist = [
+    'spain',
+    'madrid',
+    'barcelona',
+    'granada',
+    'valencia',
+    'SpanishHistory',
+    'spainpics',
+]
+
 [child.imagesofsyria]
 search = [
     'afrin',
