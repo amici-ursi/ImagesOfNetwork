@@ -1038,7 +1038,7 @@ search = [
     'tucson',
 ]
 ignore = [
-    'arizona (robins|(iced)? tea)',
+    '(arizona|az) (robins|(iced)?.?tea)',
     'hyundai tucson',
     'peoria..?(il|illinois|heights)',
     'alt/az',
