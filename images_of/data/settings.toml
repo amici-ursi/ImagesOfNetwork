@@ -912,6 +912,7 @@ whitelist = [
     'afghanistan',
     'afghanistanpics',
 ]
+wiki-blacklist = true
 
 [child.imagesofalabama]
 search = [
@@ -3687,6 +3688,7 @@ search = [
 whitelist = [
     'maldives',
 ]
+wiki-blacklist = true
 
 [child.imagesofmaryland]
 search = [
