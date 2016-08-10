@@ -3123,9 +3123,9 @@ search = [
 ignore = [
     'american?',
     'goa crew',
-    "goa'uld",
-    'indiamain',
-    'indian? (chief|point|ink|pale ale|de beaufort)',
+    'goa'uld',
+    'india eisley',
+    'indian? (chief|point|ink|pale ale|de beaufort|head|arrowhead|head|falls|reservation)',
     'milf',
     'porn',
     'bescort',
