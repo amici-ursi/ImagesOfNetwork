@@ -48,7 +48,8 @@ class Subreddit:
         self.ignore_re = make_regex(ignore, re.IGNORECASE)
         self.ignore_case_re = make_regex(ignore_case)
         self.whitelist = [sub.lower() for sub in whitelist]
-        self.blacklist = [sub.lower() for sub in blacklist]
+        blacklist_pats = [sub.lower() for sub in blacklist]
+        self.blacklist_res = [re.compile(pat) for pat in blacklist_pats]
         self.wiki_blacklist = wiki_blacklist
         self.feed_limit = feed_limit
 
@@ -82,7 +83,8 @@ class Subreddit:
             LOG.warning('Forbidden from reading blacklist on /r/{}'.format(self.name))
             wiki_blacklist = set()
 
-        self.blacklist = sorted(wiki_blacklist.union(self.blacklist))
+        blacklist_pats = sorted(wiki_blacklist.union(self.blacklist))
+        self.blacklist_res = [re.compile(pat) for pat in blacklist_pats]
         self.wiki_blacklist_loaded = True
 
     def check(self, post, flag=AcceptFlag.OK):
@@ -98,7 +100,7 @@ class Subreddit:
             return Match('whitelist', post_sub)
         if flag is AcceptFlag.OK_IF_WHITELISTED:
             return
-        if post_sub in self.blacklist:
+        if any(bl_sub.fullmatch(post_sub) for bl_sub in self.blacklist):
             return
 
 
