@@ -100,7 +100,7 @@ class Subreddit:
             return Match('whitelist', post_sub)
         if flag is AcceptFlag.OK_IF_WHITELISTED:
             return
-        if any(bl_sub.fullmatch(post_sub) for bl_sub in self.blacklist):
+        if any(bl_sub.fullmatch(post_sub) for bl_sub in self.blacklist_res):
             return
 
 
