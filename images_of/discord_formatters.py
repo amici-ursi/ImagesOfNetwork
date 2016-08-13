@@ -1,6 +1,6 @@
 """
-Contains the various formatting functions to convert reddit and GitHub objects into
-Discord-friendly messages that can be relayed to the appropriate channels.
+Contains the various formatting functions to convert reddit and GitHub objects
+into Discord-friendly messages that can be relayed to the appropriate channels.
 """
 
 
@@ -9,36 +9,39 @@ import logging
 
 from images_of import settings
 
+
 LOG = logging.getLogger(__name__)
 
 # message type mapping
 TYPES = {
-    't1':'comment',
-    't2':'account',
-    't3':'link',
-    't4':'message',
-    't5':'subreddit',
-    't6':'award',
-    't8':'promocampaign'
+    't1': 'comment',
+    't2': 'account',
+    't3': 'link',
+    't4': 'message',
+    't5': 'subreddit',
+    't6': 'award',
+    't8': 'promocampaign'
 }
 
-EVENT_FILTER = ['IssuesEvent', 'PullRequestEvent', 'PushEvent', 'IssueCommentEvent']
+EVENT_FILTER = ['IssuesEvent', 'PullRequestEvent', 'PushEvent',
+                'IssueCommentEvent']
 ISSUE_ACTION_FILTER = ["opened", "closed", "reopened", "unlabeled",
                        "unassigned", "assigned", "labeled"]
-PULL_REQUEST_ACTION_FILTER = ["opened", "edited", "closed", "reopened", "synchronize"]
+PULL_REQUEST_ACTION_FILTER = ["opened", "edited", "closed",
+                              "reopened", "synchronize"]
 
-#Regex pattern for identifying and stripping out markdown links
+# Regex pattern for identifying and stripping out markdown links
 MD_LINK_PATTERN = r'(\[)([^\]()#\n]+)\]\(([^\]()#\n]+)\)'
 MD_LINK_RE = re.compile(MD_LINK_PATTERN, flags=re.IGNORECASE)
 
 
 def is_relayable_message(message):
     """
-    Determines if an inbox message is a type of message that should or should not be relayed
-    to Discord. Does not relay mod removal or remove replies, blacklist requests, or messages
-    from AutoModerator/reddit itself.
+    Determines if an inbox message is a type of message that should or should
+    not be relayed to Discord. Does not relay mod removal or remove replies,
+    blacklist requests, or messages from AutoModerator/reddit itself.
     """
-    #only matching remove exactly
+    # only matching remove exactly
     if (message.body == 'remove') or ('mod removal' in message.body):
         # Don't announce 'remove' or 'mod removal' replies
         message.mark_as_read()
@@ -59,11 +62,9 @@ def is_relayable_message(message):
         message.mark_as_read()
         LOG.info('[Inbox] Not announcing message type: "AutoMod Response"')
         return False
-
     else:
         return True
 
-##------------------------------------
 
 def format_inbox_message(message):
     """
@@ -75,7 +76,7 @@ def format_inbox_message(message):
 
     msg_body = re.sub('\n\n', '\n', msg_body)
 
-    #Strip markdown hyperlinks, append to bottom
+    # Strip markdown hyperlinks, append to bottom
     msg_links = MD_LINK_RE.findall(msg_body)
 
     if msg_links:
@@ -96,13 +97,13 @@ def format_inbox_message(message):
     notification = ("New __{}__ from **/u/{}**: \n```\n{}\n```".format(
         msg_type, message.author.name, msg_body))
 
-    #Add permalink for comment replies
+    # Add permalink for comment replies
     if message.name[:2] == 't1':
-        notification += ('\n**Permalink:** {}?context=10\r\n '.format(message.permalink))
+        notification += '\n**Permalink:** {}?context=10\r\n '.format(
+            message.permalink)
 
     return notification
 
-##------------------------------------
 
 def format_github_issue_comment(event):
     """
@@ -121,7 +122,6 @@ def format_github_issue_comment(event):
 
         return desc
 
-    ##------------------------------------
 
 def format_github_push_event(event):
     """Takes a GitHub PushEvent and returns a markdown-formatted message
@@ -131,9 +131,11 @@ def format_github_push_event(event):
         event.payload['ref'].replace('refs/heads/', ''), event.actor.login)
 
     for com in event.payload['commits']:
-        desc = '\nCommit `{}` by `{}`:\n'.format(com['sha'][:7], com['author']['name']) \
-                + '```\n{}```\n'.format(com['message']) \
-                + 'https://github.com/amici-ursi/ImagesOfNetwork/commit/{}'.format(com['sha'])
+        desc = ('\nCommit `{}` by `{}`:\n'.format(
+                com['sha'][:7], com['author']['name']) +
+                '```\n{}```\n'.format(com['message']) +
+                'https://github.com/amici-ursi/ImagesOfNetwork' +
+                '/commit/{}'.format(com['sha']))
 
         push_message += desc
 
@@ -141,13 +143,10 @@ def format_github_push_event(event):
     return push_message
 
 
-
-
-    ##------------------------------------
-
 def format_github_issue_event(event):
     """Takes a GitHub IssuesEvent and returns a markdown-formatted message
-    that can be relayed to the Discord channel."""
+       that can be relayed to the Discord channel.
+    """
 
     action = event.payload['action']
     if action in ISSUE_ACTION_FILTER:
@@ -158,27 +157,28 @@ def format_github_issue_event(event):
 
         if action in ["unlabeled", "labeled"]:
             label = event.payload['label']
-            desc = '**{}** __{}__ **{}** on  issue `{}`'.format(user, action, label, title)
+            desc = '**{}** __{}__ **{}** on  issue `{}`'.format(
+                user, action, label, title)
 
         elif action in ["unassigned", "assigned"]:
             assignee = event.payload['assignee']
-            desc = '**{}** __{}__ `{}` on issue `{}`'.format(user, action, assignee, title)
+            desc = '**{}** __{}__ `{}` on issue `{}`'.format(
+                user, action, assignee, title)
 
         else:
-            desc = 'GitHub Issue __{}__ by **{}**:\n```\n{}\n```\r'.format(action, user, title)
+            desc = 'GitHub Issue __{}__ by **{}**:\n```\n{}\n```\r'.format(
+                action, user, title)
 
         desc += '\n**Link**: {}\r\n '.format(url)
 
         return desc
 
 
-##------------------------------------
-
 def format_github_pull_request(event):
     """
-    If the action is "closed" and the merged key is false, the pull request was closed
-    with unmerged commits.
-    If the action is "closed" and the merged key is true, the pull request was merged.
+    If the action is "closed" and the merged key is false, the pull request
+    was closed with unmerged commits. If the action is "closed" and the
+    merged key is true, the pull request was merged.
     """
     action = event.payload['action']
     pr_number = event.payload['number']
@@ -187,24 +187,21 @@ def format_github_pull_request(event):
     title = event.payload['pull_request'].title
     user = event.payload['pull_request'].user.login
 
-    ## PR Opened
+    # PR Opened
     if state == 'open':
         commits = event.payload['pull_request'].commits
         additions = event.payload['pull_request'].additions
         deletions = event.payload['pull_request'].deletions
 
-        desc = 'Pull Request #{} __{}__'.format(pr_number, action) \
-                + ' by **{}**: `{}`\r\n'.format(user, title)
+        desc = ('Pull Request #{} __{}__'.format(pr_number, action) +
+                ' by **{}**: `{}`\r\n'.format(user, title))
 
-        desc_pr_info = ' Commits: **{}** '.format(commits) \
-                        + '(**+{}**/**-{}**)\r\n '.format(additions, deletions)
+        desc_pr_info = (' Commits: **{}** '.format(commits) +
+                        '(**+{}**/**-{}**)\r\n '.format(additions, deletions))
 
-
-
-        return desc +  url + desc_pr_info
-
-    ## PR Closed; Merged or Rejected?
+        return desc + url + desc_pr_info
     elif action == 'closed':
+        # PR Closed; Merged or Rejected?
         if event.payload['pull_request'].merged_at is None:
             merged = False
         else:
@@ -212,19 +209,18 @@ def format_github_pull_request(event):
 
         sender = event.actor.login
         if merged:
-            desc = 'Pull Request #{} by **{}** __merged__'.format(pr_number, user) \
-                    + ' by **{}**: `{}`\r\n '.format(sender, title)
+            desc = ('Pull Request #{} by **{}** __merged__'.format(
+                    pr_number, user) +
+                    ' by **{}**: `{}`\r\n '.format(sender, title))
 
             return desc + url
-
         else:
-            desc = 'Pull Request #{} by **{}** __rejected__'.format(pr_number, user) \
-                    + ' by **{}**: `{}`\r\n '.format(sender, title)
+            desc = ('Pull Request #{} by **{}** __rejected__'.format(
+                    pr_number, user) +
+                    ' by **{}**: `{}`\r\n '.format(sender, title))
 
             return desc + url
 
-
-#--------------------
 
 def format_mod_action(entry):
     """
@@ -236,8 +232,9 @@ def format_mod_action(entry):
     sub = '/r/{}'.format(entry.subreddit.display_name)
     target = '/u/{}'.format(entry.target_author)
 
-    message = '***{}*** **Moderator Update**:\r\n'.format(settings.NETWORK_NAME) \
-            + '```\n{} has '.format(mod)
+    message = ('***{}*** **Moderator Update**:\r\n'.format(
+               settings.NETWORK_NAME) +
+               '```\n{} has '.format(mod))
 
     if mod_action == 'invitemoderator':
         message += 'invited {} to be a moderator'.format(target)
@@ -248,18 +245,6 @@ def format_mod_action(entry):
     elif mod_action == 'removemoderator':
         message += 'removed {} as a moderator'.format(target)
 
-    message += ' for {}'.format(sub) \
-            + '\n```\r\n '
+    message += ' for {}\n```\r\n '.format(sub)
 
     return message
-
-#------------------------------
-
-
-
-
-
-
-
-
-#------------------------------

@@ -9,6 +9,7 @@ import os.path
 import pytoml as toml
 import pkg_resources
 
+
 def _conf_get(conf, *args, default=None):
     try:
         cur = conf
@@ -42,67 +43,103 @@ class Settings:
         conf = toml.loads(raw)
 
         # reddit
-        self.USERNAME = _conf_get(conf, 'auth', 'username', default=self.USERNAME)
-        self.PASSWORD = _conf_get(conf, 'auth', 'password', default=self.PASSWORD)
+        self.USERNAME = _conf_get(conf, 'auth',
+                                  'username', default=self.USERNAME)
+        self.PASSWORD = _conf_get(conf, 'auth',
+                                  'password', default=self.PASSWORD)
 
-        self.CLIENT_ID = _conf_get(conf, 'auth', 'client-id', default=self.CLIENT_ID)
-        self.CLIENT_SECRET = _conf_get(conf, 'auth', 'client-secret', default=self.CLIENT_SECRET)
-        self.REDIRECT_URI = _conf_get(conf, 'auth', 'redirect-uri', default=self.REDIRECT_URI)
-        self.REFRESH_TOKEN = _conf_get(conf, 'auth', 'refresh-token', default=self.REFRESH_TOKEN)
+        self.CLIENT_ID = _conf_get(
+            conf, 'auth', 'client-id', default=self.CLIENT_ID)
+        self.CLIENT_SECRET = _conf_get(
+            conf, 'auth', 'client-secret', default=self.CLIENT_SECRET)
+        self.REDIRECT_URI = _conf_get(
+            conf, 'auth', 'redirect-uri', default=self.REDIRECT_URI)
+        self.REFRESH_TOKEN = _conf_get(
+            conf, 'auth', 'refresh-token', default=self.REFRESH_TOKEN)
 
         # network
-        self.NETWORK_NAME = _conf_get(conf, 'network', 'name', default=self.NETWORK_NAME)
+        self.NETWORK_NAME = _conf_get(conf, 'network',
+                                      'name', default=self.NETWORK_NAME)
 
         multi_user = _conf_get(conf, 'network', 'multireddit-user')
         if multi_user is not None:
             self.MULTIREDDIT_USER = multi_user
             self._multi_user_set = True
         elif not hasattr(self, '_multi_user_set'):
-            self.MULTIREDDIT_USER = _conf_get(conf, 'auth', 'username', default=self.USERNAME)
+            self.MULTIREDDIT_USER = _conf_get(
+                conf, 'auth', 'username', default=self.USERNAME)
 
-        self.MULTIREDDITS = _conf_get(conf, 'network', 'multireddits', default=self.MULTIREDDITS)
+        self.MULTIREDDITS = _conf_get(
+            conf, 'network', 'multireddits', default=self.MULTIREDDITS)
 
-        self.DEFAULT_MODS = _conf_get(conf, 'network', 'mods', default=self.DEFAULT_MODS)
-        self.WIKI_PAGES = _conf_get(conf, 'network', 'wiki-pages', default=self.WIKI_PAGES)
+        self.DEFAULT_MODS = _conf_get(conf, 'network',
+                                      'mods', default=self.DEFAULT_MODS)
+        self.WIKI_PAGES = _conf_get(conf, 'network',
+                                    'wiki-pages', default=self.WIKI_PAGES)
         self.NSFW_OK = _conf_get(conf, 'network', 'nsfw', default=self.NSFW_OK)
         self.NSFW_WHITELIST_OK = _conf_get(conf, 'network', 'nsfw-whitelist',
                                            default=self.NSFW_WHITELIST_OK)
-        self.COMMENT_FOOTER = _conf_get(conf, 'network', 'comment-footer', default=self.COMMENT_FOOTER)
-        self.DOMAINS = _conf_get(conf, 'posts', 'domains', default=self.DOMAINS)
-        self.EXTENSIONS = _conf_get(conf, 'posts', 'extensions', default=self.EXTENSIONS)
+        self.COMMENT_FOOTER = _conf_get(conf, 'network', 'comment-footer',
+                                        default=self.COMMENT_FOOTER)
+        self.DOMAINS = _conf_get(conf, 'posts',
+                                 'domains', default=self.DOMAINS)
+        self.EXTENSIONS = _conf_get(conf, 'posts',
+                                    'extensions', default=self.EXTENSIONS)
 
-        self.PARENT_SUB = _conf_get(conf, 'parent', 'name', default=self.PARENT_SUB)
+        self.PARENT_SUB = _conf_get(conf, 'parent',
+                                    'name', default=self.PARENT_SUB)
 
         update_children = _conf_get(conf, 'update_children', default=False)
-        self.CHILD_SUBS = self._load_group(conf, 'child', self.CHILD_SUBS, update_children)
+        self.CHILD_SUBS = self._load_group(conf, 'child',
+                                           self.CHILD_SUBS, update_children)
 
         update_cousins = _conf_get(conf, 'update_cousins', default=False)
-        self.COUSIN_SUBS = self._load_group(conf, 'cousin', self.COUSIN_SUBS, update_cousins)
+        self.COUSIN_SUBS = self._load_group(conf, 'cousin',
+                                            self.COUSIN_SUBS, update_cousins)
 
         # discord
-        self.DISCORD_CLIENTID = _conf_get(conf, 'discord', 'client_id', default=self.DISCORD_CLIENTID)
-        self.DISCORD_TOKEN = _conf_get(conf, 'discord', 'token', default=self.DISCORD_TOKEN)
+        self.DISCORD_CLIENTID = _conf_get(conf, 'discord', 'client_id',
+                                          default=self.DISCORD_CLIENTID)
+        self.DISCORD_TOKEN = _conf_get(conf, 'discord',
+                                       'token', default=self.DISCORD_TOKEN)
 
-        self.DISCORD_INBOX_CHAN_ID = _conf_get(conf, 'discord', 'inbox_channel',
-                default=self.DISCORD_INBOX_CHAN_ID)
-        self.DISCORD_FALSEPOS_CHAN_ID = _conf_get(conf, 'discord', 'falsepos_channel',
-                default=self.DISCORD_FALSEPOS_CHAN_ID)
-        self.DISCORD_OC_CHAN_ID = _conf_get(conf, 'discord', 'oc_channel',
-                default=self.DISCORD_OC_CHAN_ID)
-        self.DISCORD_GITHUB_CHAN_ID = _conf_get(conf, 'discord', 'github_channel',
-                default=self.DISCORD_GITHUB_CHAN_ID)
-        self.DISCORD_MOD_CHAN_ID = _conf_get(conf, 'discord', 'mod_channel',
-                default=self.DISCORD_MOD_CHAN_ID)
-        self.DISCORD_KEEPALIVE_CHAN_ID = _conf_get(conf, 'discord', 'keepalive_channel',
-                default=self.DISCORD_KEEPALIVE_CHAN_ID)
-
+        self.DISCORD_INBOX_CHAN_ID = _conf_get(
+            conf, 'discord', 'inbox_channel',
+            default=self.DISCORD_INBOX_CHAN_ID
+        )
+        self.DISCORD_FALSEPOS_CHAN_ID = _conf_get(
+            conf, 'discord', 'falsepos_channel',
+            default=self.DISCORD_FALSEPOS_CHAN_ID
+        )
+        self.DISCORD_OC_CHAN_ID = _conf_get(
+            conf, 'discord', 'oc_channel',
+            default=self.DISCORD_OC_CHAN_ID
+        )
+        self.DISCORD_GITHUB_CHAN_ID = _conf_get(
+            conf, 'discord', 'github_channel',
+            default=self.DISCORD_GITHUB_CHAN_ID
+        )
+        self.DISCORD_MOD_CHAN_ID = _conf_get(
+            conf, 'discord', 'mod_channel',
+            default=self.DISCORD_MOD_CHAN_ID
+        )
+        self.DISCORD_KEEPALIVE_CHAN_ID = _conf_get(
+            conf, 'discord', 'keepalive_channel',
+            default=self.DISCORD_KEEPALIVE_CHAN_ID
+        )
         # github
-        self.GITHUB_OAUTH_TOKEN = _conf_get(conf, 'github', 'token',
-                default=self.GITHUB_OAUTH_TOKEN)
-        self.GITHUB_REPO_USER = _conf_get(conf, 'github', 'user',
-                default=self.GITHUB_REPO_USER)
-        self.GITHUB_REPO_NAME = _conf_get(conf, 'github', 'repo_name',
-                default=self.GITHUB_REPO_NAME)
+        self.GITHUB_OAUTH_TOKEN = _conf_get(
+            conf, 'github', 'token',
+            default=self.GITHUB_OAUTH_TOKEN
+        )
+        self.GITHUB_REPO_USER = _conf_get(
+            conf, 'github', 'user',
+            default=self.GITHUB_REPO_USER
+        )
+        self.GITHUB_REPO_NAME = _conf_get(
+            conf, 'github', 'repo_name',
+            default=self.GITHUB_REPO_NAME
+        )
 
     def _load_group(self, conf, group, old_items, update=False):
         # update indicates that we should update the group rather
@@ -135,7 +172,6 @@ class Settings:
             new_items.append(v)
 
         return new_items
-
 
     USERNAME = ""
     PASSWORD = ""
@@ -177,4 +213,3 @@ class Settings:
     GITHUB_REPO_NAME = ""
 
 settings = Settings()
-

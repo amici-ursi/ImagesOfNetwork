@@ -7,8 +7,11 @@ from functools import wraps
 import pytoml as toml
 import click
 
+from .settings import settings
+
 
 __version__ = '0.1.0'
+
 
 def _setup_logging():
     try:
@@ -28,41 +31,39 @@ _setup_logging()
 
 # that's all of em. I'm sure we can trim it down a bit
 OAUTH_SCOPE = [
-        'account',
-        'creddits',
-        'edit',
-        'flair',
-        'history',
-        'identity',
-        'livemanage',
-        'modconfig',
-        'modcontributors',
-        'modflair',
-        'modlog',
-        'modothers',
-        'modposts',
-        'modself',
-        'modwiki',
-        'mysubreddits',
-        'privatemessages',
-        'read',
-        'report',
-        'save',
-        'submit',
-        'subscribe',
-        'vote',
-        'wikiedit',
-        'wikiread',
+    'account',
+    'creddits',
+    'edit',
+    'flair',
+    'history',
+    'identity',
+    'livemanage',
+    'modconfig',
+    'modcontributors',
+    'modflair',
+    'modlog',
+    'modothers',
+    'modposts',
+    'modself',
+    'modwiki',
+    'mysubreddits',
+    'privatemessages',
+    'read',
+    'report',
+    'save',
+    'submit',
+    'subscribe',
+    'vote',
+    'wikiedit',
+    'wikiread',
 ]
+
 
 @enum.unique
 class AcceptFlag(enum.Enum):
     OK = 1
     OK_IF_WHITELISTED = 2
     BAD = 3
-
-from .settings import settings
-from .connect import Reddit
 
 
 def _update_settings(ctx, param, value):
@@ -74,8 +75,10 @@ def command(f):
     @wraps(f)
     def wrapper(*args, **kwargs):
         g = click.command()(
-        click.option('-c', '--config', help='additional configuration file', multiple=True, is_eager=True, expose_value=False, callback=_update_settings, type=click.Path(exists=True))(
-        f))
+            click.option(
+                '-c', '--config', help='additional configuration file',
+                multiple=True, is_eager=True, expose_value=False,
+                callback=_update_settings, type=click.Path(exists=True))(f))
         return g(*args, **kwargs)
 
     return wrapper

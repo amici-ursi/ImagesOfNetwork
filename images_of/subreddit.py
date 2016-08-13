@@ -15,8 +15,9 @@ class Match:
 
 
 class Subreddit:
-    def __init__(self, name, search, feeds=[], ignore=None, ignore_case=None, whitelist=[],
-                 blacklist=[], wiki_blacklist=False, feed_limit=None, **kwargs):
+    def __init__(self, name, search, feeds=[], ignore=None,
+                 ignore_case=None, whitelist=[], blacklist=[],
+                 wiki_blacklist=False, feed_limit=None, **kwargs):
         """
         Create new Subreddit object. This object is responsible for
         checking if posts meet sub-specific criteria for whether or
@@ -76,11 +77,13 @@ class Subreddit:
 
         try:
             LOG.info('Loading wiki blacklist for /r/{}'.format(self.name))
-            content = r.get_wiki_page(self.name, 'subredditblacklist').content_md
+            content = r.get_wiki_page(
+                self.name, 'subredditblacklist').content_md
             wiki_blacklist = set(re.compile(sub.strip().lower()[3:]) for
                                  sub in content.splitlines() if sub)
         except Forbidden:
-            LOG.warning('Forbidden from reading blacklist on /r/{}'.format(self.name))
+            LOG.warning(
+                'Forbidden from reading blacklist on /r/{}'.format(self.name))
             wiki_blacklist = set()
 
         self.blacklist_res = self.blacklist_res.union(wiki_blacklist)
@@ -102,7 +105,6 @@ class Subreddit:
         if any(bl_sub.fullmatch(post_sub) for bl_sub in self.blacklist_res):
             return
 
-
         if self.ignore_case_re and self.ignore_case_re.search(title):
             return
         if self.ignore_re and self.ignore_re.search(title):
@@ -113,4 +115,3 @@ class Subreddit:
             return Match('match', match.group())
 
         return
-

@@ -7,6 +7,7 @@ from praw.errors import SubredditExists, RateLimitExceeded
 
 from images_of import command, settings, Reddit
 
+
 DRY_RUN = False
 LOG = logging.getLogger(__name__)
 
@@ -31,7 +32,8 @@ def copy_settings(r, sub, topic):
     LOG.debug('{}'.format(sub_settings))
 
     sub_settings['title'] = "{} {}".format(sub_settings['title'], topic)
-    sub_settings['public_description'] = 'Pictures and images of {}'.format(topic)
+    sub_settings['public_description'] = 'Pictures and images of {}'.format(
+        topic)
 
     LOG.info('Copying settings to /r/{}'.format(sub))
 
@@ -44,7 +46,7 @@ def copy_settings(r, sub, topic):
     except RateLimitExceeded:
         # when we change settings on a subreddit,
         # if it's been created within the last 10 minutes,
-        # reddit alwasy issues a rate limiting warning
+        # reddit always issues a rate limiting warning
         # informing us about how long we have until we
         # can create a new subreddit, and PRAW interprets
         # this as an error. It's not.
@@ -54,10 +56,9 @@ def copy_settings(r, sub, topic):
 def invite_mods(r, sub):
     mods = settings.DEFAULT_MODS
 
+    cur_mods = []
     if not DRY_RUN:
         cur_mods = [u.name for u in r.get_moderators(sub)]
-    else:
-        cur_mods = []
     LOG.debug('current mods for /r/{}: {}'.format(sub, cur_mods))
 
     need_mods = [mod for mod in mods if mod not in cur_mods]
@@ -80,7 +81,8 @@ def copy_wiki_pages(r, sub):
         LOG.info('Copying wiki page "{}"'.format(page))
         if not DRY_RUN:
             content = r.get_wiki_page(settings.PARENT_SUB, page).content_md
-            r.edit_wiki_page(sub, page, content=content, reason='Subreddit stand-up')
+            r.edit_wiki_page(sub, page, content=content,
+                             reason='Subreddit stand-up')
 
 
 def setup_flair(r, sub):
@@ -100,8 +102,8 @@ def add_to_multi(r, sub, multi):
         LOG.warning("No multireddit to add /r/{} to.".format(sub))
         return
 
-    LOG.info('Adding /r/{} to /user/{}/m/{}'
-                 .format(sub, settings.MULTIREDDIT_USER, multi))
+    LOG.info('Adding /r/{} to /user/{}/m/{}'.format(
+             sub, settings.MULTIREDDIT_USER, multi))
 
     if DRY_RUN:
         return
@@ -123,19 +125,24 @@ def setup_notifications(r, sub):
         "filter-subreddits": []
         }""")
 
-    LOG.info('Requesting notifications about /r/{} from /u/Sub_Mentions'
-                 .format(sub))
+    LOG.info(
+        'Requesting notifications about /r/{} from /u/Sub_Mentions'.format(
+            sub)
+    )
 
     if not DRY_RUN:
         r.send_message('Sub_Mentions', 'Action: Subscribe',
                        setup.replace('{{subreddit}}', sub), from_sr=sub)
 
 
-_start_points = ['creation', 'settings', 'mods', 'wiki', 'flair', 'multireddit', 'notifications']
+_start_points = ['creation', 'settings', 'mods', 'wiki',
+                 'flair', 'multireddit', 'notifications']
+
 
 @command
 @click.option('-m', '--multi', type=click.Choice(settings.MULTIREDDITS),
-              default=settings.MULTIREDDITS[0], help="Which multireddit to add the new sub to.")
+              default=settings.MULTIREDDITS[0],
+              help="Which multireddit to add the new sub to.")
 @click.option('--start-at', type=click.Choice(_start_points),
               help='Where to start the process from.')
 @click.option('--only', type=click.Choice(_start_points),
@@ -147,12 +154,11 @@ def main(multi, topic, start_at, only, dry_run):
     global DRY_RUN
     DRY_RUN = dry_run
 
+    r = None
     if not DRY_RUN:
-        r = Reddit('Expand {} Network v0.2 /u/{}'
-                   .format(settings.NETWORK_NAME, settings.USERNAME))
+        r = Reddit('Expand {} Network v0.2 /u/{}'.format(
+                   settings.NETWORK_NAME, settings.USERNAME))
         r.oauth()
-    else:
-        r = None
 
     topic = ' '.join(topic)
     nice_topic = ''.join(re.findall('[A-Za-z0-9]', topic))
@@ -190,6 +196,7 @@ def main(multi, topic, start_at, only, dry_run):
 
     if should_do('notifications'):
         setup_notifications(r, sub)
+
 
 if __name__ == '__main__':
     main()
