@@ -49,7 +49,7 @@ class Subreddit:
         self.ignore_case_re = make_regex(ignore_case)
         self.whitelist = [sub.lower() for sub in whitelist]
         blacklist_pats = [sub.lower() for sub in blacklist]
-        self.blacklist_res = [re.compile(pat) for pat in blacklist_pats]
+        self.blacklist_res = set([re.compile(pat) for pat in blacklist_pats])
         self.wiki_blacklist = wiki_blacklist
         self.feed_limit = feed_limit
 
@@ -77,14 +77,13 @@ class Subreddit:
         try:
             LOG.info('Loading wiki blacklist for /r/{}'.format(self.name))
             content = r.get_wiki_page(self.name, 'subredditblacklist').content_md
-            subs = set(sub.strip().lower()[3:] for sub in content.splitlines() if sub)
-            wiki_blacklist = subs.union(self.blacklist)
+            wiki_blacklist = set(re.compile(sub.strip().lower()[3:]) for
+                                 sub in content.splitlines() if sub)
         except Forbidden:
             LOG.warning('Forbidden from reading blacklist on /r/{}'.format(self.name))
             wiki_blacklist = set()
 
-        blacklist_pats = sorted(wiki_blacklist.union(self.blacklist))
-        self.blacklist_res = [re.compile(pat) for pat in blacklist_pats]
+        self.blacklist_res = self.blacklist_res.union(wiki_blacklist)
         self.wiki_blacklist_loaded = True
 
     def check(self, post, flag=AcceptFlag.OK):
