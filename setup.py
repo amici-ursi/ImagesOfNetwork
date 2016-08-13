@@ -16,7 +16,7 @@ setup(
         "praw==3.5",
         "pytoml",
         "github3.py==0.9.5",
-        "discord.py==0.10.0a0",
+        "discord.py==0.10.0",
         "sphinx",
         "feedparser",
     ],
