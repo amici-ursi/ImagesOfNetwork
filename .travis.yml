@@ -1,0 +1,9 @@
+cache: pip
+install:
+  - python setup.py develop
+language: python
+python:
+  - 3.4
+sudo: false
+script:
+  - flake8 --exclude=docs
