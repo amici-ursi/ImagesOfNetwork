@@ -1,5 +1,6 @@
 cache: pip
 install:
+  - pip install flake8
   - python setup.py develop
 language: python
 python:
