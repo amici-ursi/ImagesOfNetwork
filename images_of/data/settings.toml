@@ -3186,7 +3186,6 @@ whitelist = [
     'dharamsala',
     'dombivli',
     'durgapur',
-    'ecigindia',
     'faridabad',
     'gandhinagar',
     'ghatisongs',
@@ -3224,7 +3223,6 @@ whitelist = [
     'indianleft',
     'indianmythology',
     'indianpeoplegifs',
-    'indianpics',
     'indianpolitics',
     'indianrightwing',
     'indiansports',
@@ -3320,7 +3318,6 @@ whitelist = [
     'trivandrum',
     'trollywood',
     'udaipur',
-    'urdu',
     'uttarakhand',
     'uttarpradesh',
     'vadodara',
@@ -3329,6 +3326,14 @@ whitelist = [
     'vijaywada',
     'westbengal',
     'wtfindia',
+    'bangalorebikers',
+    'upliftingkhabre',
+    'pokemongoindia',
+    'keralapics',
+    'indiacc',
+    'indianews',
+    'indianfeminism',
+    'indiaspeaks',
 ]
 wiki-blacklist = true
 
