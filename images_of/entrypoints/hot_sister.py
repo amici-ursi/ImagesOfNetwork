@@ -83,7 +83,7 @@ def main():
         except APIException as e:
             LOG.error(
                 "{0} on {1} while updating the sidebar".format(
-                    f_e_o(APIException, e), child)
+                    f_e_o(APIException, e)[0], child)
                 )
             continue
 
