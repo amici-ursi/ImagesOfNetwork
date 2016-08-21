@@ -16,7 +16,7 @@ import logging
 import re
 from traceback import format_exception_only as f_e_o
 import html.parser
-from praw.errors import APIException
+from praw.errors import HTTPException
 from images_of import command, settings, Reddit
 
 
@@ -80,10 +80,10 @@ def main():
 
         try:
             sub.update_settings(description=new_sidebar)
-        except APIException as e:
+        except HTTPException as e:
             LOG.error(
                 "{0} on {1} while updating the sidebar".format(
-                    f_e_o(APIException, e)[0], child)
+                    f_e_o(type(e), e)[0], child)
                 )
             continue
 
