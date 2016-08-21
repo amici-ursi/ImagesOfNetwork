@@ -40,13 +40,15 @@ def main():
     places_multi = r.get_multireddit(settings.USERNAME, PLACES_MULTI_NAME)
     places_list_text = str()
     for post in places_multi.get_hot(limit=POSTS_TO_LIST):
-        places_list_text += ' * [{}](https://redd.it/{})\n'.format(post.title, post.id)
+        places_list_text += ' * [{}](https://redd.it/{})\n'.format(post.id,
+                                                                   post.title)
 
     # decades multireddit
     decades_multi = r.get_multireddit(settings.USERNAME, DECADES_MULTI_NAME)
     decades_list_text = ''
     for post in decades_multi.get_hot(limit=POSTS_TO_LIST):
-        decades_list_text += ' * [{}](https://redd.it/{})\n'.format(post.title, post.id)
+        decades_list_text += ' * [{}](https://redd.it/{})\n'.format(post.title,
+                                                                    post.id)
 
     # bring it together
     combined_text = "* Places:\n{}\n\n* Times:\n{}".format(places_list_text,
