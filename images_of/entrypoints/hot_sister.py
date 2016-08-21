@@ -14,7 +14,6 @@
 
 import logging
 import re
-import sys
 from traceback import format_exception_only as f_e_o
 import html.parser
 from praw.errors import APIException
