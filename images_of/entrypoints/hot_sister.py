@@ -14,6 +14,7 @@
 
 import re
 import html.parser
+from praw.errors import APIException
 from images_of import command, settings, Reddit
 
 
@@ -74,7 +75,10 @@ def main():
             current_sidebar
         )
 
-        sub.update_settings(description=new_sidebar)
+        try:
+            sub.update_settings(description=new_sidebar)
+        except APIException:
+            continue
 
 
 if __name__ == '__main__':
