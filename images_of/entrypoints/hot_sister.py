@@ -12,11 +12,15 @@
 # [](/hot-sister-end)
 # Other text that will be below the list
 
+import logging
 import re
+from traceback import format_exception_only as f_e_o
 import html.parser
+from praw.errors import APIException
 from images_of import command, settings, Reddit
 
 
+LOG = logging.getLogger(__name__)
 # defines the main and sister subreddits,
 # and how many posts to list in the sidebar
 PLACES_MULTI_NAME = 'imagesofplaces'
@@ -74,7 +78,14 @@ def main():
             current_sidebar
         )
 
-        sub.update_settings(description=new_sidebar)
+        try:
+            sub.update_settings(description=new_sidebar)
+        except APIException as e:
+            LOG.error(
+                "{0} on {1} while updating the sidebar".format(
+                    f_e_o(APIException, e)[0], child)
+                )
+            continue
 
 
 if __name__ == '__main__':
