@@ -1,5 +1,4 @@
 import click
-
 from images_of import command, settings, Reddit
 from images_of.bot import Bot
 
@@ -9,7 +8,8 @@ from images_of.bot import Bot
 def main(no_post):
     """Reddit Network scraper and x-poster bot."""
 
-    r = Reddit('{} v6.0 /u/{}'.format(settings.NETWORK_NAME, settings.USERNAME))
+    r = Reddit('{} v6.0 /u/{}'.format(settings.NETWORK_NAME,
+                                      settings.USERNAME))
     r.oauth()
 
     b = Bot(r, should_post=not no_post)

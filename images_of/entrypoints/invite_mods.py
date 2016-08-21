@@ -1,10 +1,11 @@
 import click
-
 from images_of import command, settings, Reddit
+
 
 @command
 @click.option('--defaults', is_flag=True, help='Invite default moderators')
-@click.option('--cousins', is_flag=True, help='Invite to cousin subs as well as children')
+@click.option('--cousins', is_flag=True,
+              help='Invite to cousin subs as well as children')
 @click.argument('mods', nargs=-1)
 def main(mods, defaults, cousins):
 

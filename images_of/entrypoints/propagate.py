@@ -1,13 +1,14 @@
+import click
 import logging
 
-import click
-
 from images_of import command, settings, Reddit
-from images_of.subreddit import Subreddit
+
 
 LOG = logging.getLogger(__name__)
 
-def split_content(content, start_delim, end_delim, tags_required=True, case_insensitive=False):
+
+def split_content(content, start_delim, end_delim,
+                  tags_required=True, case_insensitive=False):
     if case_insensitive:
         content_match = content.lower()
         start_delim = start_delim.lower()
@@ -43,6 +44,7 @@ def split_content(content, start_delim, end_delim, tags_required=True, case_inse
 
     return (head, content, tail)
 
+
 def copy_wiki_page(r, page, dom, subs, force):
     start_delim = "#Start-{}-Network".format(settings.NETWORK_NAME)
     end_delim = "#End-{}-Network".format(settings.NETWORK_NAME)
@@ -58,23 +60,27 @@ def copy_wiki_page(r, page, dom, subs, force):
         parts = split_content(sub_content, start_delim, end_delim, not force)
 
         new_content = ''.join([
-                parts[0],
-                start_delim,
-                content,
-                end_delim,
-                parts[2]])
+            parts[0],
+            start_delim,
+            content,
+            end_delim,
+            parts[2]
+        ])
 
-        LOG.debug('New content for /r/{}/wiki/{}: {}'.format(
-                            sub, page, new_content))
+        LOG.debug('New content for /r/{}/wiki/{}: {}'.format(sub, page,
+                                                             new_content))
 
         r.edit_wiki_page(sub, page, new_content)
 
+
 @command
 @click.option('--automod', is_flag=True,
-              help='Copy automod settings. This is an alias for \'--wiki config/automoderator\'')
+              help=("Copy automod settings. "
+                    "This is an alias for '--wiki config/automoderator'"))
 @click.option('--toolbox', is_flag=True, help='Copy toolbox settings')
 @click.option('--wiki', multiple=True, help='Wiki page to copy')
-@click.option('-f', '--force', is_flag=True, help='Overwrite even if section tags not found')
+@click.option('-f', '--force', is_flag=True,
+              help='Overwrite even if section tags not found')
 def main(automod, toolbox, wiki, force):
     """Propigate settings across the network"""
 

@@ -2,7 +2,7 @@ import logging
 import random
 
 import feedparser
-from praw.errors import AlreadySubmitted, APIException, HTTPException
+from praw.errors import AlreadySubmitted, APIException
 
 from images_of import command, settings, Reddit
 from images_of.subreddit import Subreddit
@@ -27,11 +27,11 @@ def main():
         for feed in feeds:
             thisfeed = feedparser.parse(feed)
             comment = 'This content brought to you from "{}"\n{}'.format(
-                    thisfeed.feed.title,
-                    settings.COMMENT_FOOTER.format(
-                        reason='off site feed',
-                        detail=thisfeed.feed.title
-                    ))
+                thisfeed.feed.title,
+                settings.COMMENT_FOOTER.format(
+                    reason='off site feed',
+                    detail=thisfeed.feed.title
+                ))
             for item in thisfeed.entries:
                 if sub.feed_limit and posted >= sub.feed_limit:
                     break
@@ -59,6 +59,7 @@ def main():
                     posted += 1
 
         LOG.info('Posted %s feed items into /r/%s', posted, sub.name)
+
 
 if __name__ == '__main__':
     main()

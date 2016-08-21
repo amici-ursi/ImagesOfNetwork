@@ -6,11 +6,11 @@ from urllib.parse import parse_qs
 from socketserver import ThreadingMixIn
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from queue import Queue
-
 import click
 import praw
 
 from images_of import command, settings, OAUTH_SCOPE
+
 
 LOG = logging.getLogger(__name__)
 
@@ -37,14 +37,18 @@ class RedditRedirectRequestHandler(BaseHTTPRequestHandler):
         self.wfile.write('{}'.format(traceback.format_exc()).encode())
         self.server.q.put(('err', None))
 
+
 class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
     def __init__(self, *args, q, **kwargs):
         super().__init__(*args, **kwargs)
         self.q = q
 
+
 @command
-@click.option('-h', '--host', default='127.0.0.1', help='hostname to listen on')
-@click.option('-p', '--port', default=65010, type=int, help='port to listen on')
+@click.option('-h', '--host', default='127.0.0.1',
+              help='hostname to listen on')
+@click.option('-p', '--port', default=65010,
+              type=int, help='port to listen on')
 def main(host, port):
     """
     Get an oauth Refresh Token with the appropriate priveledges
@@ -71,13 +75,13 @@ def main(host, port):
     server_thread.daemon = True
     server_thread.start()
 
-
     # Step 2: Send the user on over to reddit to say OK.
-    r = praw.Reddit(user_agent='ION Oauth Setup /u/{}'.format(settings.USERNAME))
+    r = praw.Reddit(user_agent='ION Oauth Setup /u/{}'.format(
+        settings.USERNAME))
     r.set_oauth_app_info(
-            client_id=settings.CLIENT_ID,
-            client_secret=settings.CLIENT_SECRET,
-            redirect_uri=settings.REDIRECT_URI)
+        client_id=settings.CLIENT_ID,
+        client_secret=settings.CLIENT_SECRET,
+        redirect_uri=settings.REDIRECT_URI)
 
     url = r.get_authorize_url('uniqueKey', OAUTH_SCOPE, True)
     webbrowser.open(url)
@@ -95,9 +99,9 @@ def main(host, port):
     LOG.info('Gathering access information.')
     access_info = r.get_access_information(code)
 
-    print("Write this down, now! Put it in your ion.toml or settings.toml")
-    print()
+    print("Write this down, now! Put it in your ion.toml or settings.toml\n")
     print("refresh-token = '{}'".format(access_info['refresh_token']))
+
 
 if __name__ == '__main__':
     main()
