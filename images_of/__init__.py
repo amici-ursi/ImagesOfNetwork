@@ -8,7 +8,7 @@ import pytoml as toml
 import click
 
 from .settings import settings
-from .connect import Reddit #NOQA
+from .connect import Reddit  # noqa: F401
 
 
 __version__ = '0.1.0'
