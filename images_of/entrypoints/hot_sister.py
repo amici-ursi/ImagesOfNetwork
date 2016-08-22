@@ -38,7 +38,7 @@ def main():
 
     # places multireddit
     places_multi = r.get_multireddit(settings.USERNAME, PLACES_MULTI_NAME)
-    places_list_text = str()
+    places_list_text = ''
     for post in places_multi.get_hot(limit=POSTS_TO_LIST):
         places_list_text += ' * [{}](https://redd.it/{})\n'.format(post.id,
                                                                    post.title)
