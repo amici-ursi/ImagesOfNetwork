@@ -5661,14 +5661,18 @@ whitelist = [
 ]
 blacklist = [
     'guns',
+    'guitarpedals',
     'shroomid',
     'spiders',
     'tattoos',
+    'trashy',
     'trees',
+    'UPFORFUN',
     'whatisthisthing',
     'whatsthisbird',
     'whatsthisbug',
     'whatsthisplant',
+    '(.*)circlejerk(.*)',
 ]
 
 [child.imagesofwyoming]
