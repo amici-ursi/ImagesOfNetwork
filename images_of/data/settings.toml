@@ -1082,7 +1082,6 @@ search = [
     'arkansasans?',
     'bentonville',
     'clinton presidential center',
-    'conway',
     'crystal bridges museum',
     'fayetteville',
     'f(or)?t.smith',
@@ -1091,7 +1090,6 @@ search = [
     'jonesboro',
     'little.rock',
     'pine.bluff',
-    'rogers',
     'springdale..?(arkansas|ar)',
 ]
 ignore = [
@@ -5665,6 +5663,7 @@ blacklist = [
     'shroomid',
     'spiders',
     'tattoos',
+    'tools',
     'trashy',
     'trees',
     'UPFORFUN',
@@ -5672,6 +5671,7 @@ blacklist = [
     'whatsthisbird',
     'whatsthisbug',
     'whatsthisplant',
+    '(.*)circlejerk(.*)',
 ]
 
 [child.imagesofwyoming]
