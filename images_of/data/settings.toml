@@ -2367,6 +2367,7 @@ whitelist = [
 blacklist = [
     'london',
     'panthers',
+    'sips',
     'trees',
     'tattoos',
 ]
