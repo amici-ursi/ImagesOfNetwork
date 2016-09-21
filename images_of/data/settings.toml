@@ -1045,6 +1045,7 @@ ignore = [
     'hyundai tucson',
     'peoria..?(il|illinois|heights)',
     'alt/az',
+    'grand canyon of',
 ]
 whitelist = [
     'arizona',
