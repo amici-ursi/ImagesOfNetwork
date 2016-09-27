@@ -165,6 +165,7 @@ blacklist = [
     'wallpapers',
     'ccw',
     'wsgy',
+    'colorizedhistorymemes',
 ]
 
 [child.imagesofthe1900s]
@@ -225,6 +226,7 @@ blacklist = [
     'wallpapers',
     'ccw',
     'wsgy',
+    'colorizedhistorymemes',
 ]
 
 [child.imagesofthe1910s]
@@ -284,6 +286,7 @@ blacklist = [
     'wallpapers',
     'ccw',
     'wsgy',
+    'colorizedhistorymemes',
 ]
 
 [child.imagesofthe1920s]
@@ -343,6 +346,7 @@ blacklist = [
     'wallpapers',
     'ccw',
     'wsgy',
+    'colorizedhistorymemes',
 ]
 
 [child.imagesofthe1930s]
@@ -402,6 +406,7 @@ blacklist = [
     'wallpapers',
     'ccw',
     'wsgy',
+    'colorizedhistorymemes',
 ]
 
 [child.imagesofthe1940s]
@@ -461,6 +466,7 @@ blacklist = [
     'wallpapers',
     'ccw',
     'wsgy',
+    'colorizedhistorymemes',
 ]
 
 [child.imagesofthe1950s]
@@ -520,6 +526,7 @@ blacklist = [
     'wallpapers',
     'ccw',
     'wsgy',
+    'colorizedhistorymemes',
 ]
 
 [child.imagesofthe1960s]
@@ -579,6 +586,7 @@ blacklist = [
     'wallpapers',
     'ccw',
     'wsgy',
+    'colorizedhistorymemes',
 ]
 
 [child.imagesofthe1970s]
@@ -638,6 +646,7 @@ blacklist = [
     'wallpapers',
     'ccw',
     'wsgy',
+    'colorizedhistorymemes',
 ]
 
 [child.imagesofthe1980s]
@@ -699,6 +708,7 @@ blacklist = [
     'wallpapers',
     'ccw',
     'wsgy',
+    'colorizedhistorymemes',
 ]
 
 [child.imagesofthe1990s]
@@ -758,6 +768,7 @@ blacklist = [
     'wallpapers',
     'ccw',
     'wsgy',
+    'colorizedhistorymemes',
 ]
 
 [child.imagesofthe2000s]
@@ -817,6 +828,7 @@ blacklist = [
     'wallpapers',
     'ccw',
     'wsgy',
+    'colorizedhistorymemes',
 ]
 
 [child.imagesofthe2010s]
@@ -876,6 +888,7 @@ blacklist = [
     'wallpapers',
     'ccw',
     'wsgy',
+    'colorizedhistorymemes',
 ]
 
 [child.imagesofafghanistan]
