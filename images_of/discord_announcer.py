@@ -9,7 +9,6 @@ import logging
 from time import sleep
 
 import discord
-import github3
 from praw.errors import HTTPException
 import requests
 
@@ -17,10 +16,6 @@ from images_of import settings
 from images_of.discord_formatters import (
     is_relayable_message,
     format_inbox_message,
-    format_github_issue_comment,
-    format_github_issue_event,
-    format_github_pull_request,
-    format_github_push_event,
     format_mod_action,
 )
 
@@ -65,13 +60,7 @@ class DiscordBot:
 
         self.count_messages = 0
         self.count_oc = 0
-        self.count_gh_events = 0
         self.count_modlog = 0
-
-        self.ghub = github3.login(token=settings.GITHUB_OAUTH_TOKEN)
-        repo = self.ghub.repository(settings.GITHUB_REPO_USER,
-                                    settings.GITHUB_REPO_NAME)
-        self.last_github_event = repo.iter_events(number=1).next().id
 
     def _setup_client(self):
         # loop = asyncio.get_event_loop()
@@ -162,70 +151,6 @@ class DiscordBot:
 
     # ======================================================
 
-    async def _process_github_events(self):
-
-        repo = self.ghub.repository(settings.GITHUB_REPO_USER,
-                                    settings.GITHUB_REPO_NAME)
-
-        max_length = round(20 * RUN_INTERVAL)
-
-        event_queue = deque(maxlen=max_length)
-
-        e_i = repo.iter_events(number=max_length)
-
-        cont_loop = True
-        date_max = (datetime.datetime.today() +
-                    datetime.timedelta(days=-1)).utctimetuple()
-
-        LOG.debug('[GitHub] Loading events from GitHub...')
-        while cont_loop:
-            event = e_i.next()
-
-            if event.id == self.last_github_event:
-                cont_loop = False
-                continue
-
-            self.count_gh_events += 1
-
-            if len(event_queue) == max_length:
-                cont_loop = False
-                continue
-
-            if event.created_at.utctimetuple() >= date_max:
-                if event.type in EVENT_FILTER:
-                    event_queue.append(event)
-
-            else:
-                cont_loop = False
-
-        LOG.info('[GitHub] New GitHub Events: %s', len(event_queue))
-
-        # All events queued... now send events to channel
-        while len(event_queue) > 0:
-            event = event_queue.pop()
-            if event.type == 'PushEvent':
-                LOG.info('[GitHub] Sending new PushEvent...')
-                await self.client.send_message(self.github_chan,
-                                               format_github_push_event(event))
-
-            elif event.type == 'IssuesEvent':
-                LOG.info('[GitHub] Sending new IssuesEvent...')
-                await self.client.send_message(
-                    self.github_chan, format_github_issue_event(event))
-
-            elif event.type == 'IssueCommentEvent':
-                LOG.info('[GitHub] Sending new IssueCommentEvent...')
-                await self.client.send_message(
-                    self.github_chan, format_github_issue_comment(event))
-
-            elif event.type == 'PullRequestEvent':
-                await self.client.send_message(
-                    self.github_chan, format_github_pull_request(event))
-
-        self.last_github_event = repo.iter_events(number=1).next().id
-
-    # ======================================================
-
     async def _process_network_modlog(self, multi):
         action_queue = deque(maxlen=25)
         url = 'https://www.reddit.com/user/{}/m/{}/about/log'.format(
@@ -286,11 +211,9 @@ class DiscordBot:
 
                 msg = 'Messages: **{}**\n'.format(self.count_messages) \
                     + 'Multireddit posts: **{}**\n'.format(self.count_oc) \
-                    + 'GitHub Events: **{}**\n'.format(self.count_gh_events) \
                     + 'Network Modlog Actions: **{}**\r\n'.format(
                       self.count_modlog)
 
-                self.count_gh_events = 0
                 self.count_messages = 0
                 self.count_modlog = 0
                 self.count_oc = 0
@@ -328,9 +251,6 @@ class DiscordBot:
                 await self._process_messages()
                 asyncio.sleep(5)
 
-            if self.settings.DO_GITHUB:
-                await self._process_github_events()
-
             for multi in settings.MULTIREDDITS:
                 if self.settings.DO_OC:
                     asyncio.sleep(5)
@@ -359,8 +279,6 @@ class DiscordBot:
             settings.DISCORD_INBOX_CHAN_ID)
         self.falsepos_chan = self.client.get_channel(
             settings.DISCORD_FALSEPOS_CHAN_ID)
-        self.github_chan = self.client.get_channel(
-            settings.DISCORD_GITHUB_CHAN_ID)
         self.oc_chan = self.client.get_channel(settings.DISCORD_OC_CHAN_ID)
         self.mod_chan = self.client.get_channel(settings.DISCORD_MOD_CHAN_ID)
         self.stats_chan = self.client.get_channel(
@@ -410,7 +328,6 @@ class DiscordBot:
 
 class DiscordBotSettings:
     def __init__(self):
-        self.DO_GITHUB = True
         self.DO_MODLOG = True
         self.DO_OC = True
         self.DO_INBOX = True

@@ -115,10 +115,6 @@ class Settings:
             conf, 'discord', 'oc_channel',
             default=self.DISCORD_OC_CHAN_ID
         )
-        self.DISCORD_GITHUB_CHAN_ID = _conf_get(
-            conf, 'discord', 'github_channel',
-            default=self.DISCORD_GITHUB_CHAN_ID
-        )
         self.DISCORD_MOD_CHAN_ID = _conf_get(
             conf, 'discord', 'mod_channel',
             default=self.DISCORD_MOD_CHAN_ID
@@ -126,19 +122,6 @@ class Settings:
         self.DISCORD_KEEPALIVE_CHAN_ID = _conf_get(
             conf, 'discord', 'keepalive_channel',
             default=self.DISCORD_KEEPALIVE_CHAN_ID
-        )
-        # github
-        self.GITHUB_OAUTH_TOKEN = _conf_get(
-            conf, 'github', 'token',
-            default=self.GITHUB_OAUTH_TOKEN
-        )
-        self.GITHUB_REPO_USER = _conf_get(
-            conf, 'github', 'user',
-            default=self.GITHUB_REPO_USER
-        )
-        self.GITHUB_REPO_NAME = _conf_get(
-            conf, 'github', 'repo_name',
-            default=self.GITHUB_REPO_NAME
         )
 
     def _load_group(self, conf, group, old_items, update=False):
@@ -204,12 +187,7 @@ class Settings:
     DISCORD_INBOX_CHAN_ID = None
     DISCORD_FALSEPOS_CHAN_ID = None
     DISCORD_OC_CHAN_ID = None
-    DISCORD_GITHUB_CHAN_ID = None
     DISCORD_MOD_CHAN_ID = None
     DISCORD_KEEPALIVE_CHAN_ID = None
-
-    GITHUB_OAUTH_TOKEN = ""
-    GITHUB_REPO_USER = ""
-    GITHUB_REPO_NAME = ""
 
 settings = Settings()
