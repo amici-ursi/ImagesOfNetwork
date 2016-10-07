@@ -4,8 +4,6 @@ from images_of.discord_announcer import DiscordBot, DiscordBotSettings
 
 
 @command
-@click.option('-G', '--no-github', is_flag=True,
-              help='Do not process github events')
 @click.option('-M', '--no-modlog', is_flag=True,
               help='Do not process network modlog events')
 @click.option('-O', '--no-oc', is_flag=True,
@@ -32,12 +30,10 @@ def main(no_github, no_modlog, no_oc, no_inbox,
 
     botsettings = DiscordBotSettings()
 
-    botsettings.DO_GITHUB = not no_github
     botsettings.DO_MODLOG = not no_modlog
     botsettings.DO_OC = not no_oc
     botsettings.DO_INBOX = not no_inbox
     botsettings.DO_FALSEPOS = not no_falsepositives
-
     botsettings.RUN_INTERVAL = run_interval
     botsettings.STATS_INTERVAL = stats_interval
 
