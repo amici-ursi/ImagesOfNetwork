@@ -16,7 +16,7 @@ from images_of.discord_announcer import DiscordBot, DiscordBotSettings
               help='Number of minutes to process items', default=1)
 @click.option('-s', '--stats-interval',
               help='Number of minutes to send stats info', default=15)
-def main(no_github, no_modlog, no_oc, no_inbox,
+def main(no_modlog, no_oc, no_inbox,
          no_falsepositives, run_interval, stats_interval):
     """Discord Announcer Bot to relay specified information
        to designated Discord channels.
