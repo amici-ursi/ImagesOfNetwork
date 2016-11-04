@@ -11,7 +11,7 @@ redirect-uri = 'http://127.0.0.1:65010/authorize_callback'
 name = 'ImagesOf'
 multireddits = ['ImagesOfPlaces', 'ImagesOfTheDecades']
 
-mods = ['AutoModerator', 'BotWatchman', 'amici_ursi', 'ImagesOfNetwork']
+mods = ['AutoModerator', 'BotBust', 'amici_ursi', 'ImagesOfNetwork']
 wiki-pages = ['config/automoderator', 'toolbox']
 nsfw = false
 nsfw-whitelist = true
@@ -3944,6 +3944,7 @@ search = [
     'drochia district',
     'dnestrovsc',
     'telene(s|ș)ti district',
+]
 whitelist = [
     'moldova',
     'moldovancrisis',
