@@ -1053,6 +1053,7 @@ ignore = [
     'peoria..?(il|illinois|heights)',
     'alt/az',
     'grand canyon of',
+    'tempe terra',
 ]
 whitelist = [
     'arizona',
