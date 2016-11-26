@@ -3951,6 +3951,9 @@ whitelist = [
     'moldovapics',
     'gagauzia',
 ]
+ignore = [
+    'bianca balti',
+]
 
 [child.imagesofmontana]
 search = [
