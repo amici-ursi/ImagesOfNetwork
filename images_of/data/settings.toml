@@ -2409,7 +2409,7 @@ search = [
 ignore = [
     'c(onnecticu)?t (river|bridge)',
     'ct-|\b(a|p)\.?m\.? ct',
-    'ct.(scan|machine|unit|precisa)',
+    'ct.(scan|machine|unit|precisa)s?',
     'lincolnshire',
     'uss hartford',
 ]
