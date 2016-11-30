@@ -5822,6 +5822,7 @@ whitelist = [
     'wisconsinpolitics',
 ]
 blacklist = [
+    'bravorealhousewives',
     'guns',
     'guitarpedals',
     'shroomid',
