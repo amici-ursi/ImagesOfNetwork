@@ -2589,6 +2589,10 @@ whitelist = [
     'egyptpics',
 ]
 
+blacklist = 
+    'battlefield'
+]
+
 [child.imagesofengland]
 search = [
     'ashford',
