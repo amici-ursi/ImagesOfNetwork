@@ -2588,7 +2588,7 @@ whitelist = [
     'egyptpics',
 ]
 
-blacklist = 
+blacklist = [
     'battlefield'
 ]
 
