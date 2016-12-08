@@ -927,7 +927,6 @@ wiki-blacklist = true
 search = [
     'alabama',
     'alabami?ans?',
-    'auburn',
     'birmingham..?(al|alabama)',
     'decatur',
     'dothan',
