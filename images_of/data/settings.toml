@@ -4103,6 +4103,7 @@ search = [
 ]
 ignore = [
     'nevada city',
+    'sierra nevada',
 ]
 whitelist = [
     'burningman',
