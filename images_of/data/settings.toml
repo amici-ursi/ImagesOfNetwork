@@ -1088,6 +1088,9 @@ blacklist = [
     'whatisthisbug',
     'shinedownsnation',
     'trees',
+    'edc',
+    'starterpacks',
+    'secretsanta',
 ]
 
 [child.imagesofarkansas]
