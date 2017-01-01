@@ -3896,6 +3896,9 @@ search = [
 whitelist = [
     'missouri',
 ]
+ignore = [
+    'missouri river',
+]
 
 [child.imagesofmoldova]
 feeds = [
