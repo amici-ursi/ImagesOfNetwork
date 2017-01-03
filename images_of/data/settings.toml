@@ -2958,6 +2958,18 @@ whitelist = [
     'hongkongpics',
 ]
 
+[child.imagesofhungary]
+search = [
+    'Hungary',
+]
+ignore-case = [
+    'hungary',
+]
+whitelist = [
+    'hungary',
+    'hungarypics',
+]
+
 [child.imagesoficeland]
 search = [
     'iceland',
