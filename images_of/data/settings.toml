@@ -2959,6 +2959,10 @@ whitelist = [
 ]
 
 [child.imagesofhungary]
+feeds = [
+    'https://www.flickr.com/services/feeds/groups_pool.gne?id=488293@N25&lang=en-us&format=atom',
+]
+feed-limit = 2
 search = [
     'Hungary',
 ]
