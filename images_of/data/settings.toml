@@ -4526,7 +4526,7 @@ whitelist = [
 [child.imagesofnorthkorea]
 # feeds = []            # Atom feeds for trusted off site content
 # feed-limit = 0        # maximum number of feed items to post per run of ion_feeds
-search = ['n(orth)? korea']			# regexes for title search
+search = ['n(orth)?.? korea']			# regexes for title search
 # ignore = []			# regexes for title search
 # ignore-case = []		# case-sensitive regexes for title search
 whitelist = ['northkoreapics']		# list of subreddits to search, regardless of tiltle
@@ -4898,7 +4898,7 @@ whitelist = [
 [child.imagesofsouthkorea]
 # feeds = []            # Atom feeds for trusted off site content
 # feed-limit = 0        # maximum number of feed items to post per run of ion_feeds
-search = ['s(outh)? korea']			# regexes for title search
+search = ['s(outh)?.? korea']			# regexes for title search
 # ignore = []			# regexes for title search
 # ignore-case = []		# case-sensitive regexes for title search
 whitelist = ['southkoreapics']		# list of subreddits to search, regardless of tiltle
