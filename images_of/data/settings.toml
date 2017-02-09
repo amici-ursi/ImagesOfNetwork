@@ -4203,6 +4203,7 @@ ignore = [
     'k(entuck)?y',
     'minnesota',
     'red river gorge',
+    'Santa Rosa Island',
 ]
 ignore-case = [
     'chama',
