@@ -151,7 +151,7 @@ class Bot:
 
         created = datetime.utcfromtimestamp(post.author.created_utc)
         age = (datetime.utcnow() - created).days
-        if age > 2:
+        if age > 7:
             post.age_verified = True
             return True
         return False
