@@ -5964,4 +5964,13 @@ search = [
 ]
 whitelist = []
 
+[cousin.amyacker]
+search = [
+    'Amy (Louis )?Acker',
+    'Samantha Groves',
+    'Winifred Burkle',
+    'Illyria',
+    'Kelly Peyton',
+]
+whitelist = []
 
