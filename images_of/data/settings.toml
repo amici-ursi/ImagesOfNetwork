@@ -4695,7 +4695,6 @@ whitelist = [
     'rolistentothis',
     'romania',
     'romaniapics',
-    'romania_ss',
     'romanian',
     'romanianfootball',
     'romaniaporn',
@@ -4705,6 +4704,9 @@ whitelist = [
     'stanga',
     'timisoara',
 ]
+blacklist = [
+    'romania_ss',
+    ]
 
 [child.imagesofrussia]
 search = [
