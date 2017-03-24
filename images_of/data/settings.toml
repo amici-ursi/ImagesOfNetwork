@@ -1028,6 +1028,16 @@ blacklist = [
     'snackexchange',
 ]
 
+[child.argentina]
+feeds = ['https://www.flickr.com/services/feeds/groups_pool.gne?id=43671131820@N01&lang=en-us&format=atom']            # Atom feeds for trusted off site content
+feed-limit = 1        # maximum number of feed items to post per run of ion_feeds
+search = ['argentina']			# regexes for title search
+# ignore = []			# regexes for title search
+# ignore-case = []		# case-sensitive regexes for title search
+whitelist = ['argentina', 'argentinapics']		# list of subreddits to search, regardless of tiltle
+# blacklist = []		# list of subreddits never to accept from
+# wiki-blacklist = false	# does this sub use a wiki page for blacklist?
+
 [child.imagesofarizona]
 search = [
     'antelope canyon',
