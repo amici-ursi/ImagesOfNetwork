@@ -1028,7 +1028,7 @@ blacklist = [
     'snackexchange',
 ]
 
-[child.argentina]
+[child.imagesofargentina]
 feeds = ['https://www.flickr.com/services/feeds/groups_pool.gne?id=43671131820@N01&lang=en-us&format=atom']            # Atom feeds for trusted off site content
 feed-limit = 1        # maximum number of feed items to post per run of ion_feeds
 search = ['argentina']			# regexes for title search
