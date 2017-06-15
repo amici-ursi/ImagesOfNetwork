@@ -2012,7 +2012,9 @@ wiki-blacklist = true
 [child.imagesofcambodia]
 feeds = [https://www.flickr.com/services/feeds/groups_pool.gne?id=52242386617@N01&lang=en-us&format=atom]            # Atom feeds for trusted off site content
 feed-limit = 2        # maximum number of feed items to post per run of ion_feeds
-search = ['cambodia']			# regexes for title search
+search = [
+    'cambodia',
+    'angkor']			# regexes for title search
 ignore = []			# regexes for title search
 ignore-case = []		# case-sensitive regexes for title search
 whitelist = [
