@@ -4149,6 +4149,9 @@ whitelist = [
     'netherlandspics',
     'thenetherlands',
 ]
+blacklist = [
+    'ice_poseidon',
+]
 
 [child.imagesofnevada]
 search = [
