@@ -1164,6 +1164,73 @@ blacklist = [
     'ar15',
 ]
 
+# Template:
+#
+# [child.imagesofatlanta]
+# feeds = []            # Atom feeds for trusted off site content
+# feed-limit = 0        # maximum number of feed items to post per run of ion_feeds
+search = ['Atlanta']			# regexes for title search
+# ignore = []			# regexes for title search
+# ignore-case = []		# case-sensitive regexes for title search
+whitelist = [
+    'Atlanta',
+    'ATLRiders',
+    'AtlantaBarters',
+    'atljobs',
+    'atlanimators',
+    'atlcrafters',
+    'atlfilmmakers',
+    'atlantamusic',
+    'atlantaedm',
+    'atlantagothic',
+    'atlantawoodworking',
+    'writeclubatlanta',
+    'atlbeer',
+    'atlantaeats',
+    'atlantafood',
+    'atlantaingress',
+    'ingressatlanta',
+    'otpingress',
+    'atlantapokerclub',
+    'minecraftatlanta',
+    'atlantaminecraft',
+    'atlantastarcraft',
+    'atlantagaming',
+    'pkgoatlanta',
+    'ATLiENTs',
+    'entlanta',
+    'atlantatrees',
+    'buckhead',
+    'eastatlanta',
+    'midtownatlanta',
+    'braves',
+    'falcons',
+    'hawks',
+    'atlantaunited',
+    'atlantasilverbacks',
+    'bikeatl',
+    'hikeatl',
+    'atlkrav',
+    'atlpaintball',
+    'atlantasoccer',
+    'atlantavolleyball',
+    'shootthehooch',
+    'atlruby',
+    'awdg',
+    'atlantacirclejerk',
+    'conspiracyatlanta',
+    'atlantadevelopment',
+    'atladies',
+    'atlmlp',
+    'atlnvc',
+    'atlantarage',
+    'atlantaskylinephotos',
+    'atlantaweather',
+    
+]
+# blacklist = []		# list of subreddits never to accept from
+# wiki-blacklist = false	# does this sub use a wiki page for blacklist?
+
 [child.imagesofaustralia]
 search = [
     'adelaide',
