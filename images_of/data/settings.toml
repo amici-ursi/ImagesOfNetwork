@@ -1166,10 +1166,10 @@ blacklist = [
 
 # Template:
 #
-# [child.imagesofatlanta]
+[child.imagesofatlanta]
 # feeds = []            # Atom feeds for trusted off site content
 # feed-limit = 0        # maximum number of feed items to post per run of ion_feeds
-search = ['Atlanta']			# regexes for title search
+search = ['Atlanta']
 # ignore = []			# regexes for title search
 # ignore-case = []		# case-sensitive regexes for title search
 whitelist = [
