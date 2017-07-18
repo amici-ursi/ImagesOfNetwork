@@ -5087,7 +5087,7 @@ search = [
     'yabroud',
 ]
 ignore = [
-    'damascus.*(steel|kni(v|f)es?',
+    'damascus.*(steel|kni(v|f)es?)',
 ]
 whitelist = [
     'syria',
