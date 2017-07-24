@@ -3483,6 +3483,7 @@ whitelist = [
     'indiaspeaks',
     'indianonpolitical',
     'mapsutra',
+    'artindia',
 ]
 wiki-blacklist = true
 
