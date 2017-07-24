@@ -1104,6 +1104,7 @@ blacklist = [
     'edc',
     'starterpacks',
     'secretsanta',
+    'prequelmemes',
 ]
 
 [child.imagesofarkansas]
