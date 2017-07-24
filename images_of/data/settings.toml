@@ -3484,6 +3484,7 @@ whitelist = [
     'indianonpolitical',
     'mapsutra',
     'artindia',
+    'johar',
 ]
 wiki-blacklist = true
 
