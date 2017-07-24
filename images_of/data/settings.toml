@@ -3483,8 +3483,8 @@ whitelist = [
     'indiaspeaks',
     'indianonpolitical',
     'mapsutra',
+    'artindia',
     'johar',
-
 ]
 wiki-blacklist = true
 
