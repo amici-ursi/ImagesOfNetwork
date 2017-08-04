@@ -1715,6 +1715,7 @@ search = [
 whitelist = [
     'bulgaria',
     'bulgariapics',
+    'discoverbulgaria',
 ]
 
 [child.imagesofcalifornia]
