@@ -5938,7 +5938,6 @@ search = [
     'summerfest',
     'wisc',
     'wisconsin',
-    'WI',
 ]
 ignore = [
     'madison pettis',
@@ -5946,6 +5945,9 @@ ignore = [
     'wisconsin blvd',
     'gesiotto',
     'milwaukee road',
+    'wi-fi',
+    'wi fi',
+    'wifi',
 ]
 ignore-case = [
     'Mke',
