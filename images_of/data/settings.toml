@@ -5001,6 +5001,16 @@ whitelist = [
     'singapore',
 ]
 
+[child.imagesofslovenia]
+# feeds = []            # Atom feeds for trusted off site content
+# feed-limit = 0        # maximum number of feed items to post per run of ion_feeds
+search = ['slovenia']			# regexes for title search
+# ignore = []			# regexes for title search
+# ignore-case = []		# case-sensitive regexes for title search
+whitelist = ['slovenia']		# list of subreddits to search, regardless of tiltle
+# blacklist = []		# list of subreddits never to accept from
+# wiki-blacklist = false	# does this sub use a wiki page for blacklist?
+
 [child.imagesofsouthcarolina]
 search = [
     'south carolina',
