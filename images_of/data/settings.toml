@@ -2551,7 +2551,7 @@ whitelist = [
 search = ['croatia']			# regexes for title search
 # ignore = []			# regexes for title search
 # ignore-case = []		# case-sensitive regexes for title search
-# whitelist = [
+whitelist = [
     'croatia',
     'Dubrovnik',
     'Zagreb',
