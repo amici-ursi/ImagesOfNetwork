@@ -123,7 +123,8 @@ class Bot:
                 xpost = self.r.submit(
                     sub.name,
                     title,
-                    url=post.url,
+                    kind='crosspost',
+                    crosspost_fullname=post.id,
                     captcha=None,
                     send_replies=True,
                     resubmit=False
