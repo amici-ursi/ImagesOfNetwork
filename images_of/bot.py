@@ -124,7 +124,7 @@ class Bot:
                     sub.name,
                     title,
                     kind='crosspost',
-                    crosspost_fullname=post.id,
+                    crosspost_fullname=post.name,
                     captcha=None,
                     send_replies=True,
                     resubmit=False
