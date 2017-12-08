@@ -3554,6 +3554,7 @@ ignore = [
     'NM',
     'New Mexico',
     'ca(lifornia)?',
+    'august ames',
 ]
 whitelist = [
     'ames',
