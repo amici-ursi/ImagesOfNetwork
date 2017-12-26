@@ -3239,6 +3239,7 @@ search = [
     'kanyakumari',
     'karnataka',
     'kerala',
+    'kerela',
     'kochi',
     'kodaikanal',
     'leh',
@@ -3297,7 +3298,7 @@ ignore = [
     'india eisley',
     'indian? (point|ink|pale ale|de beaufort|head|arrowhead|head|falls|reservation|scouts?|westbrooks?|reynolds|creek|mounds|peaks|cove|cent|remington|woollard)',
     'milf',
-    '(chippewa|neon|apache|red|mono|pima|native) indian',
+    '(chippewa|neon|apache|red|mono|pima|native|carnasee) indian',
     'cherokee',
     'navajo',
     'bescort',
@@ -3483,7 +3484,6 @@ whitelist = [
     'telangana',
     'telugu',
     'tilinindia',
-    'travelsinindia',
     'trivandrum',
     'trollywood',
     'udaipur',
@@ -3506,6 +3506,7 @@ whitelist = [
     'mapsutra',
     'artindia',
     'johar',
+    'anormaldayinindia'
 ]
 wiki-blacklist = true
 
