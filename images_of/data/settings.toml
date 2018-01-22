@@ -5786,6 +5786,7 @@ ignore = [
     'blackpool',
     'england',
     'lancashire',
+    'new south wales',
 ]
 whitelist = [
     'wales',
