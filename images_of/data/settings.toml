@@ -3298,6 +3298,8 @@ ignore = [
     'india eisley',
     'indian? (point|ink|pale ale|de beaufort|head|arrowhead|head|falls|reservation|scouts?|westbrooks?|reynolds|creek|mounds|peaks|cove|cent|remington|woollard)',
     'milf',
+    '(chippewa|neon|apache|red|mono|pima|native) indian',
+    'grand canyon',
     '(chippewa|neon|apache|red|mono|pima|native|carnasee) indian',
     'cherokee',
     'navajo',
